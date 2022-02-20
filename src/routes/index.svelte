@@ -6,11 +6,9 @@
 
 <script>
 	import {slidy} from '@slidy/core'
-	import pkg from '@slidy/core/package.json'
 
 
 	let items = [],
-			imagable = false,
 			width = '100%',
 			gap = 0,
 			index = 0,
@@ -18,7 +16,6 @@
 			scrollPos = 0,
 			i = length
 
-	let page = Math.trunc((Math.random()*10))
 </script>
 
 
@@ -30,10 +27,10 @@
 				length,
 				axis: 'x',
 				align: 'middle',
-				duration: 375,
-				clamp: false,
+				duration: 200,
+				clamp: true,
 				snap: true,
-				gravity: 1.2,
+				gravity: 1.3,
 				indexer: (x) => (index = x),
 				scroller: (p) => (scrollPos = p)
 			}}>
