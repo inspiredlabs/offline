@@ -1,4 +1,3 @@
-
  {
     "short_name": "Demo PWA",
     "name": "Svelte-kit Demo PWA",
@@ -16,7 +15,7 @@
     ],
     "start_url": "/",
     "scope": "/",
-    "display": "standalone",
+    "display": "fullscreen",
     "theme_color": "#3050f0",
     "background_color": "#ffffff"
   }

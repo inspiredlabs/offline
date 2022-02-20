@@ -2,58 +2,76 @@
 	export const prerender = true;
 </script>
 
-<script lang="ts">
-	import Counter from '$lib/Counter/index.svelte';
-</script>
+<script>
+	import Script from '$lib/Script.svelte';
 
-<svelte:head>
-	<title>Home</title>
-</svelte:head>
+	function onLoaded() {
+		// vanilla JS
+		const flickity = new Flickity('.carousel');
+	}
+	</script>
 
-<section>
-	<h1>
-		<div class="welcome">
-			<picture>
-				<source srcset="svelte-welcome.webp" type="image/webp" />
-				<img src="svelte-welcome.png" alt="Welcome" />
-			</picture>
-		</div>
+	<nav>
+		<a href="#carousel-cell1">Cell 1</a>,
+		<a href="#carousel-cell2">Cell 2</a>,
+		<a href="#carousel-cell3">Cell 3</a>,
+		<a href="#carousel-cell4">Cell 4</a>,
+		<a href="#carousel-cell5">Cell 5</a>
+	</nav>
 
-		to your new<br />SvelteKit app
-	</h1>
+	<!-- Flickity HTML init -->
+	<ul class="carousel list ">
+		<li class="carousel-cell" id="carousel-cell1"></li>
+		<li class="carousel-cell" id="carousel-cell2"></li>
+		<li class="carousel-cell" id="carousel-cell3"></li>
+		<li class="carousel-cell" id="carousel-cell4"></li>
+		<li class="carousel-cell" id="carousel-cell5"></li>
+	</ul>
 
-	<h2>
-		try editing <strong>src/routes/index.svelte</strong>
-	</h2>
 
-	<Counter />
-</section>
-
-<style>
-	section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 1;
+	<style>
+	.list {
+		list-style: none
 	}
 
-	h1 {
-		width: 100%;
+	:global(*) {
+		box-sizing: border-box;
 	}
 
-	.welcome {
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
+	:global(body) {
+		overflow: hidden;
+		padding: 0;
+		font-family: sans-serif;
 	}
 
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
+	.carousel {
+		background: #FAFAFA;
+	}
+
+	.carousel-cell {
+		width: 66%;
+		height: 200px;
+		margin-right: 10px;
+		background: #8C8;
+		border-radius: 5px;
+		counter-increment: carousel-cell;
+	}
+
+	/* cell number */
+	.carousel-cell:before {
 		display: block;
+		text-align: center;
+		content: counter(carousel-cell);
+		line-height: 200px;
+		font-size: 80px;
+		color: white;
 	}
-</style>
+
+	</style>
+	<svelte:head>
+		<link rel='stylesheet' href='https://instantwebapp.com/css/tachyon.shower.css'>
+		<link rel='stylesheet' href='	https://unpkg.com/flickity@2/dist/flickity.css'>
+		<Script src='https://unpkg.com/flickity@2/dist/flickity.pkgd.js' on:loaded='{onLoaded}' />
+		<Script src='https://unpkg.com/flickity-hash@1/hash.js' on:loaded='{onLoaded}' />
+	</svelte:head>
+
