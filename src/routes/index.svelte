@@ -2,7 +2,11 @@
 	export const prerender = true;
 </script>
 
+
+
 <script>
+	import '$lib/css/flickity.css';
+	import '$lib/css/tachyon.shower.css';
 	import Script from '$lib/Script.svelte';
 
 	function onLoaded() {
@@ -69,9 +73,7 @@
 
 	</style>
 	<svelte:head>
-		<link rel='stylesheet' href='https://instantwebapp.com/css/tachyon.shower.css'>
-		<link rel='stylesheet' href='	https://unpkg.com/flickity@2/dist/flickity.css'>
-		<Script src='https://unpkg.com/flickity@2/dist/flickity.pkgd.js' on:loaded='{onLoaded}' />
-		<Script src='https://unpkg.com/flickity-hash@1/hash.js' on:loaded='{onLoaded}' />
+		<Script src='$lib/js/flickity.pkgd.js' on:loaded='{onLoaded}' />
+		<Script src='$lib/js/hash.js' on:loaded='{onLoaded}' />
 	</svelte:head>
 
