@@ -2572,9 +2572,6 @@ function run_all(fns) {
 function is_function(thing) {
   return typeof thing === "function";
 }
-function safe_not_equal2(a, b) {
-  return a != a ? b == b : a !== b || (a && typeof a === "object" || typeof a === "function");
-}
 function is_empty(obj) {
   return Object.keys(obj).length === 0;
 }
@@ -2585,34 +2582,8 @@ function subscribe(store, ...callbacks) {
   const unsub = store.subscribe(...callbacks);
   return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
 }
-var is_client = typeof window !== "undefined";
-var now = is_client ? () => window.performance.now() : () => Date.now();
-var raf = is_client ? (cb) => requestAnimationFrame(cb) : noop2;
 var tasks = new Set();
-function run_tasks(now2) {
-  tasks.forEach((task) => {
-    if (!task.c(now2)) {
-      tasks.delete(task);
-      task.f();
-    }
-  });
-  if (tasks.size !== 0)
-    raf(run_tasks);
-}
-function loop(callback) {
-  let task;
-  if (tasks.size === 0)
-    raf(run_tasks);
-  return {
-    promise: new Promise((fulfill) => {
-      tasks.add(task = {c: callback, f: fulfill});
-    }),
-    abort() {
-      tasks.delete(task);
-    }
-  };
-}
-var active_docs = new Set();
+var managed_styles = new Map();
 var current_component;
 function set_current_component(component) {
   current_component = component;
@@ -2621,12 +2592,6 @@ function get_current_component() {
   if (!current_component)
     throw new Error("Function called outside component initialization");
   return current_component;
-}
-function onMount(fn) {
-  get_current_component().$$.on_mount.push(fn);
-}
-function afterUpdate(fn) {
-  get_current_component().$$.after_update.push(fn);
 }
 function setContext(key, context) {
   get_current_component().$$.context.set(key, context);
@@ -2698,7 +2663,7 @@ function create_ssr_component(fn) {
     const parent_component = current_component;
     const $$ = {
       on_destroy,
-      context: new Map(parent_component ? parent_component.$$.context : context || []),
+      context: new Map(context || (parent_component ? parent_component.$$.context : [])),
       on_mount: [],
       before_update: [],
       after_update: [],
@@ -2730,7 +2695,7 @@ function create_ssr_component(fn) {
 function add_attribute(name, value, boolean) {
   if (value == null || boolean && !value)
     return "";
-  return ` ${name}${value === true ? "" : `=${typeof value === "string" ? JSON.stringify(escape2(value)) : `"${value}"`}`}`;
+  return ` ${name}${value === true && boolean_attributes.has(name) ? "" : `=${typeof value === "string" ? JSON.stringify(escape2(value)) : `"${value}"`}`}`;
 }
 function destroy_component(component, detaching) {
   const $$ = component.$$;
@@ -2784,6 +2749,12 @@ if (typeof HTMLElement === "function") {
   };
 }
 
+// node_modules/svelte/ssr.mjs
+function onMount() {
+}
+function afterUpdate() {
+}
+
 // .svelte-kit/output/server/app.js
 var import_cookie = __toModule(require_cookie());
 
@@ -2818,156 +2789,7 @@ function v4() {
 
 // .svelte-kit/output/server/app.js
 var import_workbox_window = __toModule(require_workbox_window_prod_umd());
-
-// node_modules/svelte/store/index.mjs
-var subscriber_queue2 = [];
-function writable2(value, start = noop2) {
-  let stop;
-  const subscribers = [];
-  function set(new_value) {
-    if (safe_not_equal2(value, new_value)) {
-      value = new_value;
-      if (stop) {
-        const run_queue = !subscriber_queue2.length;
-        for (let i = 0; i < subscribers.length; i += 1) {
-          const s2 = subscribers[i];
-          s2[1]();
-          subscriber_queue2.push(s2, value);
-        }
-        if (run_queue) {
-          for (let i = 0; i < subscriber_queue2.length; i += 2) {
-            subscriber_queue2[i][0](subscriber_queue2[i + 1]);
-          }
-          subscriber_queue2.length = 0;
-        }
-      }
-    }
-  }
-  function update(fn) {
-    set(fn(value));
-  }
-  function subscribe2(run2, invalidate = noop2) {
-    const subscriber = [run2, invalidate];
-    subscribers.push(subscriber);
-    if (subscribers.length === 1) {
-      stop = start(set) || noop2;
-    }
-    run2(value);
-    return () => {
-      const index2 = subscribers.indexOf(subscriber);
-      if (index2 !== -1) {
-        subscribers.splice(index2, 1);
-      }
-      if (subscribers.length === 0) {
-        stop();
-        stop = null;
-      }
-    };
-  }
-  return {set, update, subscribe: subscribe2};
-}
-
-// node_modules/svelte/motion/index.mjs
-function is_date(obj) {
-  return Object.prototype.toString.call(obj) === "[object Date]";
-}
-function tick_spring(ctx, last_value, current_value, target_value) {
-  if (typeof current_value === "number" || is_date(current_value)) {
-    const delta = target_value - current_value;
-    const velocity = (current_value - last_value) / (ctx.dt || 1 / 60);
-    const spring2 = ctx.opts.stiffness * delta;
-    const damper = ctx.opts.damping * velocity;
-    const acceleration = (spring2 - damper) * ctx.inv_mass;
-    const d2 = (velocity + acceleration) * ctx.dt;
-    if (Math.abs(d2) < ctx.opts.precision && Math.abs(delta) < ctx.opts.precision) {
-      return target_value;
-    } else {
-      ctx.settled = false;
-      return is_date(current_value) ? new Date(current_value.getTime() + d2) : current_value + d2;
-    }
-  } else if (Array.isArray(current_value)) {
-    return current_value.map((_2, i) => tick_spring(ctx, last_value[i], current_value[i], target_value[i]));
-  } else if (typeof current_value === "object") {
-    const next_value = {};
-    for (const k in current_value) {
-      next_value[k] = tick_spring(ctx, last_value[k], current_value[k], target_value[k]);
-    }
-    return next_value;
-  } else {
-    throw new Error(`Cannot spring ${typeof current_value} values`);
-  }
-}
-function spring(value, opts = {}) {
-  const store = writable2(value);
-  const {stiffness = 0.15, damping = 0.8, precision = 0.01} = opts;
-  let last_time;
-  let task;
-  let current_token;
-  let last_value = value;
-  let target_value = value;
-  let inv_mass = 1;
-  let inv_mass_recovery_rate = 0;
-  let cancel_task = false;
-  function set(new_value, opts2 = {}) {
-    target_value = new_value;
-    const token = current_token = {};
-    if (value == null || opts2.hard || spring2.stiffness >= 1 && spring2.damping >= 1) {
-      cancel_task = true;
-      last_time = now();
-      last_value = new_value;
-      store.set(value = target_value);
-      return Promise.resolve();
-    } else if (opts2.soft) {
-      const rate = opts2.soft === true ? 0.5 : +opts2.soft;
-      inv_mass_recovery_rate = 1 / (rate * 60);
-      inv_mass = 0;
-    }
-    if (!task) {
-      last_time = now();
-      cancel_task = false;
-      task = loop((now2) => {
-        if (cancel_task) {
-          cancel_task = false;
-          task = null;
-          return false;
-        }
-        inv_mass = Math.min(inv_mass + inv_mass_recovery_rate, 1);
-        const ctx = {
-          inv_mass,
-          opts: spring2,
-          settled: true,
-          dt: (now2 - last_time) * 60 / 1e3
-        };
-        const next_value = tick_spring(ctx, last_value, value, target_value);
-        last_time = now2;
-        last_value = value;
-        store.set(value = next_value);
-        if (ctx.settled) {
-          task = null;
-        }
-        return !ctx.settled;
-      });
-    }
-    return new Promise((fulfil) => {
-      task.promise.then(() => {
-        if (token === current_token)
-          fulfil();
-      });
-    });
-  }
-  const spring2 = {
-    set,
-    update: (fn, opts2) => set(fn(target_value, value), opts2),
-    subscribe: store.subscribe,
-    stiffness,
-    damping,
-    precision
-  };
-  return spring2;
-}
-
-// .svelte-kit/output/server/app.js
-var css$7 = {
+var css$6 = {
   code: "#svelte-announcer.svelte-1j55zn5{position:absolute;left:0;top:0;clip:rect(0 0 0 0);clip-path:inset(50%);overflow:hidden;white-space:nowrap;width:1px;height:1px}",
   map: `{"version":3,"file":"root.svelte","sources":["root.svelte"],"sourcesContent":["<!-- This file is generated by @sveltejs/kit \u2014 do not edit it! -->\\n<script>\\n\\timport { setContext, afterUpdate, onMount } from 'svelte';\\n\\n\\t// stores\\n\\texport let stores;\\n\\texport let page;\\n\\n\\texport let components;\\n\\texport let props_0 = null;\\n\\texport let props_1 = null;\\n\\texport let props_2 = null;\\n\\n\\tsetContext('__svelte__', stores);\\n\\n\\t$: stores.page.set(page);\\n\\tafterUpdate(stores.page.notify);\\n\\n\\tlet mounted = false;\\n\\tlet navigated = false;\\n\\tlet title = null;\\n\\n\\tonMount(() => {\\n\\t\\tconst unsubscribe = stores.page.subscribe(() => {\\n\\t\\t\\tif (mounted) {\\n\\t\\t\\t\\tnavigated = true;\\n\\t\\t\\t\\ttitle = document.title || 'untitled page';\\n\\t\\t\\t}\\n\\t\\t});\\n\\n\\t\\tmounted = true;\\n\\t\\treturn unsubscribe;\\n\\t});\\n</script>\\n\\n<svelte:component this={components[0]} {...(props_0 || {})}>\\n\\t{#if components[1]}\\n\\t\\t<svelte:component this={components[1]} {...(props_1 || {})}>\\n\\t\\t\\t{#if components[2]}\\n\\t\\t\\t\\t<svelte:component this={components[2]} {...(props_2 || {})}/>\\n\\t\\t\\t{/if}\\n\\t\\t</svelte:component>\\n\\t{/if}\\n</svelte:component>\\n\\n{#if mounted}\\n\\t<div id=\\"svelte-announcer\\" aria-live=\\"assertive\\" aria-atomic=\\"true\\">\\n\\t\\t{#if navigated}\\n\\t\\t\\t{title}\\n\\t\\t{/if}\\n\\t</div>\\n{/if}\\n\\n<style>\\n\\t#svelte-announcer {\\n\\t\\tposition: absolute;\\n\\t\\tleft: 0;\\n\\t\\ttop: 0;\\n\\t\\tclip: rect(0 0 0 0);\\n\\t\\tclip-path: inset(50%);\\n\\t\\toverflow: hidden;\\n\\t\\twhite-space: nowrap;\\n\\t\\twidth: 1px;\\n\\t\\theight: 1px;\\n\\t}\\n</style>"],"names":[],"mappings":"AAsDC,iBAAiB,eAAC,CAAC,AAClB,QAAQ,CAAE,QAAQ,CAClB,IAAI,CAAE,CAAC,CACP,GAAG,CAAE,CAAC,CACN,IAAI,CAAE,KAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CACnB,SAAS,CAAE,MAAM,GAAG,CAAC,CACrB,QAAQ,CAAE,MAAM,CAChB,WAAW,CAAE,MAAM,CACnB,KAAK,CAAE,GAAG,CACV,MAAM,CAAE,GAAG,AACZ,CAAC"}`
 };
@@ -3005,7 +2827,7 @@ var Root = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     $$bindings.props_1(props_1);
   if ($$props.props_2 === void 0 && $$bindings.props_2 && props_2 !== void 0)
     $$bindings.props_2(props_2);
-  $$result.css.add(css$7);
+  $$result.css.add(css$6);
   {
     stores.page.set(page2);
   }
@@ -3013,9 +2835,13 @@ var Root = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
 
 ${validate_component(components[0] || missing_component, "svelte:component").$$render($$result, Object.assign(props_0 || {}), {}, {
-    default: () => `${components[1] ? `${validate_component(components[1] || missing_component, "svelte:component").$$render($$result, Object.assign(props_1 || {}), {}, {
-      default: () => `${components[2] ? `${validate_component(components[2] || missing_component, "svelte:component").$$render($$result, Object.assign(props_2 || {}), {}, {})}` : ``}`
-    })}` : ``}`
+    default: () => {
+      return `${components[1] ? `${validate_component(components[1] || missing_component, "svelte:component").$$render($$result, Object.assign(props_1 || {}), {}, {
+        default: () => {
+          return `${components[2] ? `${validate_component(components[2] || missing_component, "svelte:component").$$render($$result, Object.assign(props_2 || {}), {}, {})}` : ``}`;
+        }
+      })}` : ``}`;
+    }
   })}
 
 ${mounted ? `<div id="${"svelte-announcer"}" aria-live="${"assertive"}" aria-atomic="${"true"}" class="${"svelte-1j55zn5"}">${navigated ? `${escape2(title)}` : ``}</div>` : ``}`;
@@ -3050,9 +2876,9 @@ function init(settings) {
     amp: false,
     dev: false,
     entry: {
-      file: "/./_app/start-aa106042.js",
+      file: "/./_app/start-ffd74ae7.js",
       css: ["/./_app/assets/start-a8cd1609.css"],
-      js: ["/./_app/start-aa106042.js", "/./_app/chunks/vendor-e1f4923d.js"]
+      js: ["/./_app/start-ffd74ae7.js", "/./_app/chunks/vendor-57763e16.js"]
     },
     fetched: void 0,
     floc: false,
@@ -3144,7 +2970,7 @@ var module_lookup = {
     return index;
   })
 };
-var metadata_lookup = {"src/routes/__layout.svelte": {"entry": "/./_app/pages/__layout.svelte-6ced6f59.js", "css": ["/./_app/assets/pages/__layout.svelte-3619ff45.css"], "js": ["/./_app/pages/__layout.svelte-6ced6f59.js", "/./_app/chunks/vendor-e1f4923d.js"], "styles": null}, ".svelte-kit/build/components/error.svelte": {"entry": "/./_app/error.svelte-ddce8bb9.js", "css": [], "js": ["/./_app/error.svelte-ddce8bb9.js", "/./_app/chunks/vendor-e1f4923d.js"], "styles": null}, "src/routes/index.svelte": {"entry": "/./_app/pages/index.svelte-6100b730.js", "css": ["/./_app/assets/pages/index.svelte-078f1a0b.css"], "js": ["/./_app/pages/index.svelte-6100b730.js", "/./_app/chunks/vendor-e1f4923d.js"], "styles": null}, "src/routes/about.svelte": {"entry": "/./_app/pages/about.svelte-5425c127.js", "css": ["/./_app/assets/pages/about.svelte-4db5be0d.css"], "js": ["/./_app/pages/about.svelte-5425c127.js", "/./_app/chunks/vendor-e1f4923d.js"], "styles": null}, "src/routes/todos/index.svelte": {"entry": "/./_app/pages/todos/index.svelte-be84f25d.js", "css": ["/./_app/assets/pages/todos/index.svelte-ef0435f2.css"], "js": ["/./_app/pages/todos/index.svelte-be84f25d.js", "/./_app/chunks/vendor-e1f4923d.js"], "styles": null}};
+var metadata_lookup = {"src/routes/__layout.svelte": {"entry": "/./_app/pages/__layout.svelte-331b68e3.js", "css": ["/./_app/assets/pages/__layout.svelte-3619ff45.css"], "js": ["/./_app/pages/__layout.svelte-331b68e3.js", "/./_app/chunks/vendor-57763e16.js"], "styles": null}, ".svelte-kit/build/components/error.svelte": {"entry": "/./_app/error.svelte-299cc5b1.js", "css": [], "js": ["/./_app/error.svelte-299cc5b1.js", "/./_app/chunks/vendor-57763e16.js"], "styles": null}, "src/routes/index.svelte": {"entry": "/./_app/pages/index.svelte-28fbb61e.js", "css": ["/./_app/assets/pages/index.svelte-033be754.css"], "js": ["/./_app/pages/index.svelte-28fbb61e.js", "/./_app/chunks/vendor-57763e16.js"], "styles": null}, "src/routes/about.svelte": {"entry": "/./_app/pages/about.svelte-4a92fd88.js", "css": ["/./_app/assets/pages/about.svelte-4db5be0d.css"], "js": ["/./_app/pages/about.svelte-4a92fd88.js", "/./_app/chunks/vendor-57763e16.js"], "styles": null}, "src/routes/todos/index.svelte": {"entry": "/./_app/pages/todos/index.svelte-83ab509b.js", "css": ["/./_app/assets/pages/todos/index.svelte-ef0435f2.css"], "js": ["/./_app/pages/todos/index.svelte-83ab509b.js", "/./_app/chunks/vendor-57763e16.js"], "styles": null}};
 async function load_component(file) {
   return {
     module: await module_lookup[file](),
@@ -3242,14 +3068,14 @@ var page = {
   }
 };
 var logo = "/_app/assets/svelte-logo.87df40b8.svg";
-var css$6 = {
+var css$5 = {
   code: "header.svelte-1twf6mk.svelte-1twf6mk{display:flex;justify-content:space-between}.corner.svelte-1twf6mk.svelte-1twf6mk{width:3em;height:3em}.corner.svelte-1twf6mk a.svelte-1twf6mk{display:flex;align-items:center;justify-content:center;width:100%;height:100%}.corner.svelte-1twf6mk img.svelte-1twf6mk{width:2em;height:2em;object-fit:contain}nav.svelte-1twf6mk.svelte-1twf6mk{display:flex;justify-content:center;--background:rgba(255, 255, 255, 0.7)}svg.svelte-1twf6mk.svelte-1twf6mk{width:2em;height:3em;display:block}path.svelte-1twf6mk.svelte-1twf6mk{fill:var(--background)}ul.svelte-1twf6mk.svelte-1twf6mk{position:relative;padding:0;margin:0;height:3em;display:flex;justify-content:center;align-items:center;list-style:none;background:var(--background);background-size:contain}li.svelte-1twf6mk.svelte-1twf6mk{position:relative;height:100%}li.active.svelte-1twf6mk.svelte-1twf6mk::before{--size:6px;content:'';width:0;height:0;position:absolute;top:0;left:calc(50% - var(--size));border:var(--size) solid transparent;border-top:var(--size) solid var(--accent-color)}nav.svelte-1twf6mk a.svelte-1twf6mk{display:flex;height:100%;align-items:center;padding:0 1em;color:var(--heading-color);font-weight:700;font-size:0.8rem;text-transform:uppercase;letter-spacing:10%;text-decoration:none;transition:color 0.2s linear}a.svelte-1twf6mk.svelte-1twf6mk:hover{color:var(--accent-color)}",
   map: `{"version":3,"file":"index.svelte","sources":["index.svelte"],"sourcesContent":["<script lang=\\"ts\\">import { page } from '$app/stores';\\nimport logo from './svelte-logo.svg';\\n</script>\\n\\n<header>\\n\\t<div class=\\"corner\\">\\n\\t\\t<a href=\\"https://kit.svelte.dev\\">\\n\\t\\t\\t<img src={logo} alt=\\"SvelteKit\\" />\\n\\t\\t</a>\\n\\t</div>\\n\\n\\t<nav>\\n\\t\\t<svg viewBox=\\"0 0 2 3\\" aria-hidden=\\"true\\">\\n\\t\\t\\t<path d=\\"M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z\\" />\\n\\t\\t</svg>\\n\\t\\t<ul>\\n\\t\\t\\t<li class:active={$page.path === '/'}><a sveltekit:prefetch href=\\"/\\">Home</a></li>\\n\\t\\t\\t<li class:active={$page.path === '/about'}><a sveltekit:prefetch href=\\"/about\\">About</a></li>\\n\\t\\t\\t<li class:active={$page.path === '/todos'}><a sveltekit:prefetch href=\\"/todos\\">Todos</a></li>\\n\\t\\t</ul>\\n\\t\\t<svg viewBox=\\"0 0 2 3\\" aria-hidden=\\"true\\">\\n\\t\\t\\t<path d=\\"M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z\\" />\\n\\t\\t</svg>\\n\\t</nav>\\n\\n\\t<div class=\\"corner\\">\\n\\t\\t<!-- TODO put something else here? github link? -->\\n\\t</div>\\n</header>\\n\\n<style>\\n\\theader {\\n\\t\\tdisplay: flex;\\n\\t\\tjustify-content: space-between;\\n\\t}\\n\\n\\t.corner {\\n\\t\\twidth: 3em;\\n\\t\\theight: 3em;\\n\\t}\\n\\n\\t.corner a {\\n\\t\\tdisplay: flex;\\n\\t\\talign-items: center;\\n\\t\\tjustify-content: center;\\n\\t\\twidth: 100%;\\n\\t\\theight: 100%;\\n\\t}\\n\\n\\t.corner img {\\n\\t\\twidth: 2em;\\n\\t\\theight: 2em;\\n\\t\\tobject-fit: contain;\\n\\t}\\n\\n\\tnav {\\n\\t\\tdisplay: flex;\\n\\t\\tjustify-content: center;\\n\\t\\t--background: rgba(255, 255, 255, 0.7);\\n\\t}\\n\\n\\tsvg {\\n\\t\\twidth: 2em;\\n\\t\\theight: 3em;\\n\\t\\tdisplay: block;\\n\\t}\\n\\n\\tpath {\\n\\t\\tfill: var(--background);\\n\\t}\\n\\n\\tul {\\n\\t\\tposition: relative;\\n\\t\\tpadding: 0;\\n\\t\\tmargin: 0;\\n\\t\\theight: 3em;\\n\\t\\tdisplay: flex;\\n\\t\\tjustify-content: center;\\n\\t\\talign-items: center;\\n\\t\\tlist-style: none;\\n\\t\\tbackground: var(--background);\\n\\t\\tbackground-size: contain;\\n\\t}\\n\\n\\tli {\\n\\t\\tposition: relative;\\n\\t\\theight: 100%;\\n\\t}\\n\\n\\tli.active::before {\\n\\t\\t--size: 6px;\\n\\t\\tcontent: '';\\n\\t\\twidth: 0;\\n\\t\\theight: 0;\\n\\t\\tposition: absolute;\\n\\t\\ttop: 0;\\n\\t\\tleft: calc(50% - var(--size));\\n\\t\\tborder: var(--size) solid transparent;\\n\\t\\tborder-top: var(--size) solid var(--accent-color);\\n\\t}\\n\\n\\tnav a {\\n\\t\\tdisplay: flex;\\n\\t\\theight: 100%;\\n\\t\\talign-items: center;\\n\\t\\tpadding: 0 1em;\\n\\t\\tcolor: var(--heading-color);\\n\\t\\tfont-weight: 700;\\n\\t\\tfont-size: 0.8rem;\\n\\t\\ttext-transform: uppercase;\\n\\t\\tletter-spacing: 10%;\\n\\t\\ttext-decoration: none;\\n\\t\\ttransition: color 0.2s linear;\\n\\t}\\n\\n\\ta:hover {\\n\\t\\tcolor: var(--accent-color);\\n\\t}\\n</style>\\n"],"names":[],"mappings":"AA+BC,MAAM,8BAAC,CAAC,AACP,OAAO,CAAE,IAAI,CACb,eAAe,CAAE,aAAa,AAC/B,CAAC,AAED,OAAO,8BAAC,CAAC,AACR,KAAK,CAAE,GAAG,CACV,MAAM,CAAE,GAAG,AACZ,CAAC,AAED,sBAAO,CAAC,CAAC,eAAC,CAAC,AACV,OAAO,CAAE,IAAI,CACb,WAAW,CAAE,MAAM,CACnB,eAAe,CAAE,MAAM,CACvB,KAAK,CAAE,IAAI,CACX,MAAM,CAAE,IAAI,AACb,CAAC,AAED,sBAAO,CAAC,GAAG,eAAC,CAAC,AACZ,KAAK,CAAE,GAAG,CACV,MAAM,CAAE,GAAG,CACX,UAAU,CAAE,OAAO,AACpB,CAAC,AAED,GAAG,8BAAC,CAAC,AACJ,OAAO,CAAE,IAAI,CACb,eAAe,CAAE,MAAM,CACvB,YAAY,CAAE,wBAAwB,AACvC,CAAC,AAED,GAAG,8BAAC,CAAC,AACJ,KAAK,CAAE,GAAG,CACV,MAAM,CAAE,GAAG,CACX,OAAO,CAAE,KAAK,AACf,CAAC,AAED,IAAI,8BAAC,CAAC,AACL,IAAI,CAAE,IAAI,YAAY,CAAC,AACxB,CAAC,AAED,EAAE,8BAAC,CAAC,AACH,QAAQ,CAAE,QAAQ,CAClB,OAAO,CAAE,CAAC,CACV,MAAM,CAAE,CAAC,CACT,MAAM,CAAE,GAAG,CACX,OAAO,CAAE,IAAI,CACb,eAAe,CAAE,MAAM,CACvB,WAAW,CAAE,MAAM,CACnB,UAAU,CAAE,IAAI,CAChB,UAAU,CAAE,IAAI,YAAY,CAAC,CAC7B,eAAe,CAAE,OAAO,AACzB,CAAC,AAED,EAAE,8BAAC,CAAC,AACH,QAAQ,CAAE,QAAQ,CAClB,MAAM,CAAE,IAAI,AACb,CAAC,AAED,EAAE,qCAAO,QAAQ,AAAC,CAAC,AAClB,MAAM,CAAE,GAAG,CACX,OAAO,CAAE,EAAE,CACX,KAAK,CAAE,CAAC,CACR,MAAM,CAAE,CAAC,CACT,QAAQ,CAAE,QAAQ,CAClB,GAAG,CAAE,CAAC,CACN,IAAI,CAAE,KAAK,GAAG,CAAC,CAAC,CAAC,IAAI,MAAM,CAAC,CAAC,CAC7B,MAAM,CAAE,IAAI,MAAM,CAAC,CAAC,KAAK,CAAC,WAAW,CACrC,UAAU,CAAE,IAAI,MAAM,CAAC,CAAC,KAAK,CAAC,IAAI,cAAc,CAAC,AAClD,CAAC,AAED,kBAAG,CAAC,CAAC,eAAC,CAAC,AACN,OAAO,CAAE,IAAI,CACb,MAAM,CAAE,IAAI,CACZ,WAAW,CAAE,MAAM,CACnB,OAAO,CAAE,CAAC,CAAC,GAAG,CACd,KAAK,CAAE,IAAI,eAAe,CAAC,CAC3B,WAAW,CAAE,GAAG,CAChB,SAAS,CAAE,MAAM,CACjB,cAAc,CAAE,SAAS,CACzB,cAAc,CAAE,GAAG,CACnB,eAAe,CAAE,IAAI,CACrB,UAAU,CAAE,KAAK,CAAC,IAAI,CAAC,MAAM,AAC9B,CAAC,AAED,+BAAC,MAAM,AAAC,CAAC,AACR,KAAK,CAAE,IAAI,cAAc,CAAC,AAC3B,CAAC"}`
 };
 var Header = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $page, $$unsubscribe_page;
   $$unsubscribe_page = subscribe(page, (value) => $page = value);
-  $$result.css.add(css$6);
+  $$result.css.add(css$5);
   $$unsubscribe_page();
   return `<header class="${"svelte-1twf6mk"}"><div class="${"corner svelte-1twf6mk"}"><a href="${"https://kit.svelte.dev"}" class="${"svelte-1twf6mk"}"><img${add_attribute("src", logo, 0)} alt="${"SvelteKit"}" class="${"svelte-1twf6mk"}"></a></div>
 
@@ -3264,14 +3090,14 @@ var Header = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 });
 var browser = false;
 var dev = false;
-var css$5 = {
+var css$4 = {
   code: ".pwa-toast.svelte-1q69697.svelte-1q69697{position:fixed;right:0;bottom:0;margin:16px;padding:12px;border:1px solid #8885;border-radius:4px;z-index:1;text-align:left;background-color:aqua;box-shadow:3px 4px 5px 0px #8885}.pwa-toast.svelte-1q69697 .message.svelte-1q69697{margin-bottom:8px}.pwa-toast.svelte-1q69697 button.svelte-1q69697{border:1px solid #8885;outline:none;margin-right:5px;border-radius:2px;padding:3px 10px}",
   map: `{"version":3,"file":"index.svelte","sources":["index.svelte"],"sourcesContent":["<script lang=\\"ts\\">import { dev, browser } from '$app/env';\\nimport { Workbox, messageSW } from 'workbox-window';\\nlet wb;\\nlet registration;\\nlet offlineReady = false;\\nlet needRefresh = false;\\nfunction showSkipWaitingPrompt(event) {\\n    // \\\\\`event.wasWaitingBeforeRegister\\\\\` will be false if this is\\n    // the first time the updated service worker is waiting.\\n    // When \\\\\`event.wasWaitingBeforeRegister\\\\\` is true, a previously\\n    // updated service worker is still waiting.\\n    // You may want to customize the UI prompt accordingly.\\n    // Assumes your app has some sort of prompt UI element\\n    // that a user can either accept or reject.\\n    needRefresh = true;\\n}\\nfunction updateServiceWorker() {\\n    // Assuming the user accepted the update, set up a listener\\n    // that will reload the page as soon as the previously waiting\\n    // service worker has taken control.\\n    if (wb) {\\n        wb.addEventListener('controlling', (event) => {\\n            if (event.isUpdate)\\n                window.location.reload();\\n        });\\n    }\\n    if (registration && registration.waiting) {\\n        // Send a message to the waiting service worker,\\n        // instructing it to activate.\\n        // Note: for this to work, you have to add a message\\n        // listener in your service worker. See below.\\n        messageSW(registration.waiting, { type: 'SKIP_WAITING' }).then(() => {\\n            // console.log(\\"NOTIFIED SKIP_WAITING\\");\\n        }).catch(e => {\\n            console.error(\\"NOTIFIED SKIP_WAITING WITH ERROR\\", e);\\n        });\\n    }\\n}\\nfunction close() {\\n    offlineReady = false;\\n    needRefresh = false;\\n}\\nif (!dev && browser) {\\n    if ('serviceWorker' in navigator) {\\n        wb = new Workbox('/service-worker.js', { scope: '/' });\\n        wb.addEventListener('activated', (event) => {\\n            // this will only controls the offline request.\\n            // event.isUpdate will be true if another version of the service\\n            // worker was controlling the page when this version was registered.\\n            if (!event.isUpdate) {\\n                offlineReady = true;\\n            }\\n        });\\n        // Add an event listener to detect when the registered\\n        // service worker has installed but is waiting to activate.\\n        wb.addEventListener('waiting', showSkipWaitingPrompt);\\n        // eslint-disable-next-line\\n        // @ts-ignore\\n        wb.addEventListener('externalwaiting', showSkipWaitingPrompt);\\n        // register the service worker\\n        wb.register({ immediate: true }).then(r => registration = r).catch(e => {\\n            console.error(\\"cannot register service worker\\", e);\\n        });\\n    }\\n    else {\\n        console.warn('Service workers are not supported.');\\n    }\\n}\\n$: toast = offlineReady || needRefresh;\\n</script>\\n\\n{#if toast}\\n  <div\\n      class=\\"pwa-toast\\"\\n      role=\\"alert\\"\\n  >\\n    <div class=\\"message\\">\\n      {#if offlineReady}\\n      <span>\\n        App ready to work offline\\n      </span>\\n      {:else}\\n      <span>\\n        New content available, click on reload button to update.\\n      </span>\\n      {/if}\\n    </div>\\n    {#if needRefresh}\\n    <button on:click={updateServiceWorker}>\\n      Reload\\n    </button>\\n    {/if}\\n    <button on:click={close}>\\n      Close\\n    </button>\\n  </div>\\n{/if}\\n\\n<style>\\n    .pwa-toast {\\n        position: fixed;\\n        right: 0;\\n        bottom: 0;\\n        margin: 16px;\\n        padding: 12px;\\n        border: 1px solid #8885;\\n        border-radius: 4px;\\n        z-index: 1;\\n        text-align: left;\\n        background-color: aqua;\\n        box-shadow: 3px 4px 5px 0px #8885;\\n    }\\n    .pwa-toast .message {\\n        margin-bottom: 8px;\\n    }\\n    .pwa-toast button {\\n        border: 1px solid #8885;\\n        outline: none;\\n        margin-right: 5px;\\n        border-radius: 2px;\\n        padding: 3px 10px;\\n    }\\n</style>\\n"],"names":[],"mappings":"AAmGI,UAAU,8BAAC,CAAC,AACR,QAAQ,CAAE,KAAK,CACf,KAAK,CAAE,CAAC,CACR,MAAM,CAAE,CAAC,CACT,MAAM,CAAE,IAAI,CACZ,OAAO,CAAE,IAAI,CACb,MAAM,CAAE,GAAG,CAAC,KAAK,CAAC,KAAK,CACvB,aAAa,CAAE,GAAG,CAClB,OAAO,CAAE,CAAC,CACV,UAAU,CAAE,IAAI,CAChB,gBAAgB,CAAE,IAAI,CACtB,UAAU,CAAE,GAAG,CAAC,GAAG,CAAC,GAAG,CAAC,GAAG,CAAC,KAAK,AACrC,CAAC,AACD,yBAAU,CAAC,QAAQ,eAAC,CAAC,AACjB,aAAa,CAAE,GAAG,AACtB,CAAC,AACD,yBAAU,CAAC,MAAM,eAAC,CAAC,AACf,MAAM,CAAE,GAAG,CAAC,KAAK,CAAC,KAAK,CACvB,OAAO,CAAE,IAAI,CACb,YAAY,CAAE,GAAG,CACjB,aAAa,CAAE,GAAG,CAClB,OAAO,CAAE,GAAG,CAAC,IAAI,AACrB,CAAC"}`
 };
 var ReloadPrompt = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let toast;
   let needRefresh = false;
-  $$result.css.add(css$5);
+  $$result.css.add(css$4);
   toast = needRefresh;
   return `${toast ? `<div class="${"pwa-toast svelte-1q69697"}" role="${"alert"}"><div class="${"message svelte-1q69697"}">${`<span>New content available, click on reload button to update.
       </span>`}</div>
@@ -3279,12 +3105,12 @@ var ReloadPrompt = create_ssr_component(($$result, $$props, $$bindings, slots) =
     <button class="${"svelte-1q69697"}">Close
     </button></div>` : ``}`;
 });
-var css$4 = {
+var css$3 = {
   code: "main.svelte-1izrdc8.svelte-1izrdc8{flex:1;display:flex;flex-direction:column;padding:1rem;width:100%;max-width:1024px;margin:0 auto;box-sizing:border-box}footer.svelte-1izrdc8.svelte-1izrdc8{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:40px}footer.svelte-1izrdc8 a.svelte-1izrdc8{font-weight:bold}@media(min-width: 480px){footer.svelte-1izrdc8.svelte-1izrdc8{padding:40px 0}}",
   map: `{"version":3,"file":"__layout.svelte","sources":["__layout.svelte"],"sourcesContent":["<script lang=\\"ts\\">import Header from '$lib/Header/index.svelte';\\nimport ReloadPrompt from '$lib/ReloadPrompt/index.svelte';\\nimport '../app.css';\\n</script>\\n\\n<svelte:head>\\n\\t<link rel=\\"manifest\\" href=\\"/manifest.webmanifest\\" />\\n\\t<link rel=\\"apple-touch-icon\\" href=\\"/apple-icon-180.png\\" />\\n\\n\\t<meta\\n\\t\\tname=\\"description\\"\\n\\t\\tcontent=\\"This is a Svelte-Kit PWA skeleton app based on the regular Svelte-kit app.\\"\\n\\t/>\\n\\t<meta name=\\"apple-mobile-web-app-capable\\" content=\\"yes\\" />\\n\\t<!-- <link rel=\\"icon\\" href=\\"/favicon.svg\\" type=\\"image/svg+xml\\"> -->\\n\\t<link rel=\\"apple-touch-icon\\" href=\\"/pwa-192x192.png\\" />\\n\\t<!-- <link rel=\\"mask-icon\\" href=\\"/safari-pinned-tab.svg\\" color=\\"#00aba9\\"> -->\\n\\t<meta name=\\"msapplication-TileColor\\" content=\\"#00aba9\\" />\\n\\t<meta name=\\"theme-color\\" content=\\"#ffffff\\" />\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2048-2732.jpg\\"\\n\\t\\tmedia=\\"(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2732-2048.jpg\\"\\n\\t\\tmedia=\\"(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1668-2388.jpg\\"\\n\\t\\tmedia=\\"(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2388-1668.jpg\\"\\n\\t\\tmedia=\\"(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1536-2048.jpg\\"\\n\\t\\tmedia=\\"(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2048-1536.jpg\\"\\n\\t\\tmedia=\\"(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1668-2224.jpg\\"\\n\\t\\tmedia=\\"(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2224-1668.jpg\\"\\n\\t\\tmedia=\\"(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1620-2160.jpg\\"\\n\\t\\tmedia=\\"(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2160-1620.jpg\\"\\n\\t\\tmedia=\\"(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1284-2778.jpg\\"\\n\\t\\tmedia=\\"(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2778-1284.jpg\\"\\n\\t\\tmedia=\\"(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1170-2532.jpg\\"\\n\\t\\tmedia=\\"(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2532-1170.jpg\\"\\n\\t\\tmedia=\\"(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1125-2436.jpg\\"\\n\\t\\tmedia=\\"(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2436-1125.jpg\\"\\n\\t\\tmedia=\\"(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1242-2688.jpg\\"\\n\\t\\tmedia=\\"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2688-1242.jpg\\"\\n\\t\\tmedia=\\"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-828-1792.jpg\\"\\n\\t\\tmedia=\\"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1792-828.jpg\\"\\n\\t\\tmedia=\\"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1242-2208.jpg\\"\\n\\t\\tmedia=\\"(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2208-1242.jpg\\"\\n\\t\\tmedia=\\"(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-750-1334.jpg\\"\\n\\t\\tmedia=\\"(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1334-750.jpg\\"\\n\\t\\tmedia=\\"(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-640-1136.jpg\\"\\n\\t\\tmedia=\\"(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1136-640.jpg\\"\\n\\t\\tmedia=\\"(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n</svelte:head>\\n\\n<Header />\\n\\n<main>\\n\\t<slot />\\n</main>\\n\\n<footer>\\n\\t<p>Visit <a href=\\"https://kit.svelte.dev\\">kit.svelte.dev</a> to learn SvelteKit.</p>\\n</footer>\\n\\n<ReloadPrompt />\\n\\n<style>\\n\\tmain {\\n\\t\\tflex: 1;\\n\\t\\tdisplay: flex;\\n\\t\\tflex-direction: column;\\n\\t\\tpadding: 1rem;\\n\\t\\twidth: 100%;\\n\\t\\tmax-width: 1024px;\\n\\t\\tmargin: 0 auto;\\n\\t\\tbox-sizing: border-box;\\n\\t}\\n\\n\\tfooter {\\n\\t\\tdisplay: flex;\\n\\t\\tflex-direction: column;\\n\\t\\tjustify-content: center;\\n\\t\\talign-items: center;\\n\\t\\tpadding: 40px;\\n\\t}\\n\\n\\tfooter a {\\n\\t\\tfont-weight: bold;\\n\\t}\\n\\n\\t@media (min-width: 480px) {\\n\\t\\tfooter {\\n\\t\\t\\tpadding: 40px 0;\\n\\t\\t}\\n\\t}\\n</style>\\n"],"names":[],"mappings":"AAoKC,IAAI,8BAAC,CAAC,AACL,IAAI,CAAE,CAAC,CACP,OAAO,CAAE,IAAI,CACb,cAAc,CAAE,MAAM,CACtB,OAAO,CAAE,IAAI,CACb,KAAK,CAAE,IAAI,CACX,SAAS,CAAE,MAAM,CACjB,MAAM,CAAE,CAAC,CAAC,IAAI,CACd,UAAU,CAAE,UAAU,AACvB,CAAC,AAED,MAAM,8BAAC,CAAC,AACP,OAAO,CAAE,IAAI,CACb,cAAc,CAAE,MAAM,CACtB,eAAe,CAAE,MAAM,CACvB,WAAW,CAAE,MAAM,CACnB,OAAO,CAAE,IAAI,AACd,CAAC,AAED,qBAAM,CAAC,CAAC,eAAC,CAAC,AACT,WAAW,CAAE,IAAI,AAClB,CAAC,AAED,MAAM,AAAC,YAAY,KAAK,CAAC,AAAC,CAAC,AAC1B,MAAM,8BAAC,CAAC,AACP,OAAO,CAAE,IAAI,CAAC,CAAC,AAChB,CAAC,AACF,CAAC"}`
 };
 var _layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  $$result.css.add(css$4);
+  $$result.css.add(css$3);
   return `${$$result.head += `<link rel="${"manifest"}" href="${"/manifest.webmanifest"}" data-svelte="svelte-qoiy54"><link rel="${"apple-touch-icon"}" href="${"/apple-icon-180.png"}" data-svelte="svelte-qoiy54"><meta name="${"description"}" content="${"This is a Svelte-Kit PWA skeleton app based on the regular Svelte-kit app."}" data-svelte="svelte-qoiy54"><meta name="${"apple-mobile-web-app-capable"}" content="${"yes"}" data-svelte="svelte-qoiy54"><link rel="${"apple-touch-icon"}" href="${"/pwa-192x192.png"}" data-svelte="svelte-qoiy54"><meta name="${"msapplication-TileColor"}" content="${"#00aba9"}" data-svelte="svelte-qoiy54"><meta name="${"theme-color"}" content="${"#ffffff"}" data-svelte="svelte-qoiy54"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2048-2732.jpg"}" media="${"(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"}" data-svelte="svelte-qoiy54"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2732-2048.jpg"}" media="${"(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"}" data-svelte="svelte-qoiy54"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1668-2388.jpg"}" media="${"(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"}" data-svelte="svelte-qoiy54"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2388-1668.jpg"}" media="${"(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"}" data-svelte="svelte-qoiy54"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1536-2048.jpg"}" media="${"(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"}" data-svelte="svelte-qoiy54"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2048-1536.jpg"}" media="${"(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"}" data-svelte="svelte-qoiy54"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1668-2224.jpg"}" media="${"(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"}" data-svelte="svelte-qoiy54"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2224-1668.jpg"}" media="${"(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"}" data-svelte="svelte-qoiy54"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1620-2160.jpg"}" media="${"(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"}" data-svelte="svelte-qoiy54"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2160-1620.jpg"}" media="${"(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"}" data-svelte="svelte-qoiy54"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1284-2778.jpg"}" media="${"(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"}" data-svelte="svelte-qoiy54"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2778-1284.jpg"}" media="${"(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"}" data-svelte="svelte-qoiy54"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1170-2532.jpg"}" media="${"(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"}" data-svelte="svelte-qoiy54"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2532-1170.jpg"}" media="${"(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"}" data-svelte="svelte-qoiy54"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1125-2436.jpg"}" media="${"(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"}" data-svelte="svelte-qoiy54"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2436-1125.jpg"}" media="${"(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"}" data-svelte="svelte-qoiy54"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1242-2688.jpg"}" media="${"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"}" data-svelte="svelte-qoiy54"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2688-1242.jpg"}" media="${"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"}" data-svelte="svelte-qoiy54"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-828-1792.jpg"}" media="${"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"}" data-svelte="svelte-qoiy54"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1792-828.jpg"}" media="${"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"}" data-svelte="svelte-qoiy54"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1242-2208.jpg"}" media="${"(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"}" data-svelte="svelte-qoiy54"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2208-1242.jpg"}" media="${"(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"}" data-svelte="svelte-qoiy54"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-750-1334.jpg"}" media="${"(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"}" data-svelte="svelte-qoiy54"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1334-750.jpg"}" media="${"(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"}" data-svelte="svelte-qoiy54"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-640-1136.jpg"}" media="${"(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"}" data-svelte="svelte-qoiy54"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1136-640.jpg"}" media="${"(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"}" data-svelte="svelte-qoiy54">`, ""}
 
 ${validate_component(Header, "Header").$$render($$result, {}, {}, {})}
@@ -3323,52 +3149,30 @@ var error2 = /* @__PURE__ */ Object.freeze({
   "default": Error$1,
   load: load$1
 });
-var css$3 = {
-  code: ".counter.svelte-ltn89m.svelte-ltn89m{display:flex;border-top:1px solid rgba(0, 0, 0, 0.1);border-bottom:1px solid rgba(0, 0, 0, 0.1);margin:1rem 0}.counter.svelte-ltn89m button.svelte-ltn89m{width:2em;padding:0;display:flex;align-items:center;justify-content:center;border:0;background-color:transparent;color:var(--text-color);font-size:2rem}.counter.svelte-ltn89m button.svelte-ltn89m:hover{background-color:var(--secondary-color)}svg.svelte-ltn89m.svelte-ltn89m{width:25%;height:25%}path.svelte-ltn89m.svelte-ltn89m{vector-effect:non-scaling-stroke;stroke-width:2px;stroke:var(--text-color)}.counter-viewport.svelte-ltn89m.svelte-ltn89m{width:8em;height:4em;overflow:hidden;text-align:center;position:relative}.counter-viewport.svelte-ltn89m strong.svelte-ltn89m{position:absolute;display:block;width:100%;height:100%;font-weight:400;color:var(--accent-color);font-size:4rem;display:flex;align-items:center;justify-content:center}.counter-digits.svelte-ltn89m.svelte-ltn89m{position:absolute;width:100%;height:100%}",
-  map: `{"version":3,"file":"index.svelte","sources":["index.svelte"],"sourcesContent":["<script lang=\\"ts\\">import { spring } from 'svelte/motion';\\nlet count = 0;\\nconst displayed_count = spring();\\n$: displayed_count.set(count);\\n$: offset = modulo($displayed_count, 1);\\nfunction modulo(n, m) {\\n    // handle negative numbers\\n    return ((n % m) + m) % m;\\n}\\n</script>\\n\\n<div class=\\"counter\\">\\n\\t<button on:click={() => (count -= 1)} aria-label=\\"Decrease the counter by one\\">\\n\\t\\t<svg aria-hidden=\\"true\\" viewBox=\\"0 0 1 1\\">\\n\\t\\t\\t<path d=\\"M0,0.5 L1,0.5\\" />\\n\\t\\t</svg>\\n\\t</button>\\n\\n\\t<div class=\\"counter-viewport\\">\\n\\t\\t<div class=\\"counter-digits\\" style=\\"transform: translate(0, {100 * offset}%)\\">\\n\\t\\t\\t<strong style=\\"top: -100%\\" aria-hidden=\\"true\\">{Math.floor($displayed_count + 1)}</strong>\\n\\t\\t\\t<strong>{Math.floor($displayed_count)}</strong>\\n\\t\\t</div>\\n\\t</div>\\n\\n\\t<button on:click={() => (count += 1)} aria-label=\\"Increase the counter by one\\">\\n\\t\\t<svg aria-hidden=\\"true\\" viewBox=\\"0 0 1 1\\">\\n\\t\\t\\t<path d=\\"M0,0.5 L1,0.5 M0.5,0 L0.5,1\\" />\\n\\t\\t</svg>\\n\\t</button>\\n</div>\\n\\n<style>\\n\\t.counter {\\n\\t\\tdisplay: flex;\\n\\t\\tborder-top: 1px solid rgba(0, 0, 0, 0.1);\\n\\t\\tborder-bottom: 1px solid rgba(0, 0, 0, 0.1);\\n\\t\\tmargin: 1rem 0;\\n\\t}\\n\\n\\t.counter button {\\n\\t\\twidth: 2em;\\n\\t\\tpadding: 0;\\n\\t\\tdisplay: flex;\\n\\t\\talign-items: center;\\n\\t\\tjustify-content: center;\\n\\t\\tborder: 0;\\n\\t\\tbackground-color: transparent;\\n\\t\\tcolor: var(--text-color);\\n\\t\\tfont-size: 2rem;\\n\\t}\\n\\n\\t.counter button:hover {\\n\\t\\tbackground-color: var(--secondary-color);\\n\\t}\\n\\n\\tsvg {\\n\\t\\twidth: 25%;\\n\\t\\theight: 25%;\\n\\t}\\n\\n\\tpath {\\n\\t\\tvector-effect: non-scaling-stroke;\\n\\t\\tstroke-width: 2px;\\n\\t\\tstroke: var(--text-color);\\n\\t}\\n\\n\\t.counter-viewport {\\n\\t\\twidth: 8em;\\n\\t\\theight: 4em;\\n\\t\\toverflow: hidden;\\n\\t\\ttext-align: center;\\n\\t\\tposition: relative;\\n\\t}\\n\\n\\t.counter-viewport strong {\\n\\t\\tposition: absolute;\\n\\t\\tdisplay: block;\\n\\t\\twidth: 100%;\\n\\t\\theight: 100%;\\n\\t\\tfont-weight: 400;\\n\\t\\tcolor: var(--accent-color);\\n\\t\\tfont-size: 4rem;\\n\\t\\tdisplay: flex;\\n\\t\\talign-items: center;\\n\\t\\tjustify-content: center;\\n\\t}\\n\\n\\t.counter-digits {\\n\\t\\tposition: absolute;\\n\\t\\twidth: 100%;\\n\\t\\theight: 100%;\\n\\t}\\n</style>\\n"],"names":[],"mappings":"AAiCC,QAAQ,4BAAC,CAAC,AACT,OAAO,CAAE,IAAI,CACb,UAAU,CAAE,GAAG,CAAC,KAAK,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,CACxC,aAAa,CAAE,GAAG,CAAC,KAAK,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,CAC3C,MAAM,CAAE,IAAI,CAAC,CAAC,AACf,CAAC,AAED,sBAAQ,CAAC,MAAM,cAAC,CAAC,AAChB,KAAK,CAAE,GAAG,CACV,OAAO,CAAE,CAAC,CACV,OAAO,CAAE,IAAI,CACb,WAAW,CAAE,MAAM,CACnB,eAAe,CAAE,MAAM,CACvB,MAAM,CAAE,CAAC,CACT,gBAAgB,CAAE,WAAW,CAC7B,KAAK,CAAE,IAAI,YAAY,CAAC,CACxB,SAAS,CAAE,IAAI,AAChB,CAAC,AAED,sBAAQ,CAAC,oBAAM,MAAM,AAAC,CAAC,AACtB,gBAAgB,CAAE,IAAI,iBAAiB,CAAC,AACzC,CAAC,AAED,GAAG,4BAAC,CAAC,AACJ,KAAK,CAAE,GAAG,CACV,MAAM,CAAE,GAAG,AACZ,CAAC,AAED,IAAI,4BAAC,CAAC,AACL,aAAa,CAAE,kBAAkB,CACjC,YAAY,CAAE,GAAG,CACjB,MAAM,CAAE,IAAI,YAAY,CAAC,AAC1B,CAAC,AAED,iBAAiB,4BAAC,CAAC,AAClB,KAAK,CAAE,GAAG,CACV,MAAM,CAAE,GAAG,CACX,QAAQ,CAAE,MAAM,CAChB,UAAU,CAAE,MAAM,CAClB,QAAQ,CAAE,QAAQ,AACnB,CAAC,AAED,+BAAiB,CAAC,MAAM,cAAC,CAAC,AACzB,QAAQ,CAAE,QAAQ,CAClB,OAAO,CAAE,KAAK,CACd,KAAK,CAAE,IAAI,CACX,MAAM,CAAE,IAAI,CACZ,WAAW,CAAE,GAAG,CAChB,KAAK,CAAE,IAAI,cAAc,CAAC,CAC1B,SAAS,CAAE,IAAI,CACf,OAAO,CAAE,IAAI,CACb,WAAW,CAAE,MAAM,CACnB,eAAe,CAAE,MAAM,AACxB,CAAC,AAED,eAAe,4BAAC,CAAC,AAChB,QAAQ,CAAE,QAAQ,CAClB,KAAK,CAAE,IAAI,CACX,MAAM,CAAE,IAAI,AACb,CAAC"}`
-};
-function modulo(n, m) {
-  return (n % m + m) % m;
-}
-var Counter = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let offset;
-  let $displayed_count, $$unsubscribe_displayed_count;
-  let count = 0;
-  const displayed_count = spring();
-  $$unsubscribe_displayed_count = subscribe(displayed_count, (value) => $displayed_count = value);
-  $$result.css.add(css$3);
-  {
-    displayed_count.set(count);
-  }
-  offset = modulo($displayed_count, 1);
-  $$unsubscribe_displayed_count();
-  return `<div class="${"counter svelte-ltn89m"}"><button aria-label="${"Decrease the counter by one"}" class="${"svelte-ltn89m"}"><svg aria-hidden="${"true"}" viewBox="${"0 0 1 1"}" class="${"svelte-ltn89m"}"><path d="${"M0,0.5 L1,0.5"}" class="${"svelte-ltn89m"}"></path></svg></button>
-
-	<div class="${"counter-viewport svelte-ltn89m"}"><div class="${"counter-digits svelte-ltn89m"}" style="${"transform: translate(0, " + escape2(100 * offset) + "%)"}"><strong style="${"top: -100%"}" aria-hidden="${"true"}" class="${"svelte-ltn89m"}">${escape2(Math.floor($displayed_count + 1))}</strong>
-			<strong class="${"svelte-ltn89m"}">${escape2(Math.floor($displayed_count))}</strong></div></div>
-
-	<button aria-label="${"Increase the counter by one"}" class="${"svelte-ltn89m"}"><svg aria-hidden="${"true"}" viewBox="${"0 0 1 1"}" class="${"svelte-ltn89m"}"><path d="${"M0,0.5 L1,0.5 M0.5,0 L0.5,1"}" class="${"svelte-ltn89m"}"></path></svg></button>
-</div>`;
-});
 var css$2 = {
-  code: "section.svelte-mjk9ig.svelte-mjk9ig{display:flex;flex-direction:column;justify-content:center;align-items:center;flex:1}h1.svelte-mjk9ig.svelte-mjk9ig{width:100%}.welcome.svelte-mjk9ig.svelte-mjk9ig{position:relative;width:100%;height:0;padding:0 0 calc(100% * 495 / 2048) 0}.welcome.svelte-mjk9ig img.svelte-mjk9ig{position:absolute;width:100%;height:100%;top:0;display:block}",
-  map: `{"version":3,"file":"index.svelte","sources":["index.svelte"],"sourcesContent":["<script context=\\"module\\" lang=\\"ts\\">export const prerender = true;\\n</script>\\n\\n<script lang=\\"ts\\">import Counter from '$lib/Counter/index.svelte';\\n</script>\\n\\n<svelte:head>\\n\\t<title>Home</title>\\n</svelte:head>\\n\\n<section>\\n\\t<h1>\\n\\t\\t<div class=\\"welcome\\">\\n\\t\\t\\t<picture>\\n\\t\\t\\t\\t<source srcset=\\"svelte-welcome.webp\\" type=\\"image/webp\\" />\\n\\t\\t\\t\\t<img src=\\"svelte-welcome.png\\" alt=\\"Welcome\\" />\\n\\t\\t\\t</picture>\\n\\t\\t</div>\\n\\n\\t\\tto your new<br />SvelteKit app\\n\\t</h1>\\n\\n\\t<h2>\\n\\t\\ttry editing <strong>src/routes/index.svelte</strong>\\n\\t</h2>\\n\\n\\t<Counter />\\n</section>\\n\\n<style>\\n\\tsection {\\n\\t\\tdisplay: flex;\\n\\t\\tflex-direction: column;\\n\\t\\tjustify-content: center;\\n\\t\\talign-items: center;\\n\\t\\tflex: 1;\\n\\t}\\n\\n\\th1 {\\n\\t\\twidth: 100%;\\n\\t}\\n\\n\\t.welcome {\\n\\t\\tposition: relative;\\n\\t\\twidth: 100%;\\n\\t\\theight: 0;\\n\\t\\tpadding: 0 0 calc(100% * 495 / 2048) 0;\\n\\t}\\n\\n\\t.welcome img {\\n\\t\\tposition: absolute;\\n\\t\\twidth: 100%;\\n\\t\\theight: 100%;\\n\\t\\ttop: 0;\\n\\t\\tdisplay: block;\\n\\t}\\n</style>\\n"],"names":[],"mappings":"AA8BC,OAAO,4BAAC,CAAC,AACR,OAAO,CAAE,IAAI,CACb,cAAc,CAAE,MAAM,CACtB,eAAe,CAAE,MAAM,CACvB,WAAW,CAAE,MAAM,CACnB,IAAI,CAAE,CAAC,AACR,CAAC,AAED,EAAE,4BAAC,CAAC,AACH,KAAK,CAAE,IAAI,AACZ,CAAC,AAED,QAAQ,4BAAC,CAAC,AACT,QAAQ,CAAE,QAAQ,CAClB,KAAK,CAAE,IAAI,CACX,MAAM,CAAE,CAAC,CACT,OAAO,CAAE,CAAC,CAAC,CAAC,CAAC,KAAK,IAAI,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,AACvC,CAAC,AAED,sBAAQ,CAAC,GAAG,cAAC,CAAC,AACb,QAAQ,CAAE,QAAQ,CAClB,KAAK,CAAE,IAAI,CACX,MAAM,CAAE,IAAI,CACZ,GAAG,CAAE,CAAC,CACN,OAAO,CAAE,KAAK,AACf,CAAC"}`
+  code: "body{padding:0\n	}section.svelte-1bcwt6e.svelte-1bcwt6e{overflow:hidden;height:300px}ul.svelte-1bcwt6e.svelte-1bcwt6e{list-style:none;margin:0;padding:0;display:flex;gap:var(--gap);width:100%;height:100%;min-width:0}ul.svelte-1bcwt6e li.svelte-1bcwt6e{flex:1 0 var(--width);width:var(--width);max-width:100%;height:100%;position:relative;background-image:linear-gradient(\n      to top right,\n      gainsboro, whitesmoke\n    )}ul.svelte-1bcwt6e li.svelte-1bcwt6e:before{content:attr(id);position:absolute;background:rgba(255,255,255, 0.82);padding:1rem;z-index:1}nav.svelte-1bcwt6e.svelte-1bcwt6e{display:flex;justify-content:start;margin:1rem 0;flex-wrap:wrap;align-items:center}.active.svelte-1bcwt6e.svelte-1bcwt6e{color:red}",
+  map: `{"version":3,"file":"index.svelte","sources":["index.svelte"],"sourcesContent":["<script context=\\"module\\" lang=\\"ts\\">export const prerender = true;\\n</script>\\n\\n<svelte:options immutable={true}/>\\n\\n<script>\\n\\timport {slidy} from '@slidy/core'\\n\\timport pkg from '@slidy/core/package.json'\\n\\n\\n\\tlet items = [],\\n\\t\\t\\timagable = false,\\n\\t\\t\\twidth = '100%',\\n\\t\\t\\tgap = 0,\\n\\t\\t\\tindex = 0,\\n\\t\\t\\tlength = 3,\\n\\t\\t\\tscrollPos = 0,\\n\\t\\t\\ti = length\\n\\n\\tlet page = Math.trunc((Math.random()*10))\\n</script>\\n\\n\\n\\n<section style=\\"--gap: {gap}px; --width: {width}\\" tab-index=\\"0\\">\\n\\n\\t<ul use:slidy={{\\n\\t\\t\\t\\tindex,\\n\\t\\t\\t\\tlength,\\n\\t\\t\\t\\taxis: 'x',\\n\\t\\t\\t\\talign: 'middle',\\n\\t\\t\\t\\tduration: 375,\\n\\t\\t\\t\\tclamp: false,\\n\\t\\t\\t\\tsnap: true,\\n\\t\\t\\t\\tgravity: 1.2,\\n\\t\\t\\t\\tindexer: (x) => (index = x),\\n\\t\\t\\t\\tscroller: (p) => (scrollPos = p)\\n\\t\\t\\t}}>\\n\\n\\t\\t<li id='0' class:active={i === index}>ONE, one, 1... sfjsfbnjfnbjfsjfnjf</li>\\n\\t\\t<li id='1' class:active={i === index}>TWO, two, 2... sfjsfbnjfnbjfsjfnjf</li>\\n\\t\\t<li id='2' class:active={i === index}>Three, three, 3... sfjsfbnjfnbjfsjfnjf</li>\\n\\n\\t</ul>\\n\\n</section>\\n\\n<nav id=\\"dots\\">\\n\\t{#if length > 0}\\n\\t{#each { length } as dot, i}\\n\\t\\t<button on:click={() => (index = i)} class:active={i === index}>{i}</button>\\n\\t{/each}\\n\\t{/if}\\n</nav>\\n<nav>\\n\\t<button on:click={() => index--}>\u2190</button>\\n\\t<button on:click={() => index++}>\u2192</button>\\n</nav>\\n<pre>index: [{index}] scrollPos: {Math.trunc(scrollPos)}px</pre>\\n\\n<style>\\n\\t:global(body){\\n\\t\\tpadding:0\\n\\t}\\n\\tsection {\\n\\t\\toverflow: hidden;\\n\\t\\theight: 300px;\\n\\t\\t/* \\t\\tposition: relative; */\\n\\t}\\n\\tul {\\n\\t\\tlist-style: none;\\n\\t\\tmargin: 0;\\n\\t\\tpadding: 0;\\n\\t\\tdisplay: flex;\\n\\t\\tgap: var(--gap);\\n\\t\\twidth: 100%;\\n\\t\\theight: 100%;\\n\\t\\tmin-width: 0;\\n\\t\\t/* \\t\\tposition: relative; */\\n\\t}\\n\\tul li {\\n\\t\\tflex: 1 0 var(--width);\\n\\t\\twidth: var(--width);\\n\\t\\tmax-width: 100%;\\n\\t\\theight: 100%;\\n\\t\\tposition: relative;\\n\\n\\t\\tbackground-image:\\n    linear-gradient(\\n      to top right,\\n      gainsboro, whitesmoke\\n    );\\n\\t}\\n\\tul li:before {\\n\\t\\tcontent: attr(id);\\n\\t\\tposition: absolute;\\n\\t\\tbackground: rgba(255,255,255, 0.82);\\n\\t\\tpadding: 1rem;\\n\\t\\tz-index: 1;\\n\\t}\\n\\tul li img {\\n\\t\\twidth: 100%;\\n\\t\\twidth: auto;\\n\\t\\theight: 100%;\\n\\t\\tdisplay: flex;\\n\\t\\tobject-fit: cover;\\n\\t\\tmax-width: 100%;\\n\\t\\twill-change: transform;\\n\\t}\\n\\tnav, label {\\n\\t\\tdisplay: flex;\\n\\t\\tjustify-content: start;\\n\\t\\tmargin: 1rem 0;\\n\\t\\tflex-wrap: wrap;\\n\\t\\talign-items: center;\\n\\t}\\n\\t.active {color: red;}\\n\\tinput { margin: 0}\\n</style>"],"names":[],"mappings":"AA6DS,IAAI,AAAC,CAAC,AACb,QAAQ,CAAC;CACV,CAAC,AACD,OAAO,8BAAC,CAAC,AACR,QAAQ,CAAE,MAAM,CAChB,MAAM,CAAE,KAAK,AAEd,CAAC,AACD,EAAE,8BAAC,CAAC,AACH,UAAU,CAAE,IAAI,CAChB,MAAM,CAAE,CAAC,CACT,OAAO,CAAE,CAAC,CACV,OAAO,CAAE,IAAI,CACb,GAAG,CAAE,IAAI,KAAK,CAAC,CACf,KAAK,CAAE,IAAI,CACX,MAAM,CAAE,IAAI,CACZ,SAAS,CAAE,CAAC,AAEb,CAAC,AACD,iBAAE,CAAC,EAAE,eAAC,CAAC,AACN,IAAI,CAAE,CAAC,CAAC,CAAC,CAAC,IAAI,OAAO,CAAC,CACtB,KAAK,CAAE,IAAI,OAAO,CAAC,CACnB,SAAS,CAAE,IAAI,CACf,MAAM,CAAE,IAAI,CACZ,QAAQ,CAAE,QAAQ,CAElB,gBAAgB,CACd;MACE,EAAE,CAAC,GAAG,CAAC,KAAK,CAAC;MACb,SAAS,CAAC,CAAC,UAAU;KACtB,AACJ,CAAC,AACD,iBAAE,CAAC,iBAAE,OAAO,AAAC,CAAC,AACb,OAAO,CAAE,KAAK,EAAE,CAAC,CACjB,QAAQ,CAAE,QAAQ,CAClB,UAAU,CAAE,KAAK,GAAG,CAAC,GAAG,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC,CACnC,OAAO,CAAE,IAAI,CACb,OAAO,CAAE,CAAC,AACX,CAAC,AAUD,GAAG,8BAAQ,CAAC,AACX,OAAO,CAAE,IAAI,CACb,eAAe,CAAE,KAAK,CACtB,MAAM,CAAE,IAAI,CAAC,CAAC,CACd,SAAS,CAAE,IAAI,CACf,WAAW,CAAE,MAAM,AACpB,CAAC,AACD,OAAO,8BAAC,CAAC,KAAK,CAAE,GAAG,AAAC,CAAC"}`
 };
 var prerender$1 = true;
 var Routes = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let width = "100%", gap = 0, index2 = 0, length = 3, scrollPos = 0;
   $$result.css.add(css$2);
-  return `${$$result.head += `${$$result.title = `<title>Home</title>`, ""}`, ""}
+  return `
 
-<section class="${"svelte-mjk9ig"}"><h1 class="${"svelte-mjk9ig"}"><div class="${"welcome svelte-mjk9ig"}"><picture><source srcset="${"svelte-welcome.webp"}" type="${"image/webp"}">
-				<img src="${"svelte-welcome.png"}" alt="${"Welcome"}" class="${"svelte-mjk9ig"}"></picture></div>
 
-		to your new<br>SvelteKit app
-	</h1>
 
-	<h2>try editing <strong>src/routes/index.svelte</strong></h2>
 
-	${validate_component(Counter, "Counter").$$render($$result, {}, {}, {})}
-</section>`;
+
+<section style="${"--gap: " + escape2(gap) + "px; --width: " + escape2(width)}" tab-index="${"0"}" class="${"svelte-1bcwt6e"}"><ul class="${"svelte-1bcwt6e"}"><li id="${"0"}" class="${["svelte-1bcwt6e", ""].join(" ").trim()}">ONE, one, 1... sfjsfbnjfnbjfsjfnjf</li>
+		<li id="${"1"}" class="${["svelte-1bcwt6e", ""].join(" ").trim()}">TWO, two, 2... sfjsfbnjfnbjfsjfnjf</li>
+		<li id="${"2"}" class="${["svelte-1bcwt6e", ""].join(" ").trim()}">Three, three, 3... sfjsfbnjfnbjfsjfnjf</li></ul></section>
+
+<nav id="${"dots"}" class="${"svelte-1bcwt6e"}">${`${each({length}, (dot, i) => {
+    return `<button class="${["svelte-1bcwt6e", i === index2 ? "active" : ""].join(" ").trim()}">${escape2(i)}</button>`;
+  })}`}</nav>
+<nav class="${"svelte-1bcwt6e"}"><button>\u2190</button>
+	<button>\u2192</button></nav>
+<pre>index: [${escape2(index2)}] scrollPos: ${escape2(Math.trunc(scrollPos))}px</pre>`;
 });
 var index$1 = /* @__PURE__ */ Object.freeze({
   __proto__: null,
@@ -3492,14 +3296,16 @@ var Todos = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 
 	<form class="${"new svelte-dmxqmd"}" action="${"/todos.json"}" method="${"post"}"><input name="${"text"}" aria-label="${"Add todo"}" placeholder="${"+ tap to add a todo"}" class="${"svelte-dmxqmd"}"></form>
 
-	${each(todos, (todo) => `<div class="${["todo svelte-dmxqmd", todo.done ? "done" : ""].join(" ").trim()}"><form action="${"/todos/" + escape2(todo.uid) + ".json?_method=patch"}" method="${"post"}"><input type="${"hidden"}" name="${"done"}"${add_attribute("value", todo.done ? "" : "true", 0)} class="${"svelte-dmxqmd"}">
+	${each(todos, (todo) => {
+    return `<div class="${["todo svelte-dmxqmd", todo.done ? "done" : ""].join(" ").trim()}"><form action="${"/todos/" + escape2(todo.uid) + ".json?_method=patch"}" method="${"post"}"><input type="${"hidden"}" name="${"done"}"${add_attribute("value", todo.done ? "" : "true", 0)} class="${"svelte-dmxqmd"}">
 				<button class="${"toggle svelte-dmxqmd"}" aria-label="${"Mark todo as " + escape2(todo.done ? "not done" : "done")}"></button></form>
 
 			<form class="${"text svelte-dmxqmd"}" action="${"/todos/" + escape2(todo.uid) + ".json?_method=patch"}" method="${"post"}"><input aria-label="${"Edit todo"}" type="${"text"}" name="${"text"}"${add_attribute("value", todo.text, 0)} class="${"svelte-dmxqmd"}">
 				<button class="${"save svelte-dmxqmd"}" aria-label="${"Save todo"}"></button></form>
 
 			<form action="${"/todos/" + escape2(todo.uid) + ".json?_method=delete"}" method="${"post"}"><button class="${"delete svelte-dmxqmd"}" aria-label="${"Delete todo"}"></button></form>
-		</div>`)}
+		</div>`;
+  })}
 </div>`;
 });
 var index = /* @__PURE__ */ Object.freeze({
