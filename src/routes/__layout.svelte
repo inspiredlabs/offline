@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Header from '$lib/Header/index.svelte';
 	import ReloadPrompt from '$lib/ReloadPrompt/index.svelte';
-	import '../app.css';
 </script>
 
 <svelte:head>
@@ -10,7 +9,7 @@
 
 	<meta
 		name="description"
-		content="This is a Svelte-Kit PWA skeleton app based on the regular Svelte-kit app."
+		content="This is a Svelte-Kit PWA skeleton."
 	/>
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<!-- <link rel="icon" href="/favicon.svg" type="image/svg+xml"> -->
@@ -163,32 +162,8 @@
 <ReloadPrompt />
 
 <style>
-	main {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		padding: 1rem;
-		width: 100%;
-		max-width: 1024px;
-		margin: 0 auto;
-		box-sizing: border-box;
-	}
-
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 40px;
-	}
-
-	footer a {
-		font-weight: bold;
-	}
-
-	@media (min-width: 480px) {
-		footer {
-			padding: 40px 0;
-		}
+	:global(body) {
+		margin:0;
+		padding:0;
 	}
 </style>

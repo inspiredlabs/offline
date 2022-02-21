@@ -1,71 +1,152 @@
 <script context="module" lang="ts">
+	// PWA from: https://github.com/FunMiles/SveltekitPWA
 	export const prerender = true;
 </script>
 
 <svelte:options immutable={true}/>
 
 <script>
-	import {slidy} from '@slidy/core'
+import {slidy} from '@slidy/core';
 
-
-	let items = [],
-			width = '100%',
-			gap = 0,
-			index = 0,
-			length = 3,
-			scrollPos = 0,
-			i = length
-
+let items = [],
+		width = '100%',
+		gap = 0,
+		index = 0,
+		length = 3,
+		scrollPos = 0,
+		i = length,
+		title = 'Slidecore';
 </script>
+
+<!-- Main navigation  -->
+<nav class="bg-blue fixed z-9999 w-100
+top-0 landscape-top-0-ns landscape-top-0-m landscape-top-0-l
+flex tc debug">
+  <div class="
+	w-100 flex justify-between
+  f5 f4-ns f3-m f3-l lh-copy
+  pa2 measure
+  pa4-ns measure-ns
+  pa2-m measure-m
+  pa0-l measure-wide-l mr-auto ml-auto">
+
+    <div class="w-50 w-50-ns w-50-m w-20-l
+    bg-light-blue pv3 h3 f5 f4-ns fs-m f5-l tl">i[{index}],{Math.trunc(scrollPos)}px</div>
+
+    <!-- ONLY: large & landscape -->
+    <div class="w-60-l bg-gold justify-between dn landscape-flex-l">
+		{#if length > 0}
+			{#each { length } as dot, i}
+			<button style="width:calc(100% / {length})" class="w-20 pv3 h3 f5 f4-ns fs-m f5-l white o-60 bg-transparent" on:click={() => (index = i)} class:active={i === index}>{i}</button><!-- bg-gold -->
+			{/each}
+		{/if}
+		</div>
+
+
+    <div class="w-50 w-50-ns w-50-m w-20-l
+    bg-light-blue pv3 h3 f5 f4-ns fs-m f5-l tr flex items-center justify-end">
+			<div class="flex justify-between">
+				<span>🇮🇹&thinsp;<span class='dib dib-ns dn-m dn-l'>It&emsp;</span></span>
+				<span class='dn dn-ns dib-m dib-l'>Italiano&emsp;</span><span>🇬🇧&thinsp;<span class='dib dib-ns dn-m dn-l'>En</span></span>
+				<span class='dn dn-ns dib-m dib-l'>English</span>
+			</div>
+		</div>
+  </div>
+</nav><!-- Main navigation  -->
+
+<!-- Internal page navigation  -->
+<!-- EXCEPT large & landscape -->
+<nav class="bg-red fixed z-9999 w-100
+bottom-0 portrait-bottom-0-ns portrait-bottom-0-m portrait-bottom-0-l
+landscape-dn-l flex
+tc debug">
+  <div class="w-100 flex justify-between
+  f5 f4-ns f3-m f3-l lh-copy
+  pa2 measure
+  pa4-ns measure-ns
+  pa2-m measure-m
+  pa0-l measure-wide-l mr-auto ml-auto">
+
+		{#if length > 0}
+			{#each { length } as dot, i}
+			<button style="width:calc(100% / {length})" class="w-20 pv3 h3 f5 f4-ns fs-m f5-l white o-60 bg-transparent" on:click={() => (index = i)} class:active={i === index}>{i}</button><!-- bg-gold -->
+			{/each}
+		{/if}
+
+  </div>
+</nav><!-- /Internal page navigation  -->
 
 
 
 <section style="--gap: {gap}px; --width: {width}" tab-index="0">
 
-	<ul use:slidy={{
-				index,
-				length,
-				axis: 'x',
-				align: 'middle',
-				duration: 200,
-				clamp: true,
-				snap: true,
-				gravity: 1.3,
-				indexer: (x) => (index = x),
-				scroller: (p) => (scrollPos = p)
-			}}>
+	<ul
+		use:slidy={{
+		index,
+		length,
+		axis: 'x',
+		align: 'middle',
+		duration: 200,
+		clamp: true,
+		snap: true,
+		gravity: 1.3,
+		indexer: (x) => (index = x),
+		scroller: (p) => (scrollPos = p)
+	}}>
 
-		<li id='0' class:active={i === index}>ONE, one, 1... sfjsfbnjfnbjfsjfnjf</li>
-		<li id='1' class:active={i === index}>TWO, two, 2... sfjsfbnjfnbjfsjfnjf</li>
-		<li id='2' class:active={i === index}>Three, three, 3... sfjsfbnjfnbjfsjfnjf</li>
+<li id='0'>
+	<aside class="w-100
+f5 f4-ns f3-m f3-l lh-copy
+pa2 measure
+pa4-ns measure-ns
+pa2-m measure-m
+pa0-l measure-wide-l mr-auto ml-auto
+pv5 pv5-ns pv5-m pv5-l">
+<h1 class="">{title}</h1>
+<p>Hummus falafel bowl sriracha pecans miso turmeric glazed aubergine fig arugula cashew salad seeds walnut mushroom tart lemon sweet potato black bean burrito green pepper second course lemon red lentil soup spicy mangos guacamole overflowing mocha chocolate frosted gingerbread bites chai tea sweet potato mediterranean vegetables red amazon pepper grapefruit crunchy. One bowl chilies peaches ginger tofu shiitake mushrooms banana bread citrusy shallots fall roasted brussel sprouts chili peanut butter jalapeño cinnamon toast cilantro blackberries pumpkin main course hazelnut shiitake spring matcha pineapple salsa. Heat mint lemonade zest grenadillo double dark chocolate burritos blood orange smash apricot farro platter tasty tabasco pepper cookies plums Caribbean red habanero tempeh delightful blueberry scones. </p>
+<p>Lemon lime minty cherry bomb pepper roasted peanuts simmer pomegranate pinch of yum ginger lemongrass agave green tea maple orange tempeh alfalfa sprouts cherry bomb spiced peppermint blast parsley almond milk kung pao pepper pine nuts enchiladas asian pear. Lavender lemonade red lentil curry cilantro lime vinaigrette four-layer mint lime taco salsa hot naga viper cinnamon crispy chia seeds lemongrass green papaya salad balsamic vinaigrette leek green grapes sesame soba noodles salted hearts of palm crumbled lentils vine tomatoes Thai sun pepper entree. </p>
+</aside>
+</li>
+		<li id='1'>
+			<aside class="w-100
+f5 f4-ns f3-m f3-l lh-copy
+pa2 measure
+pa4-ns measure-ns
+pa2-m measure-m
+pa0-l measure-wide-l mr-auto ml-auto
+pv5 pv5-ns pv5-m pv5-l">
+<h1 class="">{title}</h1>
+<p>Hummus falafel bowl sriracha pecans miso turmeric glazed aubergine fig arugula cashew salad seeds walnut mushroom tart lemon sweet potato black bean burrito green pepper second course lemon red lentil soup spicy mangos guacamole overflowing mocha chocolate frosted gingerbread bites chai tea sweet potato mediterranean vegetables red amazon pepper grapefruit crunchy. One bowl chilies peaches ginger tofu shiitake mushrooms banana bread citrusy shallots fall roasted brussel sprouts chili peanut butter jalapeño cinnamon toast cilantro blackberries pumpkin main course hazelnut shiitake spring matcha pineapple salsa. Heat mint lemonade zest grenadillo double dark chocolate burritos blood orange smash apricot farro platter tasty tabasco pepper cookies plums Caribbean red habanero tempeh delightful blueberry scones. </p>
+<p>Lemon lime minty cherry bomb pepper roasted peanuts simmer pomegranate pinch of yum ginger lemongrass agave green tea maple orange tempeh alfalfa sprouts cherry bomb spiced peppermint blast parsley almond milk kung pao pepper pine nuts enchiladas asian pear. Lavender lemonade red lentil curry cilantro lime vinaigrette four-layer mint lime taco salsa hot naga viper cinnamon crispy chia seeds lemongrass green papaya salad balsamic vinaigrette leek green grapes sesame soba noodles salted hearts of palm crumbled lentils vine tomatoes Thai sun pepper entree. </p>
+</aside>
+		</li>
+		<li id='2'>
+			<aside class="w-100
+f5 f4-ns f3-m f3-l lh-copy
+pa2 measure
+pa4-ns measure-ns
+pa2-m measure-m
+pa0-l measure-wide-l mr-auto ml-auto
+pv5 pv5-ns pv5-m pv5-l">
+<h1 class="">{title}</h1>
+<p>Hummus falafel bowl sriracha pecans miso turmeric glazed aubergine fig arugula cashew salad seeds walnut mushroom tart lemon sweet potato black bean burrito green pepper second course lemon red lentil soup spicy mangos guacamole overflowing mocha chocolate frosted gingerbread bites chai tea sweet potato mediterranean vegetables red amazon pepper grapefruit crunchy. One bowl chilies peaches ginger tofu shiitake mushrooms banana bread citrusy shallots fall roasted brussel sprouts chili peanut butter jalapeño cinnamon toast cilantro blackberries pumpkin main course hazelnut shiitake spring matcha pineapple salsa. Heat mint lemonade zest grenadillo double dark chocolate burritos blood orange smash apricot farro platter tasty tabasco pepper cookies plums Caribbean red habanero tempeh delightful blueberry scones. </p>
+<p>Lemon lime minty cherry bomb pepper roasted peanuts simmer pomegranate pinch of yum ginger lemongrass agave green tea maple orange tempeh alfalfa sprouts cherry bomb spiced peppermint blast parsley almond milk kung pao pepper pine nuts enchiladas asian pear. Lavender lemonade red lentil curry cilantro lime vinaigrette four-layer mint lime taco salsa hot naga viper cinnamon crispy chia seeds lemongrass green papaya salad balsamic vinaigrette leek green grapes sesame soba noodles salted hearts of palm crumbled lentils vine tomatoes Thai sun pepper entree. </p>
+</aside>
+		</li>
 
 	</ul>
 
 </section>
 
-<nav id="dots">
-	{#if length > 0}
-	{#each { length } as dot, i}
-		<button on:click={() => (index = i)} class:active={i === index}>{i}</button>
-	{/each}
-	{/if}
-</nav>
-<nav>
-	<button on:click={() => index--}>←</button>
-	<button on:click={() => index++}>→</button>
-</nav>
-<pre>index: [{index}] scrollPos: {Math.trunc(scrollPos)}px</pre>
+
+
+
+
+
 
 <style>
-	:global(body){
-		padding:0
-	}
-	section {
-		overflow: hidden;
-		height: 300px;
-		/* 		position: relative; */
-	}
-	ul {
+
+ul {
 		list-style: none;
 		margin: 0;
 		padding: 0;
@@ -74,21 +155,22 @@
 		width: 100%;
 		height: 100%;
 		min-width: 0;
-		/* 		position: relative; */
 	}
+
 	ul li {
 		flex: 1 0 var(--width);
 		width: var(--width);
 		max-width: 100%;
 		height: 100%;
 		position: relative;
-
 		background-image:
     linear-gradient(
       to top right,
-      gainsboro, whitesmoke
+      gainsboro,
+			whitesmoke
     );
 	}
+
 	ul li:before {
 		content: attr(id);
 		position: absolute;
@@ -96,22 +178,60 @@
 		padding: 1rem;
 		z-index: 1;
 	}
-	ul li img {
-		width: 100%;
-		width: auto;
-		height: 100%;
-		display: flex;
-		object-fit: cover;
-		max-width: 100%;
-		will-change: transform;
+
+	.active { opacity:1 }
+
+/********** Slidecore ***********/
+
+@media all and (orientation:portrait) {
+
+@media screen and (min-width:30em) {
+	.portrait-bottom-0-ns {
+		bottom: 0;
 	}
-	nav, label {
-		display: flex;
-		justify-content: start;
-		margin: 1rem 0;
-		flex-wrap: wrap;
-		align-items: center;
+}
+@media screen and (min-width:30em) and (max-width:60em) {
+	.portrait-bottom-0-m {
+		bottom: 0;
 	}
-	.active {color: red;}
-	input { margin: 0}
+}
+@media screen and (min-width:60em) {
+	.portrait-bottom-0-l {
+		bottom: 0;
+	}
+}
+
+}
+
+
+@media all and (orientation:landscape) {
+
+@media screen and (min-width:30em) {
+}
+
+@media screen and (min-width:30em) and (max-width:60em) {
+}
+
+@media screen and (min-width:60em) {
+	.landscape-top-0-l {
+		top: 0;
+	}
+	.landscape-dn-l {
+		display: none;
+	}
+	.landscape-flex-l {
+		display: flex;
+	}
+}
+
+}
 </style>
+<svelte:head>
+	<link rel='stylesheet' href='https://instantwebapp.com/css/tachyon.shower.css'>
+</svelte:head>
+<!-- <pre class="absolute fixed z-max top-0 debug">
+	<nav>
+		<button on:click={() => index--}>←</button>
+		<button on:click={() => index++}>→</button>
+	</nav>
+</pre> -->
