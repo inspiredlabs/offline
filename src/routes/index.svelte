@@ -19,7 +19,7 @@ let items = [],
 </script>
 
 <!-- Main navigation  -->
-<nav class="bg-blue fixed z-9999 w-100
+<nav class="bg-blue fixed z-1 w-100
 top-0 landscape-top-0-ns landscape-top-0-m landscape-top-0-l
 flex tc debug">
   <div class="
@@ -56,7 +56,7 @@ flex tc debug">
 
 <!-- Internal page navigation  -->
 <!-- EXCEPT large & landscape -->
-<nav class="bg-red fixed z-9999 w-100
+<nav class="bg-red fixed z-1 w-100
 bottom-0 portrait-bottom-0-ns portrait-bottom-0-m portrait-bottom-0-l
 landscape-dn-l flex
 tc debug">
@@ -99,49 +99,63 @@ tc debug">
 
 <li id='0'>
 <section>
-<div class="w-100
+<div
+style="max-width:100vw"
+class="w-100 pv5">
+<article class="pb6
 f5 f4-ns f3-m f3-l lh-copy
 pa2 measure
 pa4-ns measure-ns
 pa2-m measure-m
-pa0-l measure-wide-l mr-auto ml-auto
-pv5 pv5-ns pv5-m pv5-l">
+pa0-l measure-wide-l mr-auto ml-auto">
 <h1 class="">{title}</h1>
 <p>Hummus falafel bowl sriracha pecans miso turmeric glazed aubergine fig arugula cashew salad seeds walnut mushroom tart lemon sweet potato black bean burrito green pepper second course lemon red lentil soup spicy mangos guacamole overflowing mocha chocolate frosted gingerbread bites chai tea sweet potato mediterranean vegetables red amazon pepper grapefruit crunchy. One bowl chilies peaches ginger tofu shiitake mushrooms banana bread citrusy shallots fall roasted brussel sprouts chili peanut butter jalapeño cinnamon toast cilantro blackberries pumpkin main course hazelnut shiitake spring matcha pineapple salsa. Heat mint lemonade zest grenadillo double dark chocolate burritos blood orange smash apricot farro platter tasty tabasco pepper cookies plums Caribbean red habanero tempeh delightful blueberry scones. </p>
 <p>Lemon lime minty cherry bomb pepper roasted peanuts simmer pomegranate pinch of yum ginger lemongrass agave green tea maple orange tempeh alfalfa sprouts cherry bomb spiced peppermint blast parsley almond milk kung pao pepper pine nuts enchiladas asian pear. Lavender lemonade red lentil curry cilantro lime vinaigrette four-layer mint lime taco salsa hot naga viper cinnamon crispy chia seeds lemongrass green papaya salad balsamic vinaigrette leek green grapes sesame soba noodles salted hearts of palm crumbled lentils vine tomatoes Thai sun pepper entree. </p>
+</article>
 </div>
 </section>
+
 </li>
+
 <li id='1'>
-<section>
-<div class="w-100
-f5 f4-ns f3-m f3-l lh-copy
-pa2 measure
-pa4-ns measure-ns
-pa2-m measure-m
-pa0-l measure-wide-l mr-auto ml-auto
-pv5 pv5-ns pv5-m pv5-l">
-<h1 class="">{title}</h1>
-<p>Hummus falafel bowl sriracha pecans miso turmeric glazed aubergine fig arugula cashew salad seeds walnut mushroom tart lemon sweet potato black bean burrito green pepper second course lemon red lentil soup spicy mangos guacamole overflowing mocha chocolate frosted gingerbread bites chai tea sweet potato mediterranean vegetables red amazon pepper grapefruit crunchy. One bowl chilies peaches ginger tofu shiitake mushrooms banana bread citrusy shallots fall roasted brussel sprouts chili peanut butter jalapeño cinnamon toast cilantro blackberries pumpkin main course hazelnut shiitake spring matcha pineapple salsa. Heat mint lemonade zest grenadillo double dark chocolate burritos blood orange smash apricot farro platter tasty tabasco pepper cookies plums Caribbean red habanero tempeh delightful blueberry scones. </p>
-<p>Lemon lime minty cherry bomb pepper roasted peanuts simmer pomegranate pinch of yum ginger lemongrass agave green tea maple orange tempeh alfalfa sprouts cherry bomb spiced peppermint blast parsley almond milk kung pao pepper pine nuts enchiladas asian pear. Lavender lemonade red lentil curry cilantro lime vinaigrette four-layer mint lime taco salsa hot naga viper cinnamon crispy chia seeds lemongrass green papaya salad balsamic vinaigrette leek green grapes sesame soba noodles salted hearts of palm crumbled lentils vine tomatoes Thai sun pepper entree. </p>
-</div>
-</section>
-</li>
-<li id='2'>
-<section>
-<div class="w-100
-f5 f4-ns f3-m f3-l lh-copy
-pa2 measure
-pa4-ns measure-ns
-pa2-m measure-m
-pa0-l measure-wide-l mr-auto ml-auto
-pv5 pv5-ns pv5-m pv5-l">
-<h1 class="">{title}</h1>
-<p>Hummus falafel bowl sriracha pecans miso turmeric glazed aubergine fig arugula cashew salad seeds walnut mushroom tart lemon sweet potato black bean burrito green pepper second course lemon red lentil soup spicy mangos guacamole overflowing mocha chocolate frosted gingerbread bites chai tea sweet potato mediterranean vegetables red amazon pepper grapefruit crunchy. One bowl chilies peaches ginger tofu shiitake mushrooms banana bread citrusy shallots fall roasted brussel sprouts chili peanut butter jalapeño cinnamon toast cilantro blackberries pumpkin main course hazelnut shiitake spring matcha pineapple salsa. Heat mint lemonade zest grenadillo double dark chocolate burritos blood orange smash apricot farro platter tasty tabasco pepper cookies plums Caribbean red habanero tempeh delightful blueberry scones. </p>
-<p>Lemon lime minty cherry bomb pepper roasted peanuts simmer pomegranate pinch of yum ginger lemongrass agave green tea maple orange tempeh alfalfa sprouts cherry bomb spiced peppermint blast parsley almond milk kung pao pepper pine nuts enchiladas asian pear. Lavender lemonade red lentil curry cilantro lime vinaigrette four-layer mint lime taco salsa hot naga viper cinnamon crispy chia seeds lemongrass green papaya salad balsamic vinaigrette leek green grapes sesame soba noodles salted hearts of palm crumbled lentils vine tomatoes Thai sun pepper entree. </p>
-</div>
-</section>
-</li>
+	<section>
+	<div
+	style="max-width:100vw"
+	class="w-100 pv5">
+	<article class="pb6
+	f5 f4-ns f3-m f3-l lh-copy
+	pa2 measure
+	pa4-ns measure-ns
+	pa2-m measure-m
+	pa0-l measure-wide-l mr-auto ml-auto">
+	<h1 class="">{title}</h1>
+	<p>Hummus falafel bowl sriracha pecans miso turmeric glazed aubergine fig arugula cashew salad seeds walnut mushroom tart lemon sweet potato black bean burrito green pepper second course lemon red lentil soup spicy mangos guacamole overflowing mocha chocolate frosted gingerbread bites chai tea sweet potato mediterranean vegetables red amazon pepper grapefruit crunchy. One bowl chilies peaches ginger tofu shiitake mushrooms banana bread citrusy shallots fall roasted brussel sprouts chili peanut butter jalapeño cinnamon toast cilantro blackberries pumpkin main course hazelnut shiitake spring matcha pineapple salsa. Heat mint lemonade zest grenadillo double dark chocolate burritos blood orange smash apricot farro platter tasty tabasco pepper cookies plums Caribbean red habanero tempeh delightful blueberry scones. </p>
+	<p>Lemon lime minty cherry bomb pepper roasted peanuts simmer pomegranate pinch of yum ginger lemongrass agave green tea maple orange tempeh alfalfa sprouts cherry bomb spiced peppermint blast parsley almond milk kung pao pepper pine nuts enchiladas asian pear. Lavender lemonade red lentil curry cilantro lime vinaigrette four-layer mint lime taco salsa hot naga viper cinnamon crispy chia seeds lemongrass green papaya salad balsamic vinaigrette leek green grapes sesame soba noodles salted hearts of palm crumbled lentils vine tomatoes Thai sun pepper entree. </p>
+	</article>
+	</div>
+	</section>
+
+	</li>
+
+	<li id='2'>
+		<section>
+		<div
+		style="max-width:100vw"
+		class="w-100 pv5">
+		<article class="pb6
+		f5 f4-ns f3-m f3-l lh-copy
+		pa2 measure
+		pa4-ns measure-ns
+		pa2-m measure-m
+		pa0-l measure-wide-l mr-auto ml-auto">
+		<h1 class="">{title}</h1>
+		<p>Hummus falafel bowl sriracha pecans miso turmeric glazed aubergine fig arugula cashew salad seeds walnut mushroom tart lemon sweet potato black bean burrito green pepper second course lemon red lentil soup spicy mangos guacamole overflowing mocha chocolate frosted gingerbread bites chai tea sweet potato mediterranean vegetables red amazon pepper grapefruit crunchy. One bowl chilies peaches ginger tofu shiitake mushrooms banana bread citrusy shallots fall roasted brussel sprouts chili peanut butter jalapeño cinnamon toast cilantro blackberries pumpkin main course hazelnut shiitake spring matcha pineapple salsa. Heat mint lemonade zest grenadillo double dark chocolate burritos blood orange smash apricot farro platter tasty tabasco pepper cookies plums Caribbean red habanero tempeh delightful blueberry scones. </p>
+		<p>Lemon lime minty cherry bomb pepper roasted peanuts simmer pomegranate pinch of yum ginger lemongrass agave green tea maple orange tempeh alfalfa sprouts cherry bomb spiced peppermint blast parsley almond milk kung pao pepper pine nuts enchiladas asian pear. Lavender lemonade red lentil curry cilantro lime vinaigrette four-layer mint lime taco salsa hot naga viper cinnamon crispy chia seeds lemongrass green papaya salad balsamic vinaigrette leek green grapes sesame soba noodles salted hearts of palm crumbled lentils vine tomatoes Thai sun pepper entree. </p>
+		</article>
+		</div>
+		</section>
+
+		</li>
 </ul>
 
 </div>

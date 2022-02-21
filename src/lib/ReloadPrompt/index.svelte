@@ -81,7 +81,7 @@
 
 {#if toast}
   <div
-      class="pwa-toast"
+      class="pwa-toast z-max"
       role="alert"
   >
     <div class="message">
