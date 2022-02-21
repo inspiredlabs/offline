@@ -269,7 +269,7 @@ ul {
 }
 </style>
 <svelte:head>
-	<link rel='stylesheet' href='https://instantwebapp.com/css/tachyon.shower.css'>
+	<!-- <link rel='stylesheet' href='https://instantwebapp.com/css/tachyon.shower.css'> -->
 </svelte:head>
 <!-- <pre class="absolute fixed z-max top-0 debug">
 	<nav>

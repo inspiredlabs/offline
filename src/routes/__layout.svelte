@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Tachyonshower from '$lib/Tachyonshower.svelte';
 	import Header from '$lib/Header/index.svelte';
 	import ReloadPrompt from '$lib/ReloadPrompt/index.svelte';
 </script>
