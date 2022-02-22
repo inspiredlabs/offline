@@ -1,7 +1,5 @@
-<style global>
-
-  /*! TACHYONSHOWER | demo: https://codepen.io/inspiredlabs/pen/LYPZVQK */
-
+/*! `<style global>`, from: dev.to/natclark/writing-global-styles-in-svelte-7he */
+/*! TACHYONSHOWER | demo: https://codepen.io/inspiredlabs/pen/LYPZVQK */
 
 /*! Utility classes for duplication-free layout expression  */
 
@@ -9637,6 +9635,3 @@ a[href^="market:"]:before {
 /* .quote.emojisymbol:before         { content: "\275D"; } */
 
 /* .quote.emojisymbol:after          { content: "\275E"; } */
-
-
-</style>

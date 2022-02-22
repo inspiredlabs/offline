@@ -1,15 +1,6 @@
-<script context="module">
-export const prerender = true;
-
-export const load = async ({fetch}) => {
-	const response = await fetch('/posts.json');
-	if (response.ok) {
-		const { posts } = await response.json()
-		return {
-			props: { posts },
-		}
-	}
-}
+<script context="module" lang="ts">
+	// PWA from: https://github.com/FunMiles/SveltekitPWA
+	export const prerender = true;
 </script>
 
 <svelte:options immutable={true}/>
@@ -24,9 +15,7 @@ let items = [],
 		length = 3,
 		scrollPos = 0,
 		i = length,
-		title = 'GraphCMS';
-
-export let posts = [];
+		title = 'Slidecore';
 </script>
 
 
@@ -122,9 +111,6 @@ pa4-ns measure-ns
 pa2-m measure-m
 pa0-l measure-wide-l mr-auto ml-auto">
 <h1 class="">{title}</h1>
-
-<pre>{JSON.stringify(posts, null, 2)}</pre>
-
 <p>Hummus falafel bowl sriracha pecans miso turmeric glazed aubergine fig arugula cashew salad seeds walnut mushroom tart lemon sweet potato black bean burrito green pepper second course lemon red lentil soup spicy mangos guacamole overflowing mocha chocolate frosted gingerbread bites chai tea sweet potato mediterranean vegetables red amazon pepper grapefruit crunchy. One bowl chilies peaches ginger tofu shiitake mushrooms banana bread citrusy shallots fall roasted brussel sprouts chili peanut butter jalapeño cinnamon toast cilantro blackberries pumpkin main course hazelnut shiitake spring matcha pineapple salsa. Heat mint lemonade zest grenadillo double dark chocolate burritos blood orange smash apricot farro platter tasty tabasco pepper cookies plums Caribbean red habanero tempeh delightful blueberry scones. </p>
 <p>Lemon lime minty cherry bomb pepper roasted peanuts simmer pomegranate pinch of yum ginger lemongrass agave green tea maple orange tempeh alfalfa sprouts cherry bomb spiced peppermint blast parsley almond milk kung pao pepper pine nuts enchiladas asian pear. Lavender lemonade red lentil curry cilantro lime vinaigrette four-layer mint lime taco salsa hot naga viper cinnamon crispy chia seeds lemongrass green papaya salad balsamic vinaigrette leek green grapes sesame soba noodles salted hearts of palm crumbled lentils vine tomatoes Thai sun pepper entree. </p>
 </article>

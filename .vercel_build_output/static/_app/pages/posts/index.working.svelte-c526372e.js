@@ -1,0 +1,1 @@
+import{S as s,i as t,s as o,t as r,g as a,f as e,F as n,d as c}from"../../chunks/vendor-85917fb9.js";function u(s){let t;return{c(){t=r("It works!")},l(s){t=a(s,"It works!")},m(s,o){e(s,t,o)},p:n,i:n,o:n,d(s){s&&c(t)}}}const l=!0;export default class extends s{constructor(s){super(),t(this,s,null,u,o,{})}}export{l as prerender};

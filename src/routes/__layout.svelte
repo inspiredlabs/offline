@@ -1,8 +1,17 @@
 <script lang="ts">
-	import Tachyonshower from '$lib/Tachyonshower.svelte';
+	// import Tachyonshower from '$lib/Tachyonshower.svelte'; // <Tachyonshower />
 	import Header from '$lib/Header/index.svelte';
 	import ReloadPrompt from '$lib/ReloadPrompt/index.svelte';
 </script>
+
+<style lang="css" global>
+	/* Quick prune: purifycss.online/ */
+	@import '$lib/Tachyonshower';
+	:global(body) {
+		margin:0;
+		padding:0;
+	}
+</style>
 
 <svelte:head>
 	<link rel="manifest" href="/manifest.webmanifest" />
@@ -161,10 +170,3 @@
 </footer>
 
 <ReloadPrompt />
-
-<style>
-	:global(body) {
-		margin:0;
-		padding:0;
-	}
-</style>
