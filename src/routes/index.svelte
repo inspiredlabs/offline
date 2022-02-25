@@ -100,7 +100,8 @@ tc debug">
 			align: 'middle',
 			duration: 300,
 			intersecting: true,
-			loop: true,
+			vertical: false,
+			loop: false,
 			clamp: true,
 			snap: true,
 			gravity: 1.3,
@@ -110,7 +111,7 @@ tc debug">
 
 
 
-<li id='0'>
+<li>
 <section>
 <div
 style="max-width:100vw"
@@ -133,7 +134,7 @@ pa0-l measure-wide-l mr-auto ml-auto">
 
 </li>
 
-<li id='1'>
+<li>
 	<section>
 	<div
 	style="max-width:100vw"
@@ -153,7 +154,7 @@ pa0-l measure-wide-l mr-auto ml-auto">
 
 	</li>
 
-	<li id='2'>
+	<li>
 		<section>
 		<div
 		style="max-width:100vw"
