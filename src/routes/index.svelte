@@ -89,14 +89,12 @@ flex tc">
           on:click={ slidecore.go(i) }
           on:click={ () => {$fragStore = item.slug} }
           on:click={ () => {$currentSlideStore = item.id} }
-          on:mouseleave={ e => $dragDurationStore = 200 }
-          on:mouseenter={ e => $dragDurationStore = 0 }
         >{item.title}</button>
         {/each}
 
       <!--
-        on:mouseleave={ e => $dragDurationStore = 200 }
-        on:mouseenter={ e => $dragDurationStore = 0 }
+			on:mouseleave={ e => $dragDurationStore = 200 }
+			on:mouseenter={ e => $dragDurationStore = 0 }
       -->
       <!-- learn: `$stores` for `class:active={ myVar ? 'active' : '' }`
         on:click={() => slidecore.go(i, frag, () => myVar = item.id )}
@@ -127,32 +125,37 @@ landscape-dn-l flex
 tc ">
   <div class="w-100 flex justify-between
   f5 f4-ns f3-m f3-l lh-copy
-  pa2 measure
-  pa4-ns measure-ns
-  pa2-m measure-m
-  pa0-l measure-wide-l mr-auto ml-auto">
+  pa0 measure
+  pa0-ns measure-ns
+  pa0-m measure-m
+  pa0-l measure-wide-l mr-auto ml-auto
+	">
 
   {#each items as item, i}
     <button
-      class:active={ $currentSlideStore==i ? 'active' : '' }
-      class="bn pointer glow bg-transparent w-20 pv3 h3 f5 f4-ns fs-m f5-l white o-60 bg-transparent"
+      class:active={ $currentSlideStore == i ? 'active' : '' }
+      class="bn pointer glow bg-transparent w-20 pv3 h3 pv2-ns h2-ns h3-m h3-l f5 f4-ns fs-m f5-l white o-60 bg-transparent"
       style='width:calc(100% / {items.length})'
-      on:click={ slidecore.go(i) }
-      on:click={ () => {$fragStore = item.slug} }
-      on:click={ () => {$currentSlideStore = item.id} }
-      on:mouseleave={ e => $dragDurationStore = 200 }
-      on:mouseenter={ e => $dragDurationStore = 0 }
+      on:click={ () => slidecore.go(i) }
+      on:click={ () => { $fragStore = item.slug } }
+      on:click={ () => { $currentSlideStore = item.id } }
     >{item.title}</button>
   {/each}
 
   </div>
 </nav><!-- /Internal page navigation  -->
+<!--
+	on:click={ () => { $dragDurationStore = 0 }, slidecore.go(i) }
+	on:mouseleave={ e => $dragDurationStore = 200 }
+	on:mouseenter={ e => $dragDurationStore = 0 }
+-->
+
+
 
 <!-- Ben Winchester's interpretation : https://github.com/bmw2621/svelte-carousel -->
 <!-- https://github.com/beyonk-adventures/svelte-carousel -->
 <Carousel
 	bind:this={slidecore}
-  duration={$dragDurationStore}
 	threshold={96}
 	dots={false}
 	perPage={1}
@@ -161,25 +164,29 @@ tc ">
   on:change={ e => {settle} }
   on:change={ e => $currentSlideStore = e.detail.currentSlide }
 >
+<!-- duration={ () => { $dragDurationStore } } -->
 
-<!-- on:change={ e => {getPosY}  } -->
-<!-- duration={`{$dragDurationStore}`} -->
+
+<!-- xon:change={ e => {getPosY}  } -->
 <!-- on:change={ e => {debugger} } or `console.log(e.detail)`-->
 <!-- easing={ 'cubic-bezier(0.25, 0.4, 0.55, 1.4)' } -->
 
 {#each items as item, index}
 	<div
-  on:mouseenter={ e => $dragDurationStore = 200 }
-  on:mouseleave={ e => $dragDurationStore = 0 }
   class="slide-content bg-pink w-100" >
+	<!--
+	on:mouseenter={ e => $dragDurationStore = 200 }
+  on:mouseleave={ e => $dragDurationStore = 0 }
+ -->
+
+	{item.title}
+  <svelte:component this={item.component} />
 
 	<div class="pt5 w-100">
 		<h1 class="">{title}</h1>
 		<pre>{JSON.stringify(posts, null, 2)}</pre>
 	</div>
 
-		{item.title}
-    <svelte:component this={item.component} />
 	</div>
 {/each}
 <!-- on:mouseenter={ e => $dragDurationStore = 200 } -->
@@ -268,10 +275,6 @@ tc ">
 		height: 100%;
 		color: cyan;
 	} */
-
-
-
-
 
 
 

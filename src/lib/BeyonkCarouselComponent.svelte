@@ -76,9 +76,17 @@
 	ul li.active {
 		background-color: rgba(255,255,255,1);
 	}
+
+	.slides{
+		z-index: 1; /* fix: flicker on iPhone */
+		width: 100vw;
+	}
+
 </style>
 
 <script>
+	import { dragDurationStore } from '$lib/stores.js';
+
 	import Siema from 'siema'
 	import { onMount, createEventDispatcher } from 'svelte'
 
