@@ -890,10 +890,10 @@ var require_url_state_machine = __commonJS({
     function isNormalizedWindowsDriveLetter(string) {
       return /^[A-Za-z]:$/.test(string);
     }
-    function URLStateMachine(input, base2, encodingOverride, url, stateOverride) {
+    function URLStateMachine(input, base, encodingOverride, url, stateOverride) {
       this.pointer = 0;
       this.input = input;
-      this.base = base2 || null;
+      this.base = base || null;
       this.encodingOverride = encodingOverride || "utf-8";
       this.stateOverride = stateOverride;
       this.url = url;
@@ -1560,10 +1560,10 @@ var require_URL_impl = __commonJS({
     exports.implementation = class URLImpl {
       constructor(constructorArgs) {
         const url = constructorArgs[0];
-        const base2 = constructorArgs[1];
+        const base = constructorArgs[1];
         let parsedBase = null;
-        if (base2 !== void 0) {
-          parsedBase = usm.basicURLParse(base2);
+        if (base !== void 0) {
+          parsedBase = usm.basicURLParse(base);
           if (parsedBase === "failure") {
             throw new TypeError("Invalid base URL");
           }
@@ -13720,7 +13720,7 @@ var require_dist = __commonJS({
       __setModuleDefault(result, mod);
       return result;
     };
-    var __awaiter2 = exports && exports.__awaiter || function(thisArg, _arguments, P, generator) {
+    var __awaiter = exports && exports.__awaiter || function(thisArg, _arguments, P, generator) {
       function adopt(value) {
         return value instanceof P ? value : new P(function(resolve2) {
           resolve2(value);
@@ -13892,9 +13892,9 @@ var require_dist = __commonJS({
       }, []);
       return "query=" + encodeURIComponent(JSON.stringify(payload));
     };
-    var post2 = function(_a) {
+    var post = function(_a) {
       var url = _a.url, query = _a.query, variables = _a.variables, operationName = _a.operationName, headers = _a.headers, fetch3 = _a.fetch, fetchOptions = _a.fetchOptions;
-      return __awaiter2(void 0, void 0, void 0, function() {
+      return __awaiter(void 0, void 0, void 0, function() {
         var body;
         return __generator(this, function(_b) {
           switch (_b.label) {
@@ -13909,7 +13909,7 @@ var require_dist = __commonJS({
     };
     var get2 = function(_a) {
       var url = _a.url, query = _a.query, variables = _a.variables, operationName = _a.operationName, headers = _a.headers, fetch3 = _a.fetch, fetchOptions = _a.fetchOptions;
-      return __awaiter2(void 0, void 0, void 0, function() {
+      return __awaiter(void 0, void 0, void 0, function() {
         var queryParams;
         return __generator(this, function(_b) {
           switch (_b.label) {
@@ -13932,7 +13932,7 @@ var require_dist = __commonJS({
         this.options = options2 || {};
       }
       GraphQLClient3.prototype.rawRequest = function(queryOrOptions, variables, requestHeaders) {
-        return __awaiter2(this, void 0, void 0, function() {
+        return __awaiter(this, void 0, void 0, function() {
           var rawRequestOptions, _a, headers, _b, fetch3, _c, method, fetchOptions, url;
           return __generator(this, function(_d) {
             rawRequestOptions = parseArgs_1.parseRawRequestArgs(queryOrOptions, variables, requestHeaders);
@@ -13955,7 +13955,7 @@ var require_dist = __commonJS({
         });
       };
       GraphQLClient3.prototype.request = function(documentOrOptions, variables, requestHeaders) {
-        return __awaiter2(this, void 0, void 0, function() {
+        return __awaiter(this, void 0, void 0, function() {
           var requestOptions, _a, headers, _b, fetch3, _c, method, fetchOptions, url, _d, query, operationName, data;
           return __generator(this, function(_e) {
             switch (_e.label) {
@@ -13985,7 +13985,7 @@ var require_dist = __commonJS({
         });
       };
       GraphQLClient3.prototype.batchRequests = function(documentsOrOptions, requestHeaders) {
-        return __awaiter2(this, void 0, void 0, function() {
+        return __awaiter(this, void 0, void 0, function() {
           var batchRequestOptions, _a, headers, _b, fetch3, _c, method, fetchOptions, url, queries, variables, data;
           return __generator(this, function(_d) {
             switch (_d.label) {
@@ -14044,12 +14044,12 @@ var require_dist = __commonJS({
     exports.GraphQLClient = GraphQLClient2;
     function makeRequest(_a) {
       var url = _a.url, query = _a.query, variables = _a.variables, headers = _a.headers, operationName = _a.operationName, fetch3 = _a.fetch, _b = _a.method, method = _b === void 0 ? "POST" : _b, fetchOptions = _a.fetchOptions;
-      return __awaiter2(this, void 0, void 0, function() {
+      return __awaiter(this, void 0, void 0, function() {
         var fetcher, isBathchingQuery, response, result, successfullyReceivedData, headers_1, status_1, errorResult;
         return __generator(this, function(_c) {
           switch (_c.label) {
             case 0:
-              fetcher = method.toUpperCase() === "POST" ? post2 : get2;
+              fetcher = method.toUpperCase() === "POST" ? post : get2;
               isBathchingQuery = Array.isArray(query);
               return [4, fetcher({
                 url,
@@ -14082,7 +14082,7 @@ var require_dist = __commonJS({
       });
     }
     function rawRequest(urlOrOptions, query, variables, requestHeaders) {
-      return __awaiter2(this, void 0, void 0, function() {
+      return __awaiter(this, void 0, void 0, function() {
         var requestOptions, client2;
         return __generator(this, function(_a) {
           requestOptions = parseArgs_1.parseRawRequestExtendedArgs(urlOrOptions, query, variables, requestHeaders);
@@ -14093,7 +14093,7 @@ var require_dist = __commonJS({
     }
     exports.rawRequest = rawRequest;
     function request(urlOrOptions, document2, variables, requestHeaders) {
-      return __awaiter2(this, void 0, void 0, function() {
+      return __awaiter(this, void 0, void 0, function() {
         var requestOptions, client2;
         return __generator(this, function(_a) {
           requestOptions = parseArgs_1.parseRequestExtendedArgs(urlOrOptions, document2, variables, requestHeaders);
@@ -14104,7 +14104,7 @@ var require_dist = __commonJS({
     }
     exports.request = request;
     function batchRequests(urlOrOptions, documents, requestHeaders) {
-      return __awaiter2(this, void 0, void 0, function() {
+      return __awaiter(this, void 0, void 0, function() {
         var requestOptions, client2;
         return __generator(this, function(_a) {
           requestOptions = parseArgs_1.parseBatchRequestsExtendedArgs(urlOrOptions, documents, requestHeaders);
@@ -15651,7 +15651,7 @@ function writable(value, start = noop) {
   function update(fn) {
     set(fn(value));
   }
-  function subscribe(run2, invalidate = noop) {
+  function subscribe2(run2, invalidate = noop) {
     const subscriber = [run2, invalidate];
     subscribers.push(subscriber);
     if (subscribers.length === 1) {
@@ -15669,7 +15669,7 @@ function writable(value, start = noop) {
       }
     };
   }
-  return {set, update, subscribe};
+  return {set, update, subscribe: subscribe2};
 }
 function hash(value) {
   let hash2 = 5381;
@@ -15867,8 +15867,8 @@ function normalize(loaded) {
   }
   return loaded;
 }
-function resolve(base2, path) {
-  const baseparts = path[0] === "/" ? [] : base2.slice(1).split("/");
+function resolve(base, path) {
+  const baseparts = path[0] === "/" ? [] : base.slice(1).split("/");
   const pathparts = path[0] === "/" ? path.slice(1).split("/") : path.split("/");
   baseparts.pop();
   for (let i = 0; i < pathparts.length; i += 1) {
@@ -16593,8 +16593,18 @@ function run_all(fns) {
 function is_function(thing) {
   return typeof thing === "function";
 }
+function safe_not_equal2(a, b) {
+  return a != a ? b == b : a !== b || (a && typeof a === "object" || typeof a === "function");
+}
 function is_empty(obj) {
   return Object.keys(obj).length === 0;
+}
+function subscribe(store, ...callbacks) {
+  if (store == null) {
+    return noop2;
+  }
+  const unsub = store.subscribe(...callbacks);
+  return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
 }
 var tasks = new Set();
 var managed_styles = new Map();
@@ -16801,7 +16811,53 @@ function v4() {
 // .svelte-kit/output/server/app.js
 var import_graphql_request = __toModule(require_dist());
 var import_workbox_window = __toModule(require_workbox_window_prod_umd());
-var css$5 = {
+
+// node_modules/svelte/store/index.mjs
+var subscriber_queue2 = [];
+function writable2(value, start = noop2) {
+  let stop;
+  const subscribers = new Set();
+  function set(new_value) {
+    if (safe_not_equal2(value, new_value)) {
+      value = new_value;
+      if (stop) {
+        const run_queue = !subscriber_queue2.length;
+        for (const subscriber of subscribers) {
+          subscriber[1]();
+          subscriber_queue2.push(subscriber, value);
+        }
+        if (run_queue) {
+          for (let i = 0; i < subscriber_queue2.length; i += 2) {
+            subscriber_queue2[i][0](subscriber_queue2[i + 1]);
+          }
+          subscriber_queue2.length = 0;
+        }
+      }
+    }
+  }
+  function update(fn) {
+    set(fn(value));
+  }
+  function subscribe2(run2, invalidate = noop2) {
+    const subscriber = [run2, invalidate];
+    subscribers.add(subscriber);
+    if (subscribers.size === 1) {
+      stop = start(set) || noop2;
+    }
+    run2(value);
+    return () => {
+      subscribers.delete(subscriber);
+      if (subscribers.size === 0) {
+        stop();
+        stop = null;
+      }
+    };
+  }
+  return {set, update, subscribe: subscribe2};
+}
+
+// .svelte-kit/output/server/app.js
+var css$7 = {
   code: "#svelte-announcer.svelte-1j55zn5{position:absolute;left:0;top:0;clip:rect(0 0 0 0);clip-path:inset(50%);overflow:hidden;white-space:nowrap;width:1px;height:1px}",
   map: `{"version":3,"file":"root.svelte","sources":["root.svelte"],"sourcesContent":["<!-- This file is generated by @sveltejs/kit \u2014 do not edit it! -->\\n<script>\\n\\timport { setContext, afterUpdate, onMount } from 'svelte';\\n\\n\\t// stores\\n\\texport let stores;\\n\\texport let page;\\n\\n\\texport let components;\\n\\texport let props_0 = null;\\n\\texport let props_1 = null;\\n\\texport let props_2 = null;\\n\\n\\tsetContext('__svelte__', stores);\\n\\n\\t$: stores.page.set(page);\\n\\tafterUpdate(stores.page.notify);\\n\\n\\tlet mounted = false;\\n\\tlet navigated = false;\\n\\tlet title = null;\\n\\n\\tonMount(() => {\\n\\t\\tconst unsubscribe = stores.page.subscribe(() => {\\n\\t\\t\\tif (mounted) {\\n\\t\\t\\t\\tnavigated = true;\\n\\t\\t\\t\\ttitle = document.title || 'untitled page';\\n\\t\\t\\t}\\n\\t\\t});\\n\\n\\t\\tmounted = true;\\n\\t\\treturn unsubscribe;\\n\\t});\\n</script>\\n\\n<svelte:component this={components[0]} {...(props_0 || {})}>\\n\\t{#if components[1]}\\n\\t\\t<svelte:component this={components[1]} {...(props_1 || {})}>\\n\\t\\t\\t{#if components[2]}\\n\\t\\t\\t\\t<svelte:component this={components[2]} {...(props_2 || {})}/>\\n\\t\\t\\t{/if}\\n\\t\\t</svelte:component>\\n\\t{/if}\\n</svelte:component>\\n\\n{#if mounted}\\n\\t<div id=\\"svelte-announcer\\" aria-live=\\"assertive\\" aria-atomic=\\"true\\">\\n\\t\\t{#if navigated}\\n\\t\\t\\t{title}\\n\\t\\t{/if}\\n\\t</div>\\n{/if}\\n\\n<style>\\n\\t#svelte-announcer {\\n\\t\\tposition: absolute;\\n\\t\\tleft: 0;\\n\\t\\ttop: 0;\\n\\t\\tclip: rect(0 0 0 0);\\n\\t\\tclip-path: inset(50%);\\n\\t\\toverflow: hidden;\\n\\t\\twhite-space: nowrap;\\n\\t\\twidth: 1px;\\n\\t\\theight: 1px;\\n\\t}\\n</style>"],"names":[],"mappings":"AAsDC,iBAAiB,eAAC,CAAC,AAClB,QAAQ,CAAE,QAAQ,CAClB,IAAI,CAAE,CAAC,CACP,GAAG,CAAE,CAAC,CACN,IAAI,CAAE,KAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CACnB,SAAS,CAAE,MAAM,GAAG,CAAC,CACrB,QAAQ,CAAE,MAAM,CAChB,WAAW,CAAE,MAAM,CACnB,KAAK,CAAE,GAAG,CACV,MAAM,CAAE,GAAG,AACZ,CAAC"}`
 };
@@ -16839,7 +16895,7 @@ var Root = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     $$bindings.props_1(props_1);
   if ($$props.props_2 === void 0 && $$bindings.props_2 && props_2 !== void 0)
     $$bindings.props_2(props_2);
-  $$result.css.add(css$5);
+  $$result.css.add(css$7);
   {
     stores.page.set(page);
   }
@@ -16879,7 +16935,29 @@ var user_hooks = /* @__PURE__ */ Object.freeze({
   [Symbol.toStringTag]: "Module",
   handle
 });
-var template = ({head, body}) => '<!DOCTYPE html>\n<html lang="en" class="system h-100 overflow-hidden w-100 backface-hidden">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="/favicon.ico" />\n		<meta name="viewport" content="width=device-width, initial-scale=1" />\n		' + head + '\n	</head>\n\n	<!-- disable-scrolling -->\n	<body class="ma0 pa0 overflow-hidden backface-hidden bg-near-white charcoal fixed">\n		<div id="svelte">' + body + "</div>\n	</body>\n</html>\n";
+var template = ({head, body}) => '<!DOCTYPE html>\n<html class="w-100 h-100 overflow-hidden system backface-hidden">\n<!-- prevent overscroll -->\n<!-- vw-100 vh-100 smooth-scroll backface-hidden touch-manipulation -->\n<!-- `h-100 overflow-hidden && h-100 overflow-auto`: http://stackoverflow.com/questions/12046315/ddg#17899813 -->\n	<head>\n		<meta charset="utf-8" />\n		<meta name="description" content="" />\n		<link rel="icon" href="/favicon.ico" />\n		<meta name="viewport" content="width=device-width, initial-scale=1" />\n		' + head + '\n	</head>\n	<body class="no-clutter vh-100 w-100 h-100" id="svelte">\n		<!-- no-select bg-black z-0	lh-copy ma0 pa0 vh-100 fixed  -->\n		' + body + `
+	</body>
+</html>
+
+<!-- <script src="js/flickity.pkgd.min.js"></script> -->
+<script>
+const navUserLang = navigator.language.toLowerCase().substr(0, 2) || navigator.userLanguage.toLowerCase().substr(0, 2);
+localStorage.setItem('defaultLangToken', navUserLang);
+
+/*
+(function () {
+  if (navUserLang != 'it') {
+    localStorage.setItem('defaultLang', 0);
+		localStorage.setItem('defaultLangToken', navUserLang);
+  } else {
+    localStorage.setItem('defaultLang', 1);
+		localStorage.setItem('defaultLangToken', navUserLang);
+  }
+}());
+*/
+
+</script>
+`;
 var options = null;
 function init(settings) {
   set_paths(settings.paths);
@@ -16888,9 +16966,9 @@ function init(settings) {
     amp: false,
     dev: false,
     entry: {
-      file: "/./_app/start-1a098ae4.js",
+      file: "/./_app/start-3c237526.js",
       css: ["/./_app/assets/start-a8cd1609.css"],
-      js: ["/./_app/start-1a098ae4.js", "/./_app/chunks/vendor-85917fb9.js"]
+      js: ["/./_app/start-3c237526.js", "/./_app/chunks/vendor-bec4a5ae.js", "/./_app/chunks/singletons-bb9012b7.js"]
     },
     fetched: void 0,
     floc: false,
@@ -16930,48 +17008,27 @@ var manifest = {
       b: [".svelte-kit/build/components/error.svelte"]
     },
     {
-      type: "page",
-      pattern: /^\/about\/?$/,
+      type: "endpoint",
+      pattern: /^\/tsconfig\/?$/,
       params: empty,
-      a: ["src/routes/__layout.svelte", "src/routes/about.svelte"],
-      b: [".svelte-kit/build/components/error.svelte"]
-    },
-    {
-      type: "page",
-      pattern: /^\/posts\.working\/?$/,
-      params: empty,
-      a: ["src/routes/__layout.svelte", "src/routes/posts/index.working.svelte"],
-      b: [".svelte-kit/build/components/error.svelte"]
+      load: () => Promise.resolve().then(function() {
+        return tsconfig$1;
+      })
     },
     {
       type: "endpoint",
       pattern: /^\/posts\.json$/,
       params: empty,
       load: () => Promise.resolve().then(function() {
-        return index_json$1;
-      })
-    },
-    {
-      type: "endpoint",
-      pattern: /^\/todos\.json$/,
-      params: empty,
-      load: () => Promise.resolve().then(function() {
         return index_json;
       })
     },
     {
-      type: "page",
-      pattern: /^\/todos\/?$/,
-      params: empty,
-      a: ["src/routes/__layout.svelte", "src/routes/todos/index.svelte"],
-      b: [".svelte-kit/build/components/error.svelte"]
-    },
-    {
       type: "endpoint",
-      pattern: /^\/todos\/([^/]+?)\.json$/,
-      params: (m) => ({uid: d(m[1])}),
+      pattern: /^\/([^/]+?)\/?$/,
+      params: (m) => ({404: d(m[1])}),
       load: () => Promise.resolve().then(function() {
-        return _uid__json;
+        return _404_;
       })
     }
   ]
@@ -16988,19 +17045,10 @@ var module_lookup = {
     return error2;
   }),
   "src/routes/index.svelte": () => Promise.resolve().then(function() {
-    return index$1;
-  }),
-  "src/routes/about.svelte": () => Promise.resolve().then(function() {
-    return about;
-  }),
-  "src/routes/posts/index.working.svelte": () => Promise.resolve().then(function() {
-    return index_working;
-  }),
-  "src/routes/todos/index.svelte": () => Promise.resolve().then(function() {
     return index;
   })
 };
-var metadata_lookup = {"src/routes/__layout.svelte": {"entry": "/./_app/pages/__layout.svelte-db231d79.js", "css": ["/./_app/assets/pages/__layout.svelte-bd7f550f.css"], "js": ["/./_app/pages/__layout.svelte-db231d79.js", "/./_app/chunks/vendor-85917fb9.js"], "styles": null}, ".svelte-kit/build/components/error.svelte": {"entry": "/./_app/error.svelte-687a14b6.js", "css": [], "js": ["/./_app/error.svelte-687a14b6.js", "/./_app/chunks/vendor-85917fb9.js"], "styles": null}, "src/routes/index.svelte": {"entry": "/./_app/pages/index.svelte-8dd15c34.js", "css": ["/./_app/assets/pages/index.svelte-348d802f.css"], "js": ["/./_app/pages/index.svelte-8dd15c34.js", "/./_app/chunks/vendor-85917fb9.js"], "styles": null}, "src/routes/about.svelte": {"entry": "/./_app/pages/about.svelte-face9425.js", "css": ["/./_app/assets/pages/about.svelte-4db5be0d.css"], "js": ["/./_app/pages/about.svelte-face9425.js", "/./_app/chunks/vendor-85917fb9.js"], "styles": null}, "src/routes/posts/index.working.svelte": {"entry": "/./_app/pages/posts/index.working.svelte-c526372e.js", "css": [], "js": ["/./_app/pages/posts/index.working.svelte-c526372e.js", "/./_app/chunks/vendor-85917fb9.js"], "styles": null}, "src/routes/todos/index.svelte": {"entry": "/./_app/pages/todos/index.svelte-b6a2fc46.js", "css": ["/./_app/assets/pages/todos/index.svelte-ef0435f2.css"], "js": ["/./_app/pages/todos/index.svelte-b6a2fc46.js", "/./_app/chunks/vendor-85917fb9.js"], "styles": null}};
+var metadata_lookup = {"src/routes/__layout.svelte": {"entry": "/./_app/pages/__layout.svelte-8d16603f.js", "css": ["/./_app/assets/pages/__layout.svelte-902c65e4.css"], "js": ["/./_app/pages/__layout.svelte-8d16603f.js", "/./_app/chunks/vendor-bec4a5ae.js", "/./_app/chunks/stores-8eb1c870.js"], "styles": null}, ".svelte-kit/build/components/error.svelte": {"entry": "/./_app/error.svelte-00591c47.js", "css": [], "js": ["/./_app/error.svelte-00591c47.js", "/./_app/chunks/vendor-bec4a5ae.js"], "styles": null}, "src/routes/index.svelte": {"entry": "/./_app/pages/index.svelte-65f3cd54.js", "css": ["/./_app/assets/pages/index.svelte-2e005e7a.css"], "js": ["/./_app/pages/index.svelte-65f3cd54.js", "/./_app/chunks/vendor-bec4a5ae.js", "/./_app/chunks/stores-8eb1c870.js", "/./_app/chunks/singletons-bb9012b7.js"], "styles": null}};
 async function load_component(file) {
   return {
     module: await module_lookup[file](),
@@ -17014,6 +17062,18 @@ function render(request, {
   const host = request.headers["host"];
   return respond({...request, host}, options, {prerender: prerender2});
 }
+var compilerOptions = {
+  target: "ESNext"
+};
+var tsconfig = {
+  compilerOptions
+};
+var tsconfig$1 = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  [Symbol.toStringTag]: "Module",
+  compilerOptions,
+  "default": tsconfig
+});
 var VITE_GRAPHQL_API = process.env["VITE_GRAPHQL_API"];
 var client = new import_graphql_request.GraphQLClient(VITE_GRAPHQL_API);
 var get$1 = async () => {
@@ -17043,115 +17103,177 @@ var get$1 = async () => {
     };
   }
 };
-var index_json$1 = /* @__PURE__ */ Object.freeze({
+var index_json = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   [Symbol.toStringTag]: "Module",
   get: get$1
 });
-var base = "https://api.svelte.dev";
-async function api(request, resource, data) {
-  if (!request.locals.userid) {
-    return {status: 401};
-  }
-  const res = await fetch(`${base}/${resource}`, {
-    method: request.method,
-    headers: {
-      "content-type": "application/json"
-    },
-    body: data && JSON.stringify(data)
-  });
-  if (res.ok && request.method !== "GET" && request.headers.accept !== "application/json") {
-    return {
-      status: 303,
-      headers: {
-        location: "/todos"
-      }
-    };
-  }
+async function get() {
   return {
-    status: res.status,
-    body: await res.json()
+    headers: {
+      Location: "/"
+    },
+    status: 301
   };
 }
-var get = async (request) => {
-  const response = await api(request, `todos/${request.locals.userid}`);
-  if (response.status === 404) {
-    return {body: []};
-  }
-  return response;
-};
-var post = async (request) => {
-  const response = await api(request, `todos/${request.locals.userid}`, {
-    text: request.body.get("text")
-  });
-  return response;
-};
-var index_json = /* @__PURE__ */ Object.freeze({
+var _404_ = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   [Symbol.toStringTag]: "Module",
-  get,
-  post
+  get
 });
-var patch = async (request) => {
-  return api(request, `todos/${request.locals.userid}/${request.params.uid}`, {
-    text: request.body.get("text"),
-    done: request.body.has("done") ? !!request.body.get("done") : void 0
-  });
-};
-var del = async (request) => {
-  return api(request, `todos/${request.locals.userid}/${request.params.uid}`);
-};
-var _uid__json = /* @__PURE__ */ Object.freeze({
-  __proto__: null,
-  [Symbol.toStringTag]: "Module",
-  patch,
-  del
-});
-var Header = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return ``;
-});
-var browser = false;
-var dev = false;
-var css$4 = {
-  code: ".z-max.svelte-1wovdmg.svelte-1wovdmg{z-index:2147483647}.pwa-toast.svelte-1wovdmg.svelte-1wovdmg{position:fixed;right:0;bottom:0;margin:16px;padding:12px;border:1px solid #8885;border-radius:4px;text-align:left;background-color:aqua;box-shadow:3px 4px 5px 0px #8885}.pwa-toast.svelte-1wovdmg .message.svelte-1wovdmg{margin-bottom:8px}.pwa-toast.svelte-1wovdmg button.svelte-1wovdmg{border:1px solid #8885;outline:none;margin-right:5px;border-radius:2px;padding:3px 10px}",
-  map: `{"version":3,"file":"index.svelte","sources":["index.svelte"],"sourcesContent":["<script lang=\\"ts\\">import { dev, browser } from '$app/env';\\nimport { Workbox, messageSW } from 'workbox-window';\\nlet wb;\\nlet registration;\\nlet offlineReady = false;\\nlet needRefresh = false;\\nfunction showSkipWaitingPrompt(event) {\\n    // \\\\\`event.wasWaitingBeforeRegister\\\\\` will be false if this is\\n    // the first time the updated service worker is waiting.\\n    // When \\\\\`event.wasWaitingBeforeRegister\\\\\` is true, a previously\\n    // updated service worker is still waiting.\\n    // You may want to customize the UI prompt accordingly.\\n    // Assumes your app has some sort of prompt UI element\\n    // that a user can either accept or reject.\\n    needRefresh = true;\\n}\\nfunction updateServiceWorker() {\\n    // Assuming the user accepted the update, set up a listener\\n    // that will reload the page as soon as the previously waiting\\n    // service worker has taken control.\\n    if (wb) {\\n        wb.addEventListener('controlling', (event) => {\\n            if (event.isUpdate)\\n                window.location.reload();\\n        });\\n    }\\n    if (registration && registration.waiting) {\\n        // Send a message to the waiting service worker,\\n        // instructing it to activate.\\n        // Note: for this to work, you have to add a message\\n        // listener in your service worker. See below.\\n        messageSW(registration.waiting, { type: 'SKIP_WAITING' }).then(() => {\\n            // console.log(\\"NOTIFIED SKIP_WAITING\\");\\n        }).catch(e => {\\n            console.error(\\"NOTIFIED SKIP_WAITING WITH ERROR\\", e);\\n        });\\n    }\\n}\\nfunction close() {\\n    offlineReady = false;\\n    needRefresh = false;\\n}\\nif (!dev && browser) {\\n    if ('serviceWorker' in navigator) {\\n        wb = new Workbox('/service-worker.js', { scope: '/' });\\n        wb.addEventListener('activated', (event) => {\\n            // this will only controls the offline request.\\n            // event.isUpdate will be true if another version of the service\\n            // worker was controlling the page when this version was registered.\\n            if (!event.isUpdate) {\\n                offlineReady = true;\\n            }\\n        });\\n        // Add an event listener to detect when the registered\\n        // service worker has installed but is waiting to activate.\\n        wb.addEventListener('waiting', showSkipWaitingPrompt);\\n        // eslint-disable-next-line\\n        // @ts-ignore\\n        wb.addEventListener('externalwaiting', showSkipWaitingPrompt);\\n        // register the service worker\\n        wb.register({ immediate: true }).then(r => registration = r).catch(e => {\\n            console.error(\\"cannot register service worker\\", e);\\n        });\\n    }\\n    else {\\n        console.warn('Service workers are not supported.');\\n    }\\n}\\n$: toast = offlineReady || needRefresh;\\n</script>\\n\\n{#if toast}\\n  <div\\n      class=\\"pwa-toast z-max\\"\\n      role=\\"alert\\"\\n  >\\n    <div class=\\"message\\">\\n      {#if offlineReady}\\n      <span>\\n        App ready to work offline\\n      </span>\\n      {:else}\\n      <span>\\n        New content available, click on reload button to update.\\n      </span>\\n      {/if}\\n    </div>\\n    {#if needRefresh}\\n    <button on:click={updateServiceWorker}>\\n      Reload\\n    </button>\\n    {/if}\\n    <button on:click={close}>\\n      Close\\n    </button>\\n  </div>\\n{/if}\\n\\n<style>\\n    .z-max {\\n        z-index: 2147483647;\\n    }\\n    .pwa-toast {\\n        position: fixed;\\n        right: 0;\\n        bottom: 0;\\n        margin: 16px;\\n        padding: 12px;\\n        border: 1px solid #8885;\\n        border-radius: 4px;\\n        /* z-index: 1; */\\n        text-align: left;\\n        background-color: aqua;\\n        box-shadow: 3px 4px 5px 0px #8885;\\n    }\\n    .pwa-toast .message {\\n        margin-bottom: 8px;\\n    }\\n    .pwa-toast button {\\n        border: 1px solid #8885;\\n        outline: none;\\n        margin-right: 5px;\\n        border-radius: 2px;\\n        padding: 3px 10px;\\n    }\\n</style>\\n"],"names":[],"mappings":"AAmGI,MAAM,8BAAC,CAAC,AACJ,OAAO,CAAE,UAAU,AACvB,CAAC,AACD,UAAU,8BAAC,CAAC,AACR,QAAQ,CAAE,KAAK,CACf,KAAK,CAAE,CAAC,CACR,MAAM,CAAE,CAAC,CACT,MAAM,CAAE,IAAI,CACZ,OAAO,CAAE,IAAI,CACb,MAAM,CAAE,GAAG,CAAC,KAAK,CAAC,KAAK,CACvB,aAAa,CAAE,GAAG,CAElB,UAAU,CAAE,IAAI,CAChB,gBAAgB,CAAE,IAAI,CACtB,UAAU,CAAE,GAAG,CAAC,GAAG,CAAC,GAAG,CAAC,GAAG,CAAC,KAAK,AACrC,CAAC,AACD,yBAAU,CAAC,QAAQ,eAAC,CAAC,AACjB,aAAa,CAAE,GAAG,AACtB,CAAC,AACD,yBAAU,CAAC,MAAM,eAAC,CAAC,AACf,MAAM,CAAE,GAAG,CAAC,KAAK,CAAC,KAAK,CACvB,OAAO,CAAE,IAAI,CACb,YAAY,CAAE,GAAG,CACjB,aAAa,CAAE,GAAG,CAClB,OAAO,CAAE,GAAG,CAAC,IAAI,AACrB,CAAC"}`
+var css$6 = {
+  code: ".z-max.svelte-1puc6kt.svelte-1puc6kt{z-index:2147483647}.pwa-toast.svelte-1puc6kt.svelte-1puc6kt{position:fixed;right:0;bottom:0;margin:16px;padding:12px;border:1px solid #8885;border-radius:4px;text-align:left;background-color:aqua;box-shadow:3px 4px 5px 0px #888}.pwa-toast.svelte-1puc6kt .message.svelte-1puc6kt{margin-bottom:8px}.pwa-toast.svelte-1puc6kt button.svelte-1puc6kt{border:1px solid #8885;outline:none;margin-right:5px;border-radius:2px;padding:3px 10px}",
+  map: `{"version":3,"file":"index.svelte","sources":["index.svelte"],"sourcesContent":["<script lang=\\"ts\\">import { dev, browser } from '$app/env';\\nimport { Workbox, messageSW } from 'workbox-window';\\nlet wb;\\nlet registration;\\nlet offlineReady = false;\\nlet needRefresh = false;\\nfunction showSkipWaitingPrompt(event) {\\n    // \\\\\`event.wasWaitingBeforeRegister\\\\\` will be false if this is\\n    // the first time the updated service worker is waiting.\\n    // When \\\\\`event.wasWaitingBeforeRegister\\\\\` is true, a previously\\n    // updated service worker is still waiting.\\n    // You may want to customize the UI prompt accordingly.\\n    // Assumes your app has some sort of prompt UI element\\n    // that a user can either accept or reject.\\n    needRefresh = true;\\n}\\nfunction updateServiceWorker() {\\n    // Assuming the user accepted the update, set up a listener\\n    // that will reload the page as soon as the previously waiting\\n    // service worker has taken control.\\n    if (wb) {\\n        wb.addEventListener('controlling', (event) => {\\n            if (event.isUpdate)\\n                window.location.reload();\\n        });\\n    }\\n    if (registration && registration.waiting) {\\n        // Send a message to the waiting service worker,\\n        // instructing it to activate.\\n        // Note: for this to work, you have to add a message\\n        // listener in your service worker. See below.\\n        messageSW(registration.waiting, { type: 'SKIP_WAITING' }).then(() => {\\n            // console.log(\\"NOTIFIED SKIP_WAITING\\");\\n        }).catch(e => {\\n            console.error(\\"NOTIFIED SKIP_WAITING WITH ERROR\\", e);\\n        });\\n    }\\n}\\nfunction close() {\\n    offlineReady = false;\\n    needRefresh = false;\\n}\\nif (!dev && browser) {\\n    if ('serviceWorker' in navigator) {\\n        wb = new Workbox('/service-worker.js', { scope: '/' });\\n        wb.addEventListener('activated', (event) => {\\n            // this will only controls the offline request.\\n            // event.isUpdate will be true if another version of the service\\n            // worker was controlling the page when this version was registered.\\n            if (!event.isUpdate) {\\n                offlineReady = true;\\n            }\\n        });\\n        // Add an event listener to detect when the registered\\n        // service worker has installed but is waiting to activate.\\n        wb.addEventListener('waiting', showSkipWaitingPrompt);\\n        // eslint-disable-next-line\\n        // @ts-ignore\\n        wb.addEventListener('externalwaiting', showSkipWaitingPrompt);\\n        // register the service worker\\n        wb.register({ immediate: true }).then(r => registration = r).catch(e => {\\n            console.error(\\"cannot register service worker\\", e);\\n        });\\n    }\\n    else {\\n        console.warn('Service workers are not supported.');\\n    }\\n}\\n$: toast = offlineReady || needRefresh;\\n</script>\\n\\n{#if toast}\\n<div\\n  class=\\"pwa-toast z-max\\"\\n  role=\\"alert\\"\\n>\\n  <div class=\\"message\\">\\n    {#if offlineReady}\\n      <span>\\n        App ready to work offline\\n      </span>\\n      {:else}\\n      <span>\\n        New content available, click on reload button to update.\\n      </span>\\n    {/if}\\n  </div>\\n\\n  {#if needRefresh}\\n    <button on:click={updateServiceWorker}>See what's new!</button>\\n  {/if}\\n  <button on:click={close}>Later&hellip;</button>\\n\\n</div>\\n{/if}\\n\\n<style>\\n.z-max {\\n  z-index: 2147483647;\\n}\\n.pwa-toast {\\n  position: fixed;\\n  right: 0;\\n  bottom: 0;\\n  margin: 16px;\\n  padding: 12px;\\n  border: 1px solid #8885;\\n  border-radius: 4px;\\n  /* z-index: 1; */\\n  text-align: left;\\n  background-color: aqua;\\n  box-shadow: 3px 4px 5px 0px #888;\\n}\\n.pwa-toast .message {\\n  margin-bottom: 8px;\\n}\\n.pwa-toast button {\\n  border: 1px solid #8885;\\n  outline: none;\\n  margin-right: 5px;\\n  border-radius: 2px;\\n  padding: 3px 10px;\\n}\\n</style>"],"names":[],"mappings":"AAiGA,MAAM,8BAAC,CAAC,AACN,OAAO,CAAE,UAAU,AACrB,CAAC,AACD,UAAU,8BAAC,CAAC,AACV,QAAQ,CAAE,KAAK,CACf,KAAK,CAAE,CAAC,CACR,MAAM,CAAE,CAAC,CACT,MAAM,CAAE,IAAI,CACZ,OAAO,CAAE,IAAI,CACb,MAAM,CAAE,GAAG,CAAC,KAAK,CAAC,KAAK,CACvB,aAAa,CAAE,GAAG,CAElB,UAAU,CAAE,IAAI,CAChB,gBAAgB,CAAE,IAAI,CACtB,UAAU,CAAE,GAAG,CAAC,GAAG,CAAC,GAAG,CAAC,GAAG,CAAC,IAAI,AAClC,CAAC,AACD,yBAAU,CAAC,QAAQ,eAAC,CAAC,AACnB,aAAa,CAAE,GAAG,AACpB,CAAC,AACD,yBAAU,CAAC,MAAM,eAAC,CAAC,AACjB,MAAM,CAAE,GAAG,CAAC,KAAK,CAAC,KAAK,CACvB,OAAO,CAAE,IAAI,CACb,YAAY,CAAE,GAAG,CACjB,aAAa,CAAE,GAAG,CAClB,OAAO,CAAE,GAAG,CAAC,IAAI,AACnB,CAAC"}`
 };
 var ReloadPrompt = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let toast;
   let needRefresh = false;
-  $$result.css.add(css$4);
+  $$result.css.add(css$6);
   toast = needRefresh;
-  return `${toast ? `<div class="${"pwa-toast z-max svelte-1wovdmg"}" role="${"alert"}"><div class="${"message svelte-1wovdmg"}">${`<span>New content available, click on reload button to update.
+  return `${toast ? `<div class="${"pwa-toast z-max svelte-1puc6kt"}" role="${"alert"}"><div class="${"message svelte-1puc6kt"}">${`<span>New content available, click on reload button to update.
       </span>`}</div>
-    ${``}
-    <button class="${"svelte-1wovdmg"}">Close
-    </button></div>` : ``}`;
+
+  ${``}
+  <button class="${"svelte-1puc6kt"}">Later\u2026</button></div>` : ``}`;
 });
-var css$3 = {
-  code: "@import '$lib/Tachyonshower';body{margin:0;padding:0}",
-  map: `{"version":3,"file":"__layout.svelte","sources":["__layout.svelte"],"sourcesContent":["<script lang=\\"ts\\">import Header from '$lib/Header/index.svelte';\\nimport ReloadPrompt from '$lib/ReloadPrompt/index.svelte';\\n</script>\\n\\n<style lang=\\"css\\" global>\\n\\t/* Quick prune: purifycss.online/ */\\n\\t@import '$lib/Tachyonshower';\\n\\t:global(body) {\\n\\t\\tmargin:0;\\n\\t\\tpadding:0;\\n\\t}\\n</style>\\n\\n<svelte:head>\\n\\t<link rel=\\"manifest\\" href=\\"/manifest.webmanifest\\" />\\n\\t<link rel=\\"apple-touch-icon\\" href=\\"/apple-icon-180.png\\" />\\n\\n\\t<meta\\n\\t\\tname=\\"description\\"\\n\\t\\tcontent=\\"This is a Svelte-Kit PWA skeleton.\\"\\n\\t/>\\n\\t<meta name=\\"apple-mobile-web-app-capable\\" content=\\"yes\\" />\\n\\t<!-- <link rel=\\"icon\\" href=\\"/favicon.svg\\" type=\\"image/svg+xml\\"> -->\\n\\t<link rel=\\"apple-touch-icon\\" href=\\"/pwa-192x192.png\\" />\\n\\t<!-- <link rel=\\"mask-icon\\" href=\\"/safari-pinned-tab.svg\\" color=\\"#00aba9\\"> -->\\n\\t<meta name=\\"msapplication-TileColor\\" content=\\"#00aba9\\" />\\n\\t<meta name=\\"theme-color\\" content=\\"#ffffff\\" />\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2048-2732.jpg\\"\\n\\t\\tmedia=\\"(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2732-2048.jpg\\"\\n\\t\\tmedia=\\"(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1668-2388.jpg\\"\\n\\t\\tmedia=\\"(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2388-1668.jpg\\"\\n\\t\\tmedia=\\"(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1536-2048.jpg\\"\\n\\t\\tmedia=\\"(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2048-1536.jpg\\"\\n\\t\\tmedia=\\"(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1668-2224.jpg\\"\\n\\t\\tmedia=\\"(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2224-1668.jpg\\"\\n\\t\\tmedia=\\"(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1620-2160.jpg\\"\\n\\t\\tmedia=\\"(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2160-1620.jpg\\"\\n\\t\\tmedia=\\"(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1284-2778.jpg\\"\\n\\t\\tmedia=\\"(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2778-1284.jpg\\"\\n\\t\\tmedia=\\"(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1170-2532.jpg\\"\\n\\t\\tmedia=\\"(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2532-1170.jpg\\"\\n\\t\\tmedia=\\"(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1125-2436.jpg\\"\\n\\t\\tmedia=\\"(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2436-1125.jpg\\"\\n\\t\\tmedia=\\"(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1242-2688.jpg\\"\\n\\t\\tmedia=\\"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2688-1242.jpg\\"\\n\\t\\tmedia=\\"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-828-1792.jpg\\"\\n\\t\\tmedia=\\"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1792-828.jpg\\"\\n\\t\\tmedia=\\"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1242-2208.jpg\\"\\n\\t\\tmedia=\\"(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2208-1242.jpg\\"\\n\\t\\tmedia=\\"(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-750-1334.jpg\\"\\n\\t\\tmedia=\\"(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1334-750.jpg\\"\\n\\t\\tmedia=\\"(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-640-1136.jpg\\"\\n\\t\\tmedia=\\"(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1136-640.jpg\\"\\n\\t\\tmedia=\\"(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n</svelte:head>\\n\\n<Header />\\n\\n<main>\\n\\t<slot />\\n</main>\\n\\n<footer>\\n\\t<p>Visit <a href=\\"https://kit.svelte.dev\\">kit.svelte.dev</a> to learn SvelteKit.</p>\\n</footer>\\n\\n<ReloadPrompt />\\n"],"names":[],"mappings":"AAMC,QAAQ,oBAAoB,CAAC,AACrB,IAAI,AAAE,CAAC,AACd,OAAO,CAAC,CACR,QAAQ,CAAC,AACV,CAAC"}`
+function mapTouchToMouseFor(Selector) {
+  function TouchEventMapper(originalEvent) {
+    var Target = originalEvent.target;
+    if (!Target.matches(Selector)) {
+      return;
+    }
+    var simulatedEventType;
+    switch (originalEvent.type) {
+      case "touchstart":
+        simulatedEventType = "mousedown";
+        break;
+      case "touchmove":
+        simulatedEventType = "mousemove";
+        break;
+      case "touchend":
+        simulatedEventType = "mouseup";
+        break;
+      case "touchcancel":
+        simulatedEventType = "mouseup";
+        break;
+      default:
+        return;
+    }
+    var firstTouch = originalEvent.changedTouches[0];
+    var clientX = firstTouch.clientX, pageX = firstTouch.pageX, PageXOffset = window.pageXOffset;
+    var clientY = firstTouch.clientY, pageY = firstTouch.pageY, PageYOffset = window.pageYOffset;
+    if (pageX === 0 && Math.floor(clientX) > Math.floor(pageX) || pageY === 0 && Math.floor(clientY) > Math.floor(pageY)) {
+      clientX -= PageXOffset;
+      clientY -= PageYOffset;
+    } else if (clientX < pageX - PageXOffset || clientY < pageY - PageYOffset) {
+      clientX = pageX - PageXOffset;
+      clientY = pageY - PageYOffset;
+    }
+    var simulatedEvent = new MouseEvent(simulatedEventType, {
+      bubbles: true,
+      cancelable: true,
+      screenX: firstTouch.screenX,
+      screenY: firstTouch.screenY,
+      clientX,
+      clientY,
+      pageX,
+      pageY,
+      buttons: 1,
+      button: 0,
+      ctrlKey: originalEvent.ctrlKey,
+      shiftKey: originalEvent.shiftKey,
+      altKey: originalEvent.altKey,
+      metaKey: originalEvent.metaKey
+    });
+    firstTouch.target.dispatchEvent(simulatedEvent);
+  }
+  document.addEventListener("touchstart", TouchEventMapper, true);
+  document.addEventListener("touchmove", TouchEventMapper, true);
+  document.addEventListener("touchend", TouchEventMapper, true);
+  document.addEventListener("touchcancel", TouchEventMapper, true);
+}
+var userPrefLang = void 0;
+var prefLang = writable2(userPrefLang);
+prefLang.subscribe((value) => {
+});
+var currentPageStore = writable2(0);
+var pageStore = writable2("");
+var pageItems = [
+  {title: "Membership", component: "Membership", bg: "bg-gold"},
+  {title: "Lines", component: "Lines", bg: "bg-light-green"},
+  {title: "Tutorials", component: "Tutorials", bg: "bg-light-blue"},
+  {title: "Shop", component: "Shop", bg: "bg-light-yellow"}
+];
+var css$5 = {
+  code: "aside.svelte-1fnm9pu{-webkit-touch-callout:none;-ms-touch-action:none;touch-action:none;user-select:none;cursor:move;background:rgba(255, 255, 0, 0.8);position:absolute}",
+  map: `{"version":3,"file":"InspectorGadget.svelte","sources":["InspectorGadget.svelte"],"sourcesContent":["<script context=\\"module\\">\\n  import mapTouchToMouseFor from 'svelte-touch-to-mouse';\\n</script>\\n\\n<script>\\n\\t\\t//draggable debug compoent for layout variables\\n\\timport { pageStore, pageItems, currentPageStore, prefLang } from '$lib/stores.js';\\n\\n\\t/*********** Drag Inspector *************/\\n\\texport let left = 0;\\n\\texport let top = 0;\\n\\n\\tlet moving = false; // $: console.log(moving);\\n\\n\\tfunction onMouseDown() {\\n\\t\\tmoving = true;\\n\\t}\\n\\n\\tfunction onMouseMove(e) {\\n\\t\\tif (moving) {\\n\\t\\t\\tleft += e.movementX;\\n\\t\\t\\ttop += e.movementY;\\n\\t\\t}\\n\\t}\\n\\n\\tfunction onMouseUp() {\\n\\t\\tmoving = false;\\n\\t}\\n\\n\\t/****************** REFOCUS ******************/\\n\\n\\n\\t// bind element svelte and set the focus: youtube.com/watch?v=3_IbFiT0OaU\\n\\timport { onMount } from 'svelte';\\n\\n\\tlet inputRef; //usage: <input bind:this={inputRef} />\\n\\n\\tonMount(() => {\\n\\t\\tmapTouchToMouseFor('aside');\\n\\t\\t// setTimeout(() => {\\n\\t\\t// \\tinputRef.focus();\\n\\t\\t// }, 333);\\n\\t});\\n\\n\\tfunction test(e) {\\n\\t\\t// console.log(document.activeElement); // helpers\\n\\t\\t// \`tabindex=\\"-1\\"\` https://javascript.info/focus-blur\\n\\t\\tconsole.log(e);\\n\\t}\\n\\n\\t// function refocus() {\\n\\t// \\tinputRef.focus();\\n\\t// }\\n\\n\\tfunction refocus() {\\n\\t\\tinputRef.value = $pageStore;\\n\\t}\\n\\n</script>\\n\\n\\n<svelte:window\\n\\ton:mouseup={ onMouseUp }\\n\\ton:mousemove={ onMouseMove }\\n/>\\n<!-- on:popstate={ (e) => console.log(e) } } -->\\n\\n<aside\\n\\ton:mousedown={onMouseDown}\\n\\tstyle=\\"left: {left}px; top: {top}px;\\"\\n\\tclass=\\"absolute z-max w5 pa2\\"\\n>\\n\\n<!-- <b>{({}).VITE_APP_TITLE}</b> -->\\n<ul>\\n\\t<li>{$pageStore}</li>\\n\\t<li>{$currentPageStore}</li>\\n\\t<li>{$prefLang}</li>\\n\\t<!-- <li>{$searchStore}</li> -->\\n</ul>\\n\\n<slot></slot>\\n\\t<!-- <button on:click={ () => history.pop(history.state, '', 'test') }>click me</button>\\n\\t/*********** History API *************/\\n\\timport {\\n\\t\\tafterNavigate,\\n\\t\\tbeforeNavigate,\\n\\t\\tdisableScrollHandling,\\n\\t\\tgoto,\\n\\t\\tinvalidate,\\n\\t\\tprefetch,\\n\\t\\tprefetchRoutes\\n\\t} from '$app/navigation';\\n\\t-->\\n\\n\\n</aside>\\n\\n\\n\\n\\n<style>\\n\\taside {\\n\\t\\t-webkit-touch-callout:none;\\n\\t\\t-ms-touch-action:none; touch-action:none;\\n\\t\\tuser-select: none;\\n\\t\\tcursor: move;\\n\\t\\tbackground: rgba(255, 255, 0, 0.8);\\n\\t\\tposition: absolute;\\n\\t}\\n</style>"],"names":[],"mappings":"AAsGC,KAAK,eAAC,CAAC,AACN,sBAAsB,IAAI,CAC1B,iBAAiB,IAAI,CAAE,aAAa,IAAI,CACxC,WAAW,CAAE,IAAI,CACjB,MAAM,CAAE,IAAI,CACZ,UAAU,CAAE,KAAK,GAAG,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,CAClC,QAAQ,CAAE,QAAQ,AACnB,CAAC"}`
+};
+var InspectorGadget = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let $pageStore, $$unsubscribe_pageStore;
+  let $currentPageStore, $$unsubscribe_currentPageStore;
+  let $prefLang, $$unsubscribe_prefLang;
+  $$unsubscribe_pageStore = subscribe(pageStore, (value) => $pageStore = value);
+  $$unsubscribe_currentPageStore = subscribe(currentPageStore, (value) => $currentPageStore = value);
+  $$unsubscribe_prefLang = subscribe(prefLang, (value) => $prefLang = value);
+  let {left = 0} = $$props;
+  let {top = 0} = $$props;
+  onMount(() => {
+    mapTouchToMouseFor("aside");
+  });
+  if ($$props.left === void 0 && $$bindings.left && left !== void 0)
+    $$bindings.left(left);
+  if ($$props.top === void 0 && $$bindings.top && top !== void 0)
+    $$bindings.top(top);
+  $$result.css.add(css$5);
+  $$unsubscribe_pageStore();
+  $$unsubscribe_currentPageStore();
+  $$unsubscribe_prefLang();
+  return `
+
+
+<aside style="${"left: " + escape2(left) + "px; top: " + escape2(top) + "px;"}" class="${"absolute z-max w5 pa2 svelte-1fnm9pu"}">
+<ul><li>${escape2($pageStore)}</li>
+	<li>${escape2($currentPageStore)}</li>
+	<li>${escape2($prefLang)}</li>
+	</ul>
+
+${slots.default ? slots.default({}) : ``}
+	
+
+
+</aside>`;
+});
+var css$4 = {
+  code: ".snap-center{scroll-snap-align:center}.nw-100{min-width:100%}.x-mandatory{-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory}.touch-scroll{-webkit-overflow-scrolling:touch}",
+  map: `{"version":3,"file":"__layout.svelte","sources":["__layout.svelte"],"sourcesContent":["<!--script context=\\"module\\">\\n// get all pages and build a routes menu: youtube.com/watch?v=Y_NE2R3HuOU\\nexport const modules = import.meta.glob('./**.svelte');\\n\\n//console.log(modules);\\n\\nlet allMenu = [];\\n\\nfor(let path in modules) {\\n\\tlet cleanPath = path.replace('.svelte', '').replace('./', '');\\n\\tallMenu.push({\\n\\t\\ttitle:cleanPath.substring(cleanPath.lastIndexOf('/') + 1),\\n\\t\\tlink: cleanPath.includes('index')\\n\\t\\t? cleanPath.replace('index', '') : ''\\n\\t});\\n}\\n\\nconsole.log(allMenu);\\n</script-->\\n<script context=\\"module\\">\\n// learn: FOUC: github.com/sveltejs/kit/issues/1530\\nimport '../app.css' // <- just import your css: stackoverflow.com/questions/63637662/add-js-css-files-to-svelte-component\\n</script>\\n\\n<script>\\n\\n\\t// learn: Just for the record, the key thing using SSR is that pages don't reload as long as routes shares the same __layout.svelte. \u2013- from: stackoverflow.com/questions/71185085/sveltekit-hash-based-routing\\n\\timport ReloadPrompt from '$lib/ReloadPrompt/index.svelte';\\n\\timport InspectorGadget from '$lib/InspectorGadget.svelte';\\n\\n\\tlet main;\\n\\n\\tfunction refocus() {\\n\\t\\tsetTimeout(() => { main.focus() }, 30)\\n\\t}\\n\\n\\t/* usage: <!-- <svelte:window on:keydown={handleKeydown}/> --> */\\n\\tlet key;\\n\\tlet keyCode;\\n\\n\\tfunction handleKeydown(e) {\\n\\t\\tif (e.keyCode === 38 || e.keyCode === 39) {\\n\\t\\t\\trefocus(); //alert( 'right/up' )\\n\\t\\t} else if (e.keyCode === 37 || e.keyCode === 40) {\\n\\t\\t\\trefocus(); //alert( 'down/left' )\\n\\t\\t}\\n\\t}\\n\\t// learn: youtube.com/watch?v=kXq6tO5fqnU\\n</script>\\n\\n<svelte:window on:popstate={ refocus } on:keydown={handleKeydown} />\\n\\n<main class=\\"charcoal flex flex-auto nw-100 vh-100 x-mandatory w-100 overflow-x-scroll touch-scroll\\" tabindex=\\"-1\\" bind:this={main}>\\n\\t<slot></slot>\\n\\t<ReloadPrompt />\\n\\t<InspectorGadget />\\n</main>\\n\\n<style>\\n/* Quick prune: purifycss.online/ @import '$lib/Tachyonshower'; */\\n\\n:global(.snap-center) {\\n\\tscroll-snap-align: center;\\n}\\n:global(.nw-100) {\\n\\tmin-width: 100%;\\n}\\n\\n:global(.x-mandatory) {\\n\\t-webkit-overflow-scrolling: touch;\\n\\tscroll-snap-type: x mandatory;\\n\\t/* must be used with: \`scroll-snap-align: center\` */\\n}\\n\\n/* :global(.x-proximity) {\\n\\tscroll-snap-type: x proximity;\\n} */\\n\\n:global(.touch-scroll) {\\n\\t-webkit-overflow-scrolling: touch;\\n}\\n</style>\\n\\n<svelte:head>\\n\\t<!-- <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"../support/css/tachyon.shower.css\\"> -->\\n\\n\\t<link rel=\\"manifest\\" href=\\"/manifest.webmanifest\\" />\\n\\t<link rel=\\"apple-touch-icon\\" href=\\"/apple-icon-180.png\\" />\\n\\n\\t<meta\\n\\t\\tname=\\"description\\"\\n\\t\\tcontent=\\"Svelte-Kit PWA\\"\\n\\t/>\\n\\t<meta name=\\"apple-mobile-web-app-capable\\" content=\\"yes\\" />\\n\\t<!-- <link rel=\\"icon\\" href=\\"/favicon.svg\\" type=\\"image/svg+xml\\"> -->\\n\\t<link rel=\\"apple-touch-icon\\" href=\\"/pwa-192x192.png\\" />\\n\\t<!-- <link rel=\\"mask-icon\\" href=\\"/safari-pinned-tab.svg\\" color=\\"#00aba9\\"> -->\\n\\t<meta name=\\"msapplication-TileColor\\" content=\\"#00aba9\\" />\\n\\t<meta name=\\"theme-color\\" content=\\"#ffffff\\" />\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2048-2732.jpg\\"\\n\\t\\tmedia=\\"(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2732-2048.jpg\\"\\n\\t\\tmedia=\\"(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1668-2388.jpg\\"\\n\\t\\tmedia=\\"(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2388-1668.jpg\\"\\n\\t\\tmedia=\\"(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1536-2048.jpg\\"\\n\\t\\tmedia=\\"(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2048-1536.jpg\\"\\n\\t\\tmedia=\\"(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1668-2224.jpg\\"\\n\\t\\tmedia=\\"(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2224-1668.jpg\\"\\n\\t\\tmedia=\\"(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1620-2160.jpg\\"\\n\\t\\tmedia=\\"(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2160-1620.jpg\\"\\n\\t\\tmedia=\\"(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1284-2778.jpg\\"\\n\\t\\tmedia=\\"(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2778-1284.jpg\\"\\n\\t\\tmedia=\\"(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1170-2532.jpg\\"\\n\\t\\tmedia=\\"(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2532-1170.jpg\\"\\n\\t\\tmedia=\\"(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1125-2436.jpg\\"\\n\\t\\tmedia=\\"(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2436-1125.jpg\\"\\n\\t\\tmedia=\\"(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1242-2688.jpg\\"\\n\\t\\tmedia=\\"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2688-1242.jpg\\"\\n\\t\\tmedia=\\"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-828-1792.jpg\\"\\n\\t\\tmedia=\\"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1792-828.jpg\\"\\n\\t\\tmedia=\\"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1242-2208.jpg\\"\\n\\t\\tmedia=\\"(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2208-1242.jpg\\"\\n\\t\\tmedia=\\"(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-750-1334.jpg\\"\\n\\t\\tmedia=\\"(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1334-750.jpg\\"\\n\\t\\tmedia=\\"(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-640-1136.jpg\\"\\n\\t\\tmedia=\\"(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1136-640.jpg\\"\\n\\t\\tmedia=\\"(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n</svelte:head>\\n"],"names":[],"mappings":"AA6DQ,YAAY,AAAE,CAAC,AACtB,iBAAiB,CAAE,MAAM,AAC1B,CAAC,AACO,OAAO,AAAE,CAAC,AACjB,SAAS,CAAE,IAAI,AAChB,CAAC,AAEO,YAAY,AAAE,CAAC,AACtB,0BAA0B,CAAE,KAAK,CACjC,gBAAgB,CAAE,CAAC,CAAC,SAAS,AAE9B,CAAC,AAMO,aAAa,AAAE,CAAC,AACvB,0BAA0B,CAAE,KAAK,AAClC,CAAC"}`
 };
 var _layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  $$result.css.add(css$3);
-  return `${$$result.head += `<link rel="${"manifest"}" href="${"/manifest.webmanifest"}" data-svelte="svelte-p9yk9x"><link rel="${"apple-touch-icon"}" href="${"/apple-icon-180.png"}" data-svelte="svelte-p9yk9x"><meta name="${"description"}" content="${"This is a Svelte-Kit PWA skeleton."}" data-svelte="svelte-p9yk9x"><meta name="${"apple-mobile-web-app-capable"}" content="${"yes"}" data-svelte="svelte-p9yk9x"><link rel="${"apple-touch-icon"}" href="${"/pwa-192x192.png"}" data-svelte="svelte-p9yk9x"><meta name="${"msapplication-TileColor"}" content="${"#00aba9"}" data-svelte="svelte-p9yk9x"><meta name="${"theme-color"}" content="${"#ffffff"}" data-svelte="svelte-p9yk9x"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2048-2732.jpg"}" media="${"(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"}" data-svelte="svelte-p9yk9x"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2732-2048.jpg"}" media="${"(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"}" data-svelte="svelte-p9yk9x"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1668-2388.jpg"}" media="${"(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"}" data-svelte="svelte-p9yk9x"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2388-1668.jpg"}" media="${"(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"}" data-svelte="svelte-p9yk9x"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1536-2048.jpg"}" media="${"(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"}" data-svelte="svelte-p9yk9x"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2048-1536.jpg"}" media="${"(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"}" data-svelte="svelte-p9yk9x"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1668-2224.jpg"}" media="${"(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"}" data-svelte="svelte-p9yk9x"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2224-1668.jpg"}" media="${"(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"}" data-svelte="svelte-p9yk9x"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1620-2160.jpg"}" media="${"(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"}" data-svelte="svelte-p9yk9x"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2160-1620.jpg"}" media="${"(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"}" data-svelte="svelte-p9yk9x"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1284-2778.jpg"}" media="${"(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"}" data-svelte="svelte-p9yk9x"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2778-1284.jpg"}" media="${"(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"}" data-svelte="svelte-p9yk9x"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1170-2532.jpg"}" media="${"(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"}" data-svelte="svelte-p9yk9x"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2532-1170.jpg"}" media="${"(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"}" data-svelte="svelte-p9yk9x"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1125-2436.jpg"}" media="${"(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"}" data-svelte="svelte-p9yk9x"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2436-1125.jpg"}" media="${"(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"}" data-svelte="svelte-p9yk9x"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1242-2688.jpg"}" media="${"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"}" data-svelte="svelte-p9yk9x"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2688-1242.jpg"}" media="${"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"}" data-svelte="svelte-p9yk9x"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-828-1792.jpg"}" media="${"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"}" data-svelte="svelte-p9yk9x"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1792-828.jpg"}" media="${"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"}" data-svelte="svelte-p9yk9x"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1242-2208.jpg"}" media="${"(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"}" data-svelte="svelte-p9yk9x"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2208-1242.jpg"}" media="${"(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"}" data-svelte="svelte-p9yk9x"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-750-1334.jpg"}" media="${"(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"}" data-svelte="svelte-p9yk9x"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1334-750.jpg"}" media="${"(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"}" data-svelte="svelte-p9yk9x"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-640-1136.jpg"}" media="${"(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"}" data-svelte="svelte-p9yk9x"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1136-640.jpg"}" media="${"(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"}" data-svelte="svelte-p9yk9x">`, ""}
+  let main;
+  $$result.css.add(css$4);
+  return `
 
-${validate_component(Header, "Header").$$render($$result, {}, {}, {})}
 
-<main>${slots.default ? slots.default({}) : ``}</main>
 
-<footer><p>Visit <a href="${"https://kit.svelte.dev"}">kit.svelte.dev</a> to learn SvelteKit.</p></footer>
 
-${validate_component(ReloadPrompt, "ReloadPrompt").$$render($$result, {}, {}, {})}`;
+
+
+<main class="${"charcoal flex flex-auto nw-100 vh-100 x-mandatory w-100 overflow-x-scroll touch-scroll"}" tabindex="${"-1"}"${add_attribute("this", main, 0)}>${slots.default ? slots.default({}) : ``}
+	${validate_component(ReloadPrompt, "ReloadPrompt").$$render($$result, {}, {}, {})}
+	${validate_component(InspectorGadget, "InspectorGadget").$$render($$result, {}, {}, {})}</main>
+
+
+
+${$$result.head += `<link rel="${"manifest"}" href="${"/manifest.webmanifest"}" data-svelte="svelte-1govtgl"><link rel="${"apple-touch-icon"}" href="${"/apple-icon-180.png"}" data-svelte="svelte-1govtgl"><meta name="${"description"}" content="${"Svelte-Kit PWA"}" data-svelte="svelte-1govtgl"><meta name="${"apple-mobile-web-app-capable"}" content="${"yes"}" data-svelte="svelte-1govtgl"><link rel="${"apple-touch-icon"}" href="${"/pwa-192x192.png"}" data-svelte="svelte-1govtgl"><meta name="${"msapplication-TileColor"}" content="${"#00aba9"}" data-svelte="svelte-1govtgl"><meta name="${"theme-color"}" content="${"#ffffff"}" data-svelte="svelte-1govtgl"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2048-2732.jpg"}" media="${"(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"}" data-svelte="svelte-1govtgl"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2732-2048.jpg"}" media="${"(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"}" data-svelte="svelte-1govtgl"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1668-2388.jpg"}" media="${"(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"}" data-svelte="svelte-1govtgl"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2388-1668.jpg"}" media="${"(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"}" data-svelte="svelte-1govtgl"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1536-2048.jpg"}" media="${"(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"}" data-svelte="svelte-1govtgl"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2048-1536.jpg"}" media="${"(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"}" data-svelte="svelte-1govtgl"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1668-2224.jpg"}" media="${"(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"}" data-svelte="svelte-1govtgl"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2224-1668.jpg"}" media="${"(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"}" data-svelte="svelte-1govtgl"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1620-2160.jpg"}" media="${"(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"}" data-svelte="svelte-1govtgl"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2160-1620.jpg"}" media="${"(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"}" data-svelte="svelte-1govtgl"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1284-2778.jpg"}" media="${"(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"}" data-svelte="svelte-1govtgl"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2778-1284.jpg"}" media="${"(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"}" data-svelte="svelte-1govtgl"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1170-2532.jpg"}" media="${"(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"}" data-svelte="svelte-1govtgl"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2532-1170.jpg"}" media="${"(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"}" data-svelte="svelte-1govtgl"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1125-2436.jpg"}" media="${"(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"}" data-svelte="svelte-1govtgl"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2436-1125.jpg"}" media="${"(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"}" data-svelte="svelte-1govtgl"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1242-2688.jpg"}" media="${"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"}" data-svelte="svelte-1govtgl"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2688-1242.jpg"}" media="${"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"}" data-svelte="svelte-1govtgl"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-828-1792.jpg"}" media="${"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"}" data-svelte="svelte-1govtgl"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1792-828.jpg"}" media="${"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"}" data-svelte="svelte-1govtgl"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1242-2208.jpg"}" media="${"(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"}" data-svelte="svelte-1govtgl"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-2208-1242.jpg"}" media="${"(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"}" data-svelte="svelte-1govtgl"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-750-1334.jpg"}" media="${"(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"}" data-svelte="svelte-1govtgl"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1334-750.jpg"}" media="${"(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"}" data-svelte="svelte-1govtgl"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-640-1136.jpg"}" media="${"(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"}" data-svelte="svelte-1govtgl"><link rel="${"apple-touch-startup-image"}" href="${"/apple-splash-1136-640.jpg"}" media="${"(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"}" data-svelte="svelte-1govtgl">`, ""}`;
 });
 var __layout = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   [Symbol.toStringTag]: "Module",
   "default": _layout
 });
-function load$2({error: error22, status}) {
+function load$1({error: error22, status}) {
   return {props: {error: error22, status}};
 }
-var Error$1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+var Error2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let {status} = $$props;
   let {error: error22} = $$props;
   if ($$props.status === void 0 && $$bindings.status && status !== void 0)
@@ -17168,235 +17290,190 @@ ${error22.stack ? `<pre>${escape2(error22.stack)}</pre>` : ``}`;
 var error2 = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   [Symbol.toStringTag]: "Module",
-  "default": Error$1,
-  load: load$2
+  "default": Error2,
+  load: load$1
+});
+var Section = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  return `<section class="${"w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto overflow-x-hidden"}">${slots.default ? slots.default({}) : ``}</section>`;
+});
+var css$3 = {
+  code: "section.svelte-1o25bok div.svelte-1o25bok{overflow-x:hidden }",
+  map: '{"version":3,"file":"Rows.svelte","sources":["Rows.svelte"],"sourcesContent":["<hr class=\\"h3 relative bn\\" />\\n<section class=\\"w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto\\">\\n\\t<div class=\\"outline w-50 pa3\\">ONE</div>\\n\\t<div class=\\"outline w-50 pa3\\">TWO</div>\\n</section>\\n\\n<section class=\\"w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto\\">\\n\\t<div class=\\"outline w-third pa3\\">x</div>\\n\\t<div class=\\"outline w-third pa3\\">y</div>\\n\\t<div class=\\"outline w-third pa3\\">z</div>\\n</section>\\n\\n<section class=\\"w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto\\">\\n\\t<div class=\\"outline w-25 pa3\\">up</div>\\n\\t<div class=\\"outline w-25 pa3\\">down</div>\\n\\t<div class=\\"outline w-25 pa3\\">left</div>\\n\\t<div class=\\"outline w-25 pa3\\">right</div>\\n</section>\\n\\n<section class=\\"w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto \\">\\n\\t<div class=\\"outline w-20 pa3\\">Don</div>\\n\\t<div class=\\"outline w-20 pa3\\">Mich</div>\\n\\t<div class=\\"outline w-20 pa3\\">Leo</div>\\n\\t<div class=\\"outline w-20 pa3\\">Raph</div>\\n\\t<div class=\\"outline w-20 pa3\\" id=\\"splinter\\">Splinter</div>\\n</section>\\n\\n<style>\\n/* `overflow-x-hidden` on parent masks the borders: stackoverflow.com/questions/3970455/how-to-make-the-overflow-css-property-work-with-hidden-as-value */\\nsection div { overflow-x:hidden } /* Splinter can\'t Kung-Fu the gutter wall */\\n\\n\\n</style>"],"names":[],"mappings":"AA6BA,sBAAO,CAAC,GAAG,eAAC,CAAC,AAAC,WAAW,MAAM,CAAC,CAAC"}'
+};
+var Rows = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  $$result.css.add(css$3);
+  return `<hr class="${"h3 relative bn"}">
+<section class="${"w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto svelte-1o25bok"}"><div class="${"outline w-50 pa3 svelte-1o25bok"}">ONE</div>
+	<div class="${"outline w-50 pa3 svelte-1o25bok"}">TWO</div></section>
+
+<section class="${"w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto svelte-1o25bok"}"><div class="${"outline w-third pa3 svelte-1o25bok"}">x</div>
+	<div class="${"outline w-third pa3 svelte-1o25bok"}">y</div>
+	<div class="${"outline w-third pa3 svelte-1o25bok"}">z</div></section>
+
+<section class="${"w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto svelte-1o25bok"}"><div class="${"outline w-25 pa3 svelte-1o25bok"}">up</div>
+	<div class="${"outline w-25 pa3 svelte-1o25bok"}">down</div>
+	<div class="${"outline w-25 pa3 svelte-1o25bok"}">left</div>
+	<div class="${"outline w-25 pa3 svelte-1o25bok"}">right</div></section>
+
+<section class="${"w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto  svelte-1o25bok"}"><div class="${"outline w-20 pa3 svelte-1o25bok"}">Don</div>
+	<div class="${"outline w-20 pa3 svelte-1o25bok"}">Mich</div>
+	<div class="${"outline w-20 pa3 svelte-1o25bok"}">Leo</div>
+	<div class="${"outline w-20 pa3 svelte-1o25bok"}">Raph</div>
+	<div class="${"outline w-20 pa3 svelte-1o25bok"}" id="${"splinter"}">Splinter</div>
+</section>`;
 });
 var css$2 = {
-  code: "ul.svelte-19871te.svelte-19871te{list-style:none;margin:0;padding:0;display:flex;gap:var(--gap);width:100%;height:100%;min-width:0;transform:translateY(0deg);backface-visibility:hidden}ul.svelte-19871te li.svelte-19871te{transform:translateY(0deg);backface-visibility:hidden;flex:1 0 var(--width);width:var(--width);max-width:100%;height:100%;position:relative;background-image:linear-gradient(\n      to top right,\n      gainsboro,\n			whitesmoke\n    )}section.svelte-19871te.svelte-19871te{pointer-events:fill;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;height:100vh;overflow-y:scroll}ul.svelte-19871te li.svelte-19871te:before{content:attr(id);position:absolute;background:rgba(255,255,255, 0.82);padding:1rem;z-index:1}button.svelte-19871te.svelte-19871te{white-space:nowrap }.active.svelte-19871te.svelte-19871te{font-weight:bold;opacity:1 }@media all and (orientation:portrait){@media screen and (min-width:30em){.portrait-bottom-0-ns.svelte-19871te.svelte-19871te{bottom:0}}@media screen and (min-width:30em) and (max-width:60em){.portrait-bottom-0-m.svelte-19871te.svelte-19871te{bottom:0}}@media screen and (min-width:60em){.portrait-bottom-0-l.svelte-19871te.svelte-19871te{bottom:0}}}@media all and (orientation:landscape){@media screen and (min-width:30em){}@media screen and (min-width:30em) and (max-width:60em){}@media screen and (min-width:60em){.landscape-top-0-l.svelte-19871te.svelte-19871te{top:0}.landscape-dn-l.svelte-19871te.svelte-19871te{display:none}.landscape-flex-l.svelte-19871te.svelte-19871te{display:flex}}}",
-  map: `{"version":3,"file":"index.svelte","sources":["index.svelte"],"sourcesContent":["<script context=\\"module\\">\\nexport const prerender = true;\\n\\nexport const load = async ({fetch}) => {\\n\\tconst response = await fetch('/posts.json');\\n\\tif (response.ok) {\\n\\t\\tconst { posts } = await response.json()\\n\\t\\treturn {\\n\\t\\t\\tprops: { posts },\\n\\t\\t}\\n\\t}\\n}\\n</script>\\n\\n<svelte:options immutable={true}/>\\n\\n<script>\\nimport {slidy} from '@slidy/core';\\n\\nlet items = [],\\n\\t\\twidth = '100%',\\n\\t\\tgap = 0,\\n\\t\\tindex = 0,\\n\\t\\tlength = 3,\\n\\t\\tscrollPos = 0,\\n\\t\\ti = length,\\n\\t\\ttitle = 'GraphCMS';\\n\\nexport let posts = [];\\n</script>\\n\\n\\n<!-- Main navigation  -->\\n<nav class=\\"bg-blue fixed z-1 w-100\\ntop-0 landscape-top-0-ns landscape-top-0-m landscape-top-0-l\\nflex tc debug\\">\\n  <div class=\\"\\n\\tw-100 flex justify-between\\n  f5 f4-ns f3-m f3-l lh-copy\\n  pa2 measure\\n  pa4-ns measure-ns\\n  pa2-m measure-m\\n  pa0-l measure-wide-l mr-auto ml-auto\\">\\n\\n    <div class=\\"w-50 w-50-ns w-50-m w-20-l\\n    bg-light-blue pv3 h3 f5 f4-ns fs-m f5-l tl\\">i[{index}],{Math.trunc(scrollPos)}px</div>\\n\\n    <!-- ONLY: large & landscape -->\\n    <div class=\\"w-60-l bg-gold justify-between dn landscape-flex-l\\">\\n\\t\\t{#if length > 0}\\n\\t\\t\\t{#each { length } as dot, i}\\n\\t\\t\\t<button style=\\"width:calc(100% / {length})\\" class=\\"bn w-20 pv3 h3 f5 f4-ns fs-m f5-l white o-60 bg-transparent\\" on:click={() => (index = i)} class:active={i === index}>{i}</button><!-- bg-gold -->\\n\\t\\t\\t{/each}\\n\\t\\t{/if}\\n\\t\\t</div>\\n\\n\\n    <div class=\\"w-50 w-50-ns w-50-m w-20-l\\n    bg-light-blue pv3 h3 f5 f4-ns fs-m f5-l tr flex items-center justify-end\\">\\n\\t\\t\\t<div class=\\"flex justify-between\\">\\n\\t\\t\\t\\t<span>\u{1F1EE}\u{1F1F9}&thinsp;<span class='dib dib-ns dn-m dn-l'>It&emsp;</span></span>\\n\\t\\t\\t\\t<span class='dn dn-ns dib-m dib-l'>Italiano&emsp;</span><span>\u{1F1EC}\u{1F1E7}&thinsp;<span class='dib dib-ns dn-m dn-l'>En</span></span>\\n\\t\\t\\t\\t<span class='dn dn-ns dib-m dib-l'>English</span>\\n\\t\\t\\t</div>\\n\\t\\t</div>\\n  </div>\\n</nav><!-- Main navigation  -->\\n\\n<!-- Internal page navigation  -->\\n<!-- EXCEPT large & landscape -->\\n<nav class=\\"bg-red fixed z-1 w-100\\nbottom-0 portrait-bottom-0-ns portrait-bottom-0-m portrait-bottom-0-l\\nlandscape-dn-l flex\\ntc debug\\">\\n  <div class=\\"w-100 flex justify-between\\n  f5 f4-ns f3-m f3-l lh-copy\\n  pa2 measure\\n  pa4-ns measure-ns\\n  pa2-m measure-m\\n  pa0-l measure-wide-l mr-auto ml-auto\\">\\n\\n\\t\\t{#if length > 0}\\n\\t\\t\\t{#each { length } as dot, i}\\n\\t\\t\\t<button style=\\"width:calc(100% / {length})\\" class=\\"bn w-20 pv3 h3 f5 f4-ns fs-m f5-l white o-60 bg-transparent\\" on:click={() => (index = i)} class:active={i === index}>{i}</button><!-- bg-gold -->\\n\\t\\t\\t{/each}\\n\\t\\t{/if}\\n\\n  </div>\\n</nav><!-- /Internal page navigation  -->\\n\\n\\n\\n<div style=\\"--gap: {gap}px; --width: {width}\\" tab-index=\\"0\\">\\n\\n\\t<ul\\n\\t\\tuse:slidy={{\\n\\t\\t\\tindex,\\n\\t\\t\\tlength,\\n\\t\\t\\taxis: 'x',\\n\\t\\t\\talign: 'middle',\\n\\t\\t\\tduration: 300,\\n\\t\\t\\tintersecting: true,\\n\\t\\t\\tloop: true,\\n\\t\\t\\tclamp: true,\\n\\t\\t\\tsnap: true,\\n\\t\\t\\tgravity: 1.3,\\n\\t\\t\\tindexer: (x) => (index = x),\\n\\t\\t\\tscroller: (p) => (scrollPos = p)\\n\\t}}>\\n\\n\\n\\n<li id='0'>\\n<section>\\n<div\\nstyle=\\"max-width:100vw\\"\\nclass=\\"w-100 pv5\\">\\n<article class=\\"pb6\\nf5 f4-ns f3-m f3-l lh-copy\\npa2 measure\\npa4-ns measure-ns\\npa2-m measure-m\\npa0-l measure-wide-l mr-auto ml-auto\\">\\n<h1 class=\\"\\">{title}</h1>\\n\\n<pre>{JSON.stringify(posts, null, 2)}</pre>\\n\\n<p>Hummus falafel bowl sriracha pecans miso turmeric glazed aubergine fig arugula cashew salad seeds walnut mushroom tart lemon sweet potato black bean burrito green pepper second course lemon red lentil soup spicy mangos guacamole overflowing mocha chocolate frosted gingerbread bites chai tea sweet potato mediterranean vegetables red amazon pepper grapefruit crunchy. One bowl chilies peaches ginger tofu shiitake mushrooms banana bread citrusy shallots fall roasted brussel sprouts chili peanut butter jalape\xF1o cinnamon toast cilantro blackberries pumpkin main course hazelnut shiitake spring matcha pineapple salsa. Heat mint lemonade zest grenadillo double dark chocolate burritos blood orange smash apricot farro platter tasty tabasco pepper cookies plums Caribbean red habanero tempeh delightful blueberry scones. </p>\\n<p>Lemon lime minty cherry bomb pepper roasted peanuts simmer pomegranate pinch of yum ginger lemongrass agave green tea maple orange tempeh alfalfa sprouts cherry bomb spiced peppermint blast parsley almond milk kung pao pepper pine nuts enchiladas asian pear. Lavender lemonade red lentil curry cilantro lime vinaigrette four-layer mint lime taco salsa hot naga viper cinnamon crispy chia seeds lemongrass green papaya salad balsamic vinaigrette leek green grapes sesame soba noodles salted hearts of palm crumbled lentils vine tomatoes Thai sun pepper entree. </p>\\n</article>\\n</div>\\n</section>\\n\\n</li>\\n\\n<li id='1'>\\n\\t<section>\\n\\t<div\\n\\tstyle=\\"max-width:100vw\\"\\n\\tclass=\\"w-100 pv5\\">\\n\\t<article class=\\"pb6\\n\\tf5 f4-ns f3-m f3-l lh-copy\\n\\tpa2 measure\\n\\tpa4-ns measure-ns\\n\\tpa2-m measure-m\\n\\tpa0-l measure-wide-l mr-auto ml-auto\\">\\n\\t<h1 class=\\"\\">{title}</h1>\\n\\t<p>Hummus falafel bowl sriracha pecans miso turmeric glazed aubergine fig arugula cashew salad seeds walnut mushroom tart lemon sweet potato black bean burrito green pepper second course lemon red lentil soup spicy mangos guacamole overflowing mocha chocolate frosted gingerbread bites chai tea sweet potato mediterranean vegetables red amazon pepper grapefruit crunchy. One bowl chilies peaches ginger tofu shiitake mushrooms banana bread citrusy shallots fall roasted brussel sprouts chili peanut butter jalape\xF1o cinnamon toast cilantro blackberries pumpkin main course hazelnut shiitake spring matcha pineapple salsa. Heat mint lemonade zest grenadillo double dark chocolate burritos blood orange smash apricot farro platter tasty tabasco pepper cookies plums Caribbean red habanero tempeh delightful blueberry scones. </p>\\n\\t<p>Lemon lime minty cherry bomb pepper roasted peanuts simmer pomegranate pinch of yum ginger lemongrass agave green tea maple orange tempeh alfalfa sprouts cherry bomb spiced peppermint blast parsley almond milk kung pao pepper pine nuts enchiladas asian pear. Lavender lemonade red lentil curry cilantro lime vinaigrette four-layer mint lime taco salsa hot naga viper cinnamon crispy chia seeds lemongrass green papaya salad balsamic vinaigrette leek green grapes sesame soba noodles salted hearts of palm crumbled lentils vine tomatoes Thai sun pepper entree. </p>\\n\\t</article>\\n\\t</div>\\n\\t</section>\\n\\n\\t</li>\\n\\n\\t<li id='2'>\\n\\t\\t<section>\\n\\t\\t<div\\n\\t\\tstyle=\\"max-width:100vw\\"\\n\\t\\tclass=\\"w-100 pv5\\">\\n\\t\\t<article class=\\"pb6\\n\\t\\tf5 f4-ns f3-m f3-l lh-copy\\n\\t\\tpa2 measure\\n\\t\\tpa4-ns measure-ns\\n\\t\\tpa2-m measure-m\\n\\t\\tpa0-l measure-wide-l mr-auto ml-auto\\">\\n\\t\\t<h1 class=\\"\\">{title}</h1>\\n\\t\\t<p>Hummus falafel bowl sriracha pecans miso turmeric glazed aubergine fig arugula cashew salad seeds walnut mushroom tart lemon sweet potato black bean burrito green pepper second course lemon red lentil soup spicy mangos guacamole overflowing mocha chocolate frosted gingerbread bites chai tea sweet potato mediterranean vegetables red amazon pepper grapefruit crunchy. One bowl chilies peaches ginger tofu shiitake mushrooms banana bread citrusy shallots fall roasted brussel sprouts chili peanut butter jalape\xF1o cinnamon toast cilantro blackberries pumpkin main course hazelnut shiitake spring matcha pineapple salsa. Heat mint lemonade zest grenadillo double dark chocolate burritos blood orange smash apricot farro platter tasty tabasco pepper cookies plums Caribbean red habanero tempeh delightful blueberry scones. </p>\\n\\t\\t<p>Lemon lime minty cherry bomb pepper roasted peanuts simmer pomegranate pinch of yum ginger lemongrass agave green tea maple orange tempeh alfalfa sprouts cherry bomb spiced peppermint blast parsley almond milk kung pao pepper pine nuts enchiladas asian pear. Lavender lemonade red lentil curry cilantro lime vinaigrette four-layer mint lime taco salsa hot naga viper cinnamon crispy chia seeds lemongrass green papaya salad balsamic vinaigrette leek green grapes sesame soba noodles salted hearts of palm crumbled lentils vine tomatoes Thai sun pepper entree. </p>\\n\\t\\t</article>\\n\\t\\t</div>\\n\\t\\t</section>\\n\\n\\t\\t</li>\\n</ul>\\n\\n</div>\\n\\n\\n\\n\\n\\n\\n\\n<style>\\n\\nul {\\n\\t\\tlist-style: none;\\n\\t\\tmargin: 0;\\n\\t\\tpadding: 0;\\n\\t\\tdisplay: flex;\\n\\t\\tgap: var(--gap);\\n\\t\\twidth: 100%;\\n\\t\\theight: 100%;\\n\\t\\tmin-width: 0;\\n\\n\\t\\t/* DEBUG: \\"slidy/core\\" \\"sensitivity\\": css-tricks.com/almanac/properties/b/backface-visibility/ */\\n\\t\\ttransform: translateY(0deg);\\n\\t\\tbackface-visibility: hidden;\\n\\t}\\n\\n\\tul li {\\n\\n\\t\\t/* DEBUG: \\"slidy/core\\" \\"sensitivity\\": css-tricks.com/almanac/properties/b/backface-visibility/ */\\n\\t\\ttransform: translateY(0deg);\\n\\t\\tbackface-visibility: hidden;\\n\\n\\t\\tflex: 1 0 var(--width);\\n\\t\\twidth: var(--width);\\n\\t\\tmax-width: 100%;\\n\\t\\theight: 100%;\\n\\t\\tposition: relative;\\n\\t\\tbackground-image:\\n    linear-gradient(\\n      to top right,\\n      gainsboro,\\n\\t\\t\\twhitesmoke\\n    );\\n\\t}\\n\\n\\t/* https://css-tricks.com/almanac/properties/s/scroll-behavior/ */\\n\\tsection {\\n\\t\\tpointer-events: fill;\\n\\n\\t\\tscroll-behavior: smooth;\\n\\t\\t-webkit-overflow-scrolling: touch;\\n\\n\\t\\theight: 100vh;\\n\\t\\toverflow-y: scroll;\\n\\t}\\n\\n\\tul li:before {\\n\\t\\tcontent: attr(id);\\n\\t\\tposition: absolute;\\n\\t\\tbackground: rgba(255,255,255, 0.82);\\n\\t\\tpadding: 1rem;\\n\\t\\tz-index: 1;\\n\\t}\\n\\n\\tbutton { white-space: nowrap } /* stackoverflow.com/questions/679804/prevent-wrapping-of-span-or-div */\\n\\n\\t.active { font-weight:bold; opacity:1 }\\n\\n/********** Slidecore ***********/\\n\\n@media all and (orientation:portrait) {\\n\\n@media screen and (min-width:30em) {\\n\\t.portrait-bottom-0-ns {\\n\\t\\tbottom: 0;\\n\\t}\\n}\\n@media screen and (min-width:30em) and (max-width:60em) {\\n\\t.portrait-bottom-0-m {\\n\\t\\tbottom: 0;\\n\\t}\\n}\\n@media screen and (min-width:60em) {\\n\\t.portrait-bottom-0-l {\\n\\t\\tbottom: 0;\\n\\t}\\n}\\n\\n}\\n\\n\\n@media all and (orientation:landscape) {\\n\\n@media screen and (min-width:30em) {\\n}\\n\\n@media screen and (min-width:30em) and (max-width:60em) {\\n}\\n\\n@media screen and (min-width:60em) {\\n\\t.landscape-top-0-l {\\n\\t\\ttop: 0;\\n\\t}\\n\\t.landscape-dn-l {\\n\\t\\tdisplay: none;\\n\\t}\\n\\t.landscape-flex-l {\\n\\t\\tdisplay: flex;\\n\\t}\\n}\\n\\n}\\n</style>\\n<svelte:head>\\n\\t<!-- <link rel='stylesheet' href='https://instantwebapp.com/css/tachyon.shower.css'> -->\\n</svelte:head>\\n<!-- <pre class=\\"absolute fixed z-max top-0 debug\\">\\n\\t<nav>\\n\\t\\t<button on:click={() => index--}>\u2190</button>\\n\\t\\t<button on:click={() => index++}>\u2192</button>\\n\\t</nav>\\n</pre> -->"],"names":[],"mappings":"AA0LA,EAAE,8BAAC,CAAC,AACF,UAAU,CAAE,IAAI,CAChB,MAAM,CAAE,CAAC,CACT,OAAO,CAAE,CAAC,CACV,OAAO,CAAE,IAAI,CACb,GAAG,CAAE,IAAI,KAAK,CAAC,CACf,KAAK,CAAE,IAAI,CACX,MAAM,CAAE,IAAI,CACZ,SAAS,CAAE,CAAC,CAGZ,SAAS,CAAE,WAAW,IAAI,CAAC,CAC3B,mBAAmB,CAAE,MAAM,AAC5B,CAAC,AAED,iBAAE,CAAC,EAAE,eAAC,CAAC,AAGN,SAAS,CAAE,WAAW,IAAI,CAAC,CAC3B,mBAAmB,CAAE,MAAM,CAE3B,IAAI,CAAE,CAAC,CAAC,CAAC,CAAC,IAAI,OAAO,CAAC,CACtB,KAAK,CAAE,IAAI,OAAO,CAAC,CACnB,SAAS,CAAE,IAAI,CACf,MAAM,CAAE,IAAI,CACZ,QAAQ,CAAE,QAAQ,CAClB,gBAAgB,CACd;MACE,EAAE,CAAC,GAAG,CAAC,KAAK,CAAC;MACb,SAAS,CAAC;GACb,UAAU;KACR,AACJ,CAAC,AAGD,OAAO,8BAAC,CAAC,AACR,cAAc,CAAE,IAAI,CAEpB,eAAe,CAAE,MAAM,CACvB,0BAA0B,CAAE,KAAK,CAEjC,MAAM,CAAE,KAAK,CACb,UAAU,CAAE,MAAM,AACnB,CAAC,AAED,iBAAE,CAAC,iBAAE,OAAO,AAAC,CAAC,AACb,OAAO,CAAE,KAAK,EAAE,CAAC,CACjB,QAAQ,CAAE,QAAQ,CAClB,UAAU,CAAE,KAAK,GAAG,CAAC,GAAG,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC,CACnC,OAAO,CAAE,IAAI,CACb,OAAO,CAAE,CAAC,AACX,CAAC,AAED,MAAM,8BAAC,CAAC,AAAC,WAAW,CAAE,MAAM,CAAC,CAAC,AAE9B,OAAO,8BAAC,CAAC,AAAC,YAAY,IAAI,CAAE,QAAQ,CAAC,CAAC,CAAC,AAIxC,OAAO,GAAG,CAAC,GAAG,CAAC,aAAa,QAAQ,CAAC,AAAC,CAAC,AAEvC,OAAO,MAAM,CAAC,GAAG,CAAC,WAAW,IAAI,CAAC,AAAC,CAAC,AACnC,qBAAqB,8BAAC,CAAC,AACtB,MAAM,CAAE,CAAC,AACV,CAAC,AACF,CAAC,AACD,OAAO,MAAM,CAAC,GAAG,CAAC,WAAW,IAAI,CAAC,CAAC,GAAG,CAAC,WAAW,IAAI,CAAC,AAAC,CAAC,AACxD,oBAAoB,8BAAC,CAAC,AACrB,MAAM,CAAE,CAAC,AACV,CAAC,AACF,CAAC,AACD,OAAO,MAAM,CAAC,GAAG,CAAC,WAAW,IAAI,CAAC,AAAC,CAAC,AACnC,oBAAoB,8BAAC,CAAC,AACrB,MAAM,CAAE,CAAC,AACV,CAAC,AACF,CAAC,AAED,CAAC,AAGD,OAAO,GAAG,CAAC,GAAG,CAAC,aAAa,SAAS,CAAC,AAAC,CAAC,AAExC,OAAO,MAAM,CAAC,GAAG,CAAC,WAAW,IAAI,CAAC,AAAC,CAAC,AACpC,CAAC,AAED,OAAO,MAAM,CAAC,GAAG,CAAC,WAAW,IAAI,CAAC,CAAC,GAAG,CAAC,WAAW,IAAI,CAAC,AAAC,CAAC,AACzD,CAAC,AAED,OAAO,MAAM,CAAC,GAAG,CAAC,WAAW,IAAI,CAAC,AAAC,CAAC,AACnC,kBAAkB,8BAAC,CAAC,AACnB,GAAG,CAAE,CAAC,AACP,CAAC,AACD,eAAe,8BAAC,CAAC,AAChB,OAAO,CAAE,IAAI,AACd,CAAC,AACD,iBAAiB,8BAAC,CAAC,AAClB,OAAO,CAAE,IAAI,AACd,CAAC,AACF,CAAC,AAED,CAAC"}`
+  code: ".snap-center.svelte-eotzvs{scroll-snap-align:center}.snap-start.svelte-eotzvs{scroll-snap-align:start}.always-stop.svelte-eotzvs{scroll-snap-stop:always}",
+  map: '{"version":3,"file":"Page.svelte","sources":["Page.svelte"],"sourcesContent":["<script>\\n\\timport Rows from \'./Rows.svelte\'\\n  export let id; // <Page .../>\\n\\texport let bg; // <Page .../>\\n</script>\\n\\n<!-- on:enterViewport={() => alert(`${id}`)} -->\\n<div\\n\\tid={id}\\n\\tclass=\\"nw-100 snap-center w-100 vh-100 {bg}\\">\\n\\t<!-- flex-column flex flex-none justify-center items-center  -->\\n\\t<div class=\\"h-100 w-100 vh-100 snap-start always-stop overflow-x-scroll smooth-scroll pb5\\">\\n\\t\\t<slot></slot>\\n\\t\\t<Rows />\\n\\t</div><!-- /Vertical wrapper -->\\n</div><!-- /Page id -->\\n\\n<style>\\n\\n.snap-center {\\n\\tscroll-snap-align: center;\\n}\\n\\n.snap-start {\\n\\tscroll-snap-align: start;\\n}\\n.always-stop {\\n  scroll-snap-stop: always;\\n}\\n\\n</style>"],"names":[],"mappings":"AAmBA,YAAY,cAAC,CAAC,AACb,iBAAiB,CAAE,MAAM,AAC1B,CAAC,AAED,WAAW,cAAC,CAAC,AACZ,iBAAiB,CAAE,KAAK,AACzB,CAAC,AACD,YAAY,cAAC,CAAC,AACZ,gBAAgB,CAAE,MAAM,AAC1B,CAAC"}'
 };
-var prerender$2 = true;
-var load$1 = async ({fetch: fetch22}) => {
-  const response = await fetch22("/posts.json");
+var Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let {id} = $$props;
+  let {bg} = $$props;
+  if ($$props.id === void 0 && $$bindings.id && id !== void 0)
+    $$bindings.id(id);
+  if ($$props.bg === void 0 && $$bindings.bg && bg !== void 0)
+    $$bindings.bg(bg);
+  $$result.css.add(css$2);
+  return `
+<div${add_attribute("id", id, 0)} class="${"nw-100 snap-center w-100 vh-100 " + escape2(bg) + " svelte-eotzvs"}">
+	<div class="${"h-100 w-100 vh-100 snap-start always-stop overflow-x-scroll smooth-scroll pb5 svelte-eotzvs"}">${slots.default ? slots.default({}) : ``}
+		${validate_component(Rows, "Rows").$$render($$result, {}, {}, {})}
+	</div>
+</div>`;
+});
+var Hero = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  return `<figure class="${"ma0 flex flex-column vh-75 w-100 gold cover"}" style="${"background-position:center 40%; background-image: url('https://inspiredlabs.co.uk/levi/images/base64-planck.svg')"}"><div class="${"vh-75 flex items-center invert w-100 f5 f4-ns f3-m f3-l measure pa2 measure-ns pa4-ns measure-m pa2-m measure-wide-l pa0-l mr-auto ml-auto"}"><div class="${"flex flex-column w-100 pt5 pt6-l"}"><h1 class="${"tracked-none tracked-ns tracked-m tracked-mega-l f7 f7-ns f5-m f4-l fw5 ttu tc mv0"}">Gallo Bike Park, Narni, Umbria</h1>
+				<h2 class="${"w-100 mv0 ph3 f2 f2-ns f1-m f1-l tc lh-solid"}">Join the good times</h2></div></div>
+
+	<figcaption class="${"flex items-center w-100 f5 f4-ns f3-m f3-l lh-copy measure ph2 measure-ns ph4-ns measure-m ph2-m measure-wide-l ph0-l mr-auto ml-auto vh-05 landscape-vh-15-l"}"><div class="${"flex flex-column w-100 pb0 pb0-l"}"><span class="${"tracked-none tracked-ns tracked-m tracked-mega-l f7 f7-ns f5-m f4-l fw5 mv0 pb3"}">Laguna Lej\xEDa, San Pedro de Atacama, Chile</span></div></figcaption></figure>`;
+});
+var css$1 = {
+  code: ":root{--stripe-1:goldenrod;--stripe-2:#383838}.reverse-skew-45.svelte-6trinm{transform:skew(-45deg)}.skew-45.svelte-6trinm{transform:skew(45deg);background:var(--stripe-2)}.stripes.svelte-6trinm{width:100%;display:block;background:linear-gradient(45deg,\n	    var(--stripe-1) 25%, var(--stripe-2) 0, var(--stripe-2) 50%, var(--stripe-1) 0, var(--stripe-1) 75%, var(--stripe-2) 0);background-size:100px 100px}",
+  map: `{"version":3,"file":"WarningStripes.svelte","sources":["WarningStripes.svelte"],"sourcesContent":["<script>\\n\\nexport let message;\\n\\nmessage = 'Always wear a helmet';\\n\\n</script>\\n<aside class=\\"flex justify-center items-center no-select h2 stripes\\">\\n\\t<div class=\\"mv0 mr-auto ml-auto w-25 h2 skew-45 overflow-x-hidden\\">\\n\\t\\t<p class=\\"absolute tc w-100 white lh-solid mv2 reverse-skew-45\\">{message}</p>\\n\\t</div>\\n</aside>\\n\\n<style>\\n\\t/* - from: https://codepen.io/jianzhi/pen/dVEbZw */\\n\\t/* view-source:file:///Users/scottphillips/Downloads/gallobikepark/support/stripe-banner.html */\\n\\n\\n\\t:root {\\n\\t--stripe-1: goldenrod; /* #fb3 */\\n\\t--stripe-2: #383838;/* #58a */\\n\\t}\\n\\n\\t.reverse-skew-45 {\\n\\t\\ttransform: skew(-45deg);\\n\\t}\\n\\t.skew-45 {\\n\\t\\ttransform: skew(45deg);\\n\\t\\tbackground: var(--stripe-2);\\n\\t}\\n\\n\\t.stripes {\\n\\t  width: 100%;\\n\\t  display: block;\\n\\n\\t  /* //diagonals// */\\n\\t  background: linear-gradient(45deg,\\n\\t    var(--stripe-1) 25%, var(--stripe-2) 0, var(--stripe-2) 50%, var(--stripe-1) 0, var(--stripe-1) 75%, var(--stripe-2) 0);\\n\\t  background-size: 100px 100px;\\n\\t}\\n\\n</style>"],"names":[],"mappings":"AAkBC,KAAK,AAAC,CAAC,AACP,UAAU,CAAE,SAAS,CACrB,UAAU,CAAE,OAAO,AACnB,CAAC,AAED,gBAAgB,cAAC,CAAC,AACjB,SAAS,CAAE,KAAK,MAAM,CAAC,AACxB,CAAC,AACD,QAAQ,cAAC,CAAC,AACT,SAAS,CAAE,KAAK,KAAK,CAAC,CACtB,UAAU,CAAE,IAAI,UAAU,CAAC,AAC5B,CAAC,AAED,QAAQ,cAAC,CAAC,AACR,KAAK,CAAE,IAAI,CACX,OAAO,CAAE,KAAK,CAGd,UAAU,CAAE,gBAAgB,KAAK,CAAC;KAChC,IAAI,UAAU,CAAC,CAAC,GAAG,CAAC,CAAC,IAAI,UAAU,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,UAAU,CAAC,CAAC,GAAG,CAAC,CAAC,IAAI,UAAU,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,UAAU,CAAC,CAAC,GAAG,CAAC,CAAC,IAAI,UAAU,CAAC,CAAC,CAAC,CAAC,CACzH,eAAe,CAAE,KAAK,CAAC,KAAK,AAC9B,CAAC"}`
+};
+var WarningStripes = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let {message} = $$props;
+  message = "Always wear a helmet";
+  if ($$props.message === void 0 && $$bindings.message && message !== void 0)
+    $$bindings.message(message);
+  $$result.css.add(css$1);
+  return `<aside class="${"flex justify-center items-center no-select h2 stripes svelte-6trinm"}"><div class="${"mv0 mr-auto ml-auto w-25 h2 skew-45 overflow-x-hidden svelte-6trinm"}"><p class="${"absolute tc w-100 white lh-solid mv2 reverse-skew-45 svelte-6trinm"}">${escape2(message)}</p></div>
+</aside>`;
+});
+var css = {
+  code: ".active.svelte-7sums1.svelte-7sums1{background:black}a.svelte-7sums1.svelte-7sums1:focus{background:black}.hover-ltr.svelte-7sums1.svelte-7sums1::after{position:absolute;left:0;content:'';width:100%;height:8%;background:currentColor;bottom:0;transform:scale(0, 1);transition:transform 0.4s;transform-origin:right top}.hover-ltr.svelte-7sums1.svelte-7sums1:hover::after{transform-origin:left top;transform:scale(1, 1)}.debug.svelte-7sums1 .svelte-7sums1{outline:1px solid lime}@media screen and (min-width: 30em){.debug.svelte-7sums1 .svelte-7sums1{outline:1px solid goldenrod}}@media screen and (min-width: 30em) and (max-width: 60em){.debug.svelte-7sums1 .svelte-7sums1{outline:1px solid firebrick}}@media screen and (min-width: 60em){.debug.svelte-7sums1 .svelte-7sums1{outline:1px solid cyan}}.truncate.svelte-7sums1.svelte-7sums1{display:-webkit-box;white-space:nowrap;text-overflow:ellipsis}:root{--time:0.6s\n}@media all and (orientation:portrait){@media screen and (min-width:30em){.portrait-bottom-0-ns.svelte-7sums1.svelte-7sums1{bottom:0}}@media screen and (min-width:30em) and (max-width:60em){.portrait-bottom-0-m.svelte-7sums1.svelte-7sums1{bottom:0}}@media screen and (min-width:60em){.portrait-bottom-0-l.svelte-7sums1.svelte-7sums1{bottom:0}}}@media all and (orientation:landscape){@media screen and (min-width:30em){}@media screen and (min-width:30em) and (max-width:60em){}@media screen and (min-width:60em){.landscape-top-0-l.svelte-7sums1.svelte-7sums1{top:0}.landscape-dn-l.svelte-7sums1.svelte-7sums1{display:none}.landscape-flex-l.svelte-7sums1.svelte-7sums1{display:flex}}}html, body{padding:0 }.backdrop-blur.svelte-7sums1.svelte-7sums1{backdrop-filter:blur(8px) }",
+  map: `{"version":3,"file":"index.svelte","sources":["index.svelte"],"sourcesContent":["<script context=\\"module\\">\\n  export const prerender = true;\\n\\n  export const load = async ({fetch}) => {\\n    const response = await fetch('/posts.json');\\n    if (response.ok) {\\n      const { posts } = await response.json()\\n      return {\\n        props: { posts },\\n      }\\n    }\\n  }\\n  </script>\\n\\n<script>\\n  // fix: Tachyons with \`let title = 'GraphCMS';\`\\n  export let posts = [];\\n\\n\\timport { pageStore, pageItems, currentPageStore, prefLang } from '$lib/stores.js';\\n\\n\\timport { goto } from '$app/navigation'; // learn: kit.svelte.dev/docs/modules#$app-navigation-goto, because other methods didn't work: github.com/sveltejs/svelte/issues/1241\\n\\n\\timport Section from '$lib/Section.svelte';\\n\\timport Page from '$lib/Page.svelte';\\n\\timport Hero from '$lib/Hero.svelte';\\n\\timport WarningStripes from '$lib/WarningStripes.svelte';\\n\\n\\t//import Banner75 from './Banner-vh-75.svelte'// <Banner75 />\\n\\timport viewport from '$lib/useViewportAction';\\n\\n\\n\\n\\tfunction min(title) {\\n\\t\\treturn title.replace(/\\\\s/g, '-');\\n\\t}\\n\\n\\n</script>\\n<!-- <script>\\n\\tpageItems.forEach(settle);\\n\\tfunction settle(item, index, array) {\\n\\t\\tif (currentPageStore == index) {\\n\\t\\t\\treturn $currentPageStore = index, $pageStore = \`\${item.title.toLowerCase().replace(/\\\\s/g, '-')}\`;\\n\\t\\t}\\n\\t\\t//alert(Object.keys(array)) // This \`[object Object]\` is 0,1,2\\n\\t}\\n</script> -->\\n\\n\\n\\n{#each pageItems as item, i}\\n<Page\\n\\tid={\`\${item.title.toLowerCase().replace(/\\\\s/g, '-')}\`}\\n\\tbg={\`\${item.bg.toLowerCase().replace(/\\\\s/g, '-')}\`}>\\n\\n\\t{#if i === 0}\\n\\t\\t<Hero />\\n\\t\\t<WarningStripes />\\n\\t\\t<section\\n\\t\\tclass=\\"h5 w-100 flex justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto\\">\\n\\t\\t\\t<!-- on:enterViewport={() => alert('Ciao') } -->\\n\\t\\t\\t<hr use:viewport\\n\\t\\t\\ton:enterViewport={() => goto(\`#\${item.title.toLowerCase().replace(/\\\\s/g, '-')}\`) }\\n\\t\\t\\ton:enterViewport={() => $pageStore = \`\${item.title.toLowerCase().replace(/\\\\s/g, '-')}\` } />\\n\\t\\t\\t<div class=\\"outline w-50 pa3\\">\\n\\t\\t\\t\\t<header id=\\"young-guns\\"><h1>Young Guns</h1></header>\\n\\t\\t\\t\\t<p>//// Young Guns ////</p>\\n\\t\\t\\t</div>\\n\\t\\t\\t<div class=\\"outline w-50 pa3\\">\\n\\t\\t\\t\\t<header id=\\"one-on-one\\"><h1>1-on-1</h1></header>\\n\\t\\t\\t\\t<p>//// 1-on-1 ////</p>\\n\\t\\t\\t</div>\\n\\t\\t</section>\\n\\n    <Section>\\n      <!-- learn: the replacer function is a whitelist: stackoverflow.com/questions/17537571/second-argument-in-json-stringify-in-javascript#17537621 && Steve Griffith: youtube.com/watch?v=0k4NwimfszA -->\\n      <pre>{JSON.stringify(posts, null, 2)}</pre>\\n    </Section>\\n\\t{:else }\\n\\n\\t<section\\n\\t\\tclass=\\"h5 w-100 flex justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto\\">\\n\\t\\t<hr use:viewport\\n\\t\\ton:enterViewport={() => goto(\`#\${item.title.toLowerCase().replace(/\\\\s/g, '-')}\`) }\\n\\t\\ton:enterViewport={() => $pageStore = \`\${item.title.toLowerCase().replace(/\\\\s/g, '-')}\` } />\\n\\n\\n\\n\\t\\t//// <h2 class=\\"ttu\\">{item.title}</h2> ////\\n\\t</section>\\n\\t{/if}\\n\\n</Page>\\n{/each}\\n\\n<!-- disable-scrolling -->\\n<nav class=\\"bg-black-60 backdrop-blur fixed z-9999 w-100\\ntop-0 landscape-top-0-ns landscape-top-0-m landscape-top-0-l flex debug\\">\\n<!-- bg-light-blue -->\\n<div class=\\"w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns\\nmeasure-m measure-wide-l mr-auto ml-auto\\"><div class=\\"w-40 w-50-ns w-50-m w-20-l pv3 h3\\">\\n<!-- bg-light-blue -->\\n\\t<h1 class=\\"fw6 f4 f3-ns f3-m f3-l mv0 gold\\">\\n\\t{#each pageItems as item, i}\\n\\t\\t{#if i === 0}\\n\\t\\t<a\\n\\t\\t\\tclass:active={ $currentPageStore == i ? 'active' : '' }\\n\\t\\t\\thref={\`#\${item.title.toLowerCase().replace(/\\\\s/g, '-')}\`}\\n\\t\\t\\tclass=\\"link w-third hover-near-white pointer light-gray ts1-dark-gray fw8 ml-auto mr-auto pv3 h3 transition relative hover-ltr o-80\\" title=\\"GalloBikePark\\">GBP</a>\\n\\t\\t<!-- Gallo&thinsp;Bike&thinsp;Park -->\\n\\t\\t{/if}\\n\\t{/each}\\n\\t</h1>\\n</div>\\n\\n\\t<!-- ONLY: large & landscape -->\\n\\t<div class=\\"w-50-l justify-between dn landscape-flex-l tc\\">\\n\\t{#each pageItems as item, i}\\n\\t\\t{#if i >= 1}\\n\\t\\t<a\\n\\t\\t\\thref={\`#\${item.title.toLowerCase().replace(/\\\\s/g, '-')}\`}\\n\\t\\t\\ttitle={item.title}\\n\\t\\t\\ton:click={ () => {$pageStore = \`\${item.title.toLowerCase().replace(/\\\\s/g, '-')}\` } }\\n\\t\\t\\ton:click={ () => {$currentPageStore = i } }\\n\\t\\t\\tclass:active={ $pageStore == \`\${item.title.toLowerCase().replace(/\\\\s/g, '-')}\` ? 'active' : '' }\\n\\t\\t\\tclass=\\"link hover-near-white pointer light-gray ts1-dark-gray pv3 h3 transition relative hover-ltr o-80\\"\\n\\t\\t\\tstyle='width:calc(100% / {pageItems.length -1})'>{item.title}</a>\\n\\t\\t{/if}\\n\\t{/each}\\n\\t</div>\\n\\n\\t<!-- bg-light-blue -->\\n\\t<!-- based on: svelte.dev/repl/23e375f585584862908e83db520b4c5a?version=3.46.4 -->\\n\\t<div class=\\"w-60 w-50-ns w-50-m w-30-l flex flex-row justify-end tr\\">\\n\\t\\t<button on:click={() => ($prefLang === 'it' ? prefLang.set('en') : prefLang.set('it'))} class:b={$prefLang == 'it'} class=\\"truncate hover-near-white pointer light-gray ts1-dark-gray pv3 h3 o-80 bn br0 bg-transparent\\" title=\\"Italiano\\">\u{1F1EE}\u{1F1F9}&thinsp;Italiano&emsp;</button>\\n\\t\\t<button on:click={() => ($prefLang === 'it' ? prefLang.set('en') : prefLang.set('it'))} class:b={$prefLang != 'it'} class=\\"truncate hover-near-white pointer light-gray ts1-dark-gray pv3 h3 o-80 bn br0 bg-transparent\\" title=\\"English\\">\u{1F1EC}\u{1F1E7}&thinsp;English&thinsp;</button>\\n\\t</div>\\n\\n</div>\\n</nav>\\n\\n\\n\\n<!-- EXCEPT large & landscape -->\\n<nav class=\\"bg-black-60 backdrop-blur fixed z-9999 w-100 bottom-0 portrait-bottom-0-ns portrait-bottom-0-m portrait-bottom-0-l landscape-dn-l flex\\ntc debug\\">\\n<!-- bg-red -->\\n<div class=\\"w-100 flex justify-between fw6 f4 f3-ns f3-m f3-l lh-copy measure measure-ns measure-m measure-wide-l mr-auto ml-auto\\">\\n<!-- pa2 pa4-ns pa2-m pa0-l -->\\n\\n\\n\\t{#each pageItems as item, i}\\n\\t\\t{#if i >= 1}\\n\\t\\t<a\\n\\t\\t\\thref={\`#\${item.title.toLowerCase().replace(/\\\\s/g, '-')}\`}\\n\\t\\t\\ttitle={item.title}\\n\\t\\t\\ton:click={ () => {$pageStore = \`\${item.title.toLowerCase().replace(/\\\\s/g, '-')}\` } }\\n\\t\\t\\ton:click={ () => {$currentPageStore = i } }\\n\\t\\t\\tclass:active={ $pageStore == \`\${item.title.toLowerCase().replace(/\\\\s/g, '-')}\` ? 'active' : '' }\\n\\t\\t\\tclass=\\"link hover-near-white pointer light-gray ts1-dark-gray pv3 h3 transition relative hover-ltr o-80\\"\\n\\t\\t\\tstyle='width:calc(100% / {pageItems.length -1})'>{item.title}</a>\\n\\t\\t{/if}\\n\\t{/each}\\n\\n</div>\\n</nav>\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n<style>\\n/* svelte.dev/repl/253993c0325a4b1b8ff38b4c4ecd2285?version=3.24.1\\n\\t- from: stackoverflow.com/questions/63315507/svelte-how-can-i-set-the-focus-to-the-previous-next-element-in-the-list-item-wh#63324281\\n*/\\n\\n.active {\\n\\tbackground: black;\\n}\\n\\na:focus {\\n\\tbackground: black;\\n}\\n\\n/* \`.hover-ltr\` can not be implemented into Tachyon Shower. It's not atomic. */\\n\\t/* :global(a) {\\n\\t\\ttext-decoration: none!important\\n\\t} */\\n.hover-ltr::after {\\n\\tposition: absolute;\\n\\tleft: 0;\\n\\tcontent: '';\\n\\twidth: 100%;\\n\\theight: 8%;\\n\\tbackground: currentColor;\\n\\tbottom: 0;\\n\\ttransform: scale(0, 1);\\n\\ttransition: transform 0.4s;\\n\\ttransform-origin: right top;\\n}\\n.hover-ltr:hover::after {\\n\\ttransform-origin: left top;\\n\\ttransform: scale(1, 1);\\n}\\n\\n\\n\\n/*** simplify this ***/\\n.debug * {\\n\\toutline: 1px solid lime;\\n}\\n@media screen and (min-width: 30em) {\\n\\t.debug * {\\n\\t\\toutline: 1px solid goldenrod;\\n\\t}\\n}\\n@media screen and (min-width: 30em) and (max-width: 60em) {\\n\\t.debug * {\\n\\t\\toutline: 1px solid firebrick;\\n\\t}\\n}\\n@media screen and (min-width: 60em) {\\n\\t.debug * {\\n\\t\\toutline: 1px solid cyan;\\n\\t}\\n}\\n\\n/* amend tachyon.shower.css */\\n\\n.truncate {\\n\\tdisplay: -webkit-box;\\n\\twhite-space: nowrap;\\n/* overflow: hidden; */\\n\\ttext-overflow: ellipsis;\\n}\\n\\n/**** snapper ****/\\n\\n/* .y-mandatory {\\n\\tscroll-snap-type: y mandatory;\\n} */\\n\\n/* .y-proximity {\\n\\tscroll-snap-type: y proximity;\\n} */\\n\\n\\n/* .snapper {\\n\\tpadding-top:15vh;\\n\\tpadding-bottom:0vh;\\n\\tscroll-margin: 20vh;\\n\\tscroll-snap-align: start;\\n\\tscroll-snap-stop: normal;\\n} */\\n\\n:root {\\n\\t--time: 0.6s\\n}\\n\\n/* https://css-tricks.com/almanac/properties/w/will-change/ */\\n/* .minno {\\n\\twill-change: transform, scroll-position;\\n\\t-moz-osx-font-smoothing: grayscale;\\n\\t-webkit-backface-visibility: hidden;\\n\\tbackface-visibility: hidden;\\n\\t-webkit-transform: translateZ(0);\\n\\ttransform: translateZ(0);\\n\\ttransition: -webkit-transform var(--time) ease;\\n\\ttransition: all var(--time) ease;\\n\\ttransition: all var(--time) ease,\\n\\t-webkit-transform var(--time) ease;\\n\\tbackground-clip: padding-box;\\n\\n\\tbox-shadow: 0 0 0 0 rgba(0, 0, 0, 0);\\n}\\n.minno:focus,\\n.minno:hover {\\n\\t-webkit-transform: perspective(1px) scale(1.008);\\n\\ttransform: perspective(1px) scale(1.008);\\n\\n\\tbox-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);\\n}\\n.minno:active {\\n\\t-webkit-transform: perspective(1px) scale(1.02);\\n\\ttransform: perspective(1px) scale(1.02);\\n\\n\\tbox-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);\\n}\\n*/\\n\\n/* HTML: w-100 h-100 system */\\n\\n@media all and (orientation:portrait) {\\n\\n/*   .portrait-dn {\\n\\t\\tdisplay: none;\\n\\t} */\\n\\n/*   .portrait-vh-50 {\\n\\theight: 50vh;\\n\\t} */\\n\\t@media screen and (min-width:30em) {\\n/*     .portrait-dn-ns {\\n\\t\\t\\tdisplay: none;\\n\\t\\t} */\\n/*     .portrait-vh-85-ns {\\n\\t\\theight: 85vh;\\n\\t\\t} */\\n\\t\\t.portrait-bottom-0-ns {\\n\\t\\tbottom: 0;\\n\\t\\t}\\n\\t}\\n\\t@media screen and (min-width:30em) and (max-width:60em) {\\n/*     .portrait-dn-m {\\n\\t\\t\\tdisplay: none;\\n\\t\\t} */\\n/*     .portrait-vh-85-m {\\n\\t\\theight: 85vh;\\n\\t\\t} */\\n\\t\\t.portrait-bottom-0-m {\\n\\t\\tbottom: 0;\\n\\t\\t}\\n\\t}\\n\\t@media screen and (min-width:60em) {\\n/*     .portrait-dn-l {\\n\\t\\t\\tdisplay: none;\\n\\t\\t} */\\n\\t\\t.portrait-bottom-0-l {\\n\\t\\tbottom: 0;\\n\\t\\t}\\n\\t}\\n}\\n\\n@media all and (orientation:landscape) {\\n\\n/*   .landscape-db {\\n\\t\\t\\tdisplay: block;\\n\\t\\t} */\\n/*   .landscape-dn {\\n\\t\\tdisplay: none;\\n\\t} */\\n\\n/*   .landscape-vh-66 {\\n\\theight: 66vh;\\n\\t} */\\n\\n\\t@media screen and (min-width:30em) {\\n/*     .landscape-vh-85-ns {\\n\\t\\theight: 85vh;\\n\\t\\t} */\\n/*     .landscape-db-ns {\\n\\t\\t\\tdisplay: block;\\n\\t\\t} */\\n/*     .landscape-dn-ns {\\n\\t\\t\\tdisplay: none;\\n\\t\\t} */\\n\\t}\\n\\n\\t@media screen and (min-width:30em) and (max-width:60em) {\\n/*     .landscape-vh-66-m {\\n\\t\\theight: 66vh;\\n\\t\\t} */\\n/*     .landscape-db-m {\\n\\t\\t\\tdisplay: block;\\n\\t\\t} */\\n/*     .landscape-dn-m {\\n\\t\\t\\tdisplay: none;\\n\\t\\t} */\\n\\t}\\n\\n\\t@media screen and (min-width:60em) {\\n/*     .landscape-vh-85-l {\\n\\t\\theight: 85vh;\\n\\t\\t} */\\n\\t\\t.landscape-top-0-l {\\n\\t\\ttop: 0;\\n\\t\\t}\\n/*     .landscape-db-l {\\n\\t\\t\\tdisplay: block;\\n\\t\\t} */\\n\\t\\t.landscape-dn-l {\\n\\t\\t\\tdisplay: none;\\n\\t\\t}\\n\\t\\t.landscape-flex-l {\\n\\t\\t\\tdisplay: flex;\\n\\t\\t}\\n\\t}\\n}\\n\\n:global(html, body) { padding: 0 }\\n\\n\\n/* Hide scrollbar for Chrome, Safari and Opera\\nmain::-webkit-scrollbar {\\n\\tdisplay: none;\\n}*/\\n\\n/* Hide scrollbar for IE, Edge and Firefox\\nmain {\\n\\t-ms-overflow-style: none;  /* IE and Edge\\n\\tscrollbar-width: none;  /* Firefox\\n}\\n*/\\n\\n\\t/*\\n\`.backdrop-blur\`, is NOT integrated into Tachyonshower.\\n*/\\n\\n.backdrop-blur { backdrop-filter: blur(8px) }\\n\\n</style>"],"names":[],"mappings":"AAuLA,OAAO,4BAAC,CAAC,AACR,UAAU,CAAE,KAAK,AAClB,CAAC,AAED,6BAAC,MAAM,AAAC,CAAC,AACR,UAAU,CAAE,KAAK,AAClB,CAAC,AAMD,sCAAU,OAAO,AAAC,CAAC,AAClB,QAAQ,CAAE,QAAQ,CAClB,IAAI,CAAE,CAAC,CACP,OAAO,CAAE,EAAE,CACX,KAAK,CAAE,IAAI,CACX,MAAM,CAAE,EAAE,CACV,UAAU,CAAE,YAAY,CACxB,MAAM,CAAE,CAAC,CACT,SAAS,CAAE,MAAM,CAAC,CAAC,CAAC,CAAC,CAAC,CACtB,UAAU,CAAE,SAAS,CAAC,IAAI,CAC1B,gBAAgB,CAAE,KAAK,CAAC,GAAG,AAC5B,CAAC,AACD,sCAAU,MAAM,OAAO,AAAC,CAAC,AACxB,gBAAgB,CAAE,IAAI,CAAC,GAAG,CAC1B,SAAS,CAAE,MAAM,CAAC,CAAC,CAAC,CAAC,CAAC,AACvB,CAAC,AAKD,oBAAM,CAAC,cAAE,CAAC,AACT,OAAO,CAAE,GAAG,CAAC,KAAK,CAAC,IAAI,AACxB,CAAC,AACD,OAAO,MAAM,CAAC,GAAG,CAAC,YAAY,IAAI,CAAC,AAAC,CAAC,AACpC,oBAAM,CAAC,cAAE,CAAC,AACT,OAAO,CAAE,GAAG,CAAC,KAAK,CAAC,SAAS,AAC7B,CAAC,AACF,CAAC,AACD,OAAO,MAAM,CAAC,GAAG,CAAC,YAAY,IAAI,CAAC,CAAC,GAAG,CAAC,YAAY,IAAI,CAAC,AAAC,CAAC,AAC1D,oBAAM,CAAC,cAAE,CAAC,AACT,OAAO,CAAE,GAAG,CAAC,KAAK,CAAC,SAAS,AAC7B,CAAC,AACF,CAAC,AACD,OAAO,MAAM,CAAC,GAAG,CAAC,YAAY,IAAI,CAAC,AAAC,CAAC,AACpC,oBAAM,CAAC,cAAE,CAAC,AACT,OAAO,CAAE,GAAG,CAAC,KAAK,CAAC,IAAI,AACxB,CAAC,AACF,CAAC,AAID,SAAS,4BAAC,CAAC,AACV,OAAO,CAAE,WAAW,CACpB,WAAW,CAAE,MAAM,CAEnB,aAAa,CAAE,QAAQ,AACxB,CAAC,AAqBD,KAAK,AAAC,CAAC,AACN,MAAM,CAAE;AACT,CAAC,AAmCD,OAAO,GAAG,CAAC,GAAG,CAAC,aAAa,QAAQ,CAAC,AAAC,CAAC,AAStC,OAAO,MAAM,CAAC,GAAG,CAAC,WAAW,IAAI,CAAC,AAAC,CAAC,AAOnC,qBAAqB,4BAAC,CAAC,AACvB,MAAM,CAAE,CAAC,AACT,CAAC,AACF,CAAC,AACD,OAAO,MAAM,CAAC,GAAG,CAAC,WAAW,IAAI,CAAC,CAAC,GAAG,CAAC,WAAW,IAAI,CAAC,AAAC,CAAC,AAOxD,oBAAoB,4BAAC,CAAC,AACtB,MAAM,CAAE,CAAC,AACT,CAAC,AACF,CAAC,AACD,OAAO,MAAM,CAAC,GAAG,CAAC,WAAW,IAAI,CAAC,AAAC,CAAC,AAInC,oBAAoB,4BAAC,CAAC,AACtB,MAAM,CAAE,CAAC,AACT,CAAC,AACF,CAAC,AACF,CAAC,AAED,OAAO,GAAG,CAAC,GAAG,CAAC,aAAa,SAAS,CAAC,AAAC,CAAC,AAavC,OAAO,MAAM,CAAC,GAAG,CAAC,WAAW,IAAI,CAAC,AAAC,CAAC,AAUpC,CAAC,AAED,OAAO,MAAM,CAAC,GAAG,CAAC,WAAW,IAAI,CAAC,CAAC,GAAG,CAAC,WAAW,IAAI,CAAC,AAAC,CAAC,AAUzD,CAAC,AAED,OAAO,MAAM,CAAC,GAAG,CAAC,WAAW,IAAI,CAAC,AAAC,CAAC,AAInC,kBAAkB,4BAAC,CAAC,AACpB,GAAG,CAAE,CAAC,AACN,CAAC,AAID,eAAe,4BAAC,CAAC,AAChB,OAAO,CAAE,IAAI,AACd,CAAC,AACD,iBAAiB,4BAAC,CAAC,AAClB,OAAO,CAAE,IAAI,AACd,CAAC,AACF,CAAC,AACF,CAAC,AAEO,UAAU,AAAE,CAAC,AAAC,OAAO,CAAE,CAAC,CAAC,CAAC,AAmBlC,cAAc,4BAAC,CAAC,AAAC,eAAe,CAAE,KAAK,GAAG,CAAC,CAAC,CAAC"}`
+};
+var prerender = true;
+var load = async ({fetch: fetch3}) => {
+  const response = await fetch3("/posts.json");
   if (response.ok) {
     const {posts} = await response.json();
     return {props: {posts}};
   }
 };
 var Routes = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let width = "100%", gap = 0, index2 = 0, length = 3, scrollPos = 0, title = "GraphCMS";
+  let $pageStore, $$unsubscribe_pageStore;
+  let $currentPageStore, $$unsubscribe_currentPageStore;
+  let $prefLang, $$unsubscribe_prefLang;
+  $$unsubscribe_pageStore = subscribe(pageStore, (value) => $pageStore = value);
+  $$unsubscribe_currentPageStore = subscribe(currentPageStore, (value) => $currentPageStore = value);
+  $$unsubscribe_prefLang = subscribe(prefLang, (value) => $prefLang = value);
   let {posts = []} = $$props;
   if ($$props.posts === void 0 && $$bindings.posts && posts !== void 0)
     $$bindings.posts(posts);
-  $$result.css.add(css$2);
+  $$result.css.add(css);
+  $$unsubscribe_pageStore();
+  $$unsubscribe_currentPageStore();
+  $$unsubscribe_prefLang();
   return `
 
 
 
+${each(pageItems, (item, i) => {
+    return `${validate_component(Page, "Page").$$render($$result, {
+      id: `${item.title.toLowerCase().replace(/\s/g, "-")}`,
+      bg: `${item.bg.toLowerCase().replace(/\s/g, "-")}`
+    }, {}, {
+      default: () => {
+        return `${i === 0 ? `${validate_component(Hero, "Hero").$$render($$result, {}, {}, {})}
+		${validate_component(WarningStripes, "WarningStripes").$$render($$result, {}, {}, {})}
+		<section class="${"h5 w-100 flex justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto"}">
+			<hr>
+			<div class="${"outline w-50 pa3"}"><header id="${"young-guns"}"><h1>Young Guns</h1></header>
+				<p>//// Young Guns ////</p></div>
+			<div class="${"outline w-50 pa3"}"><header id="${"one-on-one"}"><h1>1-on-1</h1></header>
+				<p>//// 1-on-1 ////</p>
+			</div></section>
 
-
-<nav class="${"bg-blue fixed z-1 w-100 top-0 landscape-top-0-ns landscape-top-0-m landscape-top-0-l flex tc debug svelte-19871te"}"><div class="${"w-100 flex justify-between f5 f4-ns f3-m f3-l lh-copy pa2 measure pa4-ns measure-ns pa2-m measure-m pa0-l measure-wide-l mr-auto ml-auto"}"><div class="${"w-50 w-50-ns w-50-m w-20-l bg-light-blue pv3 h3 f5 f4-ns fs-m f5-l tl"}">i[${escape2(index2)}],${escape2(Math.trunc(scrollPos))}px</div>
-
-    
-    <div class="${"w-60-l bg-gold justify-between dn landscape-flex-l svelte-19871te"}">${`${each({length}, (dot, i) => {
-    return `<button style="${"width:calc(100% / " + escape2(length) + ")"}" class="${[
-      "bn w-20 pv3 h3 f5 f4-ns fs-m f5-l white o-60 bg-transparent svelte-19871te",
-      i === index2 ? "active" : ""
-    ].join(" ").trim()}">${escape2(i)}</button>`;
-  })}`}</div>
-
-
-    <div class="${"w-50 w-50-ns w-50-m w-20-l bg-light-blue pv3 h3 f5 f4-ns fs-m f5-l tr flex items-center justify-end"}"><div class="${"flex justify-between"}"><span>\u{1F1EE}\u{1F1F9}\u2009<span class="${"dib dib-ns dn-m dn-l"}">It\u2003</span></span>
-				<span class="${"dn dn-ns dib-m dib-l"}">Italiano\u2003</span><span>\u{1F1EC}\u{1F1E7}\u2009<span class="${"dib dib-ns dn-m dn-l"}">En</span></span>
-				<span class="${"dn dn-ns dib-m dib-l"}">English</span></div></div></div>
-</nav>
-
-
-
-<nav class="${"bg-red fixed z-1 w-100 bottom-0 portrait-bottom-0-ns portrait-bottom-0-m portrait-bottom-0-l landscape-dn-l flex tc debug svelte-19871te"}"><div class="${"w-100 flex justify-between f5 f4-ns f3-m f3-l lh-copy pa2 measure pa4-ns measure-ns pa2-m measure-m pa0-l measure-wide-l mr-auto ml-auto"}">${`${each({length}, (dot, i) => {
-    return `<button style="${"width:calc(100% / " + escape2(length) + ")"}" class="${[
-      "bn w-20 pv3 h3 f5 f4-ns fs-m f5-l white o-60 bg-transparent svelte-19871te",
-      i === index2 ? "active" : ""
-    ].join(" ").trim()}">${escape2(i)}</button>`;
-  })}`}</div>
-</nav>
+    ${validate_component(Section, "Section").$$render($$result, {}, {}, {
+          default: () => {
+            return `
+      <pre>${escape2(JSON.stringify(posts, null, 2))}</pre>
+    `;
+          }
+        })}` : `<section class="${"h5 w-100 flex justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto"}"><hr>
 
 
 
-<div style="${"--gap: " + escape2(gap) + "px; --width: " + escape2(width)}" tab-index="${"0"}"><ul class="${"svelte-19871te"}"><li id="${"0"}" class="${"svelte-19871te"}"><section class="${"svelte-19871te"}"><div style="${"max-width:100vw"}" class="${"w-100 pv5"}"><article class="${"pb6 f5 f4-ns f3-m f3-l lh-copy pa2 measure pa4-ns measure-ns pa2-m measure-m pa0-l measure-wide-l mr-auto ml-auto"}"><h1 class="${""}">${escape2(title)}</h1>
+		//// <h2 class="${"ttu"}">${escape2(item.title)}</h2> ////
+	</section>`}
 
-<pre>${escape2(JSON.stringify(posts, null, 2))}</pre>
-
-<p>Hummus falafel bowl sriracha pecans miso turmeric glazed aubergine fig arugula cashew salad seeds walnut mushroom tart lemon sweet potato black bean burrito green pepper second course lemon red lentil soup spicy mangos guacamole overflowing mocha chocolate frosted gingerbread bites chai tea sweet potato mediterranean vegetables red amazon pepper grapefruit crunchy. One bowl chilies peaches ginger tofu shiitake mushrooms banana bread citrusy shallots fall roasted brussel sprouts chili peanut butter jalape\xF1o cinnamon toast cilantro blackberries pumpkin main course hazelnut shiitake spring matcha pineapple salsa. Heat mint lemonade zest grenadillo double dark chocolate burritos blood orange smash apricot farro platter tasty tabasco pepper cookies plums Caribbean red habanero tempeh delightful blueberry scones. </p>
-<p>Lemon lime minty cherry bomb pepper roasted peanuts simmer pomegranate pinch of yum ginger lemongrass agave green tea maple orange tempeh alfalfa sprouts cherry bomb spiced peppermint blast parsley almond milk kung pao pepper pine nuts enchiladas asian pear. Lavender lemonade red lentil curry cilantro lime vinaigrette four-layer mint lime taco salsa hot naga viper cinnamon crispy chia seeds lemongrass green papaya salad balsamic vinaigrette leek green grapes sesame soba noodles salted hearts of palm crumbled lentils vine tomatoes Thai sun pepper entree. </p></article></div></section></li>
-
-<li id="${"1"}" class="${"svelte-19871te"}"><section class="${"svelte-19871te"}"><div style="${"max-width:100vw"}" class="${"w-100 pv5"}"><article class="${"pb6 f5 f4-ns f3-m f3-l lh-copy pa2 measure pa4-ns measure-ns pa2-m measure-m pa0-l measure-wide-l mr-auto ml-auto"}"><h1 class="${""}">${escape2(title)}</h1>
-	<p>Hummus falafel bowl sriracha pecans miso turmeric glazed aubergine fig arugula cashew salad seeds walnut mushroom tart lemon sweet potato black bean burrito green pepper second course lemon red lentil soup spicy mangos guacamole overflowing mocha chocolate frosted gingerbread bites chai tea sweet potato mediterranean vegetables red amazon pepper grapefruit crunchy. One bowl chilies peaches ginger tofu shiitake mushrooms banana bread citrusy shallots fall roasted brussel sprouts chili peanut butter jalape\xF1o cinnamon toast cilantro blackberries pumpkin main course hazelnut shiitake spring matcha pineapple salsa. Heat mint lemonade zest grenadillo double dark chocolate burritos blood orange smash apricot farro platter tasty tabasco pepper cookies plums Caribbean red habanero tempeh delightful blueberry scones. </p>
-	<p>Lemon lime minty cherry bomb pepper roasted peanuts simmer pomegranate pinch of yum ginger lemongrass agave green tea maple orange tempeh alfalfa sprouts cherry bomb spiced peppermint blast parsley almond milk kung pao pepper pine nuts enchiladas asian pear. Lavender lemonade red lentil curry cilantro lime vinaigrette four-layer mint lime taco salsa hot naga viper cinnamon crispy chia seeds lemongrass green papaya salad balsamic vinaigrette leek green grapes sesame soba noodles salted hearts of palm crumbled lentils vine tomatoes Thai sun pepper entree. </p></article></div></section></li>
-
-	<li id="${"2"}" class="${"svelte-19871te"}"><section class="${"svelte-19871te"}"><div style="${"max-width:100vw"}" class="${"w-100 pv5"}"><article class="${"pb6 f5 f4-ns f3-m f3-l lh-copy pa2 measure pa4-ns measure-ns pa2-m measure-m pa0-l measure-wide-l mr-auto ml-auto"}"><h1 class="${""}">${escape2(title)}</h1>
-		<p>Hummus falafel bowl sriracha pecans miso turmeric glazed aubergine fig arugula cashew salad seeds walnut mushroom tart lemon sweet potato black bean burrito green pepper second course lemon red lentil soup spicy mangos guacamole overflowing mocha chocolate frosted gingerbread bites chai tea sweet potato mediterranean vegetables red amazon pepper grapefruit crunchy. One bowl chilies peaches ginger tofu shiitake mushrooms banana bread citrusy shallots fall roasted brussel sprouts chili peanut butter jalape\xF1o cinnamon toast cilantro blackberries pumpkin main course hazelnut shiitake spring matcha pineapple salsa. Heat mint lemonade zest grenadillo double dark chocolate burritos blood orange smash apricot farro platter tasty tabasco pepper cookies plums Caribbean red habanero tempeh delightful blueberry scones. </p>
-		<p>Lemon lime minty cherry bomb pepper roasted peanuts simmer pomegranate pinch of yum ginger lemongrass agave green tea maple orange tempeh alfalfa sprouts cherry bomb spiced peppermint blast parsley almond milk kung pao pepper pine nuts enchiladas asian pear. Lavender lemonade red lentil curry cilantro lime vinaigrette four-layer mint lime taco salsa hot naga viper cinnamon crispy chia seeds lemongrass green papaya salad balsamic vinaigrette leek green grapes sesame soba noodles salted hearts of palm crumbled lentils vine tomatoes Thai sun pepper entree. </p></article></div></section></li></ul></div>
-
-
-
-
-
-
-
-
-${$$result.head += ``, ""}
 `;
-});
-var index$1 = /* @__PURE__ */ Object.freeze({
-  __proto__: null,
-  [Symbol.toStringTag]: "Module",
-  "default": Routes,
-  prerender: prerender$2,
-  load: load$1
-});
-var css$1 = {
-  code: ".content.svelte-cf77e8{width:100%;max-width:var(--column-width);margin:var(--column-margin-top) auto 0 auto}",
-  map: `{"version":3,"file":"about.svelte","sources":["about.svelte"],"sourcesContent":["<script context=\\"module\\">\\n\\timport { browser, dev } from '$app/env';\\n\\n\\t// we don't need any JS on this page, though we'll load\\n\\t// it in dev so that we get hot module replacement...\\n\\texport const hydrate = dev;\\n\\n\\t// ...but if the client-side router is already loaded\\n\\t// (i.e. we came here from elsewhere in the app), use it\\n\\texport const router = browser;\\n\\n\\t// since there's no dynamic data here, we can prerender\\n\\t// it so that it gets served as a static asset in prod\\n\\texport const prerender = true;\\n</script>\\n\\n<svelte:head>\\n\\t<title>About</title>\\n</svelte:head>\\n\\n<div class=\\"content\\">\\n\\t<h1>About this app</h1>\\n\\n\\t<p>\\n\\t\\tThis is a <a href=\\"https://kit.svelte.dev\\">SvelteKit</a> app. You can make your own by typing the\\n\\t\\tfollowing into your command line and following the prompts:\\n\\t</p>\\n\\n\\t<!-- TODO lose the @next! -->\\n\\t<pre>npm init svelte@next</pre>\\n\\n\\t<p>\\n\\t\\tThe page you're looking at is purely static HTML, with no client-side interactivity needed.\\n\\t\\tBecause of that, we don't need to load any JavaScript. Try viewing the page's source, or opening\\n\\t\\tthe devtools network panel and reloading.\\n\\t</p>\\n\\n\\t<p>\\n\\t\\tThe <a href=\\"/todos\\">TODOs</a> page illustrates SvelteKit's data loading and form handling. Try using\\n\\t\\tit with JavaScript disabled!\\n\\t</p>\\n</div>\\n\\n<style>\\n\\t.content {\\n\\t\\twidth: 100%;\\n\\t\\tmax-width: var(--column-width);\\n\\t\\tmargin: var(--column-margin-top) auto 0 auto;\\n\\t}\\n</style>\\n"],"names":[],"mappings":"AA4CC,QAAQ,cAAC,CAAC,AACT,KAAK,CAAE,IAAI,CACX,SAAS,CAAE,IAAI,cAAc,CAAC,CAC9B,MAAM,CAAE,IAAI,mBAAmB,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,IAAI,AAC7C,CAAC"}`
-};
-var hydrate = dev;
-var router = browser;
-var prerender$1 = true;
-var About = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  $$result.css.add(css$1);
-  return `${$$result.head += `${$$result.title = `<title>About</title>`, ""}`, ""}
+      }
+    })}`;
+  })}
 
-<div class="${"content svelte-cf77e8"}"><h1>About this app</h1>
 
-	<p>This is a <a href="${"https://kit.svelte.dev"}">SvelteKit</a> app. You can make your own by typing the
-		following into your command line and following the prompts:
-	</p>
+<nav class="${"bg-black-60 backdrop-blur fixed z-9999 w-100 top-0 landscape-top-0-ns landscape-top-0-m landscape-top-0-l flex debug svelte-7sums1"}">
+<div class="${"w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto svelte-7sums1"}"><div class="${"w-40 w-50-ns w-50-m w-20-l pv3 h3 svelte-7sums1"}">
+	<h1 class="${"fw6 f4 f3-ns f3-m f3-l mv0 gold svelte-7sums1"}">${each(pageItems, (item, i) => {
+    return `${i === 0 ? `<a${add_attribute("href", `#${item.title.toLowerCase().replace(/\s/g, "-")}`, 0)} class="${[
+      "link w-third hover-near-white pointer light-gray ts1-dark-gray fw8 ml-auto mr-auto pv3 h3 transition relative hover-ltr o-80 svelte-7sums1",
+      ($currentPageStore == i ? "active" : "") ? "active" : ""
+    ].join(" ").trim()}" title="${"GalloBikePark"}">GBP</a>
+		` : ``}`;
+  })}</h1></div>
 
 	
-	<pre>npm init svelte@next</pre>
+	<div class="${"w-50-l justify-between dn landscape-flex-l tc svelte-7sums1"}">${each(pageItems, (item, i) => {
+    return `${i >= 1 ? `<a${add_attribute("href", `#${item.title.toLowerCase().replace(/\s/g, "-")}`, 0)}${add_attribute("title", item.title, 0)} class="${[
+      "link hover-near-white pointer light-gray ts1-dark-gray pv3 h3 transition relative hover-ltr o-80 svelte-7sums1",
+      ($pageStore == `${item.title.toLowerCase().replace(/\s/g, "-")}` ? "active" : "") ? "active" : ""
+    ].join(" ").trim()}" style="${"width:calc(100% / " + escape2(pageItems.length - 1) + ")"}">${escape2(item.title)}</a>` : ``}`;
+  })}</div>
 
-	<p>The page you&#39;re looking at is purely static HTML, with no client-side interactivity needed.
-		Because of that, we don&#39;t need to load any JavaScript. Try viewing the page&#39;s source, or opening
-		the devtools network panel and reloading.
-	</p>
+	
+	
+	<div class="${"w-60 w-50-ns w-50-m w-30-l flex flex-row justify-end tr svelte-7sums1"}"><button class="${[
+    "truncate hover-near-white pointer light-gray ts1-dark-gray pv3 h3 o-80 bn br0 bg-transparent svelte-7sums1",
+    $prefLang == "it" ? "b" : ""
+  ].join(" ").trim()}" title="${"Italiano"}">\u{1F1EE}\u{1F1F9}\u2009Italiano\u2003</button>
+		<button class="${[
+    "truncate hover-near-white pointer light-gray ts1-dark-gray pv3 h3 o-80 bn br0 bg-transparent svelte-7sums1",
+    $prefLang != "it" ? "b" : ""
+  ].join(" ").trim()}" title="${"English"}">\u{1F1EC}\u{1F1E7}\u2009English\u2009</button></div></div></nav>
 
-	<p>The <a href="${"/todos"}">TODOs</a> page illustrates SvelteKit&#39;s data loading and form handling. Try using
-		it with JavaScript disabled!
-	</p>
-</div>`;
-});
-var about = /* @__PURE__ */ Object.freeze({
-  __proto__: null,
-  [Symbol.toStringTag]: "Module",
-  "default": About,
-  hydrate,
-  router,
-  prerender: prerender$1
-});
-var prerender = true;
-var Posts = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `It works!`;
-});
-var index_working = /* @__PURE__ */ Object.freeze({
-  __proto__: null,
-  [Symbol.toStringTag]: "Module",
-  "default": Posts,
-  prerender
-});
-var css = {
-  code: `.todos.svelte-dmxqmd.svelte-dmxqmd.svelte-dmxqmd{width:100%;max-width:var(--column-width);margin:var(--column-margin-top) auto 0 auto;line-height:1}.new.svelte-dmxqmd.svelte-dmxqmd.svelte-dmxqmd{margin:0 0 0.5rem 0}input.svelte-dmxqmd.svelte-dmxqmd.svelte-dmxqmd{border:1px solid transparent}input.svelte-dmxqmd.svelte-dmxqmd.svelte-dmxqmd:focus-visible{box-shadow:inset 1px 1px 6px rgba(0, 0, 0, 0.1);border:1px solid #ff3e00 !important;outline:none}.new.svelte-dmxqmd input.svelte-dmxqmd.svelte-dmxqmd{font-size:28px;width:100%;padding:0.5em 1em 0.3em 1em;box-sizing:border-box;background:rgba(255, 255, 255, 0.05);border-radius:8px;text-align:center}.todo.svelte-dmxqmd.svelte-dmxqmd.svelte-dmxqmd{display:grid;grid-template-columns:2rem 1fr 2rem;grid-gap:0.5rem;align-items:center;margin:0 0 0.5rem 0;padding:0.5rem;background-color:white;border-radius:8px;filter:drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.1));transform:translate(-1px, -1px);transition:filter 0.2s, transform 0.2s}.done.svelte-dmxqmd.svelte-dmxqmd.svelte-dmxqmd{transform:none;opacity:0.4;filter:drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.1))}form.text.svelte-dmxqmd.svelte-dmxqmd.svelte-dmxqmd{position:relative;display:flex;align-items:center;flex:1}.todo.svelte-dmxqmd input.svelte-dmxqmd.svelte-dmxqmd{flex:1;padding:0.5em 2em 0.5em 0.8em;border-radius:3px}.todo.svelte-dmxqmd button.svelte-dmxqmd.svelte-dmxqmd{width:2em;height:2em;border:none;background-color:transparent;background-position:50% 50%;background-repeat:no-repeat}button.toggle.svelte-dmxqmd.svelte-dmxqmd.svelte-dmxqmd{border:1px solid rgba(0, 0, 0, 0.2);border-radius:50%;box-sizing:border-box;background-size:1em auto}.done.svelte-dmxqmd .toggle.svelte-dmxqmd.svelte-dmxqmd{background-image:url("data:image/svg+xml,%3Csvg width='22' height='16' viewBox='0 0 22 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.5 1.5L7.4375 14.5L1.5 8.5909' stroke='%23676778' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}.delete.svelte-dmxqmd.svelte-dmxqmd.svelte-dmxqmd{background-image:url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4.5 5V22H19.5V5H4.5Z' fill='%23676778' stroke='%23676778' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cpath d='M10 10V16.5' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M14 10V16.5' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M2 5H22' stroke='%23676778' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M8 5L9.6445 2H14.3885L16 5H8Z' fill='%23676778' stroke='%23676778' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E%0A");opacity:0.2}.delete.svelte-dmxqmd.svelte-dmxqmd.svelte-dmxqmd:hover,.delete.svelte-dmxqmd.svelte-dmxqmd.svelte-dmxqmd:focus{transition:opacity 0.2s;opacity:1}.save.svelte-dmxqmd.svelte-dmxqmd.svelte-dmxqmd{position:absolute;right:0;opacity:0;background-image:url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.5 2H3.5C2.67158 2 2 2.67157 2 3.5V20.5C2 21.3284 2.67158 22 3.5 22H20.5C21.3284 22 22 21.3284 22 20.5V3.5C22 2.67157 21.3284 2 20.5 2Z' fill='%23676778' stroke='%23676778' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cpath d='M17 2V11H7.5V2H17Z' fill='white' stroke='white' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cpath d='M13.5 5.5V7.5' stroke='%23676778' stroke-width='1.5' stroke-linecap='round'/%3E%3Cpath d='M5.99844 2H18.4992' stroke='%23676778' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E%0A")}.todo.svelte-dmxqmd input.svelte-dmxqmd:focus+.save.svelte-dmxqmd,.save.svelte-dmxqmd.svelte-dmxqmd.svelte-dmxqmd:focus{transition:opacity 0.2s;opacity:1}`,
-  map: `{"version":3,"file":"index.svelte","sources":["index.svelte"],"sourcesContent":["<script context=\\"module\\" lang=\\"ts\\">var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {\\n    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }\\n    return new (P || (P = Promise))(function (resolve, reject) {\\n        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }\\n        function rejected(value) { try { step(generator[\\"throw\\"](value)); } catch (e) { reject(e); } }\\n        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }\\n        step((generator = generator.apply(thisArg, _arguments || [])).next());\\n    });\\n};\\nimport { enhance } from '$lib/form';\\n;\\n// see https://kit.svelte.dev/docs#loading\\nexport const load = ({ fetch }) => __awaiter(void 0, void 0, void 0, function* () {\\n    const res = yield fetch('/todos.json');\\n    if (res.ok) {\\n        const todos = yield res.json();\\n        return {\\n            props: { todos }\\n        };\\n    }\\n    const { message } = yield res.json();\\n    return {\\n        error: new Error(message)\\n    };\\n});\\n</script>\\n\\n<script lang=\\"ts\\">var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {\\n    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }\\n    return new (P || (P = Promise))(function (resolve, reject) {\\n        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }\\n        function rejected(value) { try { step(generator[\\"throw\\"](value)); } catch (e) { reject(e); } }\\n        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }\\n        step((generator = generator.apply(thisArg, _arguments || [])).next());\\n    });\\n};\\nimport { scale } from 'svelte/transition';\\nimport { flip } from 'svelte/animate';\\nexport let todos;\\nfunction patch(res) {\\n    return __awaiter(this, void 0, void 0, function* () {\\n        const todo = yield res.json();\\n        todos = todos.map((t) => {\\n            if (t.uid === todo.uid)\\n                return todo;\\n            return t;\\n        });\\n    });\\n}\\n</script>\\n\\n<svelte:head>\\n\\t<title>Todos</title>\\n</svelte:head>\\n\\n<div class=\\"todos\\">\\n\\t<h1>Todos</h1>\\n\\n\\t<form\\n\\t\\tclass=\\"new\\"\\n\\t\\taction=\\"/todos.json\\"\\n\\t\\tmethod=\\"post\\"\\n\\t\\tuse:enhance={{\\n\\t\\t\\tresult: async (res, form) => {\\n\\t\\t\\t\\tconst created = await res.json();\\n\\t\\t\\t\\ttodos = [...todos, created];\\n\\n\\t\\t\\t\\tform.reset();\\n\\t\\t\\t}\\n\\t\\t}}\\n\\t>\\n\\t\\t<input name=\\"text\\" aria-label=\\"Add todo\\" placeholder=\\"+ tap to add a todo\\" />\\n\\t</form>\\n\\n\\t{#each todos as todo (todo.uid)}\\n\\t\\t<div\\n\\t\\t\\tclass=\\"todo\\"\\n\\t\\t\\tclass:done={todo.done}\\n\\t\\t\\ttransition:scale|local={{ start: 0.7 }}\\n\\t\\t\\tanimate:flip={{ duration: 200 }}\\n\\t\\t>\\n\\t\\t\\t<form\\n\\t\\t\\t\\taction=\\"/todos/{todo.uid}.json?_method=patch\\"\\n\\t\\t\\t\\tmethod=\\"post\\"\\n\\t\\t\\t\\tuse:enhance={{\\n\\t\\t\\t\\t\\tpending: (data) => {\\n\\t\\t\\t\\t\\t\\ttodo.done = !!data.get('done');\\n\\t\\t\\t\\t\\t},\\n\\t\\t\\t\\t\\tresult: patch\\n\\t\\t\\t\\t}}\\n\\t\\t\\t>\\n\\t\\t\\t\\t<input type=\\"hidden\\" name=\\"done\\" value={todo.done ? '' : 'true'} />\\n\\t\\t\\t\\t<button class=\\"toggle\\" aria-label=\\"Mark todo as {todo.done ? 'not done' : 'done'}\\" />\\n\\t\\t\\t</form>\\n\\n\\t\\t\\t<form\\n\\t\\t\\t\\tclass=\\"text\\"\\n\\t\\t\\t\\taction=\\"/todos/{todo.uid}.json?_method=patch\\"\\n\\t\\t\\t\\tmethod=\\"post\\"\\n\\t\\t\\t\\tuse:enhance={{\\n\\t\\t\\t\\t\\tresult: patch\\n\\t\\t\\t\\t}}\\n\\t\\t\\t>\\n\\t\\t\\t\\t<input aria-label=\\"Edit todo\\" type=\\"text\\" name=\\"text\\" value={todo.text} />\\n\\t\\t\\t\\t<button class=\\"save\\" aria-label=\\"Save todo\\" />\\n\\t\\t\\t</form>\\n\\n\\t\\t\\t<form\\n\\t\\t\\t\\taction=\\"/todos/{todo.uid}.json?_method=delete\\"\\n\\t\\t\\t\\tmethod=\\"post\\"\\n\\t\\t\\t\\tuse:enhance={{\\n\\t\\t\\t\\t\\tresult: () => {\\n\\t\\t\\t\\t\\t\\ttodos = todos.filter((t) => t.uid !== todo.uid);\\n\\t\\t\\t\\t\\t}\\n\\t\\t\\t\\t}}\\n\\t\\t\\t>\\n\\t\\t\\t\\t<button class=\\"delete\\" aria-label=\\"Delete todo\\" />\\n\\t\\t\\t</form>\\n\\t\\t</div>\\n\\t{/each}\\n</div>\\n\\n<style>\\n\\t.todos {\\n\\t\\twidth: 100%;\\n\\t\\tmax-width: var(--column-width);\\n\\t\\tmargin: var(--column-margin-top) auto 0 auto;\\n\\t\\tline-height: 1;\\n\\t}\\n\\n\\t.new {\\n\\t\\tmargin: 0 0 0.5rem 0;\\n\\t}\\n\\n\\tinput {\\n\\t\\tborder: 1px solid transparent;\\n\\t}\\n\\n\\tinput:focus-visible {\\n\\t\\tbox-shadow: inset 1px 1px 6px rgba(0, 0, 0, 0.1);\\n\\t\\tborder: 1px solid #ff3e00 !important;\\n\\t\\toutline: none;\\n\\t}\\n\\n\\t.new input {\\n\\t\\tfont-size: 28px;\\n\\t\\twidth: 100%;\\n\\t\\tpadding: 0.5em 1em 0.3em 1em;\\n\\t\\tbox-sizing: border-box;\\n\\t\\tbackground: rgba(255, 255, 255, 0.05);\\n\\t\\tborder-radius: 8px;\\n\\t\\ttext-align: center;\\n\\t}\\n\\n\\t.todo {\\n\\t\\tdisplay: grid;\\n\\t\\tgrid-template-columns: 2rem 1fr 2rem;\\n\\t\\tgrid-gap: 0.5rem;\\n\\t\\talign-items: center;\\n\\t\\tmargin: 0 0 0.5rem 0;\\n\\t\\tpadding: 0.5rem;\\n\\t\\tbackground-color: white;\\n\\t\\tborder-radius: 8px;\\n\\t\\tfilter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.1));\\n\\t\\ttransform: translate(-1px, -1px);\\n\\t\\ttransition: filter 0.2s, transform 0.2s;\\n\\t}\\n\\n\\t.done {\\n\\t\\ttransform: none;\\n\\t\\topacity: 0.4;\\n\\t\\tfilter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.1));\\n\\t}\\n\\n\\tform.text {\\n\\t\\tposition: relative;\\n\\t\\tdisplay: flex;\\n\\t\\talign-items: center;\\n\\t\\tflex: 1;\\n\\t}\\n\\n\\t.todo input {\\n\\t\\tflex: 1;\\n\\t\\tpadding: 0.5em 2em 0.5em 0.8em;\\n\\t\\tborder-radius: 3px;\\n\\t}\\n\\n\\t.todo button {\\n\\t\\twidth: 2em;\\n\\t\\theight: 2em;\\n\\t\\tborder: none;\\n\\t\\tbackground-color: transparent;\\n\\t\\tbackground-position: 50% 50%;\\n\\t\\tbackground-repeat: no-repeat;\\n\\t}\\n\\n\\tbutton.toggle {\\n\\t\\tborder: 1px solid rgba(0, 0, 0, 0.2);\\n\\t\\tborder-radius: 50%;\\n\\t\\tbox-sizing: border-box;\\n\\t\\tbackground-size: 1em auto;\\n\\t}\\n\\n\\t.done .toggle {\\n\\t\\tbackground-image: url(\\"data:image/svg+xml,%3Csvg width='22' height='16' viewBox='0 0 22 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.5 1.5L7.4375 14.5L1.5 8.5909' stroke='%23676778' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E\\");\\n\\t}\\n\\n\\t.delete {\\n\\t\\tbackground-image: url(\\"data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4.5 5V22H19.5V5H4.5Z' fill='%23676778' stroke='%23676778' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cpath d='M10 10V16.5' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M14 10V16.5' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M2 5H22' stroke='%23676778' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M8 5L9.6445 2H14.3885L16 5H8Z' fill='%23676778' stroke='%23676778' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E%0A\\");\\n\\t\\topacity: 0.2;\\n\\t}\\n\\n\\t.delete:hover,\\n\\t.delete:focus {\\n\\t\\ttransition: opacity 0.2s;\\n\\t\\topacity: 1;\\n\\t}\\n\\n\\t.save {\\n\\t\\tposition: absolute;\\n\\t\\tright: 0;\\n\\t\\topacity: 0;\\n\\t\\tbackground-image: url(\\"data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.5 2H3.5C2.67158 2 2 2.67157 2 3.5V20.5C2 21.3284 2.67158 22 3.5 22H20.5C21.3284 22 22 21.3284 22 20.5V3.5C22 2.67157 21.3284 2 20.5 2Z' fill='%23676778' stroke='%23676778' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cpath d='M17 2V11H7.5V2H17Z' fill='white' stroke='white' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cpath d='M13.5 5.5V7.5' stroke='%23676778' stroke-width='1.5' stroke-linecap='round'/%3E%3Cpath d='M5.99844 2H18.4992' stroke='%23676778' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E%0A\\");\\n\\t}\\n\\n\\t.todo input:focus + .save,\\n\\t.save:focus {\\n\\t\\ttransition: opacity 0.2s;\\n\\t\\topacity: 1;\\n\\t}\\n</style>\\n"],"names":[],"mappings":"AA2HC,MAAM,0CAAC,CAAC,AACP,KAAK,CAAE,IAAI,CACX,SAAS,CAAE,IAAI,cAAc,CAAC,CAC9B,MAAM,CAAE,IAAI,mBAAmB,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,IAAI,CAC5C,WAAW,CAAE,CAAC,AACf,CAAC,AAED,IAAI,0CAAC,CAAC,AACL,MAAM,CAAE,CAAC,CAAC,CAAC,CAAC,MAAM,CAAC,CAAC,AACrB,CAAC,AAED,KAAK,0CAAC,CAAC,AACN,MAAM,CAAE,GAAG,CAAC,KAAK,CAAC,WAAW,AAC9B,CAAC,AAED,+CAAK,cAAc,AAAC,CAAC,AACpB,UAAU,CAAE,KAAK,CAAC,GAAG,CAAC,GAAG,CAAC,GAAG,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,CAChD,MAAM,CAAE,GAAG,CAAC,KAAK,CAAC,OAAO,CAAC,UAAU,CACpC,OAAO,CAAE,IAAI,AACd,CAAC,AAED,kBAAI,CAAC,KAAK,4BAAC,CAAC,AACX,SAAS,CAAE,IAAI,CACf,KAAK,CAAE,IAAI,CACX,OAAO,CAAE,KAAK,CAAC,GAAG,CAAC,KAAK,CAAC,GAAG,CAC5B,UAAU,CAAE,UAAU,CACtB,UAAU,CAAE,KAAK,GAAG,CAAC,CAAC,GAAG,CAAC,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC,CACrC,aAAa,CAAE,GAAG,CAClB,UAAU,CAAE,MAAM,AACnB,CAAC,AAED,KAAK,0CAAC,CAAC,AACN,OAAO,CAAE,IAAI,CACb,qBAAqB,CAAE,IAAI,CAAC,GAAG,CAAC,IAAI,CACpC,QAAQ,CAAE,MAAM,CAChB,WAAW,CAAE,MAAM,CACnB,MAAM,CAAE,CAAC,CAAC,CAAC,CAAC,MAAM,CAAC,CAAC,CACpB,OAAO,CAAE,MAAM,CACf,gBAAgB,CAAE,KAAK,CACvB,aAAa,CAAE,GAAG,CAClB,MAAM,CAAE,YAAY,GAAG,CAAC,GAAG,CAAC,GAAG,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC,CACnD,SAAS,CAAE,UAAU,IAAI,CAAC,CAAC,IAAI,CAAC,CAChC,UAAU,CAAE,MAAM,CAAC,IAAI,CAAC,CAAC,SAAS,CAAC,IAAI,AACxC,CAAC,AAED,KAAK,0CAAC,CAAC,AACN,SAAS,CAAE,IAAI,CACf,OAAO,CAAE,GAAG,CACZ,MAAM,CAAE,YAAY,GAAG,CAAC,GAAG,CAAC,GAAG,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC,AACpD,CAAC,AAED,IAAI,KAAK,0CAAC,CAAC,AACV,QAAQ,CAAE,QAAQ,CAClB,OAAO,CAAE,IAAI,CACb,WAAW,CAAE,MAAM,CACnB,IAAI,CAAE,CAAC,AACR,CAAC,AAED,mBAAK,CAAC,KAAK,4BAAC,CAAC,AACZ,IAAI,CAAE,CAAC,CACP,OAAO,CAAE,KAAK,CAAC,GAAG,CAAC,KAAK,CAAC,KAAK,CAC9B,aAAa,CAAE,GAAG,AACnB,CAAC,AAED,mBAAK,CAAC,MAAM,4BAAC,CAAC,AACb,KAAK,CAAE,GAAG,CACV,MAAM,CAAE,GAAG,CACX,MAAM,CAAE,IAAI,CACZ,gBAAgB,CAAE,WAAW,CAC7B,mBAAmB,CAAE,GAAG,CAAC,GAAG,CAC5B,iBAAiB,CAAE,SAAS,AAC7B,CAAC,AAED,MAAM,OAAO,0CAAC,CAAC,AACd,MAAM,CAAE,GAAG,CAAC,KAAK,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,CACpC,aAAa,CAAE,GAAG,CAClB,UAAU,CAAE,UAAU,CACtB,eAAe,CAAE,GAAG,CAAC,IAAI,AAC1B,CAAC,AAED,mBAAK,CAAC,OAAO,4BAAC,CAAC,AACd,gBAAgB,CAAE,IAAI,uQAAuQ,CAAC,AAC/R,CAAC,AAED,OAAO,0CAAC,CAAC,AACR,gBAAgB,CAAE,IAAI,yrBAAyrB,CAAC,CAChtB,OAAO,CAAE,GAAG,AACb,CAAC,AAED,iDAAO,MAAM,CACb,iDAAO,MAAM,AAAC,CAAC,AACd,UAAU,CAAE,OAAO,CAAC,IAAI,CACxB,OAAO,CAAE,CAAC,AACX,CAAC,AAED,KAAK,0CAAC,CAAC,AACN,QAAQ,CAAE,QAAQ,CAClB,KAAK,CAAE,CAAC,CACR,OAAO,CAAE,CAAC,CACV,gBAAgB,CAAE,IAAI,gpBAAgpB,CAAC,AACxqB,CAAC,AAED,mBAAK,CAAC,mBAAK,MAAM,CAAG,mBAAK,CACzB,+CAAK,MAAM,AAAC,CAAC,AACZ,UAAU,CAAE,OAAO,CAAC,IAAI,CACxB,OAAO,CAAE,CAAC,AACX,CAAC"}`
-};
-var __awaiter = function(thisArg, _arguments, P, generator) {
-  function adopt(value) {
-    return value instanceof P ? value : new P(function(resolve2) {
-      resolve2(value);
-    });
-  }
-  return new (P || (P = Promise))(function(resolve2, reject) {
-    function fulfilled(value) {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-    function rejected(value) {
-      try {
-        step(generator["throw"](value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-    function step(result) {
-      result.done ? resolve2(result.value) : adopt(result.value).then(fulfilled, rejected);
-    }
-    step((generator = generator.apply(thisArg, _arguments || [])).next());
-  });
-};
-var load = ({fetch: fetch22}) => __awaiter(void 0, void 0, void 0, function* () {
-  const res = yield fetch22("/todos.json");
-  if (res.ok) {
-    const todos = yield res.json();
-    return {props: {todos}};
-  }
-  const {message} = yield res.json();
-  return {error: new Error(message)};
-});
-var Todos = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  (function(thisArg, _arguments, P, generator) {
-    function adopt(value) {
-      return value instanceof P ? value : new P(function(resolve2) {
-        resolve2(value);
-      });
-    }
-    return new (P || (P = Promise))(function(resolve2, reject) {
-      function fulfilled(value) {
-        try {
-          step(generator.next(value));
-        } catch (e) {
-          reject(e);
-        }
-      }
-      function rejected(value) {
-        try {
-          step(generator["throw"](value));
-        } catch (e) {
-          reject(e);
-        }
-      }
-      function step(result) {
-        result.done ? resolve2(result.value) : adopt(result.value).then(fulfilled, rejected);
-      }
-      step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-  });
-  let {todos} = $$props;
-  if ($$props.todos === void 0 && $$bindings.todos && todos !== void 0)
-    $$bindings.todos(todos);
-  $$result.css.add(css);
-  return `${$$result.head += `${$$result.title = `<title>Todos</title>`, ""}`, ""}
 
-<div class="${"todos svelte-dmxqmd"}"><h1>Todos</h1>
 
-	<form class="${"new svelte-dmxqmd"}" action="${"/todos.json"}" method="${"post"}"><input name="${"text"}" aria-label="${"Add todo"}" placeholder="${"+ tap to add a todo"}" class="${"svelte-dmxqmd"}"></form>
 
-	${each(todos, (todo) => {
-    return `<div class="${["todo svelte-dmxqmd", todo.done ? "done" : ""].join(" ").trim()}"><form action="${"/todos/" + escape2(todo.uid) + ".json?_method=patch"}" method="${"post"}"><input type="${"hidden"}" name="${"done"}"${add_attribute("value", todo.done ? "" : "true", 0)} class="${"svelte-dmxqmd"}">
-				<button class="${"toggle svelte-dmxqmd"}" aria-label="${"Mark todo as " + escape2(todo.done ? "not done" : "done")}"></button></form>
+<nav class="${"bg-black-60 backdrop-blur fixed z-9999 w-100 bottom-0 portrait-bottom-0-ns portrait-bottom-0-m portrait-bottom-0-l landscape-dn-l flex tc debug svelte-7sums1"}">
+<div class="${"w-100 flex justify-between fw6 f4 f3-ns f3-m f3-l lh-copy measure measure-ns measure-m measure-wide-l mr-auto ml-auto svelte-7sums1"}">
 
-			<form class="${"text svelte-dmxqmd"}" action="${"/todos/" + escape2(todo.uid) + ".json?_method=patch"}" method="${"post"}"><input aria-label="${"Edit todo"}" type="${"text"}" name="${"text"}"${add_attribute("value", todo.text, 0)} class="${"svelte-dmxqmd"}">
-				<button class="${"save svelte-dmxqmd"}" aria-label="${"Save todo"}"></button></form>
 
-			<form action="${"/todos/" + escape2(todo.uid) + ".json?_method=delete"}" method="${"post"}"><button class="${"delete svelte-dmxqmd"}" aria-label="${"Delete todo"}"></button></form>
-		</div>`;
-  })}
-</div>`;
+	${each(pageItems, (item, i) => {
+    return `${i >= 1 ? `<a${add_attribute("href", `#${item.title.toLowerCase().replace(/\s/g, "-")}`, 0)}${add_attribute("title", item.title, 0)} class="${[
+      "link hover-near-white pointer light-gray ts1-dark-gray pv3 h3 transition relative hover-ltr o-80 svelte-7sums1",
+      ($pageStore == `${item.title.toLowerCase().replace(/\s/g, "-")}` ? "active" : "") ? "active" : ""
+    ].join(" ").trim()}" style="${"width:calc(100% / " + escape2(pageItems.length - 1) + ")"}">${escape2(item.title)}</a>` : ``}`;
+  })}</div>
+</nav>`;
 });
 var index = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   [Symbol.toStringTag]: "Module",
-  "default": Todos,
+  "default": Routes,
+  prerender,
   load
 });
 
@@ -17435,17 +17512,3 @@ var entry_default = async (req, res) => {
  * Copyright(c) 2015 Douglas Christopher Wilson
  * MIT Licensed
  */
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation.
-
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-PERFORMANCE OF THIS SOFTWARE.
-***************************************************************************** */

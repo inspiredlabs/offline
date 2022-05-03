@@ -1,23 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" class="system h-100 overflow-hidden w-100 backface-hidden">
+<html class="w-100 h-100 overflow-hidden system backface-hidden">
+<!-- prevent overscroll -->
+<!-- vw-100 vh-100 smooth-scroll backface-hidden touch-manipulation -->
+<!-- `h-100 overflow-hidden && h-100 overflow-auto`: http://stackoverflow.com/questions/12046315/ddg#17899813 -->
 	<head>
 		<meta charset="utf-8" />
+		<meta name="description" content="" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="manifest" href="/manifest.webmanifest" data-svelte="svelte-p9yk9x"><link rel="apple-touch-icon" href="/apple-icon-180.png" data-svelte="svelte-p9yk9x"><meta name="description" content="This is a Svelte-Kit PWA skeleton." data-svelte="svelte-p9yk9x"><meta name="apple-mobile-web-app-capable" content="yes" data-svelte="svelte-p9yk9x"><link rel="apple-touch-icon" href="/pwa-192x192.png" data-svelte="svelte-p9yk9x"><meta name="msapplication-TileColor" content="#00aba9" data-svelte="svelte-p9yk9x"><meta name="theme-color" content="#ffffff" data-svelte="svelte-p9yk9x"><link rel="apple-touch-startup-image" href="/apple-splash-2048-2732.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" data-svelte="svelte-p9yk9x"><link rel="apple-touch-startup-image" href="/apple-splash-2732-2048.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" data-svelte="svelte-p9yk9x"><link rel="apple-touch-startup-image" href="/apple-splash-1668-2388.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" data-svelte="svelte-p9yk9x"><link rel="apple-touch-startup-image" href="/apple-splash-2388-1668.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" data-svelte="svelte-p9yk9x"><link rel="apple-touch-startup-image" href="/apple-splash-1536-2048.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" data-svelte="svelte-p9yk9x"><link rel="apple-touch-startup-image" href="/apple-splash-2048-1536.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" data-svelte="svelte-p9yk9x"><link rel="apple-touch-startup-image" href="/apple-splash-1668-2224.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" data-svelte="svelte-p9yk9x"><link rel="apple-touch-startup-image" href="/apple-splash-2224-1668.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" data-svelte="svelte-p9yk9x"><link rel="apple-touch-startup-image" href="/apple-splash-1620-2160.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" data-svelte="svelte-p9yk9x"><link rel="apple-touch-startup-image" href="/apple-splash-2160-1620.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" data-svelte="svelte-p9yk9x"><link rel="apple-touch-startup-image" href="/apple-splash-1284-2778.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" data-svelte="svelte-p9yk9x"><link rel="apple-touch-startup-image" href="/apple-splash-2778-1284.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" data-svelte="svelte-p9yk9x"><link rel="apple-touch-startup-image" href="/apple-splash-1170-2532.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" data-svelte="svelte-p9yk9x"><link rel="apple-touch-startup-image" href="/apple-splash-2532-1170.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" data-svelte="svelte-p9yk9x"><link rel="apple-touch-startup-image" href="/apple-splash-1125-2436.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" data-svelte="svelte-p9yk9x"><link rel="apple-touch-startup-image" href="/apple-splash-2436-1125.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" data-svelte="svelte-p9yk9x"><link rel="apple-touch-startup-image" href="/apple-splash-1242-2688.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" data-svelte="svelte-p9yk9x"><link rel="apple-touch-startup-image" href="/apple-splash-2688-1242.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" data-svelte="svelte-p9yk9x"><link rel="apple-touch-startup-image" href="/apple-splash-828-1792.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" data-svelte="svelte-p9yk9x"><link rel="apple-touch-startup-image" href="/apple-splash-1792-828.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" data-svelte="svelte-p9yk9x"><link rel="apple-touch-startup-image" href="/apple-splash-1242-2208.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" data-svelte="svelte-p9yk9x"><link rel="apple-touch-startup-image" href="/apple-splash-2208-1242.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" data-svelte="svelte-p9yk9x"><link rel="apple-touch-startup-image" href="/apple-splash-750-1334.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" data-svelte="svelte-p9yk9x"><link rel="apple-touch-startup-image" href="/apple-splash-1334-750.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" data-svelte="svelte-p9yk9x"><link rel="apple-touch-startup-image" href="/apple-splash-640-1136.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" data-svelte="svelte-p9yk9x"><link rel="apple-touch-startup-image" href="/apple-splash-1136-640.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" data-svelte="svelte-p9yk9x">
+		<link rel="manifest" href="/manifest.webmanifest" data-svelte="svelte-1govtgl"><link rel="apple-touch-icon" href="/apple-icon-180.png" data-svelte="svelte-1govtgl"><meta name="description" content="Svelte-Kit PWA" data-svelte="svelte-1govtgl"><meta name="apple-mobile-web-app-capable" content="yes" data-svelte="svelte-1govtgl"><link rel="apple-touch-icon" href="/pwa-192x192.png" data-svelte="svelte-1govtgl"><meta name="msapplication-TileColor" content="#00aba9" data-svelte="svelte-1govtgl"><meta name="theme-color" content="#ffffff" data-svelte="svelte-1govtgl"><link rel="apple-touch-startup-image" href="/apple-splash-2048-2732.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" data-svelte="svelte-1govtgl"><link rel="apple-touch-startup-image" href="/apple-splash-2732-2048.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" data-svelte="svelte-1govtgl"><link rel="apple-touch-startup-image" href="/apple-splash-1668-2388.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" data-svelte="svelte-1govtgl"><link rel="apple-touch-startup-image" href="/apple-splash-2388-1668.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" data-svelte="svelte-1govtgl"><link rel="apple-touch-startup-image" href="/apple-splash-1536-2048.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" data-svelte="svelte-1govtgl"><link rel="apple-touch-startup-image" href="/apple-splash-2048-1536.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" data-svelte="svelte-1govtgl"><link rel="apple-touch-startup-image" href="/apple-splash-1668-2224.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" data-svelte="svelte-1govtgl"><link rel="apple-touch-startup-image" href="/apple-splash-2224-1668.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" data-svelte="svelte-1govtgl"><link rel="apple-touch-startup-image" href="/apple-splash-1620-2160.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" data-svelte="svelte-1govtgl"><link rel="apple-touch-startup-image" href="/apple-splash-2160-1620.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" data-svelte="svelte-1govtgl"><link rel="apple-touch-startup-image" href="/apple-splash-1284-2778.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" data-svelte="svelte-1govtgl"><link rel="apple-touch-startup-image" href="/apple-splash-2778-1284.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" data-svelte="svelte-1govtgl"><link rel="apple-touch-startup-image" href="/apple-splash-1170-2532.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" data-svelte="svelte-1govtgl"><link rel="apple-touch-startup-image" href="/apple-splash-2532-1170.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" data-svelte="svelte-1govtgl"><link rel="apple-touch-startup-image" href="/apple-splash-1125-2436.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" data-svelte="svelte-1govtgl"><link rel="apple-touch-startup-image" href="/apple-splash-2436-1125.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" data-svelte="svelte-1govtgl"><link rel="apple-touch-startup-image" href="/apple-splash-1242-2688.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" data-svelte="svelte-1govtgl"><link rel="apple-touch-startup-image" href="/apple-splash-2688-1242.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" data-svelte="svelte-1govtgl"><link rel="apple-touch-startup-image" href="/apple-splash-828-1792.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" data-svelte="svelte-1govtgl"><link rel="apple-touch-startup-image" href="/apple-splash-1792-828.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" data-svelte="svelte-1govtgl"><link rel="apple-touch-startup-image" href="/apple-splash-1242-2208.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" data-svelte="svelte-1govtgl"><link rel="apple-touch-startup-image" href="/apple-splash-2208-1242.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" data-svelte="svelte-1govtgl"><link rel="apple-touch-startup-image" href="/apple-splash-750-1334.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" data-svelte="svelte-1govtgl"><link rel="apple-touch-startup-image" href="/apple-splash-1334-750.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" data-svelte="svelte-1govtgl"><link rel="apple-touch-startup-image" href="/apple-splash-640-1136.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" data-svelte="svelte-1govtgl"><link rel="apple-touch-startup-image" href="/apple-splash-1136-640.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" data-svelte="svelte-1govtgl">
 
 		
 
-		<link rel="modulepreload" href="/./_app/start-1a098ae4.js">
-		<link rel="modulepreload" href="/./_app/chunks/vendor-85917fb9.js">
-		<link rel="modulepreload" href="/./_app/pages/__layout.svelte-db231d79.js">
-		<link rel="modulepreload" href="/./_app/pages/index.svelte-8dd15c34.js">
+		<link rel="modulepreload" href="/./_app/start-3c237526.js">
+		<link rel="modulepreload" href="/./_app/chunks/vendor-bec4a5ae.js">
+		<link rel="modulepreload" href="/./_app/chunks/singletons-bb9012b7.js">
+		<link rel="modulepreload" href="/./_app/pages/__layout.svelte-8d16603f.js">
+		<link rel="modulepreload" href="/./_app/chunks/stores-8eb1c870.js">
+		<link rel="modulepreload" href="/./_app/pages/index.svelte-65f3cd54.js">
 		<link rel="stylesheet" href="/./_app/assets/start-a8cd1609.css">
-		<link rel="stylesheet" href="/./_app/assets/pages/__layout.svelte-bd7f550f.css">
-		<link rel="stylesheet" href="/./_app/assets/pages/index.svelte-348d802f.css">
+		<link rel="stylesheet" href="/./_app/assets/pages/__layout.svelte-902c65e4.css">
+		<link rel="stylesheet" href="/./_app/assets/pages/index.svelte-2e005e7a.css">
 
 		<script type="module">
-			import { start } from "/./_app/start-1a098ae4.js";
+			import { start } from "/./_app/start-3c237526.js";
 			start({
 				target: document.querySelector("#svelte"),
 				paths: {"base":"","assets":"/."},
@@ -30,8 +36,8 @@
 					status: 200,
 					error: null,
 					nodes: [
-						import("/./_app/pages/__layout.svelte-db231d79.js"),
-						import("/./_app/pages/index.svelte-8dd15c34.js")
+						import("/./_app/pages/__layout.svelte-8d16603f.js"),
+						import("/./_app/pages/index.svelte-65f3cd54.js")
 					],
 					page: {
 						host: location.host, // TODO this is redundant
@@ -43,43 +49,40 @@
 			});
 		</script>
 	</head>
-
-	<!-- disable-scrolling -->
-	<body class="ma0 pa0 overflow-hidden backface-hidden bg-near-white charcoal fixed">
-		<div id="svelte">
-
+	<body class="no-clutter vh-100 w-100 h-100" id="svelte">
+		<!-- no-select bg-black z-0	lh-copy ma0 pa0 vh-100 fixed  -->
+		
 
 
 
 
 
-<main>
 
 
 
 
-
-<nav class="bg-blue fixed z-1 w-100 top-0 landscape-top-0-ns landscape-top-0-m landscape-top-0-l flex tc debug svelte-19871te"><div class="w-100 flex justify-between f5 f4-ns f3-m f3-l lh-copy pa2 measure pa4-ns measure-ns pa2-m measure-m pa0-l measure-wide-l mr-auto ml-auto"><div class="w-50 w-50-ns w-50-m w-20-l bg-light-blue pv3 h3 f5 f4-ns fs-m f5-l tl">i[0],0px</div>
-
-    
-    <div class="w-60-l bg-gold justify-between dn landscape-flex-l svelte-19871te"><button style="width:calc(100% / 3)" class="bn w-20 pv3 h3 f5 f4-ns fs-m f5-l white o-60 bg-transparent svelte-19871te active">0</button><button style="width:calc(100% / 3)" class="bn w-20 pv3 h3 f5 f4-ns fs-m f5-l white o-60 bg-transparent svelte-19871te">1</button><button style="width:calc(100% / 3)" class="bn w-20 pv3 h3 f5 f4-ns fs-m f5-l white o-60 bg-transparent svelte-19871te">2</button></div>
-
-
-    <div class="w-50 w-50-ns w-50-m w-20-l bg-light-blue pv3 h3 f5 f4-ns fs-m f5-l tr flex items-center justify-end"><div class="flex justify-between"><span>🇮🇹 <span class="dib dib-ns dn-m dn-l">It </span></span>
-		<span class="dn dn-ns dib-m dib-l">Italiano </span><span>🇬🇧 <span class="dib dib-ns dn-m dn-l">En</span></span>
-		<span class="dn dn-ns dib-m dib-l">English</span></div></div></div>
-</nav>
+<main class="charcoal flex flex-auto nw-100 vh-100 x-mandatory w-100 overflow-x-scroll touch-scroll" tabindex="-1">
 
 
 
-<nav class="bg-red fixed z-1 w-100 bottom-0 portrait-bottom-0-ns portrait-bottom-0-m portrait-bottom-0-l landscape-dn-l flex tc debug svelte-19871te"><div class="w-100 flex justify-between f5 f4-ns f3-m f3-l lh-copy pa2 measure pa4-ns measure-ns pa2-m measure-m pa0-l measure-wide-l mr-auto ml-auto"><button style="width:calc(100% / 3)" class="bn w-20 pv3 h3 f5 f4-ns fs-m f5-l white o-60 bg-transparent svelte-19871te active">0</button><button style="width:calc(100% / 3)" class="bn w-20 pv3 h3 f5 f4-ns fs-m f5-l white o-60 bg-transparent svelte-19871te">1</button><button style="width:calc(100% / 3)" class="bn w-20 pv3 h3 f5 f4-ns fs-m f5-l white o-60 bg-transparent svelte-19871te">2</button></div>
-</nav>
 
+<div id="membership" class="nw-100 snap-center w-100 vh-100 bg-gold svelte-eotzvs">
+	<div class="h-100 w-100 vh-100 snap-start always-stop overflow-x-scroll smooth-scroll pb5 svelte-eotzvs"><figure class="ma0 flex flex-column vh-75 w-100 gold cover" style="background-position:center 40%; background-image: url('https://inspiredlabs.co.uk/levi/images/base64-planck.svg')"><div class="vh-75 flex items-center invert w-100 f5 f4-ns f3-m f3-l measure pa2 measure-ns pa4-ns measure-m pa2-m measure-wide-l pa0-l mr-auto ml-auto"><div class="flex flex-column w-100 pt5 pt6-l"><h1 class="tracked-none tracked-ns tracked-m tracked-mega-l f7 f7-ns f5-m f4-l fw5 ttu tc mv0">Gallo Bike Park, Narni, Umbria</h1>
+		<h2 class="w-100 mv0 ph3 f2 f2-ns f1-m f1-l tc lh-solid">Join the good times</h2></div></div>
 
+	<figcaption class="flex items-center w-100 f5 f4-ns f3-m f3-l lh-copy measure ph2 measure-ns ph4-ns measure-m ph2-m measure-wide-l ph0-l mr-auto ml-auto vh-05 landscape-vh-15-l"><div class="flex flex-column w-100 pb0 pb0-l"><span class="tracked-none tracked-ns tracked-m tracked-mega-l f7 f7-ns f5-m f4-l fw5 mv0 pb3">Laguna Lejía, San Pedro de Atacama, Chile</span></div></figcaption></figure>
+<aside class="flex justify-center items-center no-select h2 stripes svelte-6trinm"><div class="mv0 mr-auto ml-auto w-25 h2 skew-45 overflow-x-hidden svelte-6trinm"><p class="absolute tc w-100 white lh-solid mv2 reverse-skew-45 svelte-6trinm">Always wear a helmet</p></div>
+</aside>
+<section class="h5 w-100 flex justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto">
+	<hr>
+	<div class="outline w-50 pa3"><header id="young-guns"><h1>Young Guns</h1></header>
+		<p>//// Young Guns ////</p></div>
+	<div class="outline w-50 pa3"><header id="one-on-one"><h1>1-on-1</h1></header>
+		<p>//// 1-on-1 ////</p>
+	</div></section>
 
-<div style="--gap: 0px; --width: 100%" tab-index="0"><ul class="svelte-19871te"><li id="0" class="svelte-19871te"><section class="svelte-19871te"><div style="max-width:100vw" class="w-100 pv5"><article class="pb6 f5 f4-ns f3-m f3-l lh-copy pa2 measure pa4-ns measure-ns pa2-m measure-m pa0-l measure-wide-l mr-auto ml-auto"><h1 class="">GraphCMS</h1>
-
-<pre>[
+    <section class="w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto overflow-x-hidden">
+      <pre>[
   {
     &quot;title&quot;: &quot;Erit est pulcherrime&quot;,
     &quot;slug&quot;: &quot;erit-est-pulcherrime&quot;,
@@ -90,7 +93,7 @@
       &quot;CSS&quot;
     ],
     &quot;coverImage&quot;: {
-      &quot;url&quot;: &quot;https://media.graphcms.com/7QR7SGETTm6vm8g50MTO&quot;
+      &quot;url&quot;: &quot;https://media.graphassets.com/7QR7SGETTm6vm8g50MTO&quot;
     }
   },
   {
@@ -103,7 +106,7 @@
       &quot;JavaScript&quot;
     ],
     &quot;coverImage&quot;: {
-      &quot;url&quot;: &quot;https://media.graphcms.com/Fsd0hPp9QWmIqve9p4cH&quot;
+      &quot;url&quot;: &quot;https://media.graphassets.com/Fsd0hPp9QWmIqve9p4cH&quot;
     }
   },
   {
@@ -116,7 +119,7 @@
       &quot;JavaScript&quot;
     ],
     &quot;coverImage&quot;: {
-      &quot;url&quot;: &quot;https://media.graphcms.com/l4n5TRzuSSKhUBJIP4gZ&quot;
+      &quot;url&quot;: &quot;https://media.graphassets.com/l4n5TRzuSSKhUBJIP4gZ&quot;
     }
   },
   {
@@ -127,7 +130,7 @@
       &quot;JavaScript&quot;
     ],
     &quot;coverImage&quot;: {
-      &quot;url&quot;: &quot;https://media.graphcms.com/c9zpQqBtQrO58uqShsUK&quot;
+      &quot;url&quot;: &quot;https://media.graphassets.com/c9zpQqBtQrO58uqShsUK&quot;
     }
   },
   {
@@ -139,39 +142,190 @@
       &quot;CSS&quot;
     ],
     &quot;coverImage&quot;: {
-      &quot;url&quot;: &quot;https://media.graphcms.com/6JeAO2FGTUy73cORQhzW&quot;
+      &quot;url&quot;: &quot;https://media.graphassets.com/6JeAO2FGTUy73cORQhzW&quot;
     }
   }
 ]</pre>
-
-<p>Hummus falafel bowl sriracha pecans miso turmeric glazed aubergine fig arugula cashew salad seeds walnut mushroom tart lemon sweet potato black bean burrito green pepper second course lemon red lentil soup spicy mangos guacamole overflowing mocha chocolate frosted gingerbread bites chai tea sweet potato mediterranean vegetables red amazon pepper grapefruit crunchy. One bowl chilies peaches ginger tofu shiitake mushrooms banana bread citrusy shallots fall roasted brussel sprouts chili peanut butter jalapeño cinnamon toast cilantro blackberries pumpkin main course hazelnut shiitake spring matcha pineapple salsa. Heat mint lemonade zest grenadillo double dark chocolate burritos blood orange smash apricot farro platter tasty tabasco pepper cookies plums Caribbean red habanero tempeh delightful blueberry scones. </p>
-<p>Lemon lime minty cherry bomb pepper roasted peanuts simmer pomegranate pinch of yum ginger lemongrass agave green tea maple orange tempeh alfalfa sprouts cherry bomb spiced peppermint blast parsley almond milk kung pao pepper pine nuts enchiladas asian pear. Lavender lemonade red lentil curry cilantro lime vinaigrette four-layer mint lime taco salsa hot naga viper cinnamon crispy chia seeds lemongrass green papaya salad balsamic vinaigrette leek green grapes sesame soba noodles salted hearts of palm crumbled lentils vine tomatoes Thai sun pepper entree. </p></article></div></section></li>
-
-<li id="1" class="svelte-19871te"><section class="svelte-19871te"><div style="max-width:100vw" class="w-100 pv5"><article class="pb6 f5 f4-ns f3-m f3-l lh-copy pa2 measure pa4-ns measure-ns pa2-m measure-m pa0-l measure-wide-l mr-auto ml-auto"><h1 class="">GraphCMS</h1>
-	<p>Hummus falafel bowl sriracha pecans miso turmeric glazed aubergine fig arugula cashew salad seeds walnut mushroom tart lemon sweet potato black bean burrito green pepper second course lemon red lentil soup spicy mangos guacamole overflowing mocha chocolate frosted gingerbread bites chai tea sweet potato mediterranean vegetables red amazon pepper grapefruit crunchy. One bowl chilies peaches ginger tofu shiitake mushrooms banana bread citrusy shallots fall roasted brussel sprouts chili peanut butter jalapeño cinnamon toast cilantro blackberries pumpkin main course hazelnut shiitake spring matcha pineapple salsa. Heat mint lemonade zest grenadillo double dark chocolate burritos blood orange smash apricot farro platter tasty tabasco pepper cookies plums Caribbean red habanero tempeh delightful blueberry scones. </p>
-	<p>Lemon lime minty cherry bomb pepper roasted peanuts simmer pomegranate pinch of yum ginger lemongrass agave green tea maple orange tempeh alfalfa sprouts cherry bomb spiced peppermint blast parsley almond milk kung pao pepper pine nuts enchiladas asian pear. Lavender lemonade red lentil curry cilantro lime vinaigrette four-layer mint lime taco salsa hot naga viper cinnamon crispy chia seeds lemongrass green papaya salad balsamic vinaigrette leek green grapes sesame soba noodles salted hearts of palm crumbled lentils vine tomatoes Thai sun pepper entree. </p></article></div></section></li>
-
-	<li id="2" class="svelte-19871te"><section class="svelte-19871te"><div style="max-width:100vw" class="w-100 pv5"><article class="pb6 f5 f4-ns f3-m f3-l lh-copy pa2 measure pa4-ns measure-ns pa2-m measure-m pa0-l measure-wide-l mr-auto ml-auto"><h1 class="">GraphCMS</h1>
-<p>Hummus falafel bowl sriracha pecans miso turmeric glazed aubergine fig arugula cashew salad seeds walnut mushroom tart lemon sweet potato black bean burrito green pepper second course lemon red lentil soup spicy mangos guacamole overflowing mocha chocolate frosted gingerbread bites chai tea sweet potato mediterranean vegetables red amazon pepper grapefruit crunchy. One bowl chilies peaches ginger tofu shiitake mushrooms banana bread citrusy shallots fall roasted brussel sprouts chili peanut butter jalapeño cinnamon toast cilantro blackberries pumpkin main course hazelnut shiitake spring matcha pineapple salsa. Heat mint lemonade zest grenadillo double dark chocolate burritos blood orange smash apricot farro platter tasty tabasco pepper cookies plums Caribbean red habanero tempeh delightful blueberry scones. </p>
-<p>Lemon lime minty cherry bomb pepper roasted peanuts simmer pomegranate pinch of yum ginger lemongrass agave green tea maple orange tempeh alfalfa sprouts cherry bomb spiced peppermint blast parsley almond milk kung pao pepper pine nuts enchiladas asian pear. Lavender lemonade red lentil curry cilantro lime vinaigrette four-layer mint lime taco salsa hot naga viper cinnamon crispy chia seeds lemongrass green papaya salad balsamic vinaigrette leek green grapes sesame soba noodles salted hearts of palm crumbled lentils vine tomatoes Thai sun pepper entree. </p></article></div></section></li></ul></div>
+    </section>
 
 
+<hr class="h3 relative bn">
+<section class="w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto svelte-1o25bok"><div class="outline w-50 pa3 svelte-1o25bok">ONE</div>
+	<div class="outline w-50 pa3 svelte-1o25bok">TWO</div></section>
 
+<section class="w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto svelte-1o25bok"><div class="outline w-third pa3 svelte-1o25bok">x</div>
+	<div class="outline w-third pa3 svelte-1o25bok">y</div>
+	<div class="outline w-third pa3 svelte-1o25bok">z</div></section>
 
+<section class="w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto svelte-1o25bok"><div class="outline w-25 pa3 svelte-1o25bok">up</div>
+	<div class="outline w-25 pa3 svelte-1o25bok">down</div>
+	<div class="outline w-25 pa3 svelte-1o25bok">left</div>
+	<div class="outline w-25 pa3 svelte-1o25bok">right</div></section>
 
-
-
-
-
-</main>
-
-<footer><p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit.</p></footer>
-
-
-
-
-
-	<script type="svelte-data" url="/posts.json">{"status":200,"statusText":"","headers":{"content-type":"application/json"},"body":"{\"posts\":[{\"title\":\"Erit est pulcherrime\",\"slug\":\"erit-est-pulcherrime\",\"date\":\"2021-11-09\",\"tags\":[\"JavaScript\",\"HTML\",\"CSS\"],\"coverImage\":{\"url\":\"https:\u002F\u002Fmedia.graphcms.com\u002F7QR7SGETTm6vm8g50MTO\"}},{\"title\":\"Sors ventos\",\"slug\":\"sors-ventos\",\"date\":\"2021-11-17\",\"tags\":[\"HTML\",\"CSS\",\"JavaScript\"],\"coverImage\":{\"url\":\"https:\u002F\u002Fmedia.graphcms.com\u002FFsd0hPp9QWmIqve9p4cH\"}},{\"title\":\"In istis\",\"slug\":\"in-istis\",\"date\":\"2021-11-21\",\"tags\":[\"HTML\",\"CSS\",\"JavaScript\"],\"coverImage\":{\"url\":\"https:\u002F\u002Fmedia.graphcms.com\u002Fl4n5TRzuSSKhUBJIP4gZ\"}},{\"title\":\"Diva sonum rupit umbras caerulus siderea\",\"slug\":\"diva-sonum-rupit-umbras-caerulus-siderea\",\"date\":\"2021-11-22\",\"tags\":[\"JavaScript\"],\"coverImage\":{\"url\":\"https:\u002F\u002Fmedia.graphcms.com\u002Fc9zpQqBtQrO58uqShsUK\"}},{\"title\":\"Murmure splendidus invidia merui usus flammas clamoribus\",\"slug\":\"murmure-splendidus-invidia-merui-usus-flammas-clamoribus\",\"date\":\"2021-11-23\",\"tags\":[\"HTML\",\"CSS\"],\"coverImage\":{\"url\":\"https:\u002F\u002Fmedia.graphcms.com\u002F6JeAO2FGTUy73cORQhzW\"}}]}"}</script>
+<section class="w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto  svelte-1o25bok"><div class="outline w-20 pa3 svelte-1o25bok">Don</div>
+	<div class="outline w-20 pa3 svelte-1o25bok">Mich</div>
+	<div class="outline w-20 pa3 svelte-1o25bok">Leo</div>
+	<div class="outline w-20 pa3 svelte-1o25bok">Raph</div>
+	<div class="outline w-20 pa3 svelte-1o25bok" id="splinter">Splinter</div>
+</section>
+	</div>
 </div>
+<div id="lines" class="nw-100 snap-center w-100 vh-100 bg-light-green svelte-eotzvs">
+	<div class="h-100 w-100 vh-100 snap-start always-stop overflow-x-scroll smooth-scroll pb5 svelte-eotzvs"><section class="h5 w-100 flex justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto"><hr>
+
+
+
+//// <h2 class="ttu">Lines</h2> ////
+	</section>
+
+
+<hr class="h3 relative bn">
+<section class="w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto svelte-1o25bok"><div class="outline w-50 pa3 svelte-1o25bok">ONE</div>
+	<div class="outline w-50 pa3 svelte-1o25bok">TWO</div></section>
+
+<section class="w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto svelte-1o25bok"><div class="outline w-third pa3 svelte-1o25bok">x</div>
+	<div class="outline w-third pa3 svelte-1o25bok">y</div>
+	<div class="outline w-third pa3 svelte-1o25bok">z</div></section>
+
+<section class="w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto svelte-1o25bok"><div class="outline w-25 pa3 svelte-1o25bok">up</div>
+	<div class="outline w-25 pa3 svelte-1o25bok">down</div>
+	<div class="outline w-25 pa3 svelte-1o25bok">left</div>
+	<div class="outline w-25 pa3 svelte-1o25bok">right</div></section>
+
+<section class="w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto  svelte-1o25bok"><div class="outline w-20 pa3 svelte-1o25bok">Don</div>
+	<div class="outline w-20 pa3 svelte-1o25bok">Mich</div>
+	<div class="outline w-20 pa3 svelte-1o25bok">Leo</div>
+	<div class="outline w-20 pa3 svelte-1o25bok">Raph</div>
+	<div class="outline w-20 pa3 svelte-1o25bok" id="splinter">Splinter</div>
+</section>
+	</div>
+</div>
+<div id="tutorials" class="nw-100 snap-center w-100 vh-100 bg-light-blue svelte-eotzvs">
+	<div class="h-100 w-100 vh-100 snap-start always-stop overflow-x-scroll smooth-scroll pb5 svelte-eotzvs"><section class="h5 w-100 flex justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto"><hr>
+
+
+
+//// <h2 class="ttu">Tutorials</h2> ////
+	</section>
+
+
+<hr class="h3 relative bn">
+<section class="w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto svelte-1o25bok"><div class="outline w-50 pa3 svelte-1o25bok">ONE</div>
+	<div class="outline w-50 pa3 svelte-1o25bok">TWO</div></section>
+
+<section class="w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto svelte-1o25bok"><div class="outline w-third pa3 svelte-1o25bok">x</div>
+	<div class="outline w-third pa3 svelte-1o25bok">y</div>
+	<div class="outline w-third pa3 svelte-1o25bok">z</div></section>
+
+<section class="w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto svelte-1o25bok"><div class="outline w-25 pa3 svelte-1o25bok">up</div>
+	<div class="outline w-25 pa3 svelte-1o25bok">down</div>
+	<div class="outline w-25 pa3 svelte-1o25bok">left</div>
+	<div class="outline w-25 pa3 svelte-1o25bok">right</div></section>
+
+<section class="w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto  svelte-1o25bok"><div class="outline w-20 pa3 svelte-1o25bok">Don</div>
+	<div class="outline w-20 pa3 svelte-1o25bok">Mich</div>
+	<div class="outline w-20 pa3 svelte-1o25bok">Leo</div>
+	<div class="outline w-20 pa3 svelte-1o25bok">Raph</div>
+	<div class="outline w-20 pa3 svelte-1o25bok" id="splinter">Splinter</div>
+</section>
+	</div>
+</div>
+<div id="shop" class="nw-100 snap-center w-100 vh-100 bg-light-yellow svelte-eotzvs">
+	<div class="h-100 w-100 vh-100 snap-start always-stop overflow-x-scroll smooth-scroll pb5 svelte-eotzvs"><section class="h5 w-100 flex justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto"><hr>
+
+
+
+//// <h2 class="ttu">Shop</h2> ////
+	</section>
+
+
+<hr class="h3 relative bn">
+<section class="w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto svelte-1o25bok"><div class="outline w-50 pa3 svelte-1o25bok">ONE</div>
+	<div class="outline w-50 pa3 svelte-1o25bok">TWO</div></section>
+
+<section class="w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto svelte-1o25bok"><div class="outline w-third pa3 svelte-1o25bok">x</div>
+	<div class="outline w-third pa3 svelte-1o25bok">y</div>
+	<div class="outline w-third pa3 svelte-1o25bok">z</div></section>
+
+<section class="w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto svelte-1o25bok"><div class="outline w-25 pa3 svelte-1o25bok">up</div>
+	<div class="outline w-25 pa3 svelte-1o25bok">down</div>
+	<div class="outline w-25 pa3 svelte-1o25bok">left</div>
+	<div class="outline w-25 pa3 svelte-1o25bok">right</div></section>
+
+<section class="w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto  svelte-1o25bok"><div class="outline w-20 pa3 svelte-1o25bok">Don</div>
+	<div class="outline w-20 pa3 svelte-1o25bok">Mich</div>
+	<div class="outline w-20 pa3 svelte-1o25bok">Leo</div>
+	<div class="outline w-20 pa3 svelte-1o25bok">Raph</div>
+	<div class="outline w-20 pa3 svelte-1o25bok" id="splinter">Splinter</div>
+</section>
+	</div>
+</div>
+
+
+<nav class="bg-black-60 backdrop-blur fixed z-9999 w-100 top-0 landscape-top-0-ns landscape-top-0-m landscape-top-0-l flex debug svelte-7sums1">
+<div class="w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto svelte-7sums1"><div class="w-40 w-50-ns w-50-m w-20-l pv3 h3 svelte-7sums1">
+	<h1 class="fw6 f4 f3-ns f3-m f3-l mv0 gold svelte-7sums1"><a href="#membership" class="link w-third hover-near-white pointer light-gray ts1-dark-gray fw8 ml-auto mr-auto pv3 h3 transition relative hover-ltr o-80 svelte-7sums1 active" title="GalloBikePark">GBP</a>
+</h1></div>
+
+	
+	<div class="w-50-l justify-between dn landscape-flex-l tc svelte-7sums1"><a href="#lines" title="Lines" class="link hover-near-white pointer light-gray ts1-dark-gray pv3 h3 transition relative hover-ltr o-80 svelte-7sums1" style="width:calc(100% / 3)">Lines</a><a href="#tutorials" title="Tutorials" class="link hover-near-white pointer light-gray ts1-dark-gray pv3 h3 transition relative hover-ltr o-80 svelte-7sums1" style="width:calc(100% / 3)">Tutorials</a><a href="#shop" title="Shop" class="link hover-near-white pointer light-gray ts1-dark-gray pv3 h3 transition relative hover-ltr o-80 svelte-7sums1" style="width:calc(100% / 3)">Shop</a></div>
+
+	
+	
+	<div class="w-60 w-50-ns w-50-m w-30-l flex flex-row justify-end tr svelte-7sums1"><button class="truncate hover-near-white pointer light-gray ts1-dark-gray pv3 h3 o-80 bn br0 bg-transparent svelte-7sums1" title="Italiano">🇮🇹 Italiano </button>
+<button class="truncate hover-near-white pointer light-gray ts1-dark-gray pv3 h3 o-80 bn br0 bg-transparent svelte-7sums1 b" title="English">🇬🇧 English </button></div></div></nav>
+
+
+
+
+<nav class="bg-black-60 backdrop-blur fixed z-9999 w-100 bottom-0 portrait-bottom-0-ns portrait-bottom-0-m portrait-bottom-0-l landscape-dn-l flex tc debug svelte-7sums1">
+<div class="w-100 flex justify-between fw6 f4 f3-ns f3-m f3-l lh-copy measure measure-ns measure-m measure-wide-l mr-auto ml-auto svelte-7sums1">
+
+
+	<a href="#lines" title="Lines" class="link hover-near-white pointer light-gray ts1-dark-gray pv3 h3 transition relative hover-ltr o-80 svelte-7sums1" style="width:calc(100% / 3)">Lines</a><a href="#tutorials" title="Tutorials" class="link hover-near-white pointer light-gray ts1-dark-gray pv3 h3 transition relative hover-ltr o-80 svelte-7sums1" style="width:calc(100% / 3)">Tutorials</a><a href="#shop" title="Shop" class="link hover-near-white pointer light-gray ts1-dark-gray pv3 h3 transition relative hover-ltr o-80 svelte-7sums1" style="width:calc(100% / 3)">Shop</a></div>
+</nav>
+	
+	
+
+
+<aside style="left: 0px; top: 0px;" class="absolute z-max w5 pa2 svelte-1fnm9pu">
+<ul><li></li>
+	<li>0</li>
+	<li>undefined</li>
+	</ul>
+
+
+	
+
+
+</aside></main>
+
+
+
+
+
+
+
+	<script type="svelte-data" url="/posts.json">{"status":200,"statusText":"","headers":{"content-type":"application/json"},"body":"{\"posts\":[{\"title\":\"Erit est pulcherrime\",\"slug\":\"erit-est-pulcherrime\",\"date\":\"2021-11-09\",\"tags\":[\"JavaScript\",\"HTML\",\"CSS\"],\"coverImage\":{\"url\":\"https:\u002F\u002Fmedia.graphassets.com\u002F7QR7SGETTm6vm8g50MTO\"}},{\"title\":\"Sors ventos\",\"slug\":\"sors-ventos\",\"date\":\"2021-11-17\",\"tags\":[\"HTML\",\"CSS\",\"JavaScript\"],\"coverImage\":{\"url\":\"https:\u002F\u002Fmedia.graphassets.com\u002FFsd0hPp9QWmIqve9p4cH\"}},{\"title\":\"In istis\",\"slug\":\"in-istis\",\"date\":\"2021-11-21\",\"tags\":[\"HTML\",\"CSS\",\"JavaScript\"],\"coverImage\":{\"url\":\"https:\u002F\u002Fmedia.graphassets.com\u002Fl4n5TRzuSSKhUBJIP4gZ\"}},{\"title\":\"Diva sonum rupit umbras caerulus siderea\",\"slug\":\"diva-sonum-rupit-umbras-caerulus-siderea\",\"date\":\"2021-11-22\",\"tags\":[\"JavaScript\"],\"coverImage\":{\"url\":\"https:\u002F\u002Fmedia.graphassets.com\u002Fc9zpQqBtQrO58uqShsUK\"}},{\"title\":\"Murmure splendidus invidia merui usus flammas clamoribus\",\"slug\":\"murmure-splendidus-invidia-merui-usus-flammas-clamoribus\",\"date\":\"2021-11-23\",\"tags\":[\"HTML\",\"CSS\"],\"coverImage\":{\"url\":\"https:\u002F\u002Fmedia.graphassets.com\u002F6JeAO2FGTUy73cORQhzW\"}}]}"}</script>
+
 	</body>
 </html>
+
+<!-- <script src="js/flickity.pkgd.min.js"></script> -->
+<script>
+const navUserLang = navigator.language.toLowerCase().substr(0, 2) || navigator.userLanguage.toLowerCase().substr(0, 2);
+localStorage.setItem('defaultLangToken', navUserLang);
+
+/*
+(function () {
+  if (navUserLang != 'it') {
+    localStorage.setItem('defaultLang', 0);
+		localStorage.setItem('defaultLangToken', navUserLang);
+  } else {
+    localStorage.setItem('defaultLang', 1);
+		localStorage.setItem('defaultLangToken', navUserLang);
+  }
+}());
+*/
+
+</script>

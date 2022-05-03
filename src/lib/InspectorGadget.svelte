@@ -36,7 +36,7 @@
 	let inputRef; //usage: <input bind:this={inputRef} />
 
 	onMount(() => {
-		//mapTouchToMouseFor('aside');
+		mapTouchToMouseFor('aside');
 		// setTimeout(() => {
 		// 	inputRef.focus();
 		// }, 333);
@@ -71,7 +71,7 @@
 	class="absolute z-max w5 pa2"
 >
 
-<b>{import.meta.env.VITE_APP_TITLE}</b>
+<!-- <b>{import.meta.env.VITE_APP_TITLE}</b> -->
 <ul>
 	<li>{$pageStore}</li>
 	<li>{$currentPageStore}</li>
