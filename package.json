@@ -37,6 +37,7 @@
     "@slidy/core": "^3.0.5",
     "cookie": "^0.4.1",
     "siema": "^1.5.1",
+    "svelte-agnostic-draggable": "^0.1.11",
     "svelte-touch-to-mouse": "^1.0.0",
     "workbox-precaching": "^6.1.5",
     "workbox-window": "^6.1.5"
