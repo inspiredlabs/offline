@@ -21,6 +21,7 @@
 			left += e.movementX;
 			top += e.movementY;
 		}
+		mapTouchToMouseFor('aside');
 	}
 
 	function onMouseUp() {
@@ -36,7 +37,7 @@
 	let inputRef; //usage: <input bind:this={inputRef} />
 
 	onMount(() => {
-		mapTouchToMouseFor('aside');
+		//mapTouchToMouseFor('aside');
 		// setTimeout(() => {
 		// 	inputRef.focus();
 		// }, 333);
