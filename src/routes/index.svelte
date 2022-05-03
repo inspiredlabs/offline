@@ -1,286 +1,417 @@
 <script context="module">
-export const prerender = true;
+  export const prerender = true;
 
-export const load = async ({fetch}) => {
-	const response = await fetch('/posts.json');
-	if (response.ok) {
-		const { posts } = await response.json()
-		return {
-			props: { posts },
-		}
-	}
-}
-</script>
-
-
-
-<script>
-let title = 'GraphCMS';
-export let posts = [];
-
-
-// A lifecycle function that runs when the page mounts, and also whenever SvelteKit navigates to a new URL but stays on this component.:  https://kit.svelte.dev/docs/modules#$app-navigation-afternavigate
-  // Learn: SSR forms: https://codechips.me/sveltekit-ssr-forms/
-  //Learn: Cannot read property 'params' of SSR component: `import { path, query, fragment, pattern } from 'svelte-pathfinder';` // Append URL: `{ path, fragment }`: github.com/sveltetools/svelte-pathfinder
-  // import { browser } from '$app/env'; // From: is that all I need? adamtuttle.codes/blog/2021/adding-3rd-party-script-tags-in-sveltekit/
-  // import { onMount, createEventDispatcher, afterUpdate } from 'svelte';
-  /* onMount(()=>{ ... }) */
-	import { dragDurationStore, fragStore, currentSlideStore, defaultLangToken } from '$lib/stores.js';
-  import Carousel from '$lib/BeyonkCarouselComponent.svelte'; //Learn: this in NOT `import Carousel from '@beyonk/svelte-carousel'`
-  import { items } from '../routes/items.svelte';
-
-
-
-  $: slidecore = {}
-
-
-  /* usage: <!-- <svelte:window on:keydown={handleKeydown}/> --> */
-  let key;
-	let keyCode;
-
-	function handleKeydown(e) {
-    if (e.keyCode === 38 || e.keyCode === 39) {
-      slidecore.right()//alert( 'right/up' )
-    } else if (e.keyCode === 37 || e.keyCode === 40) {
-      slidecore.left()// alert( 'down/left' )
-    } else {
-      return;
+  export const load = async ({fetch}) => {
+    const response = await fetch('/posts.json');
+    if (response.ok) {
+      const { posts } = await response.json()
+      return {
+        props: { posts },
+      }
     }
   }
+  </script>
+
+<script>
+  // fix: Tachyons with `let title = 'GraphCMS';`
+  export let posts = [];
+
+	import { pageStore, pageItems, currentPageStore, prefLang } from '$lib/stores.js';
+
+	import { goto } from '$app/navigation'; // learn: kit.svelte.dev/docs/modules#$app-navigation-goto, because other methods didn't work: github.com/sveltejs/svelte/issues/1241
+
+	import Section from '$lib/Section.svelte';
+	import Page from '$lib/Page.svelte';
+	import Hero from '$lib/Hero.svelte';
+	import WarningStripes from '$lib/WarningStripes.svelte';
+
+	//import Banner75 from './Banner-vh-75.svelte'// <Banner75 />
+	import viewport from '$lib/useViewportAction';
 
 
 
-items.forEach(settle);
-function settle(item, index, array) {
-  if (currentSlideStore == index) {
-    return $currentSlideStore = index, $fragStore = item.slug;
-  }
-  //alert(Object.keys(array)) // This `[object Object]` is 0,1,2
-}
+	function min(title) {
+		return title.replace(/\s/g, '-');
+	}
 
-//function getPosY(e) { alert(e.clientY) }
+
 </script>
+<!-- <script>
+	pageItems.forEach(settle);
+	function settle(item, index, array) {
+		if (currentPageStore == index) {
+			return $currentPageStore = index, $pageStore = `${item.title.toLowerCase().replace(/\s/g, '-')}`;
+		}
+		//alert(Object.keys(array)) // This `[object Object]` is 0,1,2
+	}
+</script> -->
 
 
 
-<!-- Main navigation  -->
-<nav class="bg-blue fixed z-1 w-100
-top-0 landscape-top-0-ns landscape-top-0-m landscape-top-0-l
-flex tc">
-<!-- debug -->
-  <div class="w-100 flex justify-between
-  f5 f4-ns f3-m f3-l lh-copy
-  pa2 measure
-  pa4-ns measure-ns
-  pa2-m measure-m
-  pa0-l measure-wide-l mr-auto ml-auto">
+{#each pageItems as item, i}
+<Page
+	id={`${item.title.toLowerCase().replace(/\s/g, '-')}`}
+	bg={`${item.bg.toLowerCase().replace(/\s/g, '-')}`}>
 
-    <div class="w-50 w-50-ns w-50-m w-20-l
-    bg-light-blue pv3 h3 f5 f4-ns fs-m f5-l tl">{$dragDurationStore}, {$fragStore}, {$currentSlideStore}, {$defaultLangToken}</div>
-
-    <!-- ONLY: large & landscape -->
-    <div class="w-60-l bg-gold justify-between dn landscape-flex-l">
-
-        {#each items as item, i}
-        <button
-          class:active={ $currentSlideStore==i ? 'active' : '' }
-          class="bn pointer glow bg-transparent w-20 pv3 h3 f5 f4-ns fs-m f5-l white o-60"
-          style='width:calc(100% / {items.length})'
-          on:click={ slidecore.go(i) }
-          on:click={ () => {$fragStore = item.slug} }
-          on:click={ () => {$currentSlideStore = item.id} }
-        >{item.title}</button>
-        {/each}
-
-      <!--
-			on:mouseleave={ e => $dragDurationStore = 200 }
-			on:mouseenter={ e => $dragDurationStore = 0 }
-      -->
-      <!-- learn: `$stores` for `class:active={ myVar ? 'active' : '' }`
-        on:click={() => slidecore.go(i, frag, () => myVar = item.id )}
-        Conditional styling:
-        - Selected: https://flaviocopes.com/svelte-dynamically-apply-css/
-        - Conditional: https://progressivewebninja.com/a-guide-to-css-in-svelte-and-conditional-styling/
-      -->
-		</div>
-
-
-    <div class="w-50 w-50-ns w-50-m w-20-l
-    bg-light-blue pv3 h3 f5 f4-ns fs-m f5-l tr flex items-center justify-end">
-
-			<div class="flex justify-between">
-				<span>🇮🇹&thinsp;<span class='dib dib-ns dn-m dn-l'>It&emsp;</span></span>
-				<span class='dn dn-ns dib-m dib-l'>Italiano&emsp;</span><span>🇬🇧&thinsp;<span class='dib dib-ns dn-m dn-l'>En</span></span>
-				<span class='dn dn-ns dib-m dib-l'>English</span>
+	{#if i === 0}
+		<Hero />
+		<WarningStripes />
+		<section
+		class="h5 w-100 flex justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto">
+			<!-- on:enterViewport={() => alert('Ciao') } -->
+			<hr use:viewport
+			on:enterViewport={() => goto(`#${item.title.toLowerCase().replace(/\s/g, '-')}`) }
+			on:enterViewport={() => $pageStore = `${item.title.toLowerCase().replace(/\s/g, '-')}` } />
+			<div class="outline w-50 pa3">
+				<header id="young-guns"><h1>Young Guns</h1></header>
+				<p>//// Young Guns ////</p>
 			</div>
-		</div>
-  </div>
-</nav><!-- Main navigation  -->
+			<div class="outline w-50 pa3">
+				<header id="one-on-one"><h1>1-on-1</h1></header>
+				<p>//// 1-on-1 ////</p>
+			</div>
+		</section>
+    <Section>
+      <!-- learn: the replacer function is a whitelist: stackoverflow.com/questions/17537571/second-argument-in-json-stringify-in-javascript#17537621 && Steve Griffith: youtube.com/watch?v=0k4NwimfszA -->
+      <pre>{JSON.stringify(posts, null, 2)}</pre>
+    </Section>
+	{:else }
 
-<!-- Internal page navigation  -->
-<!-- EXCEPT large & landscape -->
-<nav class="bg-red fixed z-1 w-100
-bottom-0 portrait-bottom-0-ns portrait-bottom-0-m portrait-bottom-0-l
-landscape-dn-l flex
-tc ">
-  <div class="w-100 flex justify-between
-  f5 f4-ns f3-m f3-l lh-copy
-  pa0 measure
-  pa0-ns measure-ns
-  pa0-m measure-m
-  pa0-l measure-wide-l mr-auto ml-auto
-	">
-
-  {#each items as item, i}
-    <button
-      class:active={ $currentSlideStore == i ? 'active' : '' }
-      class="bn pointer glow bg-transparent w-20 pv3 h3 pv2-ns h2-ns h3-m h3-l f5 f4-ns fs-m f5-l white o-60 bg-transparent"
-      style='width:calc(100% / {items.length})'
-      on:click={ () => slidecore.go(i) }
-      on:click={ () => { $fragStore = item.slug } }
-      on:click={ () => { $currentSlideStore = item.id } }
-    >{item.title}</button>
-  {/each}
-
-  </div>
-</nav><!-- /Internal page navigation  -->
-<!--
-	on:click={ () => { $dragDurationStore = 0 }, slidecore.go(i) }
-	on:mouseleave={ e => $dragDurationStore = 200 }
-	on:mouseenter={ e => $dragDurationStore = 0 }
--->
+	<section
+		class="h5 w-100 flex justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto">
+		<hr use:viewport
+		on:enterViewport={() => goto(`#${item.title.toLowerCase().replace(/\s/g, '-')}`) }
+		on:enterViewport={() => $pageStore = `${item.title.toLowerCase().replace(/\s/g, '-')}` } />
 
 
 
-<!-- Ben Winchester's interpretation : https://github.com/bmw2621/svelte-carousel -->
-<!-- https://github.com/beyonk-adventures/svelte-carousel -->
-<Carousel
-	bind:this={slidecore}
-	threshold={96}
-	dots={false}
-	perPage={1}
-	easing={ 'ease' }
-	autoplay={0}
-  on:change={ e => {settle} }
-  on:change={ e => $currentSlideStore = e.detail.currentSlide }
->
-<!-- duration={ () => { $dragDurationStore } } -->
+		//// <h2 class="ttu">{item.title}</h2> ////
+	</section>
+	{/if}
 
-
-<!-- xon:change={ e => {getPosY}  } -->
-<!-- on:change={ e => {debugger} } or `console.log(e.detail)`-->
-<!-- easing={ 'cubic-bezier(0.25, 0.4, 0.55, 1.4)' } -->
-
-{#each items as item, index}
-	<div
-  class="slide-content bg-pink w-100" >
-	<!--
-	on:mouseenter={ e => $dragDurationStore = 200 }
-  on:mouseleave={ e => $dragDurationStore = 0 }
- -->
-
-	{item.title}
-  <svelte:component this={item.component} />
-
-	<div class="pt5 w-100">
-		<h1 class="">{title}</h1>
-		<pre>{JSON.stringify(posts, null, 2)}</pre>
-	</div>
-
-	</div>
+</Page>
 {/each}
-<!-- on:mouseenter={ e => $dragDurationStore = 200 } -->
-<!-- on:mouseleave={ e => $dragDurationStore = 0 } -->
 
-</Carousel>
+<!-- disable-scrolling -->
+<nav class="bg-black-60 backdrop-blur fixed z-9999 w-100
+top-0 landscape-top-0-ns landscape-top-0-m landscape-top-0-l flex debug">
+<!-- bg-light-blue -->
+<div class="w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns
+measure-m measure-wide-l mr-auto ml-auto"><div class="w-40 w-50-ns w-50-m w-20-l pv3 h3">
+<!-- bg-light-blue -->
+	<h1 class="fw6 f4 f3-ns f3-m f3-l mv0 gold">
+	{#each pageItems as item, i}
+		{#if i === 0}
+		<a
+			class:active={ $currentPageStore == i ? 'active' : '' }
+			href={`#${item.title.toLowerCase().replace(/\s/g, '-')}`}
+			class="link w-third hover-near-white pointer light-gray ts1-dark-gray fw8 ml-auto mr-auto pv3 h3 transition relative hover-ltr o-80" title="GalloBikePark">GBP</a>
+		<!-- Gallo&thinsp;Bike&thinsp;Park -->
+		{/if}
+	{/each}
+	</h1>
+</div>
+
+	<!-- ONLY: large & landscape -->
+	<div class="w-50-l justify-between dn landscape-flex-l tc">
+	{#each pageItems as item, i}
+		{#if i >= 1}
+		<a
+			href={`#${item.title.toLowerCase().replace(/\s/g, '-')}`}
+			title={item.title}
+			on:click={ () => {$pageStore = `${item.title.toLowerCase().replace(/\s/g, '-')}` } }
+			on:click={ () => {$currentPageStore = i } }
+			class:active={ $pageStore == `${item.title.toLowerCase().replace(/\s/g, '-')}` ? 'active' : '' }
+			class="link hover-near-white pointer light-gray ts1-dark-gray pv3 h3 transition relative hover-ltr o-80"
+			style='width:calc(100% / {pageItems.length -1})'>{item.title}</a>
+		{/if}
+	{/each}
+	</div>
+
+	<!-- bg-light-blue -->
+	<!-- based on: svelte.dev/repl/23e375f585584862908e83db520b4c5a?version=3.46.4 -->
+	<div class="w-60 w-50-ns w-50-m w-30-l flex flex-row justify-end tr">
+		<button on:click={() => ($prefLang === 'it' ? prefLang.set('en') : prefLang.set('it'))} class:b={$prefLang == 'it'} class="truncate hover-near-white pointer light-gray ts1-dark-gray pv3 h3 o-80 bn br0 bg-transparent" title="Italiano">🇮🇹&thinsp;Italiano&emsp;</button>
+		<button on:click={() => ($prefLang === 'it' ? prefLang.set('en') : prefLang.set('it'))} class:b={$prefLang != 'it'} class="truncate hover-near-white pointer light-gray ts1-dark-gray pv3 h3 o-80 bn br0 bg-transparent" title="English">🇬🇧&thinsp;English&thinsp;</button>
+	</div>
+
+</div>
+</nav>
+
+
+
+<!-- EXCEPT large & landscape -->
+<nav class="bg-black-60 backdrop-blur fixed z-9999 w-100 bottom-0 portrait-bottom-0-ns portrait-bottom-0-m portrait-bottom-0-l landscape-dn-l flex
+tc debug">
+<!-- bg-red -->
+<div class="w-100 flex justify-between fw6 f4 f3-ns f3-m f3-l lh-copy measure measure-ns measure-m measure-wide-l mr-auto ml-auto">
+<!-- pa2 pa4-ns pa2-m pa0-l -->
+
+
+	{#each pageItems as item, i}
+		{#if i >= 1}
+		<a
+			href={`#${item.title.toLowerCase().replace(/\s/g, '-')}`}
+			title={item.title}
+			on:click={ () => {$pageStore = `${item.title.toLowerCase().replace(/\s/g, '-')}` } }
+			on:click={ () => {$currentPageStore = i } }
+			class:active={ $pageStore == `${item.title.toLowerCase().replace(/\s/g, '-')}` ? 'active' : '' }
+			class="link hover-near-white pointer light-gray ts1-dark-gray pv3 h3 transition relative hover-ltr o-80"
+			style='width:calc(100% / {pageItems.length -1})'>{item.title}</a>
+		{/if}
+	{/each}
+
+</div>
+</nav>
+
+
+
+
+
+
+
+
+
 
 
 
 <style>
-/* Quick prune: purifycss.online/ */
-/* learn: THIS IS DONE IN __layout.svelte */
-/* @import '$lib/Tachyonshower'; */
-/* slightly more sophisticated colourschemes: https://codepen.io/inspiredlabs/pen/yLMppJL*/
+/* svelte.dev/repl/253993c0325a4b1b8ff38b4c4ecd2285?version=3.24.1
+	- from: stackoverflow.com/questions/63315507/svelte-how-can-i-set-the-focus-to-the-previous-next-element-in-the-list-item-wh#63324281
+*/
+
+.active {
+	background: black;
+}
+
+a:focus {
+	background: black;
+}
+
+/* `.hover-ltr` can not be implemented into Tachyon Shower. It's not atomic. */
+	/* :global(a) {
+		text-decoration: none!important
+	} */
+.hover-ltr::after {
+	position: absolute;
+	left: 0;
+	content: '';
+	width: 100%;
+	height: 8%;
+	background: currentColor;
+	bottom: 0;
+	transform: scale(0, 1);
+	transition: transform 0.4s;
+	transform-origin: right top;
+}
+.hover-ltr:hover::after {
+	transform-origin: left top;
+	transform: scale(1, 1);
+}
+
+
+
+/*** simplify this ***/
+.debug * {
+	outline: 1px solid lime;
+}
+@media screen and (min-width: 30em) {
+	.debug * {
+		outline: 1px solid goldenrod;
+	}
+}
+@media screen and (min-width: 30em) and (max-width: 60em) {
+	.debug * {
+		outline: 1px solid firebrick;
+	}
+}
+@media screen and (min-width: 60em) {
+	.debug * {
+		outline: 1px solid cyan;
+	}
+}
+
+/* amend tachyon.shower.css */
+
+.truncate {
+	display: -webkit-box;
+	white-space: nowrap;
+/* overflow: hidden; */
+	text-overflow: ellipsis;
+}
+
+/**** snapper ****/
+
+/* .y-mandatory {
+	scroll-snap-type: y mandatory;
+} */
+
+/* .y-proximity {
+	scroll-snap-type: y proximity;
+} */
+
+
+/* .snapper {
+	padding-top:15vh;
+	padding-bottom:0vh;
+	scroll-margin: 20vh;
+	scroll-snap-align: start;
+	scroll-snap-stop: normal;
+} */
+
+:root {
+	--time: 0.6s
+}
+
+/* https://css-tricks.com/almanac/properties/w/will-change/ */
+/* .minno {
+	will-change: transform, scroll-position;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	-webkit-transform: translateZ(0);
+	transform: translateZ(0);
+	transition: -webkit-transform var(--time) ease;
+	transition: all var(--time) ease;
+	transition: all var(--time) ease,
+	-webkit-transform var(--time) ease;
+	background-clip: padding-box;
+
+	box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+}
+.minno:focus,
+.minno:hover {
+	-webkit-transform: perspective(1px) scale(1.008);
+	transform: perspective(1px) scale(1.008);
+
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+}
+.minno:active {
+	-webkit-transform: perspective(1px) scale(1.02);
+	transform: perspective(1px) scale(1.02);
+
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+}
+*/
+
+/* HTML: w-100 h-100 system */
 
 @media all and (orientation:portrait) {
 
-  @media screen and (min-width:30em) {
-    .portrait-bottom-0-ns {
-      bottom: 0;
-    }
-  }
-  @media screen and (min-width:30em) and (max-width:60em) {
-    .portrait-bottom-0-m {
-      bottom: 0;
-    }
-  }
-  @media screen and (min-width:60em) {
-    .portrait-bottom-0-l {
-      bottom: 0;
-    }
-  }
+/*   .portrait-dn {
+		display: none;
+	} */
 
+/*   .portrait-vh-50 {
+	height: 50vh;
+	} */
+	@media screen and (min-width:30em) {
+/*     .portrait-dn-ns {
+			display: none;
+		} */
+/*     .portrait-vh-85-ns {
+		height: 85vh;
+		} */
+		.portrait-bottom-0-ns {
+		bottom: 0;
+		}
+	}
+	@media screen and (min-width:30em) and (max-width:60em) {
+/*     .portrait-dn-m {
+			display: none;
+		} */
+/*     .portrait-vh-85-m {
+		height: 85vh;
+		} */
+		.portrait-bottom-0-m {
+		bottom: 0;
+		}
+	}
+	@media screen and (min-width:60em) {
+/*     .portrait-dn-l {
+			display: none;
+		} */
+		.portrait-bottom-0-l {
+		bottom: 0;
+		}
+	}
 }
-
 
 @media all and (orientation:landscape) {
 
-  @media screen and (min-width:30em) {
-  }
-
-  @media screen and (min-width:30em) and (max-width:60em) {
-  }
-
-  @media screen and (min-width:60em) {
-    .landscape-top-0-l {
-      top: 0;
-    }
-    .landscape-dn-l {
-      display: none;
-    }
-    .landscape-flex-l {
-      display: flex;
-    }
-  }
-
-}
-
-.active {
-  opacity: 0.8;
-  background-color:rgba(0,0,0, 0.05)
-}
-
-/*overflow-x: scroll; */
-.slide-content {
-  width: 100%;
-}
-
-:global(body) {
-  padding:0;
-}
-
-:global(.carousel.slides) {
-  will-change:contents;
-  /* width: 100vw; */
-  /* height: 100vh; */
-}
-
-/* :global(img) {
-		display: block;
-		width: 100%;
+/*   .landscape-db {
+			display: block;
+		} */
+/*   .landscape-dn {
+		display: none;
 	} */
 
-/* :global(.control:hover) {
-		width: 100%;
-		height: 100%;
-		color: cyan;
+/*   .landscape-vh-66 {
+	height: 66vh;
 	} */
 
+	@media screen and (min-width:30em) {
+/*     .landscape-vh-85-ns {
+		height: 85vh;
+		} */
+/*     .landscape-db-ns {
+			display: block;
+		} */
+/*     .landscape-dn-ns {
+			display: none;
+		} */
+	}
+
+	@media screen and (min-width:30em) and (max-width:60em) {
+/*     .landscape-vh-66-m {
+		height: 66vh;
+		} */
+/*     .landscape-db-m {
+			display: block;
+		} */
+/*     .landscape-dn-m {
+			display: none;
+		} */
+	}
+
+	@media screen and (min-width:60em) {
+/*     .landscape-vh-85-l {
+		height: 85vh;
+		} */
+		.landscape-top-0-l {
+		top: 0;
+		}
+/*     .landscape-db-l {
+			display: block;
+		} */
+		.landscape-dn-l {
+			display: none;
+		}
+		.landscape-flex-l {
+			display: flex;
+		}
+	}
+}
+
+:global(html, body) { padding: 0 }
 
 
+/* Hide scrollbar for Chrome, Safari and Opera
+main::-webkit-scrollbar {
+	display: none;
+}*/
+
+/* Hide scrollbar for IE, Edge and Firefox
+main {
+	-ms-overflow-style: none;  /* IE and Edge
+	scrollbar-width: none;  /* Firefox
+}
+*/
+
+	/*
+`.backdrop-blur`, is NOT integrated into Tachyonshower.
+*/
+
+.backdrop-blur { backdrop-filter: blur(8px) }
 
 </style>
-<!-- DEBUG "Element with a slot='...' attribute must be a child of a component or a descendant of a custom element" -->
-<!-- <span class="control pointer" slot="left-control">&larr;</span> -->
-<!-- <span class="control pointer" slot="right-control">&rarr;</span> -->
-<svelte:window on:keydown={handleKeydown}/>

@@ -1,14 +1,36 @@
 <!DOCTYPE html>
-<html lang="en" class="system h-100 overflow-hidden w-100 backface-hidden">
+<html class="w-100 h-100 overflow-hidden system backface-hidden">
+<!-- prevent overscroll -->
+<!-- vw-100 vh-100 smooth-scroll backface-hidden touch-manipulation -->
+<!-- `h-100 overflow-hidden && h-100 overflow-auto`: http://stackoverflow.com/questions/12046315/ddg#17899813 -->
 	<head>
 		<meta charset="utf-8" />
+		<meta name="description" content="" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		%svelte.head%
 	</head>
-
-	<!-- disable-scrolling -->
-	<body class="ma0 pa0 overflow-hidden backface-hidden bg-near-white charcoal fixed">
-		<div id="svelte">%svelte.body%</div>
+	<body class="no-clutter vh-100 w-100 h-100" id="svelte">
+		<!-- no-select bg-black z-0	lh-copy ma0 pa0 vh-100 fixed  -->
+		%svelte.body%
 	</body>
 </html>
+
+<!-- <script src="js/flickity.pkgd.min.js"></script> -->
+<script>
+const navUserLang = navigator.language.toLowerCase().substr(0, 2) || navigator.userLanguage.toLowerCase().substr(0, 2);
+localStorage.setItem('defaultLangToken', navUserLang);
+
+/*
+(function () {
+  if (navUserLang != 'it') {
+    localStorage.setItem('defaultLang', 0);
+		localStorage.setItem('defaultLangToken', navUserLang);
+  } else {
+    localStorage.setItem('defaultLang', 1);
+		localStorage.setItem('defaultLangToken', navUserLang);
+  }
+}());
+*/
+
+</script>

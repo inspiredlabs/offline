@@ -1,25 +1,90 @@
-<script lang="ts">
-	// import Tachyonshower from '$lib/Tachyonshower.svelte'; // <Tachyonshower />
-	//import Header from '$lib/Header/index.svelte';
+<!--script context="module">
+// get all pages and build a routes menu: youtube.com/watch?v=Y_NE2R3HuOU
+export const modules = import.meta.glob('./**.svelte');
+
+//console.log(modules);
+
+let allMenu = [];
+
+for(let path in modules) {
+	let cleanPath = path.replace('.svelte', '').replace('./', '');
+	allMenu.push({
+		title:cleanPath.substring(cleanPath.lastIndexOf('/') + 1),
+		link: cleanPath.includes('index')
+		? cleanPath.replace('index', '') : ''
+	});
+}
+
+console.log(allMenu);
+</script-->
+<script>
+
+	// learn: Just for the record, the key thing using SSR is that pages don't reload as long as routes shares the same __layout.svelte. –- from: stackoverflow.com/questions/71185085/sveltekit-hash-based-routing
+
 	import ReloadPrompt from '$lib/ReloadPrompt/index.svelte';
+	import InspectorGadget from '$lib/InspectorGadget.svelte';
+
+	let main;
+
+	function refocus() {
+		setTimeout(() => { main.focus() }, 30)
+	}
+
+	/* usage: <!-- <svelte:window on:keydown={handleKeydown}/> --> */
+	let key;
+	let keyCode;
+
+	function handleKeydown(e) {
+		if (e.keyCode === 38 || e.keyCode === 39) {
+			refocus(); //alert( 'right/up' )
+		} else if (e.keyCode === 37 || e.keyCode === 40) {
+			refocus(); //alert( 'down/left' )
+		}
+	}
+	// learn: youtube.com/watch?v=kXq6tO5fqnU
 </script>
 
-<style lang="css" global>
-	/* Quick prune: purifycss.online/ */
-	@import '$lib/Tachyonshower';
-	:global(body) {
-		margin:0;
-		padding:0;
-	}
+<svelte:window on:popstate={ refocus } on:keydown={handleKeydown} />
+
+<main class="charcoal flex flex-auto nw-100 vh-100 x-mandatory w-100 overflow-x-scroll touch-scroll" tabindex="-1" bind:this={main}>
+	<slot></slot>
+	<ReloadPrompt />
+	<InspectorGadget />
+</main>
+
+<style>
+
+:global(.snap-center) {
+	scroll-snap-align: center;
+}
+:global(.nw-100) {
+	min-width: 100%;
+}
+
+:global(.x-mandatory) {
+	-webkit-overflow-scrolling: touch;
+	scroll-snap-type: x mandatory;
+	/* must be used with: `scroll-snap-align: center` */
+}
+
+/* :global(.x-proximity) {
+	scroll-snap-type: x proximity;
+} */
+
+:global(.touch-scroll) {
+	-webkit-overflow-scrolling: touch;
+}
 </style>
 
 <svelte:head>
+	<link rel="stylesheet" type="text/css" href="../support/css/tachyon.shower.css">
+	<!-- <link rel="stylesheet" type="text/css" href="https://instantwebapp.com/css/tachyon.shower.css"> -->
 	<link rel="manifest" href="/manifest.webmanifest" />
 	<link rel="apple-touch-icon" href="/apple-icon-180.png" />
 
 	<meta
 		name="description"
-		content="This is a Svelte-Kit PWA skeleton."
+		content="Svelte-Kit PWA"
 	/>
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<!-- <link rel="icon" href="/favicon.svg" type="image/svg+xml"> -->
@@ -158,6 +223,3 @@
 		media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
 	/>
 </svelte:head>
-
-<slot></slot>
-<ReloadPrompt />
