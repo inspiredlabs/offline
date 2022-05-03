@@ -21,7 +21,6 @@
 			left += e.movementX;
 			top += e.movementY;
 		}
-		mapTouchToMouseFor('aside');
 	}
 
 	function onMouseUp() {
@@ -36,12 +35,11 @@
 
 	let inputRef; //usage: <input bind:this={inputRef} />
 
-	onMount(() => {
-		//mapTouchToMouseFor('aside');
-		// setTimeout(() => {
-		// 	inputRef.focus();
-		// }, 333);
-	});
+	// onMount(() => {
+	// 	setTimeout(() => {
+	// 		mapTouchToMouseFor('aside');
+	// 	}, 333);
+	// });
 
 	function test(e) {
 		// console.log(document.activeElement); // helpers
@@ -58,9 +56,11 @@
 	}
 
 </script>
-
+;
 
 <svelte:window
+	on:mouseup={ () => mapTouchToMouseFor('aside') }
+	on:mousemove={ () => mapTouchToMouseFor('aside') }
 	on:mouseup={ onMouseUp }
 	on:mousemove={ onMouseMove }
 />
