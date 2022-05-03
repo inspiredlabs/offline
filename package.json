@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "env-cmd svelte-kit dev",
-    "special": "env-cmd svelte-kit dev --port 8888",    
+    "special": "env-cmd svelte-kit dev --port 8888",
     "build": "env-cmd svelte-kit build",
     "preview": "env-cmd svelte-kit preview",
     "lint": "prettier --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
@@ -37,6 +37,7 @@
     "@slidy/core": "^3.0.5",
     "cookie": "^0.4.1",
     "siema": "^1.5.1",
+    "svelte-touch-to-mouse": "^1.0.0",
     "workbox-precaching": "^6.1.5",
     "workbox-window": "^6.1.5"
   }

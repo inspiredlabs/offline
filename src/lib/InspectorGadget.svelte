@@ -1,5 +1,9 @@
+<script context="module">
+  import mapTouchToMouseFor from 'svelte-touch-to-mouse';
+</script>
+
 <script>
-	//draggable debug compoent for layout variables
+		//draggable debug compoent for layout variables
 	import { pageStore, pageItems, currentPageStore, prefLang } from '$lib/stores.js';
 
 	/*********** Drag Inspector *************/
@@ -32,7 +36,7 @@
 	let inputRef; //usage: <input bind:this={inputRef} />
 
 	onMount(() => {
-
+		mapTouchToMouseFor('aside');
 		// setTimeout(() => {
 		// 	inputRef.focus();
 		// }, 333);
@@ -61,22 +65,19 @@
 />
 <!-- on:popstate={ (e) => console.log(e) } } -->
 
-<section
+<aside
 	on:mousedown={onMouseDown}
 	style="left: {left}px; top: {top}px;"
-	class="draggable absolute z-max w5 pa2"
+	class="absolute z-max w5 pa2"
 >
-<span>{$pageStore}</span>•<span>{$currentPageStore}</span>•<span>{$prefLang}</span>
 
-
-
-
-
-
-
-
-
-
+<b>{import.meta.env.VITE_APP_TITLE}</b>
+<ul>
+	<li>{$pageStore}</li>
+	<li>{$currentPageStore}</li>
+	<li>{$prefLang}</li>
+	<!-- <li>{$searchStore}</li> -->
+</ul>
 
 <slot></slot>
 	<!-- <button on:click={ () => history.pop(history.state, '', 'test') }>click me</button>
@@ -93,16 +94,18 @@
 	-->
 
 
-</section>
+</aside>
 
 
 
 
 <style>
-	.draggable {
+	aside {
+		-webkit-touch-callout:none;
+		-ms-touch-action:none; touch-action:none;
 		user-select: none;
 		cursor: move;
-		background: yellow;
+		background: rgba(255, 255, 0, 0.8);
 		position: absolute;
 	}
 </style>

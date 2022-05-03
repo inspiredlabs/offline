@@ -17,10 +17,14 @@ for(let path in modules) {
 
 console.log(allMenu);
 </script-->
+<script context="module">
+// learn: FOUC: github.com/sveltejs/kit/issues/1530
+import '../app.css' // <- just import your css: stackoverflow.com/questions/63637662/add-js-css-files-to-svelte-component
+</script>
+
 <script>
 
 	// learn: Just for the record, the key thing using SSR is that pages don't reload as long as routes shares the same __layout.svelte. –- from: stackoverflow.com/questions/71185085/sveltekit-hash-based-routing
-
 	import ReloadPrompt from '$lib/ReloadPrompt/index.svelte';
 	import InspectorGadget from '$lib/InspectorGadget.svelte';
 
@@ -53,6 +57,7 @@ console.log(allMenu);
 </main>
 
 <style>
+/* Quick prune: purifycss.online/ @import '$lib/Tachyonshower'; */
 
 :global(.snap-center) {
 	scroll-snap-align: center;
@@ -78,7 +83,7 @@ console.log(allMenu);
 
 <svelte:head>
 	<!-- <link rel="stylesheet" type="text/css" href="../support/css/tachyon.shower.css"> -->
-	<link rel="stylesheet" type="text/css" href="https://instantwebapp.com/css/tachyon.shower.css">
+
 	<link rel="manifest" href="/manifest.webmanifest" />
 	<link rel="apple-touch-icon" href="/apple-icon-180.png" />
 

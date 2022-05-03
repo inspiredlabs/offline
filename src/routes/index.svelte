@@ -71,6 +71,7 @@
 				<p>//// 1-on-1 ////</p>
 			</div>
 		</section>
+
     <Section>
       <!-- learn: the replacer function is a whitelist: stackoverflow.com/questions/17537571/second-argument-in-json-stringify-in-javascript#17537621 && Steve Griffith: youtube.com/watch?v=0k4NwimfszA -->
       <pre>{JSON.stringify(posts, null, 2)}</pre>
