@@ -77,8 +77,8 @@ console.log(allMenu);
 </style>
 
 <svelte:head>
-	<link rel="stylesheet" type="text/css" href="../support/css/tachyon.shower.css">
-	<!-- <link rel="stylesheet" type="text/css" href="https://instantwebapp.com/css/tachyon.shower.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="../support/css/tachyon.shower.css"> -->
+	<link rel="stylesheet" type="text/css" href="https://instantwebapp.com/css/tachyon.shower.css">
 	<link rel="manifest" href="/manifest.webmanifest" />
 	<link rel="apple-touch-icon" href="/apple-icon-180.png" />
 
