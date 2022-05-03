@@ -26,10 +26,11 @@ export const pageStore = writable(''); // `read-only` - from: svelte.dev/tutoria
 
 // Pages:
 export const pageItems = [
-	{ title: "Membership", component: "Membership", bg: "bg-gold" },
-	{ title: "Lines", component: "Lines", bg: "bg-light-green" },
-	{ title: "Tutorials", component: "Tutorials", bg: "bg-light-blue" },
-	{ title: "Shop", component: "Shop", bg: "bg-light-yellow" },
+	{ title: "Index", component: "Index", bg: "bg-red" },
+	{ title: "Partenze", component: "partenze", bg: "bg-gold" },
+	{ title: "Viaggi", component: "Viaggi", bg: "bg-light-green" },
+	{ title: "Chi Siamo", component: "chisiamo", bg: "bg-light-blue" },
+	{ title: "News", component: "news", bg: "bg-light-yellow" },
 ]; // syntax from: svelte.dev/tutorial/each-blocks
 
 

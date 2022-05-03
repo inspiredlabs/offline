@@ -1,0 +1,61 @@
+[
+	"membership": {
+		"hero": {
+			"subheading": "SCOPRIRE E COMPRENDERE IL MONDO E I POPOLI CHE LO ABITANO"
+	    "heading": "Tutti i nostri viagei",
+	    "slug": "erit-est-pulcherrime",
+	    "date": "2021-11-09",
+	    "tags": [
+	      "JavaScript",
+	      "HTML",
+	      "CSS"
+	    ],
+	    "coverImage": {
+	      "url": "https://media.graphassets.com/7QR7SGETTm6vm8g50MTO"
+	    }
+	  },
+		"mission": {},
+		"paginator-offers": {},
+		"paginator-immediate-departures": {},
+		"destinations-carousel": {},
+		"destinations-map": {},
+		"paginator-proposals-cohort": {},
+		"paginator-blog": {},
+		"footer-journey-of-discovery-embelished": {},
+		"form-subscribe-newsletter": {},
+		"footer-partners-carousel": {},
+		"footer-destinations": {},
+		"footer-contacts": {},
+		"footer-socail": {},
+		"footer-terms": {},
+	},
+	"lines": {},
+	"tutorials": {},
+	"shop": {},
+]
+
+
+/* `fetch, GET from php server to sveltekit endpoint`
+
+Presently my consumer looks like this:
+
+```
+<script context="module">
+  export const prerender = true;
+
+  export const load = async ({fetch}) => {
+    const response = await fetch('/posts.json');
+    if (response.ok) {
+      const { posts } = await response.json()
+      return {
+        props: { posts },
+      }
+    }
+  }
+</script>
+```
+
+
+
+
+*/

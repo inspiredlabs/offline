@@ -10,7 +10,7 @@
       }
     }
   }
-  </script>
+</script>
 
 <script>
   // fix: Tachyons with `let title = 'GraphCMS';`
