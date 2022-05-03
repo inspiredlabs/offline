@@ -1,10 +1,6 @@
-<!------------------------------------------------------------------------------
---  for additional, more detailled examples visit                             --
---  https://github.com/rozek/svelte-agnostic-draggable/blob/main/README.md    --
-------------------------------------------------------------------------------->
-
 <style>
   .draggable {
+    z-index: 999999;
 		display:block;
 		position:absolute;
 		left:20px;
@@ -23,25 +19,25 @@
 
 </style>
 
+<script context="module">
+  import { draggable } from 'svelte-agnostic-draggable';
+  import mapTouchToMouseFor from 'svelte-touch-to-mouse';
+</script>
+
 <script>
-  import { draggable } from 'svelte-agnostic-draggable'
-
-/**** map all touch events to mouse events ****/
-
-  import mapTouchToMouseFor from 'svelte-touch-to-mouse'
+  /**** map all touch events to mouse events ****/
   mapTouchToMouseFor('.draggable')
 
-/**** Svelte Event Handling
+/**** Svelte Event Handling ****/
 function onDraggableInit ()    { console.log('Draggable was created') }
 function onDragStart ()        { console.log('dragging started') }
 function onDragMove ()         { console.log('dragging continues') }
 function onDragStop ()         { console.log('dragging was stopped') }
 function onDraggableDestroy () { console.log('Draggable was destroyed') }
-****/
+
 </script>
 
-  <aside class="draggable absolute z-max w5 pa2" use:draggable={{
-    containment:'parent', cursor:'grabbing'
-  }}>Drag me!</aside>
-<!-- `<div on:draggable:init={onDraggableInit} on:draggable:destroy={onDraggableDestroy}
-    on:drag:start={onDragStart} on:drag:move={onDragMove} on:drag:stop={onDragStop} />` -->
+<aside class="draggable absolute z-max w5 pa2" on:draggable:init={onDraggableInit} on:draggable:destroy={onDraggableDestroy}
+on:drag:start={onDragStart} on:drag:move={onDragMove} on:drag:stop={onDragStop}>Drag me!</aside>
+
+<!-- `<div  />` -->
