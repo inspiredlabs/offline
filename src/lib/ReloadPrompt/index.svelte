@@ -1,4 +1,7 @@
 <script lang="ts">
+
+/*********** Drag Inspector *************/
+import { draggable } from '@neodrag/svelte';
 import { dev, browser } from '$app/env';
 import { Workbox, messageSW } from 'workbox-window';
 
@@ -81,7 +84,8 @@ $: toast = offlineReady || needRefresh;
 
 {#if toast}
 <section
-class="z-max fixed pv5 right-1 bottom-1
+use:draggable
+class="z-max absolute pv5 right-1 bottom-1
 w-80 w-80-ns w-80-m w-two-thirds-l
 mr-auto ml-auto " role="alert">
   <article

@@ -1,37 +1,15 @@
-<script context="module">
-  import mapTouchToMouseFor from 'svelte-touch-to-mouse';
-</script>
-
 <script>
-		//draggable debug compoent for layout variables
+	//draggable debug compoent for layout variables
 	import { pageStore, pageItems, currentPageStore, prefLang } from '$lib/stores.js';
 
+
+
 	/*********** Drag Inspector *************/
-	export let left = 0;
-	export let top = 0;
-
-	let moving = false; // $: console.log(moving);
-
-	function onMouseDown() {
-		moving = true;
-	}
-
-	function onMouseMove(e) {
-		if (moving) {
-			left += e.movementX;
-			top += e.movementY;
-		}
-	}
-
-	function onMouseUp() {
-		moving = false;
-	}
+	import { draggable } from '@neodrag/svelte'; // from: github.com/PuruVJ/neodrag/tree/main/packages/svelte#readme from: macos-web.app/
 
 	/****************** REFOCUS ******************/
 
-
-	// bind element svelte and set the focus: youtube.com/watch?v=3_IbFiT0OaU
-	import { onMount } from 'svelte';
+	// bind element svelte and set the focus: youtube.com/watch?v=3_IbFiT0OaU import { onMount } from 'svelte';
 
 	let inputRef; //usage: <input bind:this={inputRef} />
 
@@ -41,15 +19,11 @@
 	// 	}, 333);
 	// });
 
-	function test(e) {
+	//function test(e) {
 		// console.log(document.activeElement); // helpers
 		// `tabindex="-1"` https://javascript.info/focus-blur
-		console.log(e);
-	}
-
-	// function refocus() {
-	// 	inputRef.focus();
-	// }
+		//console.log(e);
+	//}
 
 	function refocus() {
 		inputRef.value = $pageStore;
@@ -58,27 +32,29 @@
 </script>
 ;
 
-<svelte:window
-	on:mouseup={ () => mapTouchToMouseFor('aside') }
-	on:mousemove={ () => mapTouchToMouseFor('aside') }
-	on:mouseup={ onMouseUp }
-	on:mousemove={ onMouseMove }
-/>
 <!-- on:popstate={ (e) => console.log(e) } } -->
 
-<aside
-	on:mousedown={onMouseDown}
-	style="left: {left}px; top: {top}px;"
-	class="absolute z-max w5 pa2"
->
+<!-- debug -->
+<aside use:draggable class="z-max w5 pa2 ">
 
 <!-- <b>{import.meta.env.VITE_APP_TITLE}</b> -->
-<ul>
-	<li>{$pageStore}</li>
-	<li>{$currentPageStore}</li>
-	<li>{$prefLang}</li>
-	<!-- <li>{$searchStore}</li> -->
-</ul>
+<dl class="list pl0">
+	<dt>pageStore:</dt>
+	<dd>{$pageStore}</dd>
+
+	<dt>currentPageStore:</dt>
+	<dd>{$currentPageStore}</dd>
+
+	<!-- <dt>navLang:</dt> -->
+	<!-- <dd>{$navLang}</dd> -->
+
+	<dt>prefLang:</dt>
+	<dd>{$prefLang}</dd>
+
+	<!-- <dt>searchStore:</dt> -->
+	<!-- <dd>{$searchStore}</dd> -->
+</dl>
+
 
 <slot></slot>
 	<!-- <button on:click={ () => history.pop(history.state, '', 'test') }>click me</button>
@@ -96,8 +72,6 @@
 
 
 </aside>
-
-
 
 
 <style>

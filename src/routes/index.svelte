@@ -16,7 +16,7 @@
   export let posts = [];
 	import { pageStore, pageItems, currentPageStore, prefLang } from '$lib/stores.js';
 	import { goto } from '$app/navigation'; // learn: kit.svelte.dev/docs/modules#$app-navigation-goto, because other methods didn't work: github.com/sveltejs/svelte/issues/1241
-	import Loaded from '$lib/Loader.svelte';
+
 	import Section from '$lib/Section.svelte';
 	import Page from '$lib/Page.svelte';
 	import Hero from '$lib/Hero.svelte';
@@ -37,7 +37,7 @@
 	}
 </script> -->
 
-<!-- <Loader /> -->
+
 
 {#each pageItems as item, i}
 <Page
