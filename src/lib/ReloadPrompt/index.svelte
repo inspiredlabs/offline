@@ -118,7 +118,7 @@ mr-auto ml-auto " role="alert">
         pv2 pv2-ns pv4-m pv3-l
         "
         on:click={updateServiceWorker}
-        >Ok, grazie!</button>
+        >Visualizza!</button>
       </div>
       {/if}
       <div class="
@@ -128,7 +128,7 @@ mr-auto ml-auto " role="alert">
         transition hover-bg-white bg-near-white golden-brown
         br2 br2-ns br2-m br3-l
         pv2 pv2-ns pv4-m pv3-l
-        o-70 hover-o-100">Later</button>
+        o-70 hover-o-100">Più&nbsp;tardi</button>
       </div>
 
 
