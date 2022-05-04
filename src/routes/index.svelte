@@ -102,6 +102,7 @@ measure-m measure-wide-l mr-auto ml-auto"><div class="w-40 w-50-ns w-50-m w-20-l
 		<a
 			style="background: transparent!important"
 			href={`#${item.title.toLowerCase().replace(/\s/g, '-')}`}
+			class:active={ $pageStore == `${item.title.toLowerCase().replace(/\s/g, '-')}` ? 'active' : '' }
 			class="link w-third hover-near-white pointer light-gray ts1-dark-gray fw8 ml-auto mr-auto h3 transition relative" title={item.title}>
 			<img class="w4" src="./images/logo.png" alt={item.title} />
 			<!--  w4-ns w-100-m w-two-thirds-l -->
@@ -121,7 +122,7 @@ measure-m measure-wide-l mr-auto ml-auto"><div class="w-40 w-50-ns w-50-m w-20-l
 			on:click={ () => {$pageStore = `${item.title.toLowerCase().replace(/\s/g, '-')}` } }
 			on:click={ () => {$currentPageStore = i } }
 			class:active={ $pageStore == `${item.title.toLowerCase().replace(/\s/g, '-')}` ? 'active' : '' }
-			class="link hover-near-white pointer light-gray ts1-dark-gray pv3 h3 transition relative hover-ltr o-80"
+			class="link hover-near-white pointer light-gray ts1-dark-gray pv3 h3 transition relative hover-ltr o-70"
 			style='width:calc(100% / {pageItems.length -1})'>{@html item.title}</a>
 		{/if}
 	{/each}
@@ -165,7 +166,7 @@ tc">
 			on:click={ () => {$pageStore = `${item.title.toLowerCase().replace(/\s/g, '-')}` } }
 			on:click={ () => {$currentPageStore = i } }
 			class:active={ $pageStore == `${item.title.toLowerCase().replace(/\s/g, '-')}` ? 'active' : '' }
-			class="link hover-near-white pointer light-gray ts1-dark-gray pv3 h3 transition relative hover-ltr o-80"
+			class="link hover-near-white pointer light-gray ts1-dark-gray pv3 h3 transition relative hover-ltr o-70"
 			style='width:calc(100% / {pageItems.length -1})'>{@html item.title}</a>
 		{/if}
 	{/each}
@@ -189,15 +190,11 @@ tc">
 	- from: stackoverflow.com/questions/63315507/svelte-how-can-i-set-the-focus-to-the-previous-next-element-in-the-list-item-wh#63324281
 */
 
-.active img {
-	opacity: 1;
-}
-
 .active {
-	background: black;
+	opacity: 0.9;
 }
 a:focus {
-	background: black;
+	opacity: 1;
 }
 
 /* .active a img {
