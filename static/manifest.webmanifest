@@ -1,6 +1,6 @@
  {
-    "short_name": "Demo PWA",
-    "name": "Svelte-kit Demo PWA",
+    "short_name": "Maurizio Levi",
+    "name": "I Viaggi Di Maurizio Levi",
     "icons": [
       {
         "src": "pwa-192x192.png",
@@ -16,6 +16,6 @@
     "start_url": "/",
     "scope": "/",
     "display": "fullscreen",
-    "theme_color": "#3050f0",
-    "background_color": "#ffffff"
+    "theme_color": "#966417",
+    "background_color": "#e1caab"
   }

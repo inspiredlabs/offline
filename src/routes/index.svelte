@@ -1,6 +1,5 @@
 <script context="module">
   export const prerender = true;
-
   export const load = async ({fetch}) => {
     const response = await fetch('/posts.json');
     if (response.ok) {
@@ -15,27 +14,18 @@
 <script>
   // fix: Tachyons with `let title = 'GraphCMS';`
   export let posts = [];
-
 	import { pageStore, pageItems, currentPageStore, prefLang } from '$lib/stores.js';
-
 	import { goto } from '$app/navigation'; // learn: kit.svelte.dev/docs/modules#$app-navigation-goto, because other methods didn't work: github.com/sveltejs/svelte/issues/1241
-
 	import Loaded from '$lib/Loader.svelte';
 	import Section from '$lib/Section.svelte';
 	import Page from '$lib/Page.svelte';
 	import Hero from '$lib/Hero.svelte';
 	import WarningStripes from '$lib/WarningStripes.svelte';
-
 	//import Banner75 from './Banner-vh-75.svelte'// <Banner75 />
 	import viewport from '$lib/useViewportAction';
-
-
-
 	function min(title) {
 		return title.replace(/\s/g, '-');
 	}
-
-
 </script>
 <!-- <script>
 	pageItems.forEach(settle);
@@ -125,7 +115,7 @@ measure-m measure-wide-l mr-auto ml-auto"><div class="w-40 w-50-ns w-50-m w-20-l
 			on:click={ () => {$currentPageStore = i } }
 			class:active={ $pageStore == `${item.title.toLowerCase().replace(/\s/g, '-')}` ? 'active' : '' }
 			class="link hover-near-white pointer light-gray ts1-dark-gray pv3 h3 transition relative hover-ltr o-80"
-			style='width:calc(100% / {pageItems.length -1})'>{item.title}</a>
+			style='width:calc(100% / {pageItems.length -1})'>{@html item.title}</a>
 		{/if}
 	{/each}
 	</div>
@@ -159,7 +149,7 @@ tc debug">
 			on:click={ () => {$currentPageStore = i } }
 			class:active={ $pageStore == `${item.title.toLowerCase().replace(/\s/g, '-')}` ? 'active' : '' }
 			class="link hover-near-white pointer light-gray ts1-dark-gray pv3 h3 transition relative hover-ltr o-80"
-			style='width:calc(100% / {pageItems.length -1})'>{item.title}</a>
+			style='width:calc(100% / {pageItems.length -1})'>{@html item.title}</a>
 		{/if}
 	{/each}
 
@@ -181,15 +171,12 @@ tc debug">
 /* svelte.dev/repl/253993c0325a4b1b8ff38b4c4ecd2285?version=3.24.1
 	- from: stackoverflow.com/questions/63315507/svelte-how-can-i-set-the-focus-to-the-previous-next-element-in-the-list-item-wh#63324281
 */
-
 .active {
 	background: black;
 }
-
 a:focus {
 	background: black;
 }
-
 /* `.hover-ltr` can not be implemented into Tachyon Shower. It's not atomic. */
 	/* :global(a) {
 		text-decoration: none!important
@@ -210,9 +197,6 @@ a:focus {
 	transform-origin: left top;
 	transform: scale(1, 1);
 }
-
-
-
 /*** simplify this ***/
 .debug * {
 	outline: 1px solid lime;
@@ -232,27 +216,20 @@ a:focus {
 		outline: 1px solid cyan;
 	}
 }
-
 /* amend tachyon.shower.css */
-
 .truncate {
 	display: -webkit-box;
 	white-space: nowrap;
 /* overflow: hidden; */
 	text-overflow: ellipsis;
 }
-
 /**** snapper ****/
-
 /* .y-mandatory {
 	scroll-snap-type: y mandatory;
 } */
-
 /* .y-proximity {
 	scroll-snap-type: y proximity;
 } */
-
-
 /* .snapper {
 	padding-top:15vh;
 	padding-bottom:0vh;
@@ -260,11 +237,9 @@ a:focus {
 	scroll-snap-align: start;
 	scroll-snap-stop: normal;
 } */
-
 :root {
 	--time: 0.6s
 }
-
 /* https://css-tricks.com/almanac/properties/w/will-change/ */
 /* .minno {
 	will-change: transform, scroll-position;
@@ -278,32 +253,25 @@ a:focus {
 	transition: all var(--time) ease,
 	-webkit-transform var(--time) ease;
 	background-clip: padding-box;
-
 	box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
 }
 .minno:focus,
 .minno:hover {
 	-webkit-transform: perspective(1px) scale(1.008);
 	transform: perspective(1px) scale(1.008);
-
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
 }
 .minno:active {
 	-webkit-transform: perspective(1px) scale(1.02);
 	transform: perspective(1px) scale(1.02);
-
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
 }
 */
-
 /* HTML: w-100 h-100 system */
-
 @media all and (orientation:portrait) {
-
 /*   .portrait-dn {
 		display: none;
 	} */
-
 /*   .portrait-vh-50 {
 	height: 50vh;
 	} */
@@ -338,20 +306,16 @@ a:focus {
 		}
 	}
 }
-
 @media all and (orientation:landscape) {
-
 /*   .landscape-db {
 			display: block;
 		} */
 /*   .landscape-dn {
 		display: none;
 	} */
-
 /*   .landscape-vh-66 {
 	height: 66vh;
 	} */
-
 	@media screen and (min-width:30em) {
 /*     .landscape-vh-85-ns {
 		height: 85vh;
@@ -363,7 +327,6 @@ a:focus {
 			display: none;
 		} */
 	}
-
 	@media screen and (min-width:30em) and (max-width:60em) {
 /*     .landscape-vh-66-m {
 		height: 66vh;
@@ -375,7 +338,6 @@ a:focus {
 			display: none;
 		} */
 	}
-
 	@media screen and (min-width:60em) {
 /*     .landscape-vh-85-l {
 		height: 85vh;
@@ -394,26 +356,19 @@ a:focus {
 		}
 	}
 }
-
 :global(html, body) { padding: 0 }
-
-
 /* Hide scrollbar for Chrome, Safari and Opera
 main::-webkit-scrollbar {
 	display: none;
 }*/
-
 /* Hide scrollbar for IE, Edge and Firefox
 main {
 	-ms-overflow-style: none;  /* IE and Edge
 	scrollbar-width: none;  /* Firefox
 }
 */
-
 	/*
 `.backdrop-blur`, is NOT integrated into Tachyonshower.
 */
-
 .backdrop-blur { backdrop-filter: blur(8px) }
-
 </style>

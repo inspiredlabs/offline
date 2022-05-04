@@ -1,4 +1,4 @@
-<figure class="ma0 flex flex-column vh-75 w-100 gold cover" style="background-position:center 40%; background-image: url('https://inspiredlabs.co.uk/levi/images/base64-planck.svg')">
+<figure class="ma0 flex flex-column vh-75 w-100 gold cover" style="background-position:center 40%; background-image: url('./images/base64-planck.svg')">
 
 	<div class="vh-75 flex items-center invert w-100 f5 f4-ns f3-m f3-l measure pa2 measure-ns pa4-ns measure-m pa2-m measure-wide-l pa0-l mr-auto ml-auto">
 		<div class="flex flex-column w-100 pt5 pt6-l">

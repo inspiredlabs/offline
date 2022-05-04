@@ -80,55 +80,99 @@ $: toast = offlineReady || needRefresh;
 </script>
 
 {#if toast}
-<div
-  class="pwa-toast z-max"
-  role="alert"
->
-  <div class="message">
-    {#if offlineReady}
-      <span>
-        App ready to work offline
-      </span>
-      {:else}
-      <span>
-        New content available, click on reload button to update.
-      </span>
-    {/if}
-  </div>
+<section
+class="z-max fixed pv5 right-1 bottom-1
+w-80 w-80-ns w-80-m w-two-thirds-l
+mr-auto ml-auto " role="alert">
+  <article
+	style="background-color:#ebdcc8"
+	class="mw8 center
+	br3 br3-ns br3-m br4-l shadow-5">
+    <div class="dt-ns dt--fixed-ns w-100">
+      <div class="pa3 pa4-ns pr0 dtc-ns v-mid
+			w-100 w-100-ns w-50-m w-60-l">
+        <div>
+          <!-- <pre class="f5 fw4 golden-brown">viaggilevi.com</pre> -->
+          <h2 class="f4 fw6 golden-brown mt0 mb0">I Viaggi Di Maurizio&nbsp;Levi</h2>
+          {#if offlineReady}
+            <p class="black-70 measure lh-copy mv0">Maurizio&nbsp;Levi is saved to your device</p>
+            {:else}
+            <!-- <pre class="f5 fw4 golden-brown">viaggilevi.com</pre> -->
+            <p class="black-70 measure lh-copy mv0">More offers available now&hellip;</p>
+          {/if}
+        </div>
+      </div>
 
-  {#if needRefresh}
-    <button on:click={updateServiceWorker}>See what's new!</button>
-  {/if}
-  <button on:click={close}>Later&hellip;</button>
 
-</div>
+      {#if needRefresh}
+      <div class="pa2 dtc-ns v-mid
+      w-100 w-100-ns w-30-m w-30-l">
+        <!-- pa3 pa4-ns  -->
+        <button class="input-reset pointer bn f4 tc db w-100
+        transition hover-bg-white bg-near-white golden-brown
+        br2 br2-ns br2-m br3-l
+        pv2 pv2-ns pv4-m pv3-l
+        "
+        on:click={updateServiceWorker}
+        >Ok, grazie!</button>
+      </div>
+      {/if}
+      <div class="
+      pa2 dtc-ns v-mid
+      w-100 w-100-ns w-20-m w-10-l">
+        <button on:click={close} class="input-reset pointer bn f4 tc db w-100
+        transition hover-bg-white bg-near-white golden-brown
+        br2 br2-ns br2-m br3-l
+        pv2 pv2-ns pv4-m pv3-l
+        o-70 hover-o-100">Later</button>
+      </div>
+
+
+    </div>
+  </article>
+</section>
 {/if}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 <style>
-.z-max {
-  z-index: 2147483647;
-}
-.pwa-toast {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  margin: 16px;
-  padding: 12px;
-  border: 1px solid #8885;
-  border-radius: 4px;
-  /* z-index: 1; */
-  text-align: left;
-  background-color: aqua;
-  box-shadow: 3px 4px 5px 0px #888;
-}
-.pwa-toast .message {
-  margin-bottom: 8px;
-}
-.pwa-toast button {
-  border: 1px solid #8885;
-  outline: none;
-  margin-right: 5px;
-  border-radius: 2px;
-  padding: 3px 10px;
-}
+	/*
+	`.golden-brown` breadcrumb color is NOT integrated into Tachyonshower.
+	*/
+
+	.golden-brown {
+		color: hsl(36.6, 73.9%, 30%, 1.0);
+	}
 </style>
+
+
+<!-- globe <strong>&#127757;&emsp;</strong> -->
+<!-- iPhone <strong>&#128242;&nbsp;</strong> -->
+<!-- emoji: w3schools.com/charsets/ref_emoji.asp -->
+<!-- alt: codepen.io/maanehunden/pen/LNdepV?editors=1100 -->
+<!-- most basic: codepen.io/vangato/pen/jOEEEmm -->
+
+<!-- - from: tachyons.io/components/forms/newsletter-subscription/index.html -->
+<!-- <section class="z-max fixed pv5 right-1 bottom-1 w-80 w-80-ns w-80-m w-two-thirds-l mr-auto ml-auto pa4-l">
+	<form class="bg-light-red mw7 center pa4 br2-ns ba b--black-10">
+		<fieldset class="cf bn ma0 pa0">
+			<legend class="pa0 f5 f4-ns mb3 black-80">I Viaggi Di Maurizio Levi</legend>
+			<div class="cf">
+				<label class="clip" for="email-address">Email Address</label>
+				<input class="f6 f5-l input-reset bn fl black-80 bg-white pa3 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns" placeholder="Your Email Address" type="text" name="email-address" value="" id="email-address">
+				<input class="f6 f5-l button-reset fl pv3 tc bn bg-animate bg-black-70 hover-bg-black white pointer w-100 w-25-m w-20-l br2-ns br--right-ns" type="submit" value="Subscribe">
+			</div>
+		</fieldset>
+	</form>
+</section> -->

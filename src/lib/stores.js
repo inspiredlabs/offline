@@ -13,14 +13,9 @@ prefLang.subscribe((value) => {
 	}
 });
 
-
-
 export const currentPageStore = writable(0); // `set` and `update` methods in addition to `subscribe`
 
 export const pageStore = writable(''); // `read-only` - from: svelte.dev/tutorial/readable-stores
-
-
-
 
 
 
@@ -29,7 +24,7 @@ export const pageItems = [
 	{ title: "Index", component: "Index", bg: "bg-red" },
 	{ title: "Partenze", component: "partenze", bg: "bg-gold" },
 	{ title: "Viaggi", component: "Viaggi", bg: "bg-light-green" },
-	{ title: "Chi Siamo", component: "chisiamo", bg: "bg-light-blue" },
+	{ title: "Chi&nbsp;Siamo", component: "chisiamo", bg: "bg-light-blue" },
 	{ title: "News", component: "news", bg: "bg-light-yellow" },
 ]; // syntax from: svelte.dev/tutorial/each-blocks
 
