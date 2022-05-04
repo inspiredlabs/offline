@@ -25,8 +25,9 @@ export const pageItems = [
 	{ title: "Partenze", component: "partenze", bg: "bg-gold" },
 	{ title: "Viaggi", component: "Viaggi", bg: "bg-light-green" },
 	{ title: "Chi&nbsp;Siamo", component: "chisiamo", bg: "bg-light-blue" },
-	{ title: "News", component: "news", bg: "bg-light-yellow" },
-]; // syntax from: svelte.dev/tutorial/each-blocks
+];
+// syntax from: svelte.dev/tutorial/each-blocks
+// { title: "News", component: "news", bg: "bg-light-yellow" },
 
 
 /*****

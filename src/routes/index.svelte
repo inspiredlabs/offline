@@ -17,6 +17,8 @@
 	import { pageStore, pageItems, currentPageStore, prefLang } from '$lib/stores.js';
 	import { goto } from '$app/navigation'; // learn: kit.svelte.dev/docs/modules#$app-navigation-goto, because other methods didn't work: github.com/sveltejs/svelte/issues/1241
 
+	import Defs from '$lib/Defs.svelte';
+	import Fraunces from '$lib/Fraunces.svelte';
 	import Section from '$lib/Section.svelte';
 	import Page from '$lib/Page.svelte';
 	import Hero from '$lib/Hero.svelte';
@@ -37,7 +39,9 @@
 	}
 </script> -->
 
-
+<!-- Cheeky way to pass :global(.style)  -->
+<Fraunces />
+<Defs />
 
 {#each pageItems as item, i}
 <Page
@@ -77,7 +81,7 @@
 
 
 
-		//// <h2 class="ttu">{item.title}</h2> ////
+		//// <h2 class="ttu">{@html item.title}</h2> ////
 	</section>
 	{/if}
 
@@ -86,8 +90,8 @@
 
 <!-- disable-scrolling -->
 <nav class="bg-black-60 backdrop-blur fixed z-9999 w-100
-top-0 landscape-top-0-ns landscape-top-0-m landscape-top-0-l flex debug">
-<!-- bg-light-blue -->
+top-0 landscape-top-0-ns landscape-top-0-m landscape-top-0-l flex">
+<!-- debug bg-light-blue -->
 <div class="w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns
 measure-m measure-wide-l mr-auto ml-auto"><div class="w-40 w-50-ns w-50-m w-20-l h3">
 <!-- bg-light-blue -->
@@ -96,9 +100,9 @@ measure-m measure-wide-l mr-auto ml-auto"><div class="w-40 w-50-ns w-50-m w-20-l
 		{#if i === 0}
 		<!-- o-100 -->
 		<a
-			class:active={ $currentPageStore == i ? 'active' : '' }
+			style="background: transparent!important"
 			href={`#${item.title.toLowerCase().replace(/\s/g, '-')}`}
-			class="link w-third hover-near-white pointer light-gray ts1-dark-gray fw8 ml-auto mr-auto h3 transition relative bg-transparent" title={item.title}>
+			class="link w-third hover-near-white pointer light-gray ts1-dark-gray fw8 ml-auto mr-auto h3 transition relative" title={item.title}>
 			<img class="w4" src="./images/logo.png" alt={item.title} />
 			<!--  w4-ns w-100-m w-two-thirds-l -->
 		</a>
@@ -118,16 +122,26 @@ measure-m measure-wide-l mr-auto ml-auto"><div class="w-40 w-50-ns w-50-m w-20-l
 			on:click={ () => {$currentPageStore = i } }
 			class:active={ $pageStore == `${item.title.toLowerCase().replace(/\s/g, '-')}` ? 'active' : '' }
 			class="link hover-near-white pointer light-gray ts1-dark-gray pv3 h3 transition relative hover-ltr o-80"
-			style='width:calc(100% / {pageItems.length -1})'>{item.title}</a>
+			style='width:calc(100% / {pageItems.length -1})'>{@html item.title}</a>
 		{/if}
 	{/each}
 	</div>
 
-	<!-- bg-light-blue -->
 	<!-- based on: svelte.dev/repl/23e375f585584862908e83db520b4c5a?version=3.46.4 -->
-	<div class="w-60 w-50-ns w-50-m w-30-l flex flex-row justify-end tr">
+
+	<!-- <div class="w-60 w-50-ns w-50-m w-30-l flex flex-row justify-end tr">
 		<button on:click={() => ($prefLang === 'it' ? prefLang.set('en') : prefLang.set('it'))} class:b={$prefLang == 'it'} class="truncate hover-near-white pointer light-gray ts1-dark-gray pv3 h3 o-80 bn br0 bg-transparent" title="Italiano">🇮🇹&thinsp;Italiano&emsp;</button>
 		<button on:click={() => ($prefLang === 'it' ? prefLang.set('en') : prefLang.set('it'))} class:b={$prefLang != 'it'} class="truncate hover-near-white pointer light-gray ts1-dark-gray pv3 h3 o-80 bn br0 bg-transparent" title="English">🇬🇧&thinsp;English&thinsp;</button>
+	</div> -->
+	<div class="flex justify-between">
+		<input id="search" type="search" name="search" placeholder="Search"
+data-placeholder="Cerca" style="border-top:none;border-right:none;border-left:none" class="white bg-transition input-reset br0 bb bw2 w-two-thirds w-75-l bg-transparent b--black f6 f5-ns pv3 db pa3 pl1"><!-- ba bg-white-80 -->
+		<button class="white br0 ba bw2 w-third w-25-l bg-black b--black hover-bg-golden-brown transition f6 f5-ns pointer ph0 ">
+<!-- pv3 db pa3  -->
+			<svg viewbox="0 0 24 24" class="h2 no-select">
+				<use xlink:href="#icon-search"></use>
+			</svg>
+		</button>
 	</div>
 
 </div>
@@ -137,8 +151,8 @@ measure-m measure-wide-l mr-auto ml-auto"><div class="w-40 w-50-ns w-50-m w-20-l
 
 <!-- EXCEPT large & landscape -->
 <nav class="bg-black-60 backdrop-blur fixed z-9999 w-100 bottom-0 portrait-bottom-0-ns portrait-bottom-0-m portrait-bottom-0-l landscape-dn-l flex
-tc debug">
-<!-- bg-red -->
+tc">
+<!-- debug bg-red -->
 <div class="w-100 flex justify-between fw6 f4 f3-ns f3-m f3-l lh-copy measure measure-ns measure-m measure-wide-l mr-auto ml-auto">
 <!-- pa2 pa4-ns pa2-m pa0-l -->
 
@@ -174,12 +188,22 @@ tc debug">
 /* svelte.dev/repl/253993c0325a4b1b8ff38b4c4ecd2285?version=3.24.1
 	- from: stackoverflow.com/questions/63315507/svelte-how-can-i-set-the-focus-to-the-previous-next-element-in-the-list-item-wh#63324281
 */
+
+.active img {
+	opacity: 1;
+}
+
 .active {
 	background: black;
 }
 a:focus {
 	background: black;
 }
+
+/* .active a img {
+	background: transparent!important;
+} */
+
 /* `.hover-ltr` can not be implemented into Tachyon Shower. It's not atomic. */
 	/* :global(a) {
 		text-decoration: none!important
