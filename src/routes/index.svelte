@@ -89,16 +89,19 @@
 top-0 landscape-top-0-ns landscape-top-0-m landscape-top-0-l flex debug">
 <!-- bg-light-blue -->
 <div class="w-100 flex items-center justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns
-measure-m measure-wide-l mr-auto ml-auto"><div class="w-40 w-50-ns w-50-m w-20-l pv3 h3">
+measure-m measure-wide-l mr-auto ml-auto"><div class="w-40 w-50-ns w-50-m w-20-l h3">
 <!-- bg-light-blue -->
 	<h1 class="fw6 f4 f3-ns f3-m f3-l mv0 gold">
 	{#each pageItems as item, i}
 		{#if i === 0}
+		<!-- o-100 -->
 		<a
 			class:active={ $currentPageStore == i ? 'active' : '' }
 			href={`#${item.title.toLowerCase().replace(/\s/g, '-')}`}
-			class="link w-third hover-near-white pointer light-gray ts1-dark-gray fw8 ml-auto mr-auto pv3 h3 transition relative hover-ltr o-80" title="GalloBikePark">GBP</a>
-		<!-- Gallo&thinsp;Bike&thinsp;Park -->
+			class="link w-third hover-near-white pointer light-gray ts1-dark-gray fw8 ml-auto mr-auto h3 transition relative bg-transparent" title={item.title}>
+			<img class="w4" src="./images/logo.png" alt={item.title} />
+			<!--  w4-ns w-100-m w-two-thirds-l -->
+		</a>
 		{/if}
 	{/each}
 	</h1>
@@ -115,7 +118,7 @@ measure-m measure-wide-l mr-auto ml-auto"><div class="w-40 w-50-ns w-50-m w-20-l
 			on:click={ () => {$currentPageStore = i } }
 			class:active={ $pageStore == `${item.title.toLowerCase().replace(/\s/g, '-')}` ? 'active' : '' }
 			class="link hover-near-white pointer light-gray ts1-dark-gray pv3 h3 transition relative hover-ltr o-80"
-			style='width:calc(100% / {pageItems.length -1})'>{@html item.title}</a>
+			style='width:calc(100% / {pageItems.length -1})'>{item.title}</a>
 		{/if}
 	{/each}
 	</div>
