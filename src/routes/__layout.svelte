@@ -90,7 +90,9 @@ import '../app.css' // <- just import your css: stackoverflow.com/questions/6363
 		<hr>
 		<ul class="list pl0">
 			{#each menu as item }
-				<li>{item.link}</li>
+				<li>
+					<a class="link pointer" href={item.link}>{item.title}</a>
+				</li>
 			{/each}
 		</ul>
 	</InspectorGadget>

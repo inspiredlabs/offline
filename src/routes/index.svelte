@@ -13,9 +13,10 @@ export const load = async ({fetch}) => {
 </script>
 
 <script>
+	// export let posts = []; // learn: see Stringify below
+
   // fix: Tachyons with `let title = 'GraphCMS';`
-  export let posts = [];
-	import { pageStore, pageItems, currentPageStore, prefLang } from '$lib/stores.js';
+  import { pageStore, pageItems, currentPageStore, prefLang } from '$lib/stores.js';
 	import { goto } from '$app/navigation'; // learn: kit.svelte.dev/docs/modules#$app-navigation-goto, because other methods didn't work: github.com/sveltejs/svelte/issues/1241
 
 	import Search from '$lib/Search.svelte';
@@ -67,11 +68,12 @@ export const load = async ({fetch}) => {
 			</div>
 		</section>
 
-    <Section>
-      <!-- learn: the replacer function is a whitelist: stackoverflow.com/questions/17537571/second-argument-in-json-stringify-in-javascript#17537621 && Steve Griffith: youtube.com/watch?v=0k4NwimfszA -->
+		<!-- learn: the replacer function is a whitelist: stackoverflow.com/questions/17537571/second-argument-in-json-stringify-in-javascript#17537621 && Steve Griffith: youtube.com/watch?v=0k4NwimfszA -->
+    <!-- <Section>
       <pre>{JSON.stringify(posts, null, 2)}</pre>
-    </Section>
-	{:else }
+    </Section> -->
+
+		{:else }
 
 	<section
 		class="h5 w-100 flex justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto">
