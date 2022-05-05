@@ -1,14 +1,15 @@
 <script context="module">
-  export const prerender = true;
-  export const load = async ({fetch}) => {
-    const response = await fetch('/posts.json');
-    if (response.ok) {
-      const { posts } = await response.json()
-      return {
-        props: { posts },
-      }
-    }
-  }
+/******** GraphCMS POSTS **********/
+export const prerender = true;
+export const load = async ({fetch}) => {
+	const response = await fetch('/posts.json');
+	if (response.ok) {
+		const { posts } = await response.json()
+		return {
+			props: { posts },
+		}
+	}
+}
 </script>
 
 <script>

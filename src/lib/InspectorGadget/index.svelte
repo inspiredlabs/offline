@@ -38,7 +38,7 @@
 <!-- debug -->
 <aside
 use:draggable
-class="grab z-max w5 pa2"
+class="grab z-max w5 pa2 code f7 debug"
 on:mousedown="{() => current = 'gadget'}"
 on:focus="{() => current = 'gadget'}"
 on:mouseover="{() => current = ''}"
@@ -46,21 +46,21 @@ on:mouseup="{() => current = ''}"
 class:grabbing="{current == 'gadget' ? 'gadget' : ''}">
 
 <!-- <b>{import.meta.env.VITE_APP_TITLE}</b> -->
-<dl class="list pl0">
-	<dt>pageStore:</dt>
-	<dd>{$pageStore}</dd>
+<dl class="list pl0 w-100">
+	<dt class="silver dib w-50 ma0">pageStore:</dt>
+	<dd class="silver dib w-50 ma0 b tr">{$pageStore}</dd>
 
-	<dt>currentPageStore:</dt>
-	<dd>{$currentPageStore}</dd>
+	<dt class="dib w-50 ma0">currentPageStore:</dt>
+	<dd class="dib w-50  ma0 b tr">{$currentPageStore}</dd>
 
-	<!-- <dt>navLang:</dt> -->
-	<!-- <dd>{$navLang}</dd> -->
+<!-- <dt>navLang:</dt> -->
+<!-- <dd>{$navLang}</dd> -->
+	<dt class="silver dib w-50 ma0">prefLang:</dt>
+	<dd class="silver dib w-50 ma0 b tr">{$prefLang}</dd>
+	<hr>
 
-	<dt>prefLang:</dt>
-	<dd>{$prefLang}</dd>
-
-	<dt>searchStore:</dt>
-	<dd>{$searchStore}</dd>
+	<dt class="dib w-50 ma0">searchStore:</dt>
+	<dd class="dib w-50 ma0 b tr">{$searchStore}</dd>
 </dl>
 
 
@@ -83,6 +83,7 @@ class:grabbing="{current == 'gadget' ? 'gadget' : ''}">
 
 
 <style>
+
 	aside {
 		-webkit-touch-callout:none;
 		-ms-touch-action:none; touch-action:none;
@@ -91,4 +92,5 @@ class:grabbing="{current == 'gadget' ? 'gadget' : ''}">
 		background: rgba(255, 255, 0, 0.8);
 		position: absolute;
 	}
+
 </style>

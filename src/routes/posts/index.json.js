@@ -6,13 +6,17 @@ export const get = async () => {
 		const query = gql`
 			query Posts {
 				posts {
-					title
-					slug
-					date
-					tags
-					coverImage {
+					src {
 						url
 					}
+					event
+					date
+					duration
+					country
+					location
+					pp
+					participants
+					slug
 				}
 			}
 		`

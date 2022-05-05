@@ -103,7 +103,7 @@ mr-auto ml-auto " role="alert">
 	br3 br3-ns br3-m br4-l shadow-5">
     <div class="dt-ns dt--fixed-ns w-100">
       <div class="pa3 pa4-ns pr0 dtc-ns v-mid
-			w-100 w-100-ns w-50-m w-60-l">
+			w-100 w-100-ns w-50-m w-50-l">
         <div>
           <!-- <pre class="f5 fw4 golden-brown">viaggilevi.com</pre> -->
           <h2 class="f4 fw6 golden-brown mt0 mb0">I Viaggi Di Maurizio&nbsp;Levi</h2>
@@ -132,7 +132,7 @@ mr-auto ml-auto " role="alert">
       {/if}
       <div class="
       pa2 dtc-ns v-mid
-      w-100 w-100-ns w-20-m w-10-l">
+      w-100 w-100-ns w-20-m w-20-l">
         <button on:click={close} class="input-reset pointer bn f4 tc db w-100
         transition hover-bg-white bg-near-white golden-brown
         br2 br2-ns br2-m br3-l

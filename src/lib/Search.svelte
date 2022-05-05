@@ -23,7 +23,7 @@
 	type="text"
 	name="search"
 	placeholder="Cerca"
-	class="f4 white input-reset br0 bt-0 br-0 bl-0 bb bw2 b--black w-two-thirds w-75-l bg-transparent pv3 db pa3 pl1 transition"><!-- f5 f5-ns f6-m f4-l white ba bg-white-80 -->
+	class="ml3 f4 white input-reset br0 bt-0 br-0 bl-0 bb bw2 b--black w-two-thirds w-75-l bg-transparent pv3 db pa3 pl1 transition"><!-- f5 f5-ns f6-m f4-l white ba bg-white-80 -->
 
 	<button
 	class="gray hover-white transition br0 bt-0 br-0 bl-0 bb bw2 b--black pointer f5 bg-transparent ph2"

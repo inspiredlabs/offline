@@ -18,17 +18,47 @@ for(let path in modules) {
 console.log(allMenu);
 </script-->
 <script context="module">
+	/******** GET ALL ROUTES AND PAGES **********/
+	// learn: this must be `__layout.svelte: youtube.com/watch?v=Y_NE2R3HuOU&t=482s
+	const modules = import.meta.glob("./**.svelte");
+
+	let allMenu = [];
+
+	for (let path in modules) {
+		let cleanPath = path.replace(".svelte", "").replace("./", "/");
+		allMenu.push({
+			title: cleanPath.substring(cleanPath.indexOf("/") + 1),
+			link: cleanPath.includes ("index")
+				? cleanPath.replace("index", "")
+				: cleanPath,
+		});
+	}
+
+	export const load = async() => {
+		const menu = await Promise.all(allMenu);
+		return {
+			props: {
+				menu,
+			}
+		}
+	}
+
+
+
+
 // learn: FOUC: github.com/sveltejs/kit/issues/1530
 import '../app.css' // <- just import your css: stackoverflow.com/questions/63637662/add-js-css-files-to-svelte-component
 </script>
 
 <script>
+	/******** GET ALL ROUTES AND PAGES **********/
+	export let menu;
 
 	// learn: Just for the record, the key thing using SSR is that pages don't reload as long as routes shares the same __layout.svelte. –- from: stackoverflow.com/questions/71185085/sveltekit-hash-based-routing
 
 	import Defs from '$lib/Defs.svelte';
 	import ReloadPrompt from '$lib/ReloadPrompt/index.svelte';
-	import InspectorGadget from '$lib/InspectorGadget.svelte';
+	import InspectorGadget from '$lib/InspectorGadget/index.svelte';
 
 	let main;
 
@@ -56,7 +86,14 @@ import '../app.css' // <- just import your css: stackoverflow.com/questions/6363
 	<slot></slot>
 	<Defs />
 	<ReloadPrompt />
-	<InspectorGadget />
+	<InspectorGadget>
+		<hr>
+		<ul class="list pl0">
+			{#each menu as item }
+				<li>{item.link}</li>
+			{/each}
+		</ul>
+	</InspectorGadget>
 </main>
 
 <style>
