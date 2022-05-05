@@ -15,6 +15,7 @@ prefLang.subscribe((value) => {
 
 export const currentPageStore = writable(0); // `set` and `update` methods in addition to `subscribe`
 
+export const searchStore = writable(''); // consider: youtube.com/watch?v=6uNwXEyIGI4
 export const pageStore = writable(''); // `read-only` - from: svelte.dev/tutorial/readable-stores
 
 

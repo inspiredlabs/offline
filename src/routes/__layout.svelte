@@ -26,6 +26,7 @@ import '../app.css' // <- just import your css: stackoverflow.com/questions/6363
 
 	// learn: Just for the record, the key thing using SSR is that pages don't reload as long as routes shares the same __layout.svelte. –- from: stackoverflow.com/questions/71185085/sveltekit-hash-based-routing
 
+	import Defs from '$lib/Defs.svelte';
 	import ReloadPrompt from '$lib/ReloadPrompt/index.svelte';
 	import InspectorGadget from '$lib/InspectorGadget.svelte';
 
@@ -53,6 +54,7 @@ import '../app.css' // <- just import your css: stackoverflow.com/questions/6363
 
 <main class="charcoal flex flex-auto nw-100 vh-100 x-mandatory w-100 overflow-x-scroll touch-scroll" tabindex="-1" bind:this={main}>
 	<slot></slot>
+	<Defs />
 	<ReloadPrompt />
 	<InspectorGadget />
 </main>

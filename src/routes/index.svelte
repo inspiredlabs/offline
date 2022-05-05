@@ -17,7 +17,7 @@
 	import { pageStore, pageItems, currentPageStore, prefLang } from '$lib/stores.js';
 	import { goto } from '$app/navigation'; // learn: kit.svelte.dev/docs/modules#$app-navigation-goto, because other methods didn't work: github.com/sveltejs/svelte/issues/1241
 
-	import Defs from '$lib/Defs.svelte';
+	import Search from '$lib/Search.svelte';
 	import Fraunces from '$lib/Fraunces.svelte';
 	import Section from '$lib/Section.svelte';
 	import Page from '$lib/Page.svelte';
@@ -41,7 +41,6 @@
 
 <!-- Cheeky way to pass :global(.style)  -->
 <Fraunces />
-<Defs />
 
 {#each pageItems as item, i}
 <Page
@@ -103,8 +102,9 @@ measure-m measure-wide-l mr-auto ml-auto"><div class="w-40 w-50-ns w-50-m w-20-l
 			style="background: transparent!important"
 			href={`#${item.title.toLowerCase().replace(/\s/g, '-')}`}
 			class:active={ $pageStore == `${item.title.toLowerCase().replace(/\s/g, '-')}` ? 'active' : '' }
+			draggable="false"
 			class="link w-third hover-near-white pointer light-gray ts1-dark-gray fw8 ml-auto mr-auto h3 transition relative" title={item.title}>
-			<img class="w4" src="./images/logo.png" alt={item.title} />
+				<img draggable="false" class="w4" src="./images/logo.png" alt={item.title} />
 			<!--  w4-ns w-100-m w-two-thirds-l -->
 		</a>
 		{/if}
@@ -122,6 +122,7 @@ measure-m measure-wide-l mr-auto ml-auto"><div class="w-40 w-50-ns w-50-m w-20-l
 			on:click={ () => {$pageStore = `${item.title.toLowerCase().replace(/\s/g, '-')}` } }
 			on:click={ () => {$currentPageStore = i } }
 			class:active={ $pageStore == `${item.title.toLowerCase().replace(/\s/g, '-')}` ? 'active' : '' }
+			draggable="false"
 			class="link hover-near-white pointer light-gray ts1-dark-gray pv3 h3 transition relative hover-ltr o-70"
 			style='width:calc(100% / {pageItems.length -1})'>{@html item.title}</a>
 		{/if}
@@ -134,16 +135,8 @@ measure-m measure-wide-l mr-auto ml-auto"><div class="w-40 w-50-ns w-50-m w-20-l
 		<button on:click={() => ($prefLang === 'it' ? prefLang.set('en') : prefLang.set('it'))} class:b={$prefLang == 'it'} class="truncate hover-near-white pointer light-gray ts1-dark-gray pv3 h3 o-80 bn br0 bg-transparent" title="Italiano">🇮🇹&thinsp;Italiano&emsp;</button>
 		<button on:click={() => ($prefLang === 'it' ? prefLang.set('en') : prefLang.set('it'))} class:b={$prefLang != 'it'} class="truncate hover-near-white pointer light-gray ts1-dark-gray pv3 h3 o-80 bn br0 bg-transparent" title="English">🇬🇧&thinsp;English&thinsp;</button>
 	</div> -->
-	<div class="flex justify-between">
-		<input id="search" type="search" name="search" placeholder="Search"
-data-placeholder="Cerca" style="border-top:none;border-right:none;border-left:none" class="white bg-transition input-reset br0 bb bw2 w-two-thirds w-75-l bg-transparent b--black f6 f5-ns pv3 db pa3 pl1"><!-- ba bg-white-80 -->
-		<button class="white br0 ba bw2 w-third w-25-l bg-black b--black hover-bg-golden-brown transition f6 f5-ns pointer ph0 ">
-<!-- pv3 db pa3  -->
-			<svg viewbox="0 0 24 24" class="h2 no-select">
-				<use xlink:href="#icon-search"></use>
-			</svg>
-		</button>
-	</div>
+	<Search />
+
 
 </div>
 </nav>
@@ -166,6 +159,7 @@ tc">
 			on:click={ () => {$pageStore = `${item.title.toLowerCase().replace(/\s/g, '-')}` } }
 			on:click={ () => {$currentPageStore = i } }
 			class:active={ $pageStore == `${item.title.toLowerCase().replace(/\s/g, '-')}` ? 'active' : '' }
+			draggable="false"
 			class="link hover-near-white pointer light-gray ts1-dark-gray pv3 h3 transition relative hover-ltr o-70"
 			style='width:calc(100% / {pageItems.length -1})'>{@html item.title}</a>
 		{/if}

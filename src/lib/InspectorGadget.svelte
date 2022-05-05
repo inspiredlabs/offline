@@ -1,11 +1,12 @@
 <script>
 	//draggable debug compoent for layout variables
-	import { pageStore, pageItems, currentPageStore, prefLang } from '$lib/stores.js';
+	import { searchStore, pageStore, pageItems, currentPageStore, prefLang } from '$lib/stores.js';
 
 
 
 	/*********** Drag Inspector *************/
 	import { draggable } from '@neodrag/svelte'; // from: github.com/PuruVJ/neodrag/tree/main/packages/svelte#readme from: macos-web.app/
+	let current = 'gadget';
 
 	/****************** REFOCUS ******************/
 
@@ -30,12 +31,19 @@
 	}
 
 </script>
-;
+
 
 <!-- on:popstate={ (e) => console.log(e) } } -->
 
 <!-- debug -->
-<aside use:draggable class="z-max w5 pa2 ">
+<aside
+use:draggable
+class="grab z-max w5 pa2"
+on:mousedown="{() => current = 'gadget'}"
+on:focus="{() => current = 'gadget'}"
+on:mouseover="{() => current = ''}"
+on:mouseup="{() => current = ''}"
+class:grabbing="{current == 'gadget' ? 'gadget' : ''}">
 
 <!-- <b>{import.meta.env.VITE_APP_TITLE}</b> -->
 <dl class="list pl0">
@@ -51,8 +59,8 @@
 	<dt>prefLang:</dt>
 	<dd>{$prefLang}</dd>
 
-	<!-- <dt>searchStore:</dt> -->
-	<!-- <dd>{$searchStore}</dd> -->
+	<dt>searchStore:</dt>
+	<dd>{$searchStore}</dd>
 </dl>
 
 
@@ -79,7 +87,7 @@
 		-webkit-touch-callout:none;
 		-ms-touch-action:none; touch-action:none;
 		user-select: none;
-		cursor: move;
+		/* cursor: move; */
 		background: rgba(255, 255, 0, 0.8);
 		position: absolute;
 	}

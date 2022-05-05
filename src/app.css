@@ -11,8 +11,15 @@
 /*` $style.Content | replaceRE `\/\*(.*)\*\/` `$style` | safeCSS ` */
 
 
-/* 28.06.20 .name 	           description               thing: `x`			*/
-/* 06.10.20 .shadow-N-hover    Vertical box-shadow       card  hover: `box-shadow: none|h-offset v-offset blur spread color |inset|initial|inherit;` */
+/* 28.06.20 .name 	           description                 thing: `x`			*/
+
+
+
+/* 05.05.22 .ttt              Text Transform Titlecase                    */
+/* 05.05.22 .golden-brown     Maurizio Levi fill colour                   */
+/* 05.05.22 .inherit          SVG fill colour                             */
+/* 05.05.22 .grab, .grabbing, etc pointer styles           search: `w3schools.com/csSref/pr_class_cursor.asp` */
+/* 06.10.20 .shadow-N-hover    Vertical box-shadow         card  hover: `box-shadow: none|h-offset v-offset blur spread color |inset|initial|inherit;` */
 /* 28.06.20 .blockquote 	     avoid collisions            rename: `blockquote`			*/
 /* 28.06.20 .prussia… 	                                   rename/addition					*/
 /* 30.01.20 .ds2-dark-gray… 	filter: drop-shadow(0px 0.625rem 0.625rem #333);    	*/
@@ -2709,6 +2716,10 @@ code {
 .ttn {
   text-transform: none;
 }
+.ttt:first-letter {
+  text-transform: capitalize;
+}
+
 .f-6,
 .f-headline {
   font-size: 6rem;
@@ -2885,6 +2896,44 @@ code {
   -webkit-transform: perspective(1px) scale(0.95);
   transform: perspective(1px) scale(0.95);
 }
+
+/* try: w3schools.com/csSref/pr_class_cursor.asp */
+.alias {cursor: alias;}
+.all-scroll {cursor: all-scroll;}
+.auto {cursor: auto;}
+.cell {cursor: cell;}
+.context-menu {cursor: context-menu;}
+.col-resize {cursor: col-resize;}
+.copy {cursor: copy;}
+.crosshair {cursor: crosshair;}
+.default {cursor: default;}
+.e-resize {cursor: e-resize;}
+.ew-resize {cursor: ew-resize;}
+.grab {cursor: grab;}
+.grabbing {cursor: grabbing;}
+.help {cursor: help;}
+.move {cursor: move;}
+.n-resize {cursor: n-resize;}
+.ne-resize {cursor: ne-resize;}
+.nesw-resize {cursor: nesw-resize;}
+.ns-resize {cursor: ns-resize;}
+.nw-resize {cursor: nw-resize;}
+.nwse-resize {cursor: nwse-resize;}
+.no-drop {cursor: no-drop;}
+.none {cursor: none;}
+.not-allowed {cursor: not-allowed;}
+.progress {cursor: progress;}
+.row-resize {cursor: row-resize;}
+.s-resize {cursor: s-resize;}
+.se-resize {cursor: se-resize;}
+.sw-resize {cursor: sw-resize;}
+.text {cursor: text;}
+/* .url {cursor: url(myBall.cur),auto;} */
+.w-resize {cursor: w-resize;}
+.wait {cursor: wait;}
+.zoom-in {cursor: zoom-in;}
+.zoom-out {cursor: zoom-out;}
+
 .pointer:hover,
 .shadow-hover {
   cursor: pointer;
@@ -7296,7 +7345,10 @@ details[open] summary~* {
   /*#4a4a4a*/
   --lit-cta: gainsboro;
   /*gray*/
+
   /* Colour */
+  --golden-brown: hsl(36.6, 73.9%, 30%, 1.0); /* hsl(36.6, 73.9%, 30%, 1.0); /* hsl(36.6, 73.9%, 30%, 1.0) WARNING: too low-contrast: contrast-ratio.com/#%23966417-on-%23e1caab; edited: colorhexa.com/855914#conversion */
+
   --charcoal: #4a4a4a;
   --dark-beige: rgba(234,219,160,var(--ten));
   /* #eadba0; */
@@ -7844,9 +7896,25 @@ input:-webkit-autofill {
   height: 0.7rem;
 }
 
-/*</style>*/
 
-/*<style>*/
+
+
+/*------------------- Maurizio Levi Colourscheme ---------------------*/
+
+.golden-brown {
+  color: var(--golden-brown);
+  fill: var(--golden-brown);
+}
+
+.hover-golden-brown:active,
+.hover-golden-brown:hover,
+.hover-golden-brown:focus { color: var(--golden-brown); }
+
+.b--golden-brown { border-color: var(--golden-brown); }
+
+.hover-bg-golden-brown:active,
+.hover-bg-golden-brown:hover,
+.hover-bg-golden-brown:focus { background-color: var(--golden-brown); }
 
 /*------------------- Generic ---------------------*/
 .beige {
@@ -9470,8 +9538,10 @@ input:focus::placeholder {
 }
 */
 .inherit {
-  color: inherit;
+  color:inherit;
+  fill: currentColor;
 }
+
 .bg-inherit {
   background-color: inherit;
 }

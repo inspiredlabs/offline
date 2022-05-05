@@ -2,6 +2,9 @@
 
 /*********** Drag Inspector *************/
 import { draggable } from '@neodrag/svelte';
+let current = 'gadget';
+
+
 import { dev, browser } from '$app/env';
 import { Workbox, messageSW } from 'workbox-window';
 
@@ -80,12 +83,18 @@ if (!dev && browser) {
 }
 
 $: toast = offlineReady || needRefresh;
+
 </script>
 
 {#if toast}
 <section
 use:draggable
-class="z-max absolute pv5 right-1 bottom-1
+on:mousedown="{() => current = 'gadget'}"
+on:focus="{() => current = 'gadget'}"
+on:mouseover="{() => current = ''}"
+on:mouseup="{() => current = ''}"
+class:grabbing="{current == 'gadget' ? 'gadget' : ''}"
+class="grab z-max absolute pv5 right-1 bottom-1
 w-80 w-80-ns w-80-m w-two-thirds-l
 mr-auto ml-auto " role="alert">
   <article
@@ -151,13 +160,6 @@ mr-auto ml-auto " role="alert">
 
 
 <style>
-	/*
-	`.golden-brown` breadcrumb color is NOT integrated into Tachyonshower.
-	*/
-
-	.golden-brown {
-		color: hsl(36.6, 73.9%, 30%, 1.0);
-	}
 </style>
 
 
