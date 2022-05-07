@@ -1,8 +1,8 @@
-<script context="module">
+<!-- <script context="module">
 /******** GraphCMS POSTS **********/
 export const prerender = true;
 export const load = async ({fetch}) => {
-	const response = await fetch('/posts.json');
+	const response = await fetch('./viaggi.json');
 	if (response.ok) {
 		const { posts } = await response.json()
 		return {
@@ -10,7 +10,7 @@ export const load = async ({fetch}) => {
 		}
 	}
 }
-</script>
+</script> -->
 
 <script>
 	// export let posts = []; // learn: see Stringify below
