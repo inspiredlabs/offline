@@ -87,7 +87,7 @@ import '../app.css' // <- just import your css: stackoverflow.com/questions/6363
 	<slot></slot>
 	<Defs />
 	<ReloadPrompt />
-	<InspectorGadget>
+	<!-- <InspectorGadget>
 		<hr>
 		<ul class="list pl0">
 			{#each menu as item }
@@ -97,6 +97,8 @@ import '../app.css' // <- just import your css: stackoverflow.com/questions/6363
 			{/each}
 		</ul>
 	</InspectorGadget>
+-->
+
 </main>
 
 <style>

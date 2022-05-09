@@ -9,9 +9,9 @@
 	id={id}
 	class="nw-100 snap-center w-100 vh-100 {bg}">
 	<!-- flex-column flex flex-none justify-center items-center  -->
-	<div class="h-100 w-100 vh-100 snap-start always-stop overflow-x-scroll smooth-scroll pb5">
+	<div class="h-100 w-100 vh-100 snap-start always-stop overflow-x-scroll smooth-scroll">
 		<slot></slot>
-		<Rows />
+		<!-- <Rows /> -->
 	</div><!-- /Vertical wrapper -->
 </div><!-- /Page id -->
 

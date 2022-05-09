@@ -13,13 +13,13 @@
 
 /* 28.06.20 .name 	           description                 thing: `x`			*/
 
-/* 09.05.22 hr                reset rule req.              `hr`            */
-/* reset based on: stackoverflow.com/questions/6382023/changing-the-color-of-an-hr-element/6382036#6382036 */
 
-/* 09.05.22 .solitare         Maurizio Levi fill colour                   */
+/* 09.05.22 .solitaire, .linen, .cocoa `:active` fill colours             */
+/* 09.05.22 hr                reset rule req.              `hr`           */
+/* reset based on: stackoverflow.com/questions/6382023/changing-the-color-of-an-hr-element/6382036#6382036 */
 /* 05.05.22 .transition-!     Text Transform Titlecase                    */
 /* 05.05.22 .ttt              Text Transform Titlecase                    */
-/* 05.05.22 .golden-brown     Maurizio Levi fill colour                   */
+/* 05.05.22 .golden-brown     Maurizio Levi `:active` fill colour         */
 /* 05.05.22 .inherit          SVG fill colour                             */
 /* 05.05.22 .grab, .grabbing, etc pointer styles           search: `w3schools.com/csSref/pr_class_cursor.asp` */
 /* 06.10.20 .shadow-N-hover    Vertical box-shadow         card  hover: `box-shadow: none|h-offset v-offset blur spread color |inset|initial|inherit;` */
@@ -7365,7 +7365,11 @@ details[open] summary~* {
   /* Maurizio Levi Colourscheme */
   --golden-brown: hsl(36.6, 73.9%, 30%, var(--alpha)); /* hsl(36.6, 73.9%, 30%, 1.0); /* hsl(36.6, 73.9%, 30%, 1.0) WARNING: too low-contrast: contrast-ratio.com/#%23966417-on-%23e1caab; edited: colorhexa.com/855914#conversion */
   --solitaire: hsl(34, 47.0%, 85%, var(--alpha)); /* colordesigner.io/convert/hextohsl converted from: htmlcsscolor.com/hex/EBDCC8 */
+  /* --fawn: *//* quora.com/What-colour-is-fawn is more gray */
+  /* --oyster: *//* oyster, more pink */
+  /* --caramel: *//* caramel, more orange */
   --linen: hsl(32, 60.0%, 95.1%, var(--alpha)); /* htmlcsscolor.com/hex/faf3eb */
+  --cocoa: hsl(30, 28.95%, 14.9%, var(--alpha)); /* htmlcsscolor.com/hex/31261B */
 
 
 
@@ -7918,26 +7922,7 @@ input:-webkit-autofill {
 
 
 
-/*
-CSS SHAPES DO NOT GO HERE!
-<!--
-  <div class="cf w-100 h2 debug">
-  	<aside class="green triangle-up h1 w2"></aside>
-  </div>
 
-  <div class="cf w-100 h2 debug">
-  	<aside class="dark-blue triangle-down h1 w2"></aside>
-  </div>
-
-  <div class="cf w-100 h2 debug">
-  	<aside class="dark-pink triangle-left h2 w1"></aside>
-  </div>
-
-  <div class="cf w-100 h2 debug">
-  	<aside class="blue triangle-right h2 w1"></aside>
-  </div>
--->
-*/
 /*------------------- Maurizio Levi Colourscheme ---------------------*/
 /* NOTE: `color:active` is not from tachyons-tldr.vercel.app/#/tools */
 
@@ -7946,17 +7931,20 @@ CSS SHAPES DO NOT GO HERE!
   fill: var(--golden-brown);
 }
 
-/*.hover-golden-brown:active,*/
+.hover-golden-brown:active,
 .hover-golden-brown:hover,
-.hover-golden-brown:focus { color: var(--golden-brown); }
-
-.b--golden-brown { border-color: var(--golden-brown); }
-
-/*.hover-bg-golden-brown:active,*/
-.hover-bg-golden-brown:hover,
-.hover-bg-golden-brown:focus {
+.hover-golden-brown:focus {
   color: var(--golden-brown);
   fill: var(--golden-brown);
+}
+
+.bg-golden-brown { background-color: var(--golden-brown); }
+.b--golden-brown { border-color: var(--golden-brown); }
+
+.hover-bg-golden-brown:active,
+.hover-bg-golden-brown:hover,
+.hover-bg-golden-brown:focus {
+  background-color: var(--golden-brown);
 }
 
 
@@ -7965,21 +7953,30 @@ CSS SHAPES DO NOT GO HERE!
   fill: var(--solitaire);
 }
 
-.bg-solitaire { background-color: var(--solitaire); }
-.b--solitaire { border-color: var(--solitaire); }
-
-/*.hover-solitaire:active,*/
+.hover-solitaire:active,
 .hover-solitaire:hover,
 .hover-solitaire:focus {
   color: var(--solitaire);
   fill: var(--solitaire);
 }
 
-/*.hover-bg-solitaire:active,*/
+.bg-solitaire { background-color: var(--solitaire); }
+.b--solitaire { border-color: var(--solitaire); }
+
+.hover-bg-solitaire:active,
 .hover-bg-solitaire:hover,
-.hover-bg-solitaire:focus { background-color: var(--solitaire); }
+.hover-bg-solitaire:focus {
+  background-color: var(--solitaire);
+}
 
 .linen {
+  color: var(--linen);
+  fill: var(--linen);
+}
+
+.hover-linen:active,
+.hover-linen:hover,
+.hover-linen:focus {
   color: var(--linen);
   fill: var(--linen);
 }
@@ -7987,16 +7984,33 @@ CSS SHAPES DO NOT GO HERE!
 .bg-linen { background-color: var(--linen); }
 .b--linen { border-color: var(--linen); }
 
-/*.hover-linen:active,*/
-.hover-linen:hover,
-.hover-linen:focus {
-  color: var(--linen);
-  fill: var(--linen);
+.hover-bg-linen:active,
+.hover-bg-linen:hover,
+.hover-bg-linen:focus {
+  background-color: var(--linen);
 }
 
-/*.hover-bg-linen:active,*/
-.hover-bg-linen:hover,
-.hover-bg-linen:focus { background-color: var(--linen); }
+.cocoa {
+  color: var(--cocoa);
+  fill: var(--cocoa);
+}
+
+.hover-cocoa:active,
+.hover-cocoa:hover,
+.hover-cocoa:focus {
+  color: var(--cocoa);
+  fill: var(--cocoa);
+}
+
+.bg-cocoa { background-color: var(--cocoa); }
+.b--cocoa { border-color: var(--cocoa); }
+
+.hover-bg-cocoa:active,
+.hover-bg-cocoa:hover,
+.hover-bg-cocoa:focus {
+  background-color: var(--cocoa);
+}
+
 
 
 /*------------------- Generic ---------------------*/

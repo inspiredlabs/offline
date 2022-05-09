@@ -33,7 +33,7 @@
 	</button>
 
 	<button
-	class="white br0 ba bw2 w-third w-25-l bg-black b--black hover-bg-golden-brown transition f6 f5-ns pointer ph0 ">
+	class="white br0 ba bw2 w-third w-25-l bg-near-black b--black hover-bg-golden-brown transition f6 f5-ns pointer ph0 ">
 <!-- pv3 db pa3  -->
 		<svg viewbox="0 0 24 24" class="h2 no-select">
 			<use xlink:href="#icon-search"></use>
@@ -42,6 +42,10 @@
 </div>
 
 <style>
+
+/* learn: more about the `Maurizio Levi Colourscheme`, which will replace `Tachyon.Shower.css` */
+
+
 /* inherit `input::placeholder` is NOT integrated into Tachyonshower. */
 
 
