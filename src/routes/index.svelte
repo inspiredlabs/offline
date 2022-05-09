@@ -33,7 +33,6 @@
 
 
 
-
 /* note: working with Stefano:
 	- Swagger API: klsgpapi.ramcube.it/swagger/index.html
 	- you'll probably need credentials (then `storeEverything.js`): Protected routes: svelte.dev/repl/c81d8f3dff584065a82b2d3ea7cd4aee?version=3.46.4
@@ -64,125 +63,168 @@
 		 -->
 		<Hero />
 
-		<Section>
+		<Section bg="bg-solitaire">
+			<article class="ph2 ph0-ns ph0-m ph0-l">
 
-		<!-- learn: Slot nesting, do you need clear-fix/`cf`? -->
-      <h4 class="mv0 pv4 f2 f2-ns f1-m f1-l fw2 lh-solid">
-				<small class="golden-brown db tracked-none tracked-ns tracked-m tracked-mega-l f7 f7-ns f5-m f4-l fw5 ttu mv0">Cile</small>
-				<span class="fraunces">Patagonia e Deserto&nbsp;Atacama</span><br>
-			</h4>
-			<div class="fl w-100 w-50-m w-50-l lh-copy measure ">
-				<p class="pr4 fw5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna&nbsp;aliqua.</p>
+			<!-- learn: Slot nesting, do you need clear-fix/`cf`? -->
+				<h4 class="mv0 pv4 f2 f2-ns f1-m f1-l fw2 lh-solid">
+					<small class="golden-brown db tracked-none tracked-ns tracked-m tracked-mega-l f7 f7-ns f5-m f4-l fw5 ttu mv0">Cile</small>
+					<span class="fraunces">Patagonia e Deserto&nbsp;Atacama</span><br>
+				</h4>
+				<div class="fl w-100 w-50-m w-50-l lh-copy measure ">
+					<p class="pr4 fw5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna&nbsp;aliqua.</p>
+				</div>
+				<div class="fl w-100 w-50-m w-50-l lh-copy measure">
+					<p class="">Lorem ipsum dolor sit amet, consectetur
+		adipiscing elit, sed do eiusmod tempor
+		incididunt ut labore et dolore magna
+		aliqua. Ut enim ad minim veniam, quis
+		nostrud exercitation ullamco laboris nisi
+		ut aliquip ex ea commodo consequat.
+		<br><br>
+		Duis aute irure dolor in reprehenderit in
+		voluptate velit esse cillum dolore eu
+		fugiat nulla pariatur. Excepteur sint
+		occaecat cupidatat non proident, sunt in
+		culpa qui officia deserunt mollit anim id
+		est laborum.</p>
+				</div>
+
+				<!-- `Trip Info` component: -->
+
+				<h5 class="f3 f2-ns f2-m f2-l fw5"><span class="fraunces">Informazioni</span><span class="fraunces-i">&nbsp;di viaggio</span></h5>
+
+				<div class="fl w-100 w-third-m w-third-l f6 lh-copy measure ">
+					<small class="golden-brown db tracked-none tracked-ns tracked-m tracked-mega-l f7 f7-ns f5-m f4-l fw5 ttu mv0 pb2">clima</small>
+					<hr class="inherit b--golden-brown"/>
+					<p class="pr4">
+					Nell'inverno australe (da Giugno a
+		Settembre) temperature molto
+		fredde di notte e tiepide di giorno
+		Nell'estate australe (da Novembre
+		a Febbraio) temperature tiepide
+		sull'altopiano e calde sul livello del
+		mare, con rischio di annuvolamenti
+		ma piogge rarissime.<br><br>
+		Isola di Pasqua: clima gradevole
+		durante tutto l'anno.<br><br>
+		Patagonia: temperature
+		fresche-fredde nei mesi dell'estate
+		australe.
+					</p>
 			</div>
-			<div class="fl w-100 w-50-m w-50-l lh-copy measure">
-				<p class="">Lorem ipsum dolor sit amet, consectetur
-	adipiscing elit, sed do eiusmod tempor
-	incididunt ut labore et dolore magna
-	aliqua. Ut enim ad minim veniam, quis
-	nostrud exercitation ullamco laboris nisi
-	ut aliquip ex ea commodo consequat.
-	<br><br>
-	Duis aute irure dolor in reprehenderit in
-	voluptate velit esse cillum dolore eu
-	fugiat nulla pariatur. Excepteur sint
-	occaecat cupidatat non proident, sunt in
-	culpa qui officia deserunt mollit anim id
-	est laborum.</p>
-			</div>
+				<div class="fl w-100 w-third-m w-third-l f6 lh-copy measure">
+					<small class="golden-brown db tracked-none tracked-ns tracked-m tracked-mega-l f7 f7-ns f5-m f4-l fw5 ttu mv0 pb2">documentazione</small>
+					<hr class="inherit b--golden-brown"/>
+					<p class="pr4">Passaporto con validità di almeno
+		6 mesi dalla data di partenza.</p>
+				</div>
+				<div class="fl w-100 w-third-m w-third-l ph0 f6 lh-copy measure">
+					<small class="golden-brown db tracked-none tracked-ns tracked-m tracked-mega-l f7 f7-ns f5-m f4-l fw5 ttu mv0 pb2">disp. sanitarie</small>
+					<hr class="inherit b--golden-brown"/>
+					<p class="pr4">Non è richiesta alcuna vaccinazione.</p>
+				</div>
 
-			<!-- `Trip Info` component: -->
+			</article>
+		</Section>
 
-			<h5 class="f3 f2-ns f2-m f2-l fw5"><span class="fraunces">Informazioni</span><span class="fraunces-i">&nbsp;di viaggio</span></h5>
-
-			<div class="fl w-100 w-third-m w-third-l f6 lh-copy measure ">
-				<small class="golden-brown db tracked-none tracked-ns tracked-m tracked-mega-l f7 f7-ns f5-m f4-l fw5 ttu mv0 pb2">clima</small>
-				<hr class="inherit b--golden-brown"/>
-				<p class="pr4">
-				Nell'inverno australe (da Giugno a
-	Settembre) temperature molto
-	fredde di notte e tiepide di giorno
-	Nell'estate australe (da Novembre
-	a Febbraio) temperature tiepide
-	sull'altopiano e calde sul livello del
-	mare, con rischio di annuvolamenti
-	ma piogge rarissime.<br><br>
-	Isola di Pasqua: clima gradevole
-	durante tutto l'anno.<br><br>
-	Patagonia: temperature
-	fresche-fredde nei mesi dell'estate
-	australe.
-				</p>
-		</div>
-			<div class="fl w-100 w-third-m w-third-l f6 lh-copy measure">
-				<small class="golden-brown db tracked-none tracked-ns tracked-m tracked-mega-l f7 f7-ns f5-m f4-l fw5 ttu mv0 pb2">documentazione</small>
-				<hr class="inherit b--golden-brown"/>
-				<p class="pr4">Passaporto con validità di almeno
-	6 mesi dalla data di partenza.</p>
-			</div>
-			<div class="fl w-100 w-third-m w-third-l ph0 f6 lh-copy measure">
-				<small class="golden-brown db tracked-none tracked-ns tracked-m tracked-mega-l f7 f7-ns f5-m f4-l fw5 ttu mv0 pb2">disp. sanitarie</small>
-				<hr class="inherit b--golden-brown"/>
-				<p class="pr4">Non è richiesta alcuna vaccinazione.</p>
-			</div>
-
-			<!------  DECIDI DI PARTIRE Proposte di viaggio, goes here ------>
-	</Section>
-
-	<div class="" style="background-color:#faf3eb">
-	<Section>
-		<article class="highlight db black-70 f5 f4-ns f3-m f3-l pb6 measure ph2 measure-ns ph4-ns measure-m ph2-m measure-wide-l ph0-l mr-auto ml-auto">
+		<Section bg="bg-linen">
+		<!-- learn: this is a paginator: `DECIDI DI PARTIRE Proposte di viaggio` -->
+		<aside class="highlight db black-70 f5 f4-ns f3-m f3-l pv5 measure ph2 measure-ns ph4-ns measure-m ph2-m measure-wide-l ph0-l mr-auto ml-auto">
 
 			<h4 class="mv0 pv4 f2 f2-ns f1-m f1-l fw2 lh-solid">
 				<small class="golden-brown db tracked-none tracked-ns tracked-m tracked-mega-l f7 f7-ns f5-m f4-l fw5 ttu mv0">decidi di partire</small>
 				<span class="fraunces">Proposte</span><span class="fraunces-i">&nbsp;di viaggio</span>
 			</h4>
 
-
-
 			<div class="w-100 flex justify-between flex-column flex-column-ns flex-row-m flex-row-l">
 
-			<!-- <h4 class="mv0 pv4 f2 f2-ns f1-m f1-l fw2 lh-solid">
-				<small class="golden-brown db tracked-none tracked-ns tracked-m tracked-mega-l f7 f7-ns f5-m f4-l fw5 ttu mv0">decidi di partire</small>
-				<span class="fraunces">Proposte</span><span class="fraunces-i">&nbsp;di viaggio</span>
-			</h4> -->
+				{#each posts as { src, event, date, duration, country, location, pp, participants, slug }, i}
+					<a href={slug} class="w-100 w-100-ns w-30-m w5-l link">
+						<figure class="ma0 w-100 f6 mh0 ph3 ph3-ns ph1-m ph3-l pb4 pt5 cover shadow-5-hover transition-bs overflow-hidden"
+						style='background-position: 50% 0; background-image: linear-gradient( rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.50) 100%), url({JSON.stringify(src.url)})'
+						title={location}>
+						<!-- learn: take care of escaped [Object object] strings: stackoverflow.com/questions/25721164/how-to-fix-an-escaped-json-string-javascript#25721227 -->
 
+							<figurecap class="white ts1-dark-gray flex flex-column lh-solid">
+								<time datetime={date} class="f5 f6-ns f7-m f6-l fw7 ttu tracked flex-auto">{@html duration}</time>
+								<!--
+								{#if country.length >= truncate }
+									{@html country.substring(0, truncate)}
+								{:else }
+									{@html country}
+								{/if} -->
 
+								<h5 class="ts fraunces mv0 f-subheadline f1-ns f2-m f1-l fw5 h5 flex-auto">
+									{@html country.length > truncate ? country.substring(0, truncate) + '&hellip;' : country }
+								</h5>
+								<p class="mv0 pb4 f5 f6-ns f7-m f6-l fw7 ttu tracked h2 flex-auto">{@html event}</p>
+								<p class="h3 mv0 pb0 f4 f5-ns f6-m f5-l fw4 flex-auto">{@html location}</p>
+								<div class="flex items-center h4">
+									<h6 class="ts mv0 fraunces fw4 f1 f1-ns f2-m f1-l"><small>€&nbsp;</small><span class="pt0 fw5">{@html pp}</span><small class="pt0 f6 f5-l system">&nbsp;p.p</small>
+									</h6>
+								</div>
+							</figurecap>
+							<div class="pointer br-pill ba bw2 ph3 pv2 bg-black-10 white hover-bg-black-50 transition-bg mr-auto ml-auto db tc w-70 w-100-ns w-90-m w-90-l ts1-dark-gray f5 f5-ns f7-m f5-l" href={slug} title="{event}">Scopri il viaggio</div>
+						</figure>
+					</a>
 
-			{#each posts as { src, event, date, duration, country, location, pp, participants, slug }, i}
-				<a href={slug} class="w-100 w-100-ns w-30-m w5-l link ">
-					<figure class="ma0 w-100 f6 mh0 ph3 ph3-ns ph1-m ph3-l pb4 pt5 cover shadow-5-hover transition-bs overflow-hidden"
-					style='background-position: 50% 0; background-image: linear-gradient( rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.50) 100%), url({JSON.stringify(src.url)})'
-					title={location}>
-					<!-- learn: take care of escaped [Object object] strings: stackoverflow.com/questions/25721164/how-to-fix-an-escaped-json-string-javascript#25721227 -->
-
-						<figurecap class="white ts1-dark-gray flex flex-column lh-solid">
-							<time datetime={date} class="f5 f6-ns f7-m f6-l fw7 ttu tracked flex-auto">{@html duration}</time>
-							<!--
-							{#if country.length >= truncate }
-								{@html country.substring(0, truncate)}
-							{:else }
-								{@html country}
-							{/if} -->
-
-							<h5 class="ts fraunces mv0 f-subheadline f1-ns f2-m f1-l fw5 h5 flex-auto">
-								{@html country.length > truncate ? country.substring(0, truncate) + '&hellip;' : country }
-							</h5>
-							<p class="mv0 pb4 f5 f6-ns f7-m f6-l fw7 ttu tracked h2 flex-auto">{@html event}</p>
-							<p class="h3 mv0 pb0 f4 f5-ns f6-m f5-l fw4 flex-auto">{@html location}</p>
-							<div class="flex items-center h4">
-								<h6 class="ts mv0 fraunces fw4 f1 f1-ns f2-m f1-l"><small>€&nbsp;</small><span class="pt0 fw5">{@html pp}</span><small class="pt0 f6 f5-l system">&nbsp;p.p</small>
-								</h6>
-							</div>
-						</figurecap>
-						<div class="pointer br-pill ba bw2 ph3 pv2 bg-black-10 white hover-bg-black-50 transition-bg mr-auto ml-auto db tc w-70 w-100-ns w-90-m w-90-l ts1-dark-gray f5 f5-ns f7-m f5-l" href={slug} title="{event}">Scopri il viaggio</div>
-					</figure>
-				</a>
 				<!-- fix: {participants} -->
-			{/each}
+				{/each}
 			</div>
+		</aside>
+	</Section>
+
+	<Section bg="bg-linen" id="viaggi-di-scoperta">
+		<article class="highlight db black-70 f5 f4-ns f3-m f3-l lh-copy pb6 measure ph2 measure-ns ph4-ns measure-m ph2-m measure-wide-l ph0-l mr-auto ml-auto">
+			<h4 class="mv0 pv4 f2 f2-ns f1-m f1-l fw2 lh-solid">
+				<small class="golden-brown db tracked-none tracked-ns tracked-m tracked-mega-l f7 f7-ns f5-m f4-l fw5 ttu mv0">i viaggi di maurizio levi</small>
+				<span class="fraunces">Viaggi </span><span class="fraunces-i">di&nbsp;scoperta</span>
+			</h4>
+
+			<!-- usage: `.montage img:nth-child(0)` -->
+			<figure class="cf montage relative top-0 w-100 mr-auto ml-auto">
+				<img class="absolute shadow-5" src="./images/MaurizioLevi_Anteprima.jpg" alt="Maurizio Levi">
+				<img class="absolute shadow-5" src="./images/Levi-Maurizio-768x510.jpg" alt="Maurizio Levi">
+				<img class="absolute shadow-5" src="./images/Maurizio_Levi.jpg" alt="Maurizio Levi">
+			</figure>
+			<div class="fl w-100 w-50-m w-50-l lh-copy measure ">
+				<p class="pr3 fw5">Scegliamo itinerari che sono il frutto di anni di esperienza e sono il meglio possible in quel paese o in quella regione per la durata che&nbsp;è&nbsp;prevista.</p>
+		</div>
+			<div class="fl w-100 w-50-m w-50-l lh-copy measure">
+				<blockquote class="ma0">
+					<p class="">Tutti i nostri viaggi integrano, ciascuno a suo modo, i nostri tre&nbsp;valori: <span class="o-80">natura, cultura e incontri con le&nbsp;popolazioni.</span></p>
+
+		<p class="">Esaminate attentamente i nostri itinerari, cercate di capire dale descrizioni il motivo delle nostre scelte e comprenderete la differenza con quanto proposto da&nbsp;altri.</p>
+
+
+		<cite class="fraunces-i fs-normal tr"><p>
+			<span class="fw5">Maurizio Levi</span> e tutto lo staff de <span class="db">I&nbsp;Viaggi di Maurizio Levi</span>
+			</p>
+		 </cite>
+	<!-- system fw5 -->
+	</blockquote>
+
+	</div>
+		<aside class="fl w-100 lh-copy">
+			<div class="fl w-100 w-third-m w-third-l f6 lh-copy measure ">
+							<aside class="golden-brown diamond h2 w2 mb3 mr-auto ml-auto mt3"></aside>
+					<h5 class="db black-70 fraunces mv0 pb2 tc f4 fw5 h3">Piccoli gruppi</h5>
+				<p class="pr4">Favoriscono la coesione tra i partecipanti, riducono l'impatto sull'ambiente e acilitano 'opportunità di instaurare rapporti con la popolazione locale.</p>
+		</div>
+			<div class="fl w-100 w-third-m w-third-l f6 lh-copy measure">
+				<aside class="golden-brown diamond h2 w2 mb3 mr-auto ml-auto mt3"></aside>
+					<h5 class="db black-70 fraunces mv0 pb2 tc f4 fw5 h3" >Spirito di esplorazione</h5>
+				<p class="pr3">Percorsi accuratamente studiati, con un contenuto culturale in senso ampio, in grado di svelare aspetti inattesi e fuori dagli stereotipi.</p>
+			</div>
+			<div class="fl w-100 w-third-m w-third-l ph0 f6 lh-copy measure">
+							<aside class="golden-brown diamond h2 w2 mb3 mr-auto ml-auto mt3"></aside>
+					<h5 class="db black-70 fraunces mv0 pb2 tc f4 fw5 h3">Cultura dell'incontro</h5>
+				<p class="pr4">Spirito di adattamento e predisposizione mentale verso realtà differenti, da rispettare e apprezzare proprio per la loro unicità.</p>
+			</div>
+		</aside>
 		</article>
 	</Section>
-</div>
 
 
 
@@ -356,6 +398,97 @@ tc">
 
 /****** ^ BREAKOUT PAGINATOR COMPONENT ^ *******/
 
+
+
+/****** $ BREAKOUT ABOUT MONTAGE COMPONENT $ *******/
+
+/*
+About `.montage`, is NOT integrated into Tachyonshower.
+This req. prevent horizontal scroll css: `overflow-x-hidden`
+*/
+:root {
+--montage-img: 240px; /*   var(--montage-img) */
+--montage-duration: 1.6s; /*   var(--montage-duration) */
+}
+.montage {
+  width: var(--montage-img);
+  height: var(--montage-img);
+/* height: 300px; */
+}
+
+.montage img {
+  /* css-tricks.com/almanac/properties/b/box-shadow/ */
+  will-change: transform;
+  width: var(--montage-img);
+/*   -webkit-transition: all var(--montage-duration) ease-out;
+  -moz-transition: all var(--montage-duration) ease-out;
+  -ms-transition: all var(--montage-duration) ease-out;
+  -o-transition: all var(--montage-duration) ease-out; */
+  transition: all var(--montage-duration) ease-out;
+}
+
+.montage img {
+  z-index: 4;
+/*   -webkit-transform: scale(1.0) rotate(4.3deg);
+  -moz-transform: scale(1.0) rotate(4.3deg);
+  -ms-transform: scale(1.0) rotate(4.3deg);
+  -o-transform: scale(1.0) rotate(4.3deg); */
+  transform: scale(1.0) rotate(4.3deg);
+}
+
+/* reduction class: css-tricks.com/almanac/selectors/n/nth-last-child/ */
+.montage img:nth-child(1) {
+  z-index: 3;
+  left: calc(var(--montage-img)*0.53);
+/*   -webkit-transform: scale(0.7) rotate(3.5deg);
+  -moz-transform: scale(0.7) rotate(3.5deg);
+  -ms-transform: scale(0.7) rotate(3.5deg);
+  -o-transform: scale(0.7) rotate(3.5deg); */
+  transform: scale(0.7) rotate(3.5deg);
+}
+
+.montage img:nth-child(2) {
+  z-index: 2;
+  right: calc(var(--montage-img)*0.59);
+/*   -webkit-transform: scale(0.8) rotate(-5.5deg);
+  -moz-transform: scale(0.8) rotate(-5.5deg);
+  -ms-transform: scale(0.8) rotate(-5.5deg);
+  -o-transform: scale(0.8) rotate(-5.5deg); */
+  transform: scale(0.8) rotate(-5.5deg);
+}
+
+.montage:hover img {
+/*   -webkit-transform: scale(0.9) rotate(0deg);
+  -moz-transform: scale(0.9) rotate(0deg);
+  -ms-transform: scale(0.9) rotate(0deg);
+  -o-transform: scale(0.9) rotate(0deg); */
+  transform: scale(0.9) rotate(0deg);
+}
+
+.montage:hover img:nth-child(1) {
+/*   -webkit-transform: scale(1.0) rotate(12deg);
+  -moz-transform: scale(1.0) rotate(9deg);
+  -ms-transform: scale(1.0) rotate(9deg);
+  -o-transform: scale(1.0) rotate(9deg); */
+  transform: scale(1.0) rotate(12deg);
+  left: calc(var(--montage-img)*0.7);
+}
+
+.montage:hover img:nth-child(2) {
+/*   -webkit-transform: scale(1.0) rotate(-9.5deg);
+  -moz-transform: scale(1.0) rotate(-9.5deg);
+  -ms-transform: scale(1.0) rotate(-9.5deg);
+  -o-transform: scale(1.0) rotate(-9.5deg); */
+  transform: scale(1.0) rotate(-9.5deg);
+  right: calc(var(--montage-img)*0.7);
+}
+
+
+.diamond {
+	background: currentColor;
+  transform: rotate(45deg);
+}
+/****** ^ BREAKOUT ABOUT MONTAGE COMPONENT ^ *******/
 
 
 

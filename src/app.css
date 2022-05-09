@@ -91,8 +91,9 @@ hr {
   overflow: visible
   */
 
-  /* this might be req. display: block, double-check browser compatability. */
-  /* height: 1px; */
+  /* ...double-check browser compatability, these might be req!
+  height: 1px;
+  display: block */
   border: 0;
   border-top: 1px solid transparent;
   color: inherit;
@@ -7364,6 +7365,7 @@ details[open] summary~* {
   /* Maurizio Levi Colourscheme */
   --golden-brown: hsl(36.6, 73.9%, 30%, var(--alpha)); /* hsl(36.6, 73.9%, 30%, 1.0); /* hsl(36.6, 73.9%, 30%, 1.0) WARNING: too low-contrast: contrast-ratio.com/#%23966417-on-%23e1caab; edited: colorhexa.com/855914#conversion */
   --solitaire: hsl(34, 47.0%, 85%, var(--alpha)); /* colordesigner.io/convert/hextohsl converted from: htmlcsscolor.com/hex/EBDCC8 */
+  --linen: hsl(32, 60.0%, 95.1%, var(--alpha)); /* htmlcsscolor.com/hex/faf3eb */
 
 
 
@@ -7916,8 +7918,28 @@ input:-webkit-autofill {
 
 
 
+/*
+CSS SHAPES DO NOT GO HERE!
+<!--
+  <div class="cf w-100 h2 debug">
+  	<aside class="green triangle-up h1 w2"></aside>
+  </div>
 
+  <div class="cf w-100 h2 debug">
+  	<aside class="dark-blue triangle-down h1 w2"></aside>
+  </div>
+
+  <div class="cf w-100 h2 debug">
+  	<aside class="dark-pink triangle-left h2 w1"></aside>
+  </div>
+
+  <div class="cf w-100 h2 debug">
+  	<aside class="blue triangle-right h2 w1"></aside>
+  </div>
+-->
+*/
 /*------------------- Maurizio Levi Colourscheme ---------------------*/
+/* NOTE: `color:active` is not from tachyons-tldr.vercel.app/#/tools */
 
 .golden-brown {
   color: var(--golden-brown);
@@ -7946,14 +7968,36 @@ input:-webkit-autofill {
 .bg-solitaire { background-color: var(--solitaire); }
 .b--solitaire { border-color: var(--solitaire); }
 
+/*.hover-solitaire:active,*/
 .hover-solitaire:hover,
 .hover-solitaire:focus {
   color: var(--solitaire);
   fill: var(--solitaire);
 }
 
+/*.hover-bg-solitaire:active,*/
 .hover-bg-solitaire:hover,
 .hover-bg-solitaire:focus { background-color: var(--solitaire); }
+
+.linen {
+  color: var(--linen);
+  fill: var(--linen);
+}
+
+.bg-linen { background-color: var(--linen); }
+.b--linen { border-color: var(--linen); }
+
+/*.hover-linen:active,*/
+.hover-linen:hover,
+.hover-linen:focus {
+  color: var(--linen);
+  fill: var(--linen);
+}
+
+/*.hover-bg-linen:active,*/
+.hover-bg-linen:hover,
+.hover-bg-linen:focus { background-color: var(--linen); }
+
 
 /*------------------- Generic ---------------------*/
 .beige {
