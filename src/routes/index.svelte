@@ -69,11 +69,13 @@
 		import Hero from '$lib/Hero.svelte';
 
 		 -->
+
+
+		<Hero />
+
 		<hr use:viewport
 		on:enterViewport={() => goto(`#${item.title.toLowerCase().replace(/\s/g, '-')}`) }
 		on:enterViewport={() => $pageStore = `${item.title.toLowerCase().replace(/\s/g, '-')}` } />
-
-		<Hero />
 
 		<Section bg="bg-solitaire">
 			<article class="ph2 ph0-ns ph0-m ph0-l">
