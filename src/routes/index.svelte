@@ -1,35 +1,43 @@
-<!-- <script context="module">
-/******** GraphCMS POSTS **********/
-export const prerender = true;
-export const load = async ({fetch}) => {
-	const response = await fetch('./viaggi.json');
-	if (response.ok) {
-		const { posts } = await response.json()
-		return {
-			props: { posts },
+<script context="module">
+	/******** GraphCMS POSTS **********/
+	export const prerender = true;
+	export const load = async ({fetch}) => {
+		const response = await fetch('./viaggi.json');
+		if (response.ok) {
+			const { posts } = await response.json()
+			return {
+				props: { posts },
+			}
 		}
 	}
-}
-</script> -->
+	</script>
 
 <script>
-	// export let posts = []; // learn: see Stringify below
+	export let posts = [];// learn: see Stringify below
+	let truncate = 29; /* try `Slovacchia` */
 
   // fix: Tachyons with `let title = 'GraphCMS';`
   import { pageStore, pageItems, currentPageStore, prefLang } from '$lib/stores.js';
 	import { goto } from '$app/navigation'; // learn: kit.svelte.dev/docs/modules#$app-navigation-goto, because other methods didn't work: github.com/sveltejs/svelte/issues/1241
 
 	import Search from '$lib/Search.svelte';
-	import Fraunces from '$lib/Fraunces.svelte';
 	import Section from '$lib/Section.svelte';
 	import Page from '$lib/Page.svelte';
 	import Hero from '$lib/Hero.svelte';
-	import WarningStripes from '$lib/WarningStripes.svelte';
+
 	//import Banner75 from './Banner-vh-75.svelte'// <Banner75 />
 	import viewport from '$lib/useViewportAction';
 	function min(title) {
 		return title.replace(/\s/g, '-');
 	}
+
+
+
+
+/* note: working with Stefano:
+	- Swagger API: klsgpapi.ramcube.it/swagger/index.html
+	- you'll probably need credentials (then `storeEverything.js`): Protected routes: svelte.dev/repl/c81d8f3dff584065a82b2d3ea7cd4aee?version=3.46.4
+ */
 </script>
 <!-- <script>
 	pageItems.forEach(settle);
@@ -41,31 +49,158 @@ export const load = async ({fetch}) => {
 	}
 </script> -->
 
-<!-- Cheeky way to pass :global(.style)  -->
-<Fraunces />
-
 {#each pageItems as item, i}
 <Page
 	id={`${item.title.toLowerCase().replace(/\s/g, '-')}`}
-	bg={`${item.bg.toLowerCase().replace(/\s/g, '-')}`}>
+	bg={`${item.bg.toLowerCase().replace(/\s/g, '-')}`}
+	>
 
 	{#if i === 0}
+
+		<!-- Learn: your JSON payload: `~routes/viaggi/cile-12-giorni.svelte`, req:
+		import Section from '$lib/Section.svelte';
+		import Hero from '$lib/Hero.svelte';
+
+		 -->
 		<Hero />
-		<WarningStripes />
+
+		<Section>
+
+		<!-- learn: Slot nesting, do you need clear-fix/`cf`? -->
+      <h4 class="mv0 pv4 f2 f2-ns f1-m f1-l fw2 lh-solid">
+				<small class="golden-brown db tracked-none tracked-ns tracked-m tracked-mega-l f7 f7-ns f5-m f4-l fw5 ttu mv0">Cile</small>
+				<span class="fraunces">Patagonia e Deserto&nbsp;Atacama</span><br>
+			</h4>
+			<div class="fl w-100 w-50-m w-50-l lh-copy measure ">
+				<p class="pr4 fw5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna&nbsp;aliqua.</p>
+			</div>
+			<div class="fl w-100 w-50-m w-50-l lh-copy measure">
+				<p class="">Lorem ipsum dolor sit amet, consectetur
+	adipiscing elit, sed do eiusmod tempor
+	incididunt ut labore et dolore magna
+	aliqua. Ut enim ad minim veniam, quis
+	nostrud exercitation ullamco laboris nisi
+	ut aliquip ex ea commodo consequat.
+	<br><br>
+	Duis aute irure dolor in reprehenderit in
+	voluptate velit esse cillum dolore eu
+	fugiat nulla pariatur. Excepteur sint
+	occaecat cupidatat non proident, sunt in
+	culpa qui officia deserunt mollit anim id
+	est laborum.</p>
+			</div>
+
+			<!-- `Trip Info` component: -->
+
+			<h5 class="f3 f2-ns f2-m f2-l fw5"><span class="fraunces">Informazioni</span><span class="fraunces-i">&nbsp;di viaggio</span></h5>
+
+			<div class="fl w-100 w-third-m w-third-l f6 lh-copy measure ">
+				<small class="golden-brown db tracked-none tracked-ns tracked-m tracked-mega-l f7 f7-ns f5-m f4-l fw5 ttu mv0 pb2">clima</small>
+				<hr class="inherit b--golden-brown"/>
+				<p class="pr4">
+				Nell'inverno australe (da Giugno a
+	Settembre) temperature molto
+	fredde di notte e tiepide di giorno
+	Nell'estate australe (da Novembre
+	a Febbraio) temperature tiepide
+	sull'altopiano e calde sul livello del
+	mare, con rischio di annuvolamenti
+	ma piogge rarissime.<br><br>
+	Isola di Pasqua: clima gradevole
+	durante tutto l'anno.<br><br>
+	Patagonia: temperature
+	fresche-fredde nei mesi dell'estate
+	australe.
+				</p>
+		</div>
+			<div class="fl w-100 w-third-m w-third-l f6 lh-copy measure">
+				<small class="golden-brown db tracked-none tracked-ns tracked-m tracked-mega-l f7 f7-ns f5-m f4-l fw5 ttu mv0 pb2">documentazione</small>
+				<hr class="inherit b--golden-brown"/>
+				<p class="pr4">Passaporto con validità di almeno
+	6 mesi dalla data di partenza.</p>
+			</div>
+			<div class="fl w-100 w-third-m w-third-l ph0 f6 lh-copy measure">
+				<small class="golden-brown db tracked-none tracked-ns tracked-m tracked-mega-l f7 f7-ns f5-m f4-l fw5 ttu mv0 pb2">disp. sanitarie</small>
+				<hr class="inherit b--golden-brown"/>
+				<p class="pr4">Non è richiesta alcuna vaccinazione.</p>
+			</div>
+
+			<!------  DECIDI DI PARTIRE Proposte di viaggio, goes here ------>
+	</Section>
+
+	<div class="" style="background-color:#faf3eb">
+	<Section>
+		<article class="highlight db black-70 f5 f4-ns f3-m f3-l pb6 measure ph2 measure-ns ph4-ns measure-m ph2-m measure-wide-l ph0-l mr-auto ml-auto">
+
+			<h4 class="mv0 pv4 f2 f2-ns f1-m f1-l fw2 lh-solid">
+				<small class="golden-brown db tracked-none tracked-ns tracked-m tracked-mega-l f7 f7-ns f5-m f4-l fw5 ttu mv0">decidi di partire</small>
+				<span class="fraunces">Proposte</span><span class="fraunces-i">&nbsp;di viaggio</span>
+			</h4>
+
+
+
+			<div class="w-100 flex justify-between flex-column flex-column-ns flex-row-m flex-row-l">
+
+			<!-- <h4 class="mv0 pv4 f2 f2-ns f1-m f1-l fw2 lh-solid">
+				<small class="golden-brown db tracked-none tracked-ns tracked-m tracked-mega-l f7 f7-ns f5-m f4-l fw5 ttu mv0">decidi di partire</small>
+				<span class="fraunces">Proposte</span><span class="fraunces-i">&nbsp;di viaggio</span>
+			</h4> -->
+
+
+
+			{#each posts as { src, event, date, duration, country, location, pp, participants, slug }, i}
+				<a href={slug} class="w-100 w-100-ns w-30-m w5-l link ">
+					<figure class="ma0 w-100 f6 mh0 ph3 ph3-ns ph1-m ph3-l pb4 pt5 cover shadow-5-hover transition-bs overflow-hidden"
+					style='background-position: 50% 0; background-image: linear-gradient( rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.50) 100%), url({JSON.stringify(src.url)})'
+					title={location}>
+					<!-- learn: take care of escaped [Object object] strings: stackoverflow.com/questions/25721164/how-to-fix-an-escaped-json-string-javascript#25721227 -->
+
+						<figurecap class="white ts1-dark-gray flex flex-column lh-solid">
+							<time datetime={date} class="f5 f6-ns f7-m f6-l fw7 ttu tracked flex-auto">{@html duration}</time>
+							<!--
+							{#if country.length >= truncate }
+								{@html country.substring(0, truncate)}
+							{:else }
+								{@html country}
+							{/if} -->
+
+							<h5 class="ts fraunces mv0 f-subheadline f1-ns f2-m f1-l fw5 h5 flex-auto">
+								{@html country.length > truncate ? country.substring(0, truncate) + '&hellip;' : country }
+							</h5>
+							<p class="mv0 pb4 f5 f6-ns f7-m f6-l fw7 ttu tracked h2 flex-auto">{@html event}</p>
+							<p class="h3 mv0 pb0 f4 f5-ns f6-m f5-l fw4 flex-auto">{@html location}</p>
+							<div class="flex items-center h4">
+								<h6 class="ts mv0 fraunces fw4 f1 f1-ns f2-m f1-l"><small>€&nbsp;</small><span class="pt0 fw5">{@html pp}</span><small class="pt0 f6 f5-l system">&nbsp;p.p</small>
+								</h6>
+							</div>
+						</figurecap>
+						<div class="pointer br-pill ba bw2 ph3 pv2 bg-black-10 white hover-bg-black-50 transition-bg mr-auto ml-auto db tc w-70 w-100-ns w-90-m w-90-l ts1-dark-gray f5 f5-ns f7-m f5-l" href={slug} title="{event}">Scopri il viaggio</div>
+					</figure>
+				</a>
+				<!-- fix: {participants} -->
+			{/each}
+			</div>
+		</article>
+	</Section>
+</div>
+
+
+
+
 		<section
 		class="h5 w-100 flex justify-between fw6 f4 f3-ns f3-m f3-l measure measure-ns measure-m measure-wide-l mr-auto ml-auto">
 			<!-- on:enterViewport={() => alert('Ciao') } -->
 			<hr use:viewport
 			on:enterViewport={() => goto(`#${item.title.toLowerCase().replace(/\s/g, '-')}`) }
 			on:enterViewport={() => $pageStore = `${item.title.toLowerCase().replace(/\s/g, '-')}` } />
-			<div class="outline w-50 pa3">
+			<!-- <div class="outline w-50 pa3">
 				<header id="young-guns"><h1>Young Guns</h1></header>
 				<p>//// Young Guns ////</p>
 			</div>
 			<div class="outline w-50 pa3">
 				<header id="one-on-one"><h1>1-on-1</h1></header>
 				<p>//// 1-on-1 ////</p>
-			</div>
+			</div> -->
 		</section>
 
 		<!-- learn: the replacer function is a whitelist: stackoverflow.com/questions/17537571/second-argument-in-json-stringify-in-javascript#17537621 && Steve Griffith: youtube.com/watch?v=0k4NwimfszA -->
@@ -183,6 +318,56 @@ tc">
 
 
 <style>
+
+
+/****** $ BREAKOUT PAGINATOR COMPONENT $ *******/
+
+	/* `overflow-x-hidden` repaints often and `.transition` has poor performance implactions so treat them as a lazy handler. `.transition-bs` or `transition-bg`, are NOT yet integrated into Tachyonshower.
+	*/
+
+	/* https://stackoverflow.com/questions/71074/how-to-remove-firefoxs-dotted-outline-on-buttons-as-well-as-links */
+
+	a:focus {
+		outline: none;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8); /* Deeper than `.shadow-5-hover` */
+	}
+
+	a::-moz-focus-inner {
+		border: 0;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8); /*Deeper than `.shadow-5-hover` */
+	}
+
+
+
+	.transition-bs {
+		transition: box-shadow 0.4s ease 0s;
+		-webkit-transition: box-shadow 0.4s ease 0s;
+	}
+	.transition-bg {
+		transition: background 0.4s ease 0s;
+		-webkit-transition: background 0.4s ease 0s;
+	}
+
+	:root{ --tint: 0.5; /* 1 is max */ }
+	/* `.mh-100-vh { max-height: 100vh }` convention borrowed: .mw-100 { max-width: 100% } and `.100-vh { height: 100vh }` */
+
+	/* Flexbox should be preferred over conditional-css: `.zed:nth-child(3n) { margin-right: 0 }`: css-tricks.com/almanac/selectors/n/nth-child/ */
+
+
+/****** ^ BREAKOUT PAGINATOR COMPONENT ^ *******/
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* svelte.dev/repl/253993c0325a4b1b8ff38b4c4ecd2285?version=3.24.1
 	- from: stackoverflow.com/questions/63315507/svelte-how-can-i-set-the-focus-to-the-previous-next-element-in-the-list-item-wh#63324281
 */
@@ -388,8 +573,6 @@ main {
 	scrollbar-width: none;  /* Firefox
 }
 */
-	/*
-`.backdrop-blur`, is NOT integrated into Tachyonshower.
-*/
-.backdrop-blur { backdrop-filter: blur(8px) }
+
+.backdrop-blur { backdrop-filter: blur(8px) } /* from: `offline`:  localhost:3000/viaggi */
 </style>

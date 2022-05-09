@@ -13,8 +13,11 @@
 
 /* 28.06.20 .name 	           description                 thing: `x`			*/
 
+/* 09.05.22 hr                reset rule req.              `hr`            */
+/* reset based on: stackoverflow.com/questions/6382023/changing-the-color-of-an-hr-element/6382036#6382036 */
 
-
+/* 09.05.22 .solitare         Maurizio Levi fill colour                   */
+/* 05.05.22 .transition-!     Text Transform Titlecase                    */
 /* 05.05.22 .ttt              Text Transform Titlecase                    */
 /* 05.05.22 .golden-brown     Maurizio Levi fill colour                   */
 /* 05.05.22 .inherit          SVG fill colour                             */
@@ -82,10 +85,21 @@ h1 {
   margin: 0.67em 0;
 }
 hr {
+  /* originally:
   box-sizing: content-box;
   height: 0;
-  overflow: visible;
+  overflow: visible
+  */
+
+  /* this might be req. display: block, double-check browser compatability. */
+  /* height: 1px; */
+  border: 0;
+  border-top: 1px solid transparent;
+  color: inherit;
+  margin: 1em 0;
+  padding: 0;
 }
+
 pre {
   font-family: monospace,
   monospace;
@@ -7326,6 +7340,7 @@ details[open] summary~* {
 :root {
   /* https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties */
   /* custom props: https://medium.com/awebdeveloper/an-easier-way-to-theme-with-css-variable-8f27e7a8d93b*/
+  --alpha: 1.0;
   --one: 0.1;
   --two: 0.2;
   --three: 0.3;
@@ -7346,8 +7361,11 @@ details[open] summary~* {
   --lit-cta: gainsboro;
   /*gray*/
 
-  /* Colour */
-  --golden-brown: hsl(36.6, 73.9%, 30%, 1.0); /* hsl(36.6, 73.9%, 30%, 1.0); /* hsl(36.6, 73.9%, 30%, 1.0) WARNING: too low-contrast: contrast-ratio.com/#%23966417-on-%23e1caab; edited: colorhexa.com/855914#conversion */
+  /* Maurizio Levi Colourscheme */
+  --golden-brown: hsl(36.6, 73.9%, 30%, var(--alpha)); /* hsl(36.6, 73.9%, 30%, 1.0); /* hsl(36.6, 73.9%, 30%, 1.0) WARNING: too low-contrast: contrast-ratio.com/#%23966417-on-%23e1caab; edited: colorhexa.com/855914#conversion */
+  --solitaire: hsl(34, 47.0%, 85%, var(--alpha)); /* colordesigner.io/convert/hextohsl converted from: htmlcsscolor.com/hex/EBDCC8 */
+
+
 
   --charcoal: #4a4a4a;
   --dark-beige: rgba(234,219,160,var(--ten));
@@ -7906,15 +7924,36 @@ input:-webkit-autofill {
   fill: var(--golden-brown);
 }
 
-.hover-golden-brown:active,
+/*.hover-golden-brown:active,*/
 .hover-golden-brown:hover,
 .hover-golden-brown:focus { color: var(--golden-brown); }
 
 .b--golden-brown { border-color: var(--golden-brown); }
 
-.hover-bg-golden-brown:active,
+/*.hover-bg-golden-brown:active,*/
 .hover-bg-golden-brown:hover,
-.hover-bg-golden-brown:focus { background-color: var(--golden-brown); }
+.hover-bg-golden-brown:focus {
+  color: var(--golden-brown);
+  fill: var(--golden-brown);
+}
+
+
+.solitaire {
+  color: var(--solitaire);
+  fill: var(--solitaire);
+}
+
+.bg-solitaire { background-color: var(--solitaire); }
+.b--solitaire { border-color: var(--solitaire); }
+
+.hover-solitaire:hover,
+.hover-solitaire:focus {
+  color: var(--solitaire);
+  fill: var(--solitaire);
+}
+
+.hover-bg-solitaire:hover,
+.hover-bg-solitaire:focus { background-color: var(--solitaire); }
 
 /*------------------- Generic ---------------------*/
 .beige {

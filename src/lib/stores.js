@@ -22,7 +22,7 @@ export const pageStore = writable(''); // `read-only` - from: svelte.dev/tutoria
 
 // Pages:
 export const pageItems = [
-	{ title: "Index", component: "Index", bg: "bg-silver" },
+	{ title: "Index", component: "Index", bg: "bg-solitaire" },
 	{ title: "Partenze", component: "partenze", bg: "bg-gold" },
 	{ title: "Viaggi", component: "Viaggi", bg: "bg-light-green" },
 	{ title: "Chi&nbsp;Siamo", component: "chisiamo", bg: "bg-light-blue" },

@@ -14,9 +14,9 @@ export const load = async ({fetch}) => {
 
 <script>
 export let posts = [];
-import Fraunces from '$lib/Fraunces.svelte';
-import Section from '$lib/Section.svelte';
-//import viewport from '$lib/useViewportAction';
+//import Fraunces from '$lib/Fraunces.svelte'; // this should be in `__layout.svelte`
+// import Section from '$lib/Section.svelte';
+// import viewport from '$lib/useViewportAction';
 
 let truncate = 29; /* try `Slovacchia` */
 
