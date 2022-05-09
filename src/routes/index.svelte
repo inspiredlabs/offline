@@ -22,6 +22,9 @@
 
 	import Search from '$lib/Search.svelte';
 	import Section from '$lib/Section.svelte';
+	import Subscribe from '$lib/Subscribe.svelte';
+	import Partners from '$lib/Partners.svelte';
+
 	import Page from '$lib/Page.svelte';
 	import Hero from '$lib/Hero.svelte';
 
@@ -226,7 +229,9 @@
 		</article>
 	</Section>
 
+	<Subscribe />
 
+	<Partners />
 
 
 		<section
