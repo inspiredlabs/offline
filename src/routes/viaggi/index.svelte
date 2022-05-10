@@ -34,8 +34,8 @@ let truncate = 29; /* try `Slovacchia` */
 
 
 		{#each posts as { src, event, date, duration, country, location, pp, participants, slug }, i}
-			<a href={slug} class="w-100 w-100-ns w-30-m w5-l link ">
-				<figure class="ma0 w-100 f6 mh0 ph3 ph3-ns ph1-m ph3-l pb4 pt5 cover shadow-5-hover transition-bs overflow-hidden"
+			<a title="{event}" href="./viaggi/{slug}" class="w-100 w-100-ns w-30-m w5-l link ">
+				<figure class="ma0 w-100 f6 mh0 ph3 ph3-ns ph1-m ph2-l pb4 pt5 cover shadow-5-hover transition-bs overflow-hidden"
 				style='background-position: 50% 0; background-image: linear-gradient( rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.50) 100%), url({JSON.stringify(src.url)})'
 				title={location}>
 				<!-- learn: take care of escaped [Object object] strings: stackoverflow.com/questions/25721164/how-to-fix-an-escaped-json-string-javascript#25721227 -->
@@ -59,7 +59,7 @@ let truncate = 29; /* try `Slovacchia` */
 							</h6>
 						</div>
 					</figurecap>
-					<div class="pointer br-pill ba bw2 ph3 pv2 bg-black-10 white hover-bg-black-50 transition-bg mr-auto ml-auto db tc w-70 w-100-ns w-90-m w-90-l ts1-dark-gray f5 f5-ns f7-m f5-l" href={slug} title="{event}">Scopri il viaggio</div>
+					<div class="pointer br-pill ba bw2 ph3 pv2 bg-black-10 white hover-bg-black-50 transition-bg mr-auto ml-auto db tc w-70 w-100-ns w-90-m w-90-l ts1-dark-gray f5 f5-ns f7-m f5-l">Scopri il viaggio</div>
 				</figure>
 			</a>
 			<!-- fix: {participants} -->

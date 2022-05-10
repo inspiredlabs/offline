@@ -87,6 +87,7 @@ import '../app.css' // <- just import your css: stackoverflow.com/questions/6363
 	<slot></slot>
 	<Defs />
 	<ReloadPrompt />
+
 	<!-- <InspectorGadget>
 		<hr>
 		<ul class="list pl0">
@@ -96,8 +97,8 @@ import '../app.css' // <- just import your css: stackoverflow.com/questions/6363
 				</li>
 			{/each}
 		</ul>
-	</InspectorGadget>
--->
+	</InspectorGadget> -->
+
 
 </main>
 

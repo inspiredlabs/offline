@@ -98,20 +98,23 @@ class="grab z-max absolute pv5 right-1 bottom-1
 w-80 w-80-ns w-80-m w-two-thirds-l
 mr-auto ml-auto " role="alert">
   <article
-	style="background-color:#ebdcc8"
-	class="mw8 center
+	class="bg-cocoa mw8 center
 	br3 br3-ns br3-m br4-l shadow-5">
+  <!-- style="background-color: var(--cocoa)" <style>:root { --alpha: 0.8; }</style> bg-linen -->
     <div class="dt-ns dt--fixed-ns w-100">
       <div class="pa3 pa4-ns pr0 dtc-ns v-mid
 			w-100 w-100-ns w-50-m w-50-l">
         <div>
           <!-- <pre class="f5 fw4 golden-brown">viaggilevi.com</pre> -->
-          <h2 class="f4 fw6 golden-brown mt0 mb0">I Viaggi Di Maurizio&nbsp;Levi</h2>
+          <h2 class="f4 fw6 linen mt0 mb2">I Viaggi Di Maurizio&nbsp;Levi</h2>
+          <!-- golden-brown -->
           {#if offlineReady}
-            <p class="black-70 measure lh-copy mv0">Maurizio&nbsp;Levi is saved to your device</p>
+            <p class="o-90 linen measure lh-copy mv0">Maurizio&nbsp;Levi is saved to your device</p>
+            <!-- black-70 -->
             {:else}
             <!-- <pre class="f5 fw4 golden-brown">viaggilevi.com</pre> -->
-            <p class="black-70 measure lh-copy mv0">More offers available now&hellip;</p>
+            <p class="o-90 linen measure lh-copy mv0">More offers available now&hellip;</p>
+            <!-- black-70 -->
           {/if}
         </div>
       </div>
@@ -159,8 +162,7 @@ mr-auto ml-auto " role="alert">
 
 
 
-<style>
-</style>
+
 
 
 <!-- globe <strong>&#127757;&emsp;</strong> -->

@@ -7363,13 +7363,14 @@ details[open] summary~* {
   /*gray*/
 
   /* Maurizio Levi Colourscheme */
-  --golden-brown: hsl(36.6, 73.9%, 30%, var(--alpha)); /* hsl(36.6, 73.9%, 30%, 1.0); /* hsl(36.6, 73.9%, 30%, 1.0) WARNING: too low-contrast: contrast-ratio.com/#%23966417-on-%23e1caab; edited: colorhexa.com/855914#conversion */
-  --solitaire: hsl(34, 47.0%, 85%, var(--alpha)); /* colordesigner.io/convert/hextohsl converted from: htmlcsscolor.com/hex/EBDCC8 */
+  --golden-brown: hsla(36.6, 73.9%, 30%, var(--alpha)); /* hsl(36.6, 73.9%, 30%, 1.0); /* hsl(36.6, 73.9%, 30%, 1.0) WARNING: too low-contrast: contrast-ratio.com/#%23966417-on-%23e1caab; edited: colorhexa.com/855914#conversion */
+  --solitaire: hsla(34, 47.0%, 85%, var(--alpha)); /* colordesigner.io/convert/hextohsl converted from: htmlcsscolor.com/hex/EBDCC8 */
+  /* --pebble: *//* pebble? */
   /* --fawn: *//* quora.com/What-colour-is-fawn is more gray */
   /* --oyster: *//* oyster, more pink */
   /* --caramel: *//* caramel, more orange */
-  --linen: hsl(32, 60.0%, 95.1%, var(--alpha)); /* htmlcsscolor.com/hex/faf3eb */
-  --cocoa: hsl(30, 28.95%, 14.9%, var(--alpha)); /* htmlcsscolor.com/hex/31261B */
+  --linen: hsla(32, 60.0%, 95.1%, var(--alpha)); /* htmlcsscolor.com/hex/faf3eb */
+  --cocoa: hsla(30, 28.95%, 14.9%, var(--alpha)); /* htmlcsscolor.com/hex/31261B */
 
 
 

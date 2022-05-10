@@ -1,6 +1,7 @@
 <script>
 import Section from '$lib/Section.svelte';
 let alt = 'Maurizio Levi Official Partner'; // `alt={alt}`
+let imagesBaseUrl = 'https://offline-phi.vercel.app/images/' // usage: `{imagesBaseUrl}`
 </script>
 
 <Section bg="bg-white">
@@ -10,11 +11,11 @@ let alt = 'Maurizio Levi Official Partner'; // `alt={alt}`
 			<span class="fraunces">I nostri</span><span class="fraunces-i">&nbsp;partner</span>
 		</h4>
 		<div class="flex justify-between w-100">
-			<img class="h3 db no-select" src="./images/fai.png" alt={alt}>
-			<img class="h2 db no-select" src="./images/fto.png" alt={alt}>
-			<img class="h3 db no-select" src="./images/tri.png" alt={alt}>
-			<img class="h3 db no-select" src="./images/unesco.png" alt={alt}>
-			<img class="h3 db no-select" src="./images/asc.png" alt={alt}>
+			<img class="h3 db no-select" src="{imagesBaseUrl}fai.png" alt={alt}>
+			<img class="h2 db no-select" src="{imagesBaseUrl}fto.png" alt={alt}>
+			<img class="h3 db no-select" src="{imagesBaseUrl}tri.png" alt={alt}>
+			<img class="h3 db no-select" src="{imagesBaseUrl}unesco.png" alt={alt}>
+			<img class="h3 db no-select" src="{imagesBaseUrl}asc.png" alt={alt}>
 		</div>
 		<!--
 			Golden Donor

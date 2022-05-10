@@ -1,10 +1,9 @@
 <script>
-
 import ScrollIndicator from '$lib/ScrollIndicator.svelte';
-
+let imagesBaseUrl = 'https://offline-phi.vercel.app/images/' // usage: `{imagesBaseUrl}`
 </script>
 
-<figure class="ma0 flex flex-column vh-75 w-100 cover" style="background-position:center 40%; background-image: url('./images/base64-planck.svg')" id="cile">
+<figure class="ma0 flex flex-column vh-75 w-100 cover" style="background-position:center 40%; background-image: url('{imagesBaseUrl}base64-planck.svg')" id="cile">
 <!-- base64'd: onlinejpgtools.com/convert-jpg-to-base64 -->
 
 <div class="vh-75 flex items-center white w-100 f5 f4-ns f3-m f3-l lh-copy measure pa2 measure-ns pa4-ns measure-m pa2-m measure-wide-l pa0-l mr-auto ml-auto">

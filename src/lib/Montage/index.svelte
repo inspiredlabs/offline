@@ -4,6 +4,7 @@ let alt = 'Maurizio Levi Official Partner'; // `alt={alt}`
 import viewport from '$lib/useViewportAction';
 
 let visible;
+let imagesBaseUrl = 'https://offline-phi.vercel.app/images/' // usage: `{imagesBaseUrl}`
 </script>
 
 <Section bg="bg-linen" id="viaggi-di-scoperta">
@@ -21,9 +22,9 @@ let visible;
 			class="montage { visible ? 'visible' : '' }
 			cf relative top-0 w-100 mr-auto ml-auto"
 		>
-			<img class="absolute shadow-5" src="./images/MaurizioLevi_Anteprima.jpg" alt="Maurizio Levi">
-			<img class="absolute shadow-5" src="./images/Levi-Maurizio-768x510.jpg" alt="Maurizio Levi">
-			<img class="absolute shadow-5" src="./images/Maurizio_Levi.jpg" alt="Maurizio Levi">
+			<img class="absolute shadow-5" src="{imagesBaseUrl}MaurizioLevi_Anteprima.jpg" alt="Maurizio Levi">
+			<img class="absolute shadow-5" src="{imagesBaseUrl}Levi-Maurizio-768x510.jpg" alt="Maurizio Levi">
+			<img class="absolute shadow-5" src="{imagesBaseUrl}Maurizio_Levi.jpg" alt="Maurizio Levi">
 		</figure>
 
 		<div class="fl w-100 w-50-m w-50-l lh-copy measure ">
