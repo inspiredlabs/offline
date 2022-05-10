@@ -1,3 +1,4 @@
+<!-- Webjeda `const id = params.page.id` example: youtube.com/watch?v=cqdEHFPSZwg&list=PLm_Qt4aKpfKjf77S8UD79Ockhwp_699Ms&index=3 -->
 <script context="module">
 /******** GraphCMS POSTS **********/
 export const prerender = true;

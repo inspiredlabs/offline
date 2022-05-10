@@ -16973,9 +16973,9 @@ function init(settings) {
     amp: false,
     dev: false,
     entry: {
-      file: "/./_app/start-62e25d85.js",
+      file: "/./_app/start-62032183.js",
       css: ["/./_app/assets/start-a8cd1609.css"],
-      js: ["/./_app/start-62e25d85.js", "/./_app/chunks/vendor-be60de84.js", "/./_app/chunks/preload-helper-9f12a5fd.js", "/./_app/chunks/singletons-bb9012b7.js"]
+      js: ["/./_app/start-62032183.js", "/./_app/chunks/vendor-209141c5.js", "/./_app/chunks/preload-helper-9f12a5fd.js", "/./_app/chunks/singletons-bb9012b7.js"]
     },
     fetched: void 0,
     floc: false,
@@ -17060,6 +17060,20 @@ var manifest = {
     },
     {
       type: "page",
+      pattern: /^\/viaggi\/ungheria-repubblica-slovacca9-days\/?$/,
+      params: empty,
+      a: ["src/routes/__layout.svelte", "src/routes/viaggi/ungheria-repubblica-slovacca9-days/__layout.svelte", "src/routes/viaggi/ungheria-repubblica-slovacca9-days/index.svelte"],
+      b: [".svelte-kit/build/components/error.svelte"]
+    },
+    {
+      type: "page",
+      pattern: /^\/viaggi\/the-moon-12-days\/?$/,
+      params: empty,
+      a: ["src/routes/__layout.svelte", "src/routes/viaggi/the-moon-12-days/__layout.svelte", "src/routes/viaggi/the-moon-12-days/index.svelte"],
+      b: [".svelte-kit/build/components/error.svelte"]
+    },
+    {
+      type: "page",
       pattern: /^\/viaggi\/cile-12-giorni\/?$/,
       params: empty,
       a: ["src/routes/__layout.svelte", "src/routes/viaggi/cile-12-giorni/__layout.svelte", "src/routes/viaggi/cile-12-giorni/index.svelte"],
@@ -17081,24 +17095,36 @@ var get_hooks = (hooks) => ({
 });
 var module_lookup = {
   "src/routes/__layout.svelte": () => Promise.resolve().then(function() {
-    return __layout$1;
+    return __layout$3;
   }),
   ".svelte-kit/build/components/error.svelte": () => Promise.resolve().then(function() {
     return error2;
   }),
   "src/routes/index.svelte": () => Promise.resolve().then(function() {
-    return index$5;
+    return index$7;
   }),
   "src/routes/chi-siamo/index.svelte": () => Promise.resolve().then(function() {
-    return index$4;
+    return index$6;
   }),
   "src/routes/partenze/index.svelte": () => Promise.resolve().then(function() {
-    return index$3;
+    return index$5;
   }),
   "src/routes/privacy/index.svelte": () => Promise.resolve().then(function() {
-    return index$2;
+    return index$4;
   }),
   "src/routes/viaggi/index.svelte": () => Promise.resolve().then(function() {
+    return index$3;
+  }),
+  "src/routes/viaggi/ungheria-repubblica-slovacca9-days/__layout.svelte": () => Promise.resolve().then(function() {
+    return __layout$2;
+  }),
+  "src/routes/viaggi/ungheria-repubblica-slovacca9-days/index.svelte": () => Promise.resolve().then(function() {
+    return index$2;
+  }),
+  "src/routes/viaggi/the-moon-12-days/__layout.svelte": () => Promise.resolve().then(function() {
+    return __layout$1;
+  }),
+  "src/routes/viaggi/the-moon-12-days/index.svelte": () => Promise.resolve().then(function() {
     return index$1;
   }),
   "src/routes/viaggi/cile-12-giorni/__layout.svelte": () => Promise.resolve().then(function() {
@@ -17108,7 +17134,7 @@ var module_lookup = {
     return index;
   })
 };
-var metadata_lookup = {"src/routes/__layout.svelte": {"entry": "/./_app/pages/__layout.svelte-ca61f53c.js", "css": ["/./_app/assets/pages/__layout.svelte-ef8189ac.css", "/./_app/assets/index-aa54306a.css"], "js": ["/./_app/pages/__layout.svelte-ca61f53c.js", "/./_app/chunks/preload-helper-9f12a5fd.js", "/./_app/chunks/vendor-be60de84.js", "/./_app/chunks/index-1f1b3ca4.js", "/./_app/chunks/stores-8ab65a66.js"], "styles": null}, ".svelte-kit/build/components/error.svelte": {"entry": "/./_app/error.svelte-9bf87281.js", "css": [], "js": ["/./_app/error.svelte-9bf87281.js", "/./_app/chunks/vendor-be60de84.js"], "styles": null}, "src/routes/index.svelte": {"entry": "/./_app/pages/index.svelte-39dfa98b.js", "css": ["/./_app/assets/pages/index.svelte-c66c9178.css", "/./_app/assets/index-2d612062.css"], "js": ["/./_app/pages/index.svelte-39dfa98b.js", "/./_app/chunks/vendor-be60de84.js", "/./_app/chunks/stores-8ab65a66.js", "/./_app/chunks/singletons-bb9012b7.js", "/./_app/chunks/index-1d923b80.js"], "styles": null}, "src/routes/chi-siamo/index.svelte": {"entry": "/./_app/pages/chi-siamo/index.svelte-aace5d2c.js", "css": [], "js": ["/./_app/pages/chi-siamo/index.svelte-aace5d2c.js", "/./_app/chunks/vendor-be60de84.js"], "styles": null}, "src/routes/partenze/index.svelte": {"entry": "/./_app/pages/partenze/index.svelte-1a767bad.js", "css": [], "js": ["/./_app/pages/partenze/index.svelte-1a767bad.js", "/./_app/chunks/vendor-be60de84.js"], "styles": null}, "src/routes/privacy/index.svelte": {"entry": "/./_app/pages/privacy/index.svelte-323d39ea.js", "css": [], "js": ["/./_app/pages/privacy/index.svelte-323d39ea.js", "/./_app/chunks/vendor-be60de84.js"], "styles": null}, "src/routes/viaggi/index.svelte": {"entry": "/./_app/pages/viaggi/index.svelte-a955f5b9.js", "css": ["/./_app/assets/pages/viaggi/index.svelte-05843384.css"], "js": ["/./_app/pages/viaggi/index.svelte-a955f5b9.js", "/./_app/chunks/vendor-be60de84.js"], "styles": null}, "src/routes/viaggi/cile-12-giorni/__layout.svelte": {"entry": "/./_app/pages/viaggi/cile-12-giorni/__layout.svelte-4a62529c.js", "css": ["/./_app/assets/index-aa54306a.css"], "js": ["/./_app/pages/viaggi/cile-12-giorni/__layout.svelte-4a62529c.js", "/./_app/chunks/vendor-be60de84.js", "/./_app/chunks/index-1f1b3ca4.js"], "styles": null}, "src/routes/viaggi/cile-12-giorni/index.svelte": {"entry": "/./_app/pages/viaggi/cile-12-giorni/index.svelte-5d0cdd00.js", "css": ["/./_app/assets/index-2d612062.css"], "js": ["/./_app/pages/viaggi/cile-12-giorni/index.svelte-5d0cdd00.js", "/./_app/chunks/vendor-be60de84.js", "/./_app/chunks/index-1d923b80.js"], "styles": null}};
+var metadata_lookup = {"src/routes/__layout.svelte": {"entry": "/./_app/pages/__layout.svelte-f459afa8.js", "css": ["/./_app/assets/pages/__layout.svelte-ef8189ac.css", "/./_app/assets/index-aa54306a.css"], "js": ["/./_app/pages/__layout.svelte-f459afa8.js", "/./_app/chunks/preload-helper-9f12a5fd.js", "/./_app/chunks/vendor-209141c5.js", "/./_app/chunks/index-1237179f.js", "/./_app/chunks/stores-e04e8439.js"], "styles": null}, ".svelte-kit/build/components/error.svelte": {"entry": "/./_app/error.svelte-1a58a229.js", "css": [], "js": ["/./_app/error.svelte-1a58a229.js", "/./_app/chunks/vendor-209141c5.js"], "styles": null}, "src/routes/index.svelte": {"entry": "/./_app/pages/index.svelte-4b6390b5.js", "css": ["/./_app/assets/pages/index.svelte-c66c9178.css", "/./_app/assets/index-2d612062.css"], "js": ["/./_app/pages/index.svelte-4b6390b5.js", "/./_app/chunks/vendor-209141c5.js", "/./_app/chunks/stores-e04e8439.js", "/./_app/chunks/singletons-bb9012b7.js", "/./_app/chunks/index-99fda528.js"], "styles": null}, "src/routes/chi-siamo/index.svelte": {"entry": "/./_app/pages/chi-siamo/index.svelte-909b186b.js", "css": [], "js": ["/./_app/pages/chi-siamo/index.svelte-909b186b.js", "/./_app/chunks/vendor-209141c5.js"], "styles": null}, "src/routes/partenze/index.svelte": {"entry": "/./_app/pages/partenze/index.svelte-4e29593d.js", "css": [], "js": ["/./_app/pages/partenze/index.svelte-4e29593d.js", "/./_app/chunks/vendor-209141c5.js"], "styles": null}, "src/routes/privacy/index.svelte": {"entry": "/./_app/pages/privacy/index.svelte-3655edda.js", "css": [], "js": ["/./_app/pages/privacy/index.svelte-3655edda.js", "/./_app/chunks/vendor-209141c5.js"], "styles": null}, "src/routes/viaggi/index.svelte": {"entry": "/./_app/pages/viaggi/index.svelte-a8794864.js", "css": ["/./_app/assets/pages/viaggi/index.svelte-05843384.css"], "js": ["/./_app/pages/viaggi/index.svelte-a8794864.js", "/./_app/chunks/vendor-209141c5.js"], "styles": null}, "src/routes/viaggi/ungheria-repubblica-slovacca9-days/__layout.svelte": {"entry": "/./_app/pages/viaggi/ungheria-repubblica-slovacca9-days/__layout.svelte-270ac25c.js", "css": ["/./_app/assets/index-aa54306a.css"], "js": ["/./_app/pages/viaggi/ungheria-repubblica-slovacca9-days/__layout.svelte-270ac25c.js", "/./_app/chunks/vendor-209141c5.js", "/./_app/chunks/index-1237179f.js"], "styles": null}, "src/routes/viaggi/ungheria-repubblica-slovacca9-days/index.svelte": {"entry": "/./_app/pages/viaggi/ungheria-repubblica-slovacca9-days/index.svelte-200eb450.js", "css": [], "js": ["/./_app/pages/viaggi/ungheria-repubblica-slovacca9-days/index.svelte-200eb450.js", "/./_app/chunks/vendor-209141c5.js"], "styles": null}, "src/routes/viaggi/the-moon-12-days/__layout.svelte": {"entry": "/./_app/pages/viaggi/the-moon-12-days/__layout.svelte-3bd1c8b6.js", "css": ["/./_app/assets/index-aa54306a.css"], "js": ["/./_app/pages/viaggi/the-moon-12-days/__layout.svelte-3bd1c8b6.js", "/./_app/chunks/vendor-209141c5.js", "/./_app/chunks/index-1237179f.js"], "styles": null}, "src/routes/viaggi/the-moon-12-days/index.svelte": {"entry": "/./_app/pages/viaggi/the-moon-12-days/index.svelte-f091b991.js", "css": [], "js": ["/./_app/pages/viaggi/the-moon-12-days/index.svelte-f091b991.js", "/./_app/chunks/vendor-209141c5.js"], "styles": null}, "src/routes/viaggi/cile-12-giorni/__layout.svelte": {"entry": "/./_app/pages/viaggi/cile-12-giorni/__layout.svelte-6285e8e0.js", "css": ["/./_app/assets/index-aa54306a.css"], "js": ["/./_app/pages/viaggi/cile-12-giorni/__layout.svelte-6285e8e0.js", "/./_app/chunks/vendor-209141c5.js", "/./_app/chunks/index-1237179f.js"], "styles": null}, "src/routes/viaggi/cile-12-giorni/index.svelte": {"entry": "/./_app/pages/viaggi/cile-12-giorni/index.svelte-4e816dee.js", "css": ["/./_app/assets/index-2d612062.css"], "js": ["/./_app/pages/viaggi/cile-12-giorni/index.svelte-4e816dee.js", "/./_app/chunks/vendor-209141c5.js", "/./_app/chunks/index-99fda528.js"], "styles": null}};
 async function load_component(file) {
   return {
     module: await module_lookup[file](),
@@ -17257,7 +17283,7 @@ var css$9 = {
   code: "aside.svelte-grrh0c{-webkit-touch-callout:none;-ms-touch-action:none;touch-action:none;user-select:none;background:rgba(255, 255, 0, 0.8);position:absolute}",
   map: `{"version":3,"file":"index.svelte","sources":["index.svelte"],"sourcesContent":["<script>\\n\\t//draggable debug compoent for layout variables\\n\\timport { searchStore, pageStore, pageItems, currentPageStore, prefLang } from '$lib/stores.js';\\n\\n\\n\\n\\t/*********** Drag Inspector *************/\\n\\timport { draggable } from '@neodrag/svelte'; // from: github.com/PuruVJ/neodrag/tree/main/packages/svelte#readme from: macos-web.app/\\n\\tlet current = 'gadget';\\n\\n\\t/****************** REFOCUS ******************/\\n\\n\\t// bind element svelte and set the focus: youtube.com/watch?v=3_IbFiT0OaU import { onMount } from 'svelte';\\n\\n\\tlet inputRef; //usage: <input bind:this={inputRef} />\\n\\n\\t// onMount(() => {\\n\\t// \\tsetTimeout(() => {\\n\\t// \\t\\tmapTouchToMouseFor('aside');\\n\\t// \\t}, 333);\\n\\t// });\\n\\n\\t//function test(e) {\\n\\t\\t// console.log(document.activeElement); // helpers\\n\\t\\t// \`tabindex=\\"-1\\"\` https://javascript.info/focus-blur\\n\\t\\t//console.log(e);\\n\\t//}\\n\\n\\tfunction refocus() {\\n\\t\\tinputRef.value = $pageStore;\\n\\t}\\n\\n</script>\\n\\n\\n<!-- on:popstate={ (e) => console.log(e) } } -->\\n\\n<!-- debug -->\\n<aside\\nuse:draggable\\nclass=\\"grab z-max w5 pa2 code f7 debug\\"\\non:mousedown=\\"{() => current = 'gadget'}\\"\\non:focus=\\"{() => current = 'gadget'}\\"\\non:mouseover=\\"{() => current = ''}\\"\\non:mouseup=\\"{() => current = ''}\\"\\nclass:grabbing=\\"{current == 'gadget' ? 'gadget' : ''}\\">\\n\\n<!-- <b>{({}).VITE_APP_TITLE}</b> -->\\n<dl class=\\"list pl0 w-100\\">\\n\\t<dt class=\\"silver dib w-50 ma0\\">pageStore:</dt>\\n\\t<dd class=\\"silver dib w-50 ma0 b tr\\">{$pageStore}</dd>\\n\\n\\t<dt class=\\"dib w-50 ma0\\">currentPageStore:</dt>\\n\\t<dd class=\\"dib w-50  ma0 b tr\\">{$currentPageStore}</dd>\\n\\n<!-- <dt>navLang:</dt> -->\\n<!-- <dd>{$navLang}</dd> -->\\n\\t<dt class=\\"silver dib w-50 ma0\\">prefLang:</dt>\\n\\t<dd class=\\"silver dib w-50 ma0 b tr\\">{$prefLang}</dd>\\n\\t<hr>\\n\\n\\t<dt class=\\"dib w-50 ma0\\">searchStore:</dt>\\n\\t<dd class=\\"dib w-50 ma0 b tr\\">{$searchStore}</dd>\\n</dl>\\n\\n\\n<slot></slot>\\n\\t<!-- <button on:click={ () => history.pop(history.state, '', 'test') }>click me</button>\\n\\t/*********** History API *************/\\n\\timport {\\n\\t\\tafterNavigate,\\n\\t\\tbeforeNavigate,\\n\\t\\tdisableScrollHandling,\\n\\t\\tgoto,\\n\\t\\tinvalidate,\\n\\t\\tprefetch,\\n\\t\\tprefetchRoutes\\n\\t} from '$app/navigation';\\n\\t-->\\n\\n\\n</aside>\\n\\n\\n<style>\\n\\n\\taside {\\n\\t\\t-webkit-touch-callout:none;\\n\\t\\t-ms-touch-action:none; touch-action:none;\\n\\t\\tuser-select: none;\\n\\t\\t/* cursor: move; */\\n\\t\\tbackground: rgba(255, 255, 0, 0.8);\\n\\t\\tposition: absolute;\\n\\t}\\n\\n</style>"],"names":[],"mappings":"AAsFC,KAAK,cAAC,CAAC,AACN,sBAAsB,IAAI,CAC1B,iBAAiB,IAAI,CAAE,aAAa,IAAI,CACxC,WAAW,CAAE,IAAI,CAEjB,UAAU,CAAE,KAAK,GAAG,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,CAClC,QAAQ,CAAE,QAAQ,AACnB,CAAC"}`
 };
-var InspectorGadget = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $pageStore, $$unsubscribe_pageStore;
   let $currentPageStore, $$unsubscribe_currentPageStore;
   let $prefLang, $$unsubscribe_prefLang;
@@ -17289,22 +17315,30 @@ ${slots.default ? slots.default({}) : ``}
 });
 var css$8 = {
   code: ".snap-center{scroll-snap-align:center}.nw-100{min-width:100%}.x-mandatory{-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory}.touch-scroll{-webkit-overflow-scrolling:touch}",
-  map: `{"version":3,"file":"__layout.svelte","sources":["__layout.svelte"],"sourcesContent":["<!--script context=\\"module\\">\\n// get all pages and build a routes menu: youtube.com/watch?v=Y_NE2R3HuOU\\nexport const modules = import.meta.glob('./**.svelte');\\n\\n//console.log(modules);\\n\\nlet allMenu = [];\\n\\nfor(let path in modules) {\\n\\tlet cleanPath = path.replace('.svelte', '').replace('./', '');\\n\\tallMenu.push({\\n\\t\\ttitle:cleanPath.substring(cleanPath.lastIndexOf('/') + 1),\\n\\t\\tlink: cleanPath.includes('index')\\n\\t\\t? cleanPath.replace('index', '') : ''\\n\\t});\\n}\\n\\nconsole.log(allMenu);\\n</script-->\\n<script context=\\"module\\">\\n\\t/******** GET ALL ROUTES AND PAGES **********/\\n\\t// learn: this must be \`__layout.svelte: youtube.com/watch?v=Y_NE2R3HuOU&t=482s\\n\\tconst modules = import.meta.glob(\\"./**.svelte\\");\\n\\n\\tlet allMenu = [];\\n\\n\\tfor (let path in modules) {\\n\\t\\tlet cleanPath = path.replace(\\".svelte\\", \\"\\").replace(\\"./\\", \\"/\\");\\n\\t\\tallMenu.push({\\n\\t\\t\\ttitle: cleanPath.substring(cleanPath.indexOf(\\"/\\") + 1),\\n\\t\\t\\tlink: cleanPath.includes (\\"index\\")\\n\\t\\t\\t\\t? cleanPath.replace(\\"index\\", \\"\\")\\n\\t\\t\\t\\t: cleanPath,\\n\\t\\t});\\n\\t}\\n\\n\\texport const load = async() => {\\n\\t\\tconst menu = await Promise.all(allMenu);\\n\\t\\treturn {\\n\\t\\t\\tprops: {\\n\\t\\t\\t\\tmenu,\\n\\t\\t\\t}\\n\\t\\t}\\n\\t}\\n\\n\\n\\n\\n// learn: FOUC: github.com/sveltejs/kit/issues/1530\\nimport '../app.css' // <- just import your css: stackoverflow.com/questions/63637662/add-js-css-files-to-svelte-component\\n</script>\\n\\n<script>\\n\\t/******** GET ALL ROUTES AND PAGES **********/\\n\\texport let menu;\\n\\n\\t// learn: Just for the record, the key thing using SSR is that pages don't reload as long as routes shares the same __layout.svelte. \u2013- from: stackoverflow.com/questions/71185085/sveltekit-hash-based-routing\\n\\n\\timport Defs from '$lib/Defs.svelte';\\n\\timport Fraunces from '$lib/Fraunces.svelte';\\n\\timport ReloadPrompt from '$lib/ReloadPrompt/index.svelte';\\n\\timport InspectorGadget from '$lib/InspectorGadget/index.svelte';\\n\\n\\tlet main;\\n\\n\\tfunction refocus() {\\n\\t\\tsetTimeout(() => { main.focus() }, 30)\\n\\t}\\n\\n\\t/* usage: <!-- <svelte:window on:keydown={handleKeydown}/> --> */\\n\\tlet key;\\n\\tlet keyCode;\\n\\n\\tfunction handleKeydown(e) {\\n\\t\\tif (e.keyCode === 38 || e.keyCode === 39) {\\n\\t\\t\\trefocus(); //alert( 'right/up' )\\n\\t\\t} else if (e.keyCode === 37 || e.keyCode === 40) {\\n\\t\\t\\trefocus(); //alert( 'down/left' )\\n\\t\\t}\\n\\t}\\n\\t// learn: youtube.com/watch?v=kXq6tO5fqnU\\n</script>\\n\\n<svelte:window on:popstate={ refocus } on:keydown={handleKeydown} />\\n\\n<main class=\\"charcoal flex flex-auto nw-100 vh-100 x-mandatory w-100 overflow-x-scroll touch-scroll\\" tabindex=\\"-1\\" bind:this={main}>\\n\\t<slot></slot>\\n\\t<Defs />\\n\\t<ReloadPrompt />\\n\\n\\t<InspectorGadget>\\n\\t\\t<hr>\\n\\t\\t<ul class=\\"list pl0\\">\\n\\t\\t\\t{#each menu as item }\\n\\t\\t\\t\\t<li>\\n\\t\\t\\t\\t\\t<a class=\\"link pointer\\" href={item.link}>{item.title}</a>\\n\\t\\t\\t\\t</li>\\n\\t\\t\\t{/each}\\n\\t\\t</ul>\\n\\t</InspectorGadget>\\n\\n\\n</main>\\n\\n<style>\\n/* Quick prune: purifycss.online/ @import '$lib/Tachyonshower'; */\\n\\n:global(.snap-center) {\\n\\tscroll-snap-align: center;\\n}\\n:global(.nw-100) {\\n\\tmin-width: 100%;\\n}\\n\\n:global(.x-mandatory) {\\n\\t-webkit-overflow-scrolling: touch;\\n\\tscroll-snap-type: x mandatory;\\n\\t/* must be used with: \`scroll-snap-align: center\` */\\n}\\n\\n/* :global(.x-proximity) {\\n\\tscroll-snap-type: x proximity;\\n} */\\n\\n:global(.touch-scroll) {\\n\\t-webkit-overflow-scrolling: touch;\\n}\\n</style>\\n\\n<svelte:head>\\n\\t<!-- <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"../support/css/tachyon.shower.css\\"> -->\\n\\n\\t<link rel=\\"manifest\\" href=\\"/manifest.webmanifest\\" />\\n\\t<link rel=\\"apple-touch-icon\\" href=\\"/apple-icon-180.png\\" />\\n\\n\\t<meta\\n\\t\\tname=\\"description\\"\\n\\t\\tcontent=\\"Svelte-Kit PWA\\"\\n\\t/>\\n\\t<meta name=\\"apple-mobile-web-app-capable\\" content=\\"yes\\" />\\n\\t<!-- <link rel=\\"icon\\" href=\\"/favicon.svg\\" type=\\"image/svg+xml\\"> -->\\n\\t<link rel=\\"apple-touch-icon\\" href=\\"/pwa-192x192.png\\" />\\n\\t<!-- <link rel=\\"mask-icon\\" href=\\"/safari-pinned-tab.svg\\" color=\\"#00aba9\\"> -->\\n\\t<meta name=\\"msapplication-TileColor\\" content=\\"#00aba9\\" />\\n\\t<meta name=\\"theme-color\\" content=\\"#ffffff\\" />\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2048-2732.jpg\\"\\n\\t\\tmedia=\\"(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2732-2048.jpg\\"\\n\\t\\tmedia=\\"(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1668-2388.jpg\\"\\n\\t\\tmedia=\\"(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2388-1668.jpg\\"\\n\\t\\tmedia=\\"(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1536-2048.jpg\\"\\n\\t\\tmedia=\\"(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2048-1536.jpg\\"\\n\\t\\tmedia=\\"(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1668-2224.jpg\\"\\n\\t\\tmedia=\\"(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2224-1668.jpg\\"\\n\\t\\tmedia=\\"(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1620-2160.jpg\\"\\n\\t\\tmedia=\\"(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2160-1620.jpg\\"\\n\\t\\tmedia=\\"(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1284-2778.jpg\\"\\n\\t\\tmedia=\\"(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2778-1284.jpg\\"\\n\\t\\tmedia=\\"(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1170-2532.jpg\\"\\n\\t\\tmedia=\\"(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2532-1170.jpg\\"\\n\\t\\tmedia=\\"(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1125-2436.jpg\\"\\n\\t\\tmedia=\\"(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2436-1125.jpg\\"\\n\\t\\tmedia=\\"(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1242-2688.jpg\\"\\n\\t\\tmedia=\\"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2688-1242.jpg\\"\\n\\t\\tmedia=\\"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-828-1792.jpg\\"\\n\\t\\tmedia=\\"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1792-828.jpg\\"\\n\\t\\tmedia=\\"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1242-2208.jpg\\"\\n\\t\\tmedia=\\"(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2208-1242.jpg\\"\\n\\t\\tmedia=\\"(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-750-1334.jpg\\"\\n\\t\\tmedia=\\"(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1334-750.jpg\\"\\n\\t\\tmedia=\\"(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-640-1136.jpg\\"\\n\\t\\tmedia=\\"(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1136-640.jpg\\"\\n\\t\\tmedia=\\"(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n</svelte:head>\\n\\n<!-- Cheeky way to pass :global(.style)  -->\\n<Fraunces />"],"names":[],"mappings":"AA2GQ,YAAY,AAAE,CAAC,AACtB,iBAAiB,CAAE,MAAM,AAC1B,CAAC,AACO,OAAO,AAAE,CAAC,AACjB,SAAS,CAAE,IAAI,AAChB,CAAC,AAEO,YAAY,AAAE,CAAC,AACtB,0BAA0B,CAAE,KAAK,CACjC,gBAAgB,CAAE,CAAC,CAAC,SAAS,AAE9B,CAAC,AAMO,aAAa,AAAE,CAAC,AACvB,0BAA0B,CAAE,KAAK,AAClC,CAAC"}`
+  map: `{"version":3,"file":"__layout.svelte","sources":["__layout.svelte"],"sourcesContent":["<!--script context=\\"module\\">\\n// get all pages and build a routes menu: youtube.com/watch?v=Y_NE2R3HuOU\\nexport const modules = import.meta.glob('./**.svelte');\\n\\n//console.log(modules);\\n\\nlet allMenu = [];\\n\\nfor(let path in modules) {\\n\\tlet cleanPath = path.replace('.svelte', '').replace('./', '');\\n\\tallMenu.push({\\n\\t\\ttitle:cleanPath.substring(cleanPath.lastIndexOf('/') + 1),\\n\\t\\tlink: cleanPath.includes('index')\\n\\t\\t? cleanPath.replace('index', '') : ''\\n\\t});\\n}\\n\\nconsole.log(allMenu);\\n</script-->\\n<script context=\\"module\\">\\n\\t/******** GET ALL ROUTES AND PAGES **********/\\n\\t// learn: this must be \`__layout.svelte: youtube.com/watch?v=Y_NE2R3HuOU&t=482s\\n\\tconst modules = import.meta.glob(\\"./**.svelte\\");\\n\\n\\tlet allMenu = [];\\n\\n\\tfor (let path in modules) {\\n\\t\\tlet cleanPath = path.replace(\\".svelte\\", \\"\\").replace(\\"./\\", \\"/\\");\\n\\t\\tallMenu.push({\\n\\t\\t\\ttitle: cleanPath.substring(cleanPath.indexOf(\\"/\\") + 1),\\n\\t\\t\\tlink: cleanPath.includes (\\"index\\")\\n\\t\\t\\t\\t? cleanPath.replace(\\"index\\", \\"\\")\\n\\t\\t\\t\\t: cleanPath,\\n\\t\\t});\\n\\t}\\n\\n\\texport const load = async() => {\\n\\t\\tconst menu = await Promise.all(allMenu);\\n\\t\\treturn {\\n\\t\\t\\tprops: {\\n\\t\\t\\t\\tmenu,\\n\\t\\t\\t}\\n\\t\\t}\\n\\t}\\n\\n\\n\\n\\n// learn: FOUC: github.com/sveltejs/kit/issues/1530\\nimport '../app.css' // <- just import your css: stackoverflow.com/questions/63637662/add-js-css-files-to-svelte-component\\n</script>\\n\\n<script>\\n\\t/******** GET ALL ROUTES AND PAGES **********/\\n\\texport let menu;\\n\\n\\t// learn: Just for the record, the key thing using SSR is that pages don't reload as long as routes shares the same __layout.svelte. \u2013- from: stackoverflow.com/questions/71185085/sveltekit-hash-based-routing\\n\\n\\timport Defs from '$lib/Defs.svelte';\\n\\timport Fraunces from '$lib/Fraunces.svelte';\\n\\timport ReloadPrompt from '$lib/ReloadPrompt/index.svelte';\\n\\timport InspectorGadget from '$lib/InspectorGadget/index.svelte';\\n\\n\\tlet main;\\n\\n\\tfunction refocus() {\\n\\t\\tsetTimeout(() => { main.focus() }, 30)\\n\\t}\\n\\n\\t/* usage: <!-- <svelte:window on:keydown={handleKeydown}/> --> */\\n\\tlet key;\\n\\tlet keyCode;\\n\\n\\tfunction handleKeydown(e) {\\n\\t\\tif (e.keyCode === 38 || e.keyCode === 39) {\\n\\t\\t\\trefocus(); //alert( 'right/up' )\\n\\t\\t} else if (e.keyCode === 37 || e.keyCode === 40) {\\n\\t\\t\\trefocus(); //alert( 'down/left' )\\n\\t\\t}\\n\\t}\\n\\t// learn: youtube.com/watch?v=kXq6tO5fqnU\\n</script>\\n\\n<svelte:window on:popstate={ refocus } on:keydown={handleKeydown} />\\n\\n<main class=\\"charcoal flex flex-auto nw-100 vh-100 x-mandatory w-100 overflow-x-scroll touch-scroll\\" tabindex=\\"-1\\" bind:this={main}>\\n\\t<slot></slot>\\n\\t<Defs />\\n\\t<ReloadPrompt />\\n\\n\\t<!-- <InspectorGadget>\\n\\t\\t<hr>\\n\\t\\t<ul class=\\"list pl0\\">\\n\\t\\t\\t{#each menu as item }\\n\\t\\t\\t\\t<li>\\n\\t\\t\\t\\t\\t<a class=\\"link pointer\\" href={item.link}>{item.title}</a>\\n\\t\\t\\t\\t</li>\\n\\t\\t\\t{/each}\\n\\t\\t</ul>\\n\\t</InspectorGadget> -->\\n\\n\\n</main>\\n\\n<style>\\n/* Quick prune: purifycss.online/ @import '$lib/Tachyonshower'; */\\n\\n:global(.snap-center) {\\n\\tscroll-snap-align: center;\\n}\\n:global(.nw-100) {\\n\\tmin-width: 100%;\\n}\\n\\n:global(.x-mandatory) {\\n\\t-webkit-overflow-scrolling: touch;\\n\\tscroll-snap-type: x mandatory;\\n\\t/* must be used with: \`scroll-snap-align: center\` */\\n}\\n\\n/* :global(.x-proximity) {\\n\\tscroll-snap-type: x proximity;\\n} */\\n\\n:global(.touch-scroll) {\\n\\t-webkit-overflow-scrolling: touch;\\n}\\n</style>\\n\\n<svelte:head>\\n\\t<!-- <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"../support/css/tachyon.shower.css\\"> -->\\n\\n\\t<link rel=\\"manifest\\" href=\\"/manifest.webmanifest\\" />\\n\\t<link rel=\\"apple-touch-icon\\" href=\\"/apple-icon-180.png\\" />\\n\\n\\t<meta\\n\\t\\tname=\\"description\\"\\n\\t\\tcontent=\\"Svelte-Kit PWA\\"\\n\\t/>\\n\\t<meta name=\\"apple-mobile-web-app-capable\\" content=\\"yes\\" />\\n\\t<!-- <link rel=\\"icon\\" href=\\"/favicon.svg\\" type=\\"image/svg+xml\\"> -->\\n\\t<link rel=\\"apple-touch-icon\\" href=\\"/pwa-192x192.png\\" />\\n\\t<!-- <link rel=\\"mask-icon\\" href=\\"/safari-pinned-tab.svg\\" color=\\"#00aba9\\"> -->\\n\\t<meta name=\\"msapplication-TileColor\\" content=\\"#00aba9\\" />\\n\\t<meta name=\\"theme-color\\" content=\\"#ffffff\\" />\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2048-2732.jpg\\"\\n\\t\\tmedia=\\"(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2732-2048.jpg\\"\\n\\t\\tmedia=\\"(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1668-2388.jpg\\"\\n\\t\\tmedia=\\"(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2388-1668.jpg\\"\\n\\t\\tmedia=\\"(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1536-2048.jpg\\"\\n\\t\\tmedia=\\"(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2048-1536.jpg\\"\\n\\t\\tmedia=\\"(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1668-2224.jpg\\"\\n\\t\\tmedia=\\"(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2224-1668.jpg\\"\\n\\t\\tmedia=\\"(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1620-2160.jpg\\"\\n\\t\\tmedia=\\"(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2160-1620.jpg\\"\\n\\t\\tmedia=\\"(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1284-2778.jpg\\"\\n\\t\\tmedia=\\"(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2778-1284.jpg\\"\\n\\t\\tmedia=\\"(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1170-2532.jpg\\"\\n\\t\\tmedia=\\"(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2532-1170.jpg\\"\\n\\t\\tmedia=\\"(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1125-2436.jpg\\"\\n\\t\\tmedia=\\"(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2436-1125.jpg\\"\\n\\t\\tmedia=\\"(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1242-2688.jpg\\"\\n\\t\\tmedia=\\"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2688-1242.jpg\\"\\n\\t\\tmedia=\\"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-828-1792.jpg\\"\\n\\t\\tmedia=\\"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1792-828.jpg\\"\\n\\t\\tmedia=\\"(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1242-2208.jpg\\"\\n\\t\\tmedia=\\"(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-2208-1242.jpg\\"\\n\\t\\tmedia=\\"(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-750-1334.jpg\\"\\n\\t\\tmedia=\\"(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1334-750.jpg\\"\\n\\t\\tmedia=\\"(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-640-1136.jpg\\"\\n\\t\\tmedia=\\"(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)\\"\\n\\t/>\\n\\t<link\\n\\t\\trel=\\"apple-touch-startup-image\\"\\n\\t\\thref=\\"/apple-splash-1136-640.jpg\\"\\n\\t\\tmedia=\\"(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)\\"\\n\\t/>\\n</svelte:head>\\n\\n<!-- Cheeky way to pass :global(.style)  -->\\n<Fraunces />"],"names":[],"mappings":"AA2GQ,YAAY,AAAE,CAAC,AACtB,iBAAiB,CAAE,MAAM,AAC1B,CAAC,AACO,OAAO,AAAE,CAAC,AACjB,SAAS,CAAE,IAAI,AAChB,CAAC,AAEO,YAAY,AAAE,CAAC,AACtB,0BAA0B,CAAE,KAAK,CACjC,gBAAgB,CAAE,CAAC,CAAC,SAAS,AAE9B,CAAC,AAMO,aAAa,AAAE,CAAC,AACvB,0BAA0B,CAAE,KAAK,AAClC,CAAC"}`
 };
 var modules = {"./index.svelte": () => Promise.resolve().then(function() {
-  return index$5;
+  return index$7;
 }), "./chi-siamo/index.svelte": () => Promise.resolve().then(function() {
-  return index$4;
+  return index$6;
 }), "./partenze/index.svelte": () => Promise.resolve().then(function() {
-  return index$3;
+  return index$5;
 }), "./privacy/index.svelte": () => Promise.resolve().then(function() {
-  return index$2;
+  return index$4;
 }), "./viaggi/index.svelte": () => Promise.resolve().then(function() {
-  return index$1;
+  return index$3;
 }), "./viaggi/cile-12-giorni/__layout.svelte": () => Promise.resolve().then(function() {
   return __layout;
 }), "./viaggi/cile-12-giorni/index.svelte": () => Promise.resolve().then(function() {
   return index;
+}), "./viaggi/the-moon-12-days/__layout.svelte": () => Promise.resolve().then(function() {
+  return __layout$1;
+}), "./viaggi/the-moon-12-days/index.svelte": () => Promise.resolve().then(function() {
+  return index$1;
+}), "./viaggi/ungheria-repubblica-slovacca9-days/__layout.svelte": () => Promise.resolve().then(function() {
+  return __layout$2;
+}), "./viaggi/ungheria-repubblica-slovacca9-days/index.svelte": () => Promise.resolve().then(function() {
+  return index$2;
 })};
 var allMenu = [];
 for (let path in modules) {
@@ -17318,7 +17352,7 @@ var load$4 = async () => {
   const menu = await Promise.all(allMenu);
   return {props: {menu}};
 };
-var _layout$1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+var _layout$3 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let {menu} = $$props;
   let main;
   if ($$props.menu === void 0 && $$bindings.menu && menu !== void 0)
@@ -17335,15 +17369,7 @@ var _layout$1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 	${validate_component(Defs, "Defs").$$render($$result, {}, {}, {})}
 	${validate_component(ReloadPrompt, "ReloadPrompt").$$render($$result, {}, {}, {})}
 
-	${validate_component(InspectorGadget, "InspectorGadget").$$render($$result, {}, {}, {
-    default: () => {
-      return `<hr>
-		<ul class="${"list pl0"}">${each(menu, (item) => {
-        return `<li><a class="${"link pointer"}"${add_attribute("href", item.link, 0)}>${escape2(item.title)}</a>
-				</li>`;
-      })}</ul>`;
-    }
-  })}</main>
+	</main>
 
 
 
@@ -17352,10 +17378,10 @@ ${$$result.head += `<link rel="${"manifest"}" href="${"/manifest.webmanifest"}" 
 
 ${validate_component(Fraunces, "Fraunces").$$render($$result, {}, {}, {})}`;
 });
-var __layout$1 = /* @__PURE__ */ Object.freeze({
+var __layout$3 = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   [Symbol.toStringTag]: "Module",
-  "default": _layout$1,
+  "default": _layout$3,
   load: load$4
 });
 function load$3({error: error22, status}) {
@@ -17684,7 +17710,7 @@ var load$2 = async ({fetch: fetch3}) => {
     return {props: {posts}};
   }
 };
-var truncate$1 = 29;
+var truncate$2 = 29;
 var Routes = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $pageStore, $$unsubscribe_pageStore;
   let $$unsubscribe_currentPageStore;
@@ -17725,7 +17751,7 @@ ${each(pageItems, (item, i) => {
 							<figurecap class="${"white ts1-dark-gray flex flex-column lh-solid"}"><time${add_attribute("datetime", date, 0)} class="${"f5 f6-ns f7-m f6-l fw7 ttu tracked flex-auto"}"><!-- HTML_TAG_START -->${duration}<!-- HTML_TAG_END --></time>
 								
 
-								<h5 class="${"ts fraunces mv0 f-subheadline f1-ns f2-m f1-l fw5 h5 flex-auto"}"><!-- HTML_TAG_START -->${country.length > truncate$1 ? country.substring(0, truncate$1) + "&hellip;" : country}<!-- HTML_TAG_END --></h5>
+								<h5 class="${"ts fraunces mv0 f-subheadline f1-ns f2-m f1-l fw5 h5 flex-auto"}"><!-- HTML_TAG_START -->${country.length > truncate$2 ? country.substring(0, truncate$2) + "&hellip;" : country}<!-- HTML_TAG_END --></h5>
 								<p class="${"mv0 pb4 f5 f6-ns f7-m f6-l fw7 ttu tracked h2 flex-auto"}"><!-- HTML_TAG_START -->${event}<!-- HTML_TAG_END --></p>
 								<p class="${"h3 mv0 pb0 f4 f5-ns f6-m f5-l fw4 flex-auto"}"><!-- HTML_TAG_START -->${location2}<!-- HTML_TAG_END --></p>
 								<div class="${"flex items-center h4"}"><h6 class="${"ts mv0 fraunces fw4 f1 f1-ns f2-m f1-l"}"><small>\u20AC\xA0</small><span class="${"pt0 fw5"}"><!-- HTML_TAG_START -->${pp}<!-- HTML_TAG_END --></span><small class="${"pt0 f6 f5-l system"}">\xA0p.p</small></h6>
@@ -17797,7 +17823,7 @@ ${each(pageItems, (item, i) => {
   })}</div>
 </nav>`;
 });
-var index$5 = /* @__PURE__ */ Object.freeze({
+var index$7 = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   [Symbol.toStringTag]: "Module",
   "default": Routes,
@@ -17808,7 +17834,7 @@ var Chi_siamo = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `<main class="${"white"}"><pre>/chi-siamo</pre><br><br>It works!
 </main>`;
 });
-var index$4 = /* @__PURE__ */ Object.freeze({
+var index$6 = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   [Symbol.toStringTag]: "Module",
   "default": Chi_siamo
@@ -17817,7 +17843,7 @@ var Partenze = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `<main class="${"white"}"><pre>/partenze</pre><br><br>It works!
 </main>`;
 });
-var index$3 = /* @__PURE__ */ Object.freeze({
+var index$5 = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   [Symbol.toStringTag]: "Module",
   "default": Partenze
@@ -17826,14 +17852,14 @@ var Privacy = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `<main class="${"white"}"><pre>/privacy</pre><br><br>It works!
 </main>`;
 });
-var index$2 = /* @__PURE__ */ Object.freeze({
+var index$4 = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   [Symbol.toStringTag]: "Module",
   "default": Privacy
 });
 var css = {
   code: "a.svelte-1w00xze:focus{outline:none;box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.8)}a.svelte-1w00xze::-moz-focus-inner{border:0;box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.8)}.transition-bs.svelte-1w00xze{transition:box-shadow 0.4s ease 0s;-webkit-transition:box-shadow 0.4s ease 0s}.transition-bg.svelte-1w00xze{transition:background 0.4s ease 0s;-webkit-transition:background 0.4s ease 0s}:root{--tint:0.5}",
-  map: '{"version":3,"file":"index.svelte","sources":["index.svelte"],"sourcesContent":["<script context=\\"module\\">\\n/******** GraphCMS POSTS **********/\\nexport const prerender = true;\\nexport const load = async ({fetch}) => {\\n\\tconst response = await fetch(\'viaggi.json\');\\n\\tif (response.ok) {\\n\\t\\tconst { posts } = await response.json()\\n\\t\\treturn {\\n\\t\\t\\tprops: { posts },\\n\\t\\t}\\n\\t}\\n}\\n</script>\\n\\n<script>\\nexport let posts = [];\\n//import Fraunces from \'$lib/Fraunces.svelte\'; // this should be in `__layout.svelte`\\n// import Section from \'$lib/Section.svelte\';\\n// import viewport from \'$lib/useViewportAction\';\\n\\nlet truncate = 29; /* try `Slovacchia` */\\n\\n</script>\\n\\n<section class=\\"cf db w-100 \\" style=\\"background-color:#faf3eb\\">\\n\\t<article class=\\"highlight db black-70 f5 f4-ns f3-m f3-l pb6 measure ph2 measure-ns ph4-ns measure-m ph2-m measure-wide-l ph0-l mr-auto ml-auto\\">\\n\\t\\t<div class=\\"w-100 flex justify-between flex-column flex-column-ns flex-row-m flex-row-l\\">\\n\\n\\t\\t<!-- <h4 class=\\"mv0 pv4 f2 f2-ns f1-m f1-l fw2 lh-solid\\">\\n\\t\\t\\t<small class=\\"golden-brown db tracked-none tracked-ns tracked-m tracked-mega-l f7 f7-ns f5-m f4-l fw5 ttu mv0\\">decidi di partire</small>\\n\\t\\t\\t<span class=\\"fraunces\\">Proposte</span><span class=\\"fraunces-i\\">&nbsp;di viaggio</span>\\n\\t\\t</h4> -->\\n\\n\\n\\n\\t\\t{#each posts as { src, event, date, duration, country, location, pp, participants, slug }, i}\\n\\t\\t\\t<a title=\\"{event}\\" href=\\"./viaggi/{slug}\\" class=\\"w-100 w-100-ns w-30-m w5-l link \\">\\n\\t\\t\\t\\t<figure class=\\"ma0 w-100 f6 mh0 ph3 ph3-ns ph1-m ph2-l pb4 pt5 cover shadow-5-hover transition-bs overflow-hidden\\"\\n\\t\\t\\t\\tstyle=\'background-position: 50% 0; background-image: linear-gradient( rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.50) 100%), url({JSON.stringify(src.url)})\'\\n\\t\\t\\t\\ttitle={location}>\\n\\t\\t\\t\\t<!-- learn: take care of escaped [Object object] strings: stackoverflow.com/questions/25721164/how-to-fix-an-escaped-json-string-javascript#25721227 -->\\n\\n\\t\\t\\t\\t\\t<figurecap class=\\"white ts1-dark-gray flex flex-column lh-solid\\">\\n\\t\\t\\t\\t\\t\\t<time datetime={date} class=\\"f5 f6-ns f7-m f6-l fw7 ttu tracked flex-auto\\">{@html duration}</time>\\n\\t\\t\\t\\t\\t\\t<!--\\n\\t\\t\\t\\t\\t\\t{#if country.length >= truncate }\\n\\t\\t\\t\\t\\t\\t\\t{@html country.substring(0, truncate)}\\n\\t\\t\\t\\t\\t\\t{:else }\\n\\t\\t\\t\\t\\t\\t\\t{@html country}\\n\\t\\t\\t\\t\\t\\t{/if} -->\\n\\n\\t\\t\\t\\t\\t\\t<h5 class=\\"ts fraunces mv0 f-subheadline f1-ns f2-m f1-l fw5 h5 flex-auto\\">\\n\\t\\t\\t\\t\\t\\t\\t{@html country.length > truncate ? country.substring(0, truncate) + \'&hellip;\' : country }\\n\\t\\t\\t\\t\\t\\t</h5>\\n\\t\\t\\t\\t\\t\\t<p class=\\"mv0 pb4 f5 f6-ns f7-m f6-l fw7 ttu tracked h2 flex-auto\\">{@html event}</p>\\n\\t\\t\\t\\t\\t\\t<p class=\\"h3 mv0 pb0 f4 f5-ns f6-m f5-l fw4 flex-auto\\">{@html location}</p>\\n\\t\\t\\t\\t\\t\\t<div class=\\"flex items-center h4\\">\\n\\t\\t\\t\\t\\t\\t\\t<h6 class=\\"ts mv0 fraunces fw4 f1 f1-ns f2-m f1-l\\"><small>\u20AC&nbsp;</small><span class=\\"pt0 fw5\\">{@html pp}</span><small class=\\"pt0 f6 f5-l system\\">&nbsp;p.p</small>\\n\\t\\t\\t\\t\\t\\t\\t</h6>\\n\\t\\t\\t\\t\\t\\t</div>\\n\\t\\t\\t\\t\\t</figurecap>\\n\\t\\t\\t\\t\\t<div class=\\"pointer br-pill ba bw2 ph3 pv2 bg-black-10 white hover-bg-black-50 transition-bg mr-auto ml-auto db tc w-70 w-100-ns w-90-m w-90-l ts1-dark-gray f5 f5-ns f7-m f5-l\\">Scopri il viaggio</div>\\n\\t\\t\\t\\t</figure>\\n\\t\\t\\t</a>\\n\\t\\t\\t<!-- fix: {participants} -->\\n\\t\\t{/each}\\n\\t\\t</div>\\n\\t</article>\\n</section>\\n\\n\\n<style>\\n\\t/* `overflow-x-hidden` repaints often and `.transition` has poor performance implactions so treat them as a lazy handler. `.transition-bs` or `transition-bg`, are NOT yet integrated into Tachyonshower.\\n\\t*/\\n\\n\\t/* https://stackoverflow.com/questions/71074/how-to-remove-firefoxs-dotted-outline-on-buttons-as-well-as-links */\\n\\n\\ta:focus {\\n\\t\\toutline: none;\\n\\t\\tbox-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8); /* Deeper than `.shadow-5-hover` */\\n\\t}\\n\\n\\ta::-moz-focus-inner {\\n\\t\\tborder: 0;\\n\\t\\tbox-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8); /*Deeper than `.shadow-5-hover` */\\n\\t}\\n\\n\\n\\n\\t.transition-bs {\\n\\t\\ttransition: box-shadow 0.4s ease 0s;\\n\\t\\t-webkit-transition: box-shadow 0.4s ease 0s;\\n\\t}\\n\\t.transition-bg {\\n\\t\\ttransition: background 0.4s ease 0s;\\n\\t\\t-webkit-transition: background 0.4s ease 0s;\\n\\t}\\n\\n\\t:root{ --tint: 0.5; /* 1 is max */ }\\n\\t/* `.mh-100-vh { max-height: 100vh }` convention borrowed: .mw-100 { max-width: 100% } and `.100-vh { height: 100vh }` */\\n\\n\\t/* Flexbox should be preferred over conditional-css: `.zed:nth-child(3n) { margin-right: 0 }`: css-tricks.com/almanac/selectors/n/nth-child/ */\\n\\n\\t</style>"],"names":[],"mappings":"AA6EC,gBAAC,MAAM,AAAC,CAAC,AACR,OAAO,CAAE,IAAI,CACb,UAAU,CAAE,CAAC,CAAC,GAAG,CAAC,GAAG,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,AAC3C,CAAC,AAED,gBAAC,kBAAkB,AAAC,CAAC,AACpB,MAAM,CAAE,CAAC,CACT,UAAU,CAAE,CAAC,CAAC,GAAG,CAAC,GAAG,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,AAC3C,CAAC,AAID,cAAc,eAAC,CAAC,AACf,UAAU,CAAE,UAAU,CAAC,IAAI,CAAC,IAAI,CAAC,EAAE,CACnC,kBAAkB,CAAE,UAAU,CAAC,IAAI,CAAC,IAAI,CAAC,EAAE,AAC5C,CAAC,AACD,cAAc,eAAC,CAAC,AACf,UAAU,CAAE,UAAU,CAAC,IAAI,CAAC,IAAI,CAAC,EAAE,CACnC,kBAAkB,CAAE,UAAU,CAAC,IAAI,CAAC,IAAI,CAAC,EAAE,AAC5C,CAAC,AAED,KAAK,CAAC,AAAC,MAAM,CAAE,GAAG,AAAiB,CAAC"}'
+  map: '{"version":3,"file":"index.svelte","sources":["index.svelte"],"sourcesContent":["<!-- Webjeda `const id = params.page.id` example: youtube.com/watch?v=cqdEHFPSZwg&list=PLm_Qt4aKpfKjf77S8UD79Ockhwp_699Ms&index=3 -->\\n<script context=\\"module\\">\\n/******** GraphCMS POSTS **********/\\nexport const prerender = true;\\nexport const load = async ({fetch}) => {\\n\\tconst response = await fetch(\'viaggi.json\');\\n\\tif (response.ok) {\\n\\t\\tconst { posts } = await response.json()\\n\\t\\treturn {\\n\\t\\t\\tprops: { posts },\\n\\t\\t}\\n\\t}\\n}\\n</script>\\n\\n<script>\\nexport let posts = [];\\n//import Fraunces from \'$lib/Fraunces.svelte\'; // this should be in `__layout.svelte`\\n// import Section from \'$lib/Section.svelte\';\\n// import viewport from \'$lib/useViewportAction\';\\n\\nlet truncate = 29; /* try `Slovacchia` */\\n\\n</script>\\n\\n<section class=\\"cf db w-100 \\" style=\\"background-color:#faf3eb\\">\\n\\t<article class=\\"highlight db black-70 f5 f4-ns f3-m f3-l pb6 measure ph2 measure-ns ph4-ns measure-m ph2-m measure-wide-l ph0-l mr-auto ml-auto\\">\\n\\t\\t<div class=\\"w-100 flex justify-between flex-column flex-column-ns flex-row-m flex-row-l\\">\\n\\n\\t\\t<!-- <h4 class=\\"mv0 pv4 f2 f2-ns f1-m f1-l fw2 lh-solid\\">\\n\\t\\t\\t<small class=\\"golden-brown db tracked-none tracked-ns tracked-m tracked-mega-l f7 f7-ns f5-m f4-l fw5 ttu mv0\\">decidi di partire</small>\\n\\t\\t\\t<span class=\\"fraunces\\">Proposte</span><span class=\\"fraunces-i\\">&nbsp;di viaggio</span>\\n\\t\\t</h4> -->\\n\\n\\n\\n\\t\\t{#each posts as { src, event, date, duration, country, location, pp, participants, slug }, i}\\n\\t\\t\\t<a title=\\"{event}\\" href=\\"./viaggi/{slug}\\" class=\\"w-100 w-100-ns w-30-m w5-l link \\">\\n\\t\\t\\t\\t<figure class=\\"ma0 w-100 f6 mh0 ph3 ph3-ns ph1-m ph2-l pb4 pt5 cover shadow-5-hover transition-bs overflow-hidden\\"\\n\\t\\t\\t\\tstyle=\'background-position: 50% 0; background-image: linear-gradient( rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.50) 100%), url({JSON.stringify(src.url)})\'\\n\\t\\t\\t\\ttitle={location}>\\n\\t\\t\\t\\t<!-- learn: take care of escaped [Object object] strings: stackoverflow.com/questions/25721164/how-to-fix-an-escaped-json-string-javascript#25721227 -->\\n\\n\\t\\t\\t\\t\\t<figurecap class=\\"white ts1-dark-gray flex flex-column lh-solid\\">\\n\\t\\t\\t\\t\\t\\t<time datetime={date} class=\\"f5 f6-ns f7-m f6-l fw7 ttu tracked flex-auto\\">{@html duration}</time>\\n\\t\\t\\t\\t\\t\\t<!--\\n\\t\\t\\t\\t\\t\\t{#if country.length >= truncate }\\n\\t\\t\\t\\t\\t\\t\\t{@html country.substring(0, truncate)}\\n\\t\\t\\t\\t\\t\\t{:else }\\n\\t\\t\\t\\t\\t\\t\\t{@html country}\\n\\t\\t\\t\\t\\t\\t{/if} -->\\n\\n\\t\\t\\t\\t\\t\\t<h5 class=\\"ts fraunces mv0 f-subheadline f1-ns f2-m f1-l fw5 h5 flex-auto\\">\\n\\t\\t\\t\\t\\t\\t\\t{@html country.length > truncate ? country.substring(0, truncate) + \'&hellip;\' : country }\\n\\t\\t\\t\\t\\t\\t</h5>\\n\\t\\t\\t\\t\\t\\t<p class=\\"mv0 pb4 f5 f6-ns f7-m f6-l fw7 ttu tracked h2 flex-auto\\">{@html event}</p>\\n\\t\\t\\t\\t\\t\\t<p class=\\"h3 mv0 pb0 f4 f5-ns f6-m f5-l fw4 flex-auto\\">{@html location}</p>\\n\\t\\t\\t\\t\\t\\t<div class=\\"flex items-center h4\\">\\n\\t\\t\\t\\t\\t\\t\\t<h6 class=\\"ts mv0 fraunces fw4 f1 f1-ns f2-m f1-l\\"><small>\u20AC&nbsp;</small><span class=\\"pt0 fw5\\">{@html pp}</span><small class=\\"pt0 f6 f5-l system\\">&nbsp;p.p</small>\\n\\t\\t\\t\\t\\t\\t\\t</h6>\\n\\t\\t\\t\\t\\t\\t</div>\\n\\t\\t\\t\\t\\t</figurecap>\\n\\t\\t\\t\\t\\t<div class=\\"pointer br-pill ba bw2 ph3 pv2 bg-black-10 white hover-bg-black-50 transition-bg mr-auto ml-auto db tc w-70 w-100-ns w-90-m w-90-l ts1-dark-gray f5 f5-ns f7-m f5-l\\">Scopri il viaggio</div>\\n\\t\\t\\t\\t</figure>\\n\\t\\t\\t</a>\\n\\t\\t\\t<!-- fix: {participants} -->\\n\\t\\t{/each}\\n\\t\\t</div>\\n\\t</article>\\n</section>\\n\\n\\n<style>\\n\\t/* `overflow-x-hidden` repaints often and `.transition` has poor performance implactions so treat them as a lazy handler. `.transition-bs` or `transition-bg`, are NOT yet integrated into Tachyonshower.\\n\\t*/\\n\\n\\t/* https://stackoverflow.com/questions/71074/how-to-remove-firefoxs-dotted-outline-on-buttons-as-well-as-links */\\n\\n\\ta:focus {\\n\\t\\toutline: none;\\n\\t\\tbox-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8); /* Deeper than `.shadow-5-hover` */\\n\\t}\\n\\n\\ta::-moz-focus-inner {\\n\\t\\tborder: 0;\\n\\t\\tbox-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8); /*Deeper than `.shadow-5-hover` */\\n\\t}\\n\\n\\n\\n\\t.transition-bs {\\n\\t\\ttransition: box-shadow 0.4s ease 0s;\\n\\t\\t-webkit-transition: box-shadow 0.4s ease 0s;\\n\\t}\\n\\t.transition-bg {\\n\\t\\ttransition: background 0.4s ease 0s;\\n\\t\\t-webkit-transition: background 0.4s ease 0s;\\n\\t}\\n\\n\\t:root{ --tint: 0.5; /* 1 is max */ }\\n\\t/* `.mh-100-vh { max-height: 100vh }` convention borrowed: .mw-100 { max-width: 100% } and `.100-vh { height: 100vh }` */\\n\\n\\t/* Flexbox should be preferred over conditional-css: `.zed:nth-child(3n) { margin-right: 0 }`: css-tricks.com/almanac/selectors/n/nth-child/ */\\n\\n\\t</style>"],"names":[],"mappings":"AA8EC,gBAAC,MAAM,AAAC,CAAC,AACR,OAAO,CAAE,IAAI,CACb,UAAU,CAAE,CAAC,CAAC,GAAG,CAAC,GAAG,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,AAC3C,CAAC,AAED,gBAAC,kBAAkB,AAAC,CAAC,AACpB,MAAM,CAAE,CAAC,CACT,UAAU,CAAE,CAAC,CAAC,GAAG,CAAC,GAAG,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,AAC3C,CAAC,AAID,cAAc,eAAC,CAAC,AACf,UAAU,CAAE,UAAU,CAAC,IAAI,CAAC,IAAI,CAAC,EAAE,CACnC,kBAAkB,CAAE,UAAU,CAAC,IAAI,CAAC,IAAI,CAAC,EAAE,AAC5C,CAAC,AACD,cAAc,eAAC,CAAC,AACf,UAAU,CAAE,UAAU,CAAC,IAAI,CAAC,IAAI,CAAC,EAAE,CACnC,kBAAkB,CAAE,UAAU,CAAC,IAAI,CAAC,IAAI,CAAC,EAAE,AAC5C,CAAC,AAED,KAAK,CAAC,AAAC,MAAM,CAAE,GAAG,AAAiB,CAAC"}'
 };
 var prerender$1 = true;
 var load$1 = async ({fetch: fetch3}) => {
@@ -17843,13 +17869,18 @@ var load$1 = async ({fetch: fetch3}) => {
     return {props: {posts}};
   }
 };
-var truncate = 29;
+var truncate$1 = 29;
 var Viaggi = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let {posts = []} = $$props;
   if ($$props.posts === void 0 && $$bindings.posts && posts !== void 0)
     $$bindings.posts(posts);
   $$result.css.add(css);
-  return `<section class="${"cf db w-100 "}" style="${"background-color:#faf3eb"}"><article class="${"highlight db black-70 f5 f4-ns f3-m f3-l pb6 measure ph2 measure-ns ph4-ns measure-m ph2-m measure-wide-l ph0-l mr-auto ml-auto"}"><div class="${"w-100 flex justify-between flex-column flex-column-ns flex-row-m flex-row-l"}">
+  return `
+
+
+
+
+<section class="${"cf db w-100 "}" style="${"background-color:#faf3eb"}"><article class="${"highlight db black-70 f5 f4-ns f3-m f3-l pb6 measure ph2 measure-ns ph4-ns measure-m ph2-m measure-wide-l ph0-l mr-auto ml-auto"}"><div class="${"w-100 flex justify-between flex-column flex-column-ns flex-row-m flex-row-l"}">
 
 
 
@@ -17859,7 +17890,7 @@ var Viaggi = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 					<figurecap class="${"white ts1-dark-gray flex flex-column lh-solid"}"><time${add_attribute("datetime", date, 0)} class="${"f5 f6-ns f7-m f6-l fw7 ttu tracked flex-auto"}"><!-- HTML_TAG_START -->${duration}<!-- HTML_TAG_END --></time>
 						
 
-						<h5 class="${"ts fraunces mv0 f-subheadline f1-ns f2-m f1-l fw5 h5 flex-auto"}"><!-- HTML_TAG_START -->${country.length > truncate ? country.substring(0, truncate) + "&hellip;" : country}<!-- HTML_TAG_END --></h5>
+						<h5 class="${"ts fraunces mv0 f-subheadline f1-ns f2-m f1-l fw5 h5 flex-auto"}"><!-- HTML_TAG_START -->${country.length > truncate$1 ? country.substring(0, truncate$1) + "&hellip;" : country}<!-- HTML_TAG_END --></h5>
 						<p class="${"mv0 pb4 f5 f6-ns f7-m f6-l fw7 ttu tracked h2 flex-auto"}"><!-- HTML_TAG_START -->${event}<!-- HTML_TAG_END --></p>
 						<p class="${"h3 mv0 pb0 f4 f5-ns f6-m f5-l fw4 flex-auto"}"><!-- HTML_TAG_START -->${location2}<!-- HTML_TAG_END --></p>
 						<div class="${"flex items-center h4"}"><h6 class="${"ts mv0 fraunces fw4 f1 f1-ns f2-m f1-l"}"><small>\u20AC\xA0</small><span class="${"pt0 fw5"}"><!-- HTML_TAG_START -->${pp}<!-- HTML_TAG_END --></span><small class="${"pt0 f6 f5-l system"}">\xA0p.p</small></h6>
@@ -17870,17 +17901,96 @@ var Viaggi = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   })}</div></article>
 </section>`;
 });
-var index$1 = /* @__PURE__ */ Object.freeze({
+var index$3 = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   [Symbol.toStringTag]: "Module",
   "default": Viaggi,
   prerender: prerender$1,
   load: load$1
 });
+var _layout$2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  return `
+
+
+
+
+
+
+
+
+<div class="${"nw-100 snap-center w-100 vh-100 bg-cocoa"}"><div class="${"h-100 w-100 vh-100 snap-start always-stop overflow-x-scroll smooth-scroll"}">${slots.default ? slots.default({}) : ``}
+		${validate_component(Defs, "Defs").$$render($$result, {}, {}, {})}
+		${validate_component(ReloadPrompt, "ReloadPrompt").$$render($$result, {}, {}, {})}
+	</div></div>
+
+
+
+${validate_component(Fraunces, "Fraunces").$$render($$result, {}, {}, {})}`;
+});
+var __layout$2 = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  [Symbol.toStringTag]: "Module",
+  "default": _layout$2
+});
+var Ungheria_repubblica_slovacca9_days = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  return `
+
+<main class="${"white"}"><pre>viaggi/ungheria-repubblica-slovacca9-days</pre><br><br>It works!
+</main>`;
+});
+var index$2 = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  [Symbol.toStringTag]: "Module",
+  "default": Ungheria_repubblica_slovacca9_days
+});
+var _layout$1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  return `
+
+
+
+
+
+
+
+
+<div class="${"nw-100 snap-center w-100 vh-100 bg-golden-brown"}"><div class="${"h-100 w-100 vh-100 snap-start always-stop overflow-x-scroll smooth-scroll"}">${slots.default ? slots.default({}) : ``}
+		${validate_component(Defs, "Defs").$$render($$result, {}, {}, {})}
+		${validate_component(ReloadPrompt, "ReloadPrompt").$$render($$result, {}, {}, {})}
+	</div></div>
+
+
+
+${validate_component(Fraunces, "Fraunces").$$render($$result, {}, {}, {})}`;
+});
+var __layout$1 = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  [Symbol.toStringTag]: "Module",
+  "default": _layout$1
+});
+var The_moon_12_days = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  return `
+<main class="${"white"}"><pre>viaggi/the-moon-12-days</pre><br><br>It works!
+</main>`;
+});
+var index$1 = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  [Symbol.toStringTag]: "Module",
+  "default": The_moon_12_days
+});
 var _layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `<div class="${"mr-auto ml-auto charcoal bg-solitaire"}">${slots.default ? slots.default({}) : ``}
-	${validate_component(Defs, "Defs").$$render($$result, {}, {}, {})}
-	${validate_component(ReloadPrompt, "ReloadPrompt").$$render($$result, {}, {}, {})}</div>
+  return `
+
+
+
+
+
+
+
+
+<div class="${"nw-100 snap-center w-100 vh-100 bg-solitaire"}"><div class="${"h-100 w-100 vh-100 snap-start always-stop overflow-x-scroll smooth-scroll"}">${slots.default ? slots.default({}) : ``}
+		${validate_component(Defs, "Defs").$$render($$result, {}, {}, {})}
+		${validate_component(ReloadPrompt, "ReloadPrompt").$$render($$result, {}, {}, {})}
+	</div></div>
 
 
 
@@ -17899,6 +18009,7 @@ var load = async ({fetch: fetch3}) => {
     return {props: {posts}};
   }
 };
+var truncate = 29;
 var Cile_12_giorni = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let {posts = []} = $$props;
   if ($$props.posts === void 0 && $$bindings.posts && posts !== void 0)
@@ -17914,9 +18025,22 @@ ${validate_component(Section, "Section").$$render($$result, {bg: "bg-linen"}, {}
 	<aside class="${"highlight db black-70 f5 f4-ns f3-m f3-l pv5 measure ph2 measure-ns ph4-ns measure-m ph2-m measure-wide-l ph0-l mr-auto ml-auto"}"><h4 class="${"mv0 pv4 f2 f2-ns f1-m f1-l fw2 lh-solid"}"><small class="${"golden-brown db tracked-none tracked-ns tracked-m tracked-mega-l f7 f7-ns f5-m f4-l fw5 ttu mv0"}">decidi di partire</small>
 			<span class="${"fraunces"}">Proposte</span><span class="${"fraunces-i"}">\xA0di viaggio</span></h4>
 
-		STY&gt;E
+		<div class="${"w-100 flex justify-between flex-column flex-column-ns flex-row-m flex-row-l"}">${each(posts, ({src: src2, event, date, duration, country, location: location2, pp, participants, slug}, i) => {
+        return `<a${add_attribute("href", slug, 0)} class="${"w-100 w-100-ns w-30-m w5-l link"}"><figure class="${"ma0 w-100 f6 mh0 ph3 ph3-ns ph1-m ph2-l pb4 pt5 cover shadow-5-hover transition-bs overflow-hidden"}" style="${"background-position: 50% 0; background-image: linear-gradient( rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.50) 100%), url(" + escape2(JSON.stringify(src2.url)) + ")"}"${add_attribute("title", location2, 0)}>
 
-	</aside>`;
+						<figurecap class="${"white ts1-dark-gray flex flex-column lh-solid"}"><time${add_attribute("datetime", date, 0)} class="${"f5 f6-ns f7-m f6-l fw7 ttu tracked flex-auto"}"><!-- HTML_TAG_START -->${duration}<!-- HTML_TAG_END --></time>
+							
+
+							<h5 class="${"ts fraunces mv0 f-subheadline f1-ns f2-m f1-l fw5 h5 flex-auto"}"><!-- HTML_TAG_START -->${country.length > truncate ? country.substring(0, truncate) + "&hellip;" : country}<!-- HTML_TAG_END --></h5>
+							<p class="${"mv0 pb4 f5 f6-ns f7-m f6-l fw7 ttu tracked h2 flex-auto"}"><!-- HTML_TAG_START -->${event}<!-- HTML_TAG_END --></p>
+							<p class="${"h3 mv0 pb0 f4 f5-ns f6-m f5-l fw4 flex-auto"}"><!-- HTML_TAG_START -->${location2}<!-- HTML_TAG_END --></p>
+							<div class="${"flex items-center h4"}"><h6 class="${"ts mv0 fraunces fw4 f1 f1-ns f2-m f1-l"}"><small>\u20AC\xA0</small><span class="${"pt0 fw5"}"><!-- HTML_TAG_START -->${pp}<!-- HTML_TAG_END --></span><small class="${"pt0 f6 f5-l system"}">\xA0p.p</small></h6>
+							</div></figurecap>
+						<div class="${"link pointer br-pill ba bw2 ph3 pv2 bg-black-10 white hover-bg-black-50 transition-bg mr-auto ml-auto db tc w-70 w-100-ns w-90-m w-90-l ts1-dark-gray f5 f5-ns f7-m f5-l"}"${add_attribute("title", event, 0)}>Scopri il viaggio</div>
+					</figure></a>
+
+			`;
+      })}</div></aside>`;
     }
   })}
 

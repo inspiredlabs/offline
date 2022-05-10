@@ -29,7 +29,16 @@ precacheAndRoute([
 
 // Edit the list of routes so they get cached and routed correctly, allowing
 // cold start or hot reload to work offline.
-const skRoutes = [ '/', '/about', '/todos' ];
+const skRoutes = [
+    '/',
+    '/viaggi',
+    '/viaggi/cile-12-giorni',
+    '/viaggi/the-moon-12-days',
+    '/viaggi/ungheria-repubblica-slovacca9-days',
+    '/chi-siamo',
+    '/partenze',
+    '/privacy',
+];
 
 precache( skRoutes.map(f => {
     return {
